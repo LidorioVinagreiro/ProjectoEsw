@@ -1,0 +1,4 @@
+﻿o ficheiro de bower contem as dependencias de bibliotecas do projecto!
+atencao se for preciso adicionar alguma bibbliteca!
+bootstrap:webdesign-> já tem classes para melhorar aparecia e não só
+ver : https://docs.microsoft.com/en-us/aspnet/core/client-side/bootstrap

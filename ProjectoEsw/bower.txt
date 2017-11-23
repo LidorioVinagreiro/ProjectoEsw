@@ -7,3 +7,25 @@ jquery validation -> validacoes do lado do cliente
 jquery validation unbrosive -> validcoes do lado do cliente
 atenção aos scripts necessarios para certo tipo de accoes!
 : mais tarde fazer render dos scripts para cada pagina!
+
+_viewStart -> meter codigo que existe em todas as views!
+_viewimports -> meter modelos que sao importados pelas mesmas views @model ________
+
+nas views podemos meter os pacotes que estamos a usar: using microsoft.****
+
+nas views podemos injectar classes que estamos a usar : @inject *tipoCLasse *nomeDaClasse
+exemplos de uso: quando uma view mostra uma coisa para uns utilizadores e nao para outros
+
+
+DEPENDENCY INJECTION : serve para uso de classes em outras classes sem terem uma ligação directa com NEW
+CRIAR UMA INTERFACE
+CRIAR UMA CLASS COM ESSA INTERFACE
+adicionar ao servico pelo configureServices esta no startup
+	é adicionado como : 
+		services.addTrasient< <interface> ,<class> >();
+			Transient lifetime services are created each time they are requested. 
+			This lifetime works best for lightweight, stateless services.
+		services.addScoped< <interface> ,<class> >();
+			Scoped lifetime services are created once per request.
+		services.addSingleton< <interface> ,<class> >();
+			https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection : search singleton	

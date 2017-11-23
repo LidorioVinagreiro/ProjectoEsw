@@ -5,3 +5,5 @@ ver : https://docs.microsoft.com/en-us/aspnet/core/client-side/bootstrap
 
 jquery validation -> validacoes do lado do cliente
 jquery validation unbrosive -> validcoes do lado do cliente
+atenção aos scripts necessarios para certo tipo de accoes!
+: mais tarde fazer render dos scripts para cada pagina!

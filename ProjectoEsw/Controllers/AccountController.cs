@@ -41,25 +41,30 @@ namespace ProjectoEsw.Controllers
                     await _signInManager.SignInAsync(user, false);
                     return RedirectToAction("Index", "Home");
                 }
-                    //tem que se melhorar isto caso aconteça alguns erros
-                    foreach (var error in result.Errors) {
-                        ModelState.AddModelError(string.Empty, error.Description);
-                    }
+                //tem que se melhorar isto caso aconteça alguns erros
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
                 return View();
             }
             return View();
         }
+
+        [AutoValidateAntiforgeryToken]
         public IActionResult Login() {
             return View();
         }
 
+        [AutoValidateAntiforgeryToken]
+        [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model) {
             if (ModelState.IsValid) {
                 //1 false = persistent, 2 false = lockdownonfailure
                 var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password,false,false);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "UtilizadorRegistado",model.Email);
                 }
                 else {
                     ModelState.AddModelError(string.Empty, "invalid login user");
@@ -68,10 +73,7 @@ namespace ProjectoEsw.Controllers
             return View();
         }
 
-        [Authorize]
-        public string Check() {
-            return "Login Aceite.";
-        }
+
         public IActionResult Index()
         {
             return View();

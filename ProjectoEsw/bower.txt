@@ -28,4 +28,18 @@ adicionar ao servico pelo configureServices esta no startup
 		services.addScoped< <interface> ,<class> >();
 			Scoped lifetime services are created once per request.
 		services.addSingleton< <interface> ,<class> >();
-			https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection : search singleton	
+			https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection : search singleton
+			
+se precisarmos da injeccao num so metodo entao usar IActionresult <name> ([FromServices] <service name>)
+___________________________controlllers______________________________________________
+ViewResult – Represents HTML and markup.
+EmptyResult – Represents no result.
+RedirectResult – Represents a redirection to a new URL.
+JsonResult – Represents a JavaScript Object Notation result that can be used in an AJAX application.
+JavaScriptResult – Represents a JavaScript script.
+ContentResult – Represents a text result.
+FileContentResult – Represents a downloadable file (with the binary content).
+FilePathResult – Represents a downloadable file (with a path).
+FileStreamResult – Represents a downloadable file (with a file stream).
+---->tipos de action results!!!!
+

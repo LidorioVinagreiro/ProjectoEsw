@@ -27,6 +27,7 @@ namespace ProjectoEsw
         {
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=RegistoTeste"));
             services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddTransient<IdentityUser, ApplicationUser>();
             services.AddMvc();
         }
 
@@ -42,8 +43,8 @@ namespace ProjectoEsw
             {
                 app.UseExceptionHandler("/Home/Error");
             }
-
-            AuthAppBuilderExtensions.UseAuthentication(app);
+            app.UseAuthentication();
+            //AuthAppBuilderExtensions.UseAuthentication(app);
 
             app.UseStaticFiles();
 

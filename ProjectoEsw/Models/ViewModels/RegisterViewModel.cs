@@ -14,6 +14,21 @@ namespace ProjectoEsw.Models.Identity
         public string Email { get; set; }
 
         [Required]
+        public string NomeCompleto { get; set; }
+
+        [Required]
+        public DateTime DataNasc { set; get; }
+
+        [Required]
+        public int Nif { get; set; }
+
+        
+        public string Morada { get; set; }
+
+        [Required]
+        public string Telefone { get; set; }
+
+        [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Palavra-chave")]
         public string Password { get; set; }

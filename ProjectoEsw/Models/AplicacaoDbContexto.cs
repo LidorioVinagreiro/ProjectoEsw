@@ -8,9 +8,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ProjectoEsw.Models
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class AplicacaoDbContexto : IdentityDbContext<AplicacaoUtilizador>
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
+        public AplicacaoDbContexto(DbContextOptions<AplicacaoDbContexto> options) : base(options) { }
         public DbSet<Perfil> Perfils { get; set; } 
         //public DbSet<Perfil> Perfils { get; set; }
         //este é a classe da base de dados

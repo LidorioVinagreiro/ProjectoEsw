@@ -9,7 +9,7 @@ namespace ProjectoEsw.Models.Identity
     public class Perfil
     {
         public int ID { get; set; }
-        [DisplayName("NomeCompleto")]
+        [DisplayName("Nome Completo")]
         public string NomeCompleto { get; set; }
         public string Email { get; set; }
         public int Nif { get; set; }

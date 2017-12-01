@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ProjectoEsw.Models.Identity
 {
-    public class ApplicationUser : IdentityUser
+    public class AplicacaoUtilizador : IdentityUser
     {
         [ForeignKey("Perfil")]
         public int PerfilFK { get; set; }

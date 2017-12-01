@@ -24,7 +24,7 @@ namespace ProjectoEsw
                 var services = scope.ServiceProvider;
                 try
                 {
-                    var context = services.GetRequiredService<ApplicationDbContext>();
+                    var context = services.GetRequiredService<AplicacaoDbContexto>();
                     DbInitializer.Initialize(context);
                 }
                 catch (Exception ex)

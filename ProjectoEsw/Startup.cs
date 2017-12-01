@@ -25,9 +25,9 @@ namespace ProjectoEsw
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=RegistoTeste"));
-            services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
-            services.AddTransient<IdentityUser, ApplicationUser>();
+            services.AddDbContext<AplicacaoDbContexto>(options => options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=RegistoTeste"));
+            services.AddIdentity<AplicacaoUtilizador, IdentityRole>().AddEntityFrameworkStores<AplicacaoDbContexto>();
+            services.AddTransient<IdentityUser, AplicacaoUtilizador>();
             services.AddMvc();
         }
 

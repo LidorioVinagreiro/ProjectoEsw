@@ -9,7 +9,7 @@ namespace ProjectoEsw.Models
     public static class DbInitializer
     {
 
-        public static void Initialize(ApplicationDbContext context)
+        public static void Initialize(AplicacaoDbContexto context)
         {
             context.Roles.Add(new IdentityRole("Candidato"));
             context.SaveChanges();

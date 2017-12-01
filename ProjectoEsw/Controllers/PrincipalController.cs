@@ -9,13 +9,13 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace ProjectoEsw.Controllers
 {
-    public class AccountController : Controller
+    public class PrincipalController : Controller
     {
-        private UserManager<ApplicationUser> _userManager;
-        private SignInManager<ApplicationUser> _signInManager;
+        private UserManager<AplicacaoUtilizador> _userManager;
+        private SignInManager<AplicacaoUtilizador> _signInManager;
         //o dependidy injection vai tratar destas variaveis, não é necessario criar estes objectos
 
-        public AccountController(UserManager<ApplicationUser> _userManager, SignInManager<ApplicationUser> _signInManager)
+        public PrincipalController(UserManager<AplicacaoUtilizador> _userManager, SignInManager<AplicacaoUtilizador> _signInManager)
         {
             this._userManager = _userManager;
             this._signInManager = _signInManager;
@@ -32,7 +32,7 @@ namespace ProjectoEsw.Controllers
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid) {
-                ApplicationUser user = new ApplicationUser { UserName = model.Email };
+                AplicacaoUtilizador user = new AplicacaoUtilizador { UserName = model.Email };
                 //identityResult guarda informacao se a criacao do user ficou guardada e o createAsync cria um utilizador
                 IdentityResult result = await _userManager.CreateAsync(user,model.Password);
                 if (result.Succeeded)

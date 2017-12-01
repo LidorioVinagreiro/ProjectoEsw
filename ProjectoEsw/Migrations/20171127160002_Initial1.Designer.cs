@@ -10,7 +10,7 @@ using System;
 
 namespace ProjectoEsw.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(AplicacaoDbContexto))]
     [Migration("20171127160002_Initial1")]
     partial class Initial1
     {

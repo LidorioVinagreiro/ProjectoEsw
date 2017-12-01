@@ -8,11 +8,12 @@ namespace ProjectoEsw.Models.Identity
 {
     public class LoginViewModel
     {
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessage ="É obrigatório inserir Email")]
+        [EmailAddress(ErrorMessage ="Este Email está incorrecto")]
         public string Email { get; set; }
-        [Required]
-        [DataType(DataType.Password)]
+
+        [Required(ErrorMessage ="")]
+        [DataType(DataType.Password,ErrorMessage ="")]
         public string Password { get; set; }
     }
 }

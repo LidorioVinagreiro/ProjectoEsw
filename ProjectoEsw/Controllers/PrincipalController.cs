@@ -64,7 +64,7 @@ namespace ProjectoEsw.Controllers
                 var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password,false,false);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "UtilizadorRegistado",model.Email);
+                    return RedirectToAction("Index", "Candidato",model.Email);
                 }
                 else {
                     ModelState.AddModelError(string.Empty, "invalid login user");

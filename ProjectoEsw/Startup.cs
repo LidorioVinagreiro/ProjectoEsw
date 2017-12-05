@@ -52,7 +52,20 @@ namespace ProjectoEsw
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Principal}/{action=Index}/");
+
+                routes.MapRoute(
+                    name: "Candidato",
+                    template: "{ controller = TiposUtilizador/Candidato}/{ action = Index}/"
+                    );
+                routes.MapRoute(
+                    name: "Tecnico",
+                    template: "{ controller = TiposUtilizador/Tecnico}/{ action = Index}/"
+                    );
+                routes.MapRoute(
+                    name: "Administrador",
+                    template: "{ controller = TiposUtilizador/Administrador}/{ action = Index}/"
+                    );
             });
         }
     }

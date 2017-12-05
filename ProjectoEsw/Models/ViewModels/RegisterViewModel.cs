@@ -8,32 +8,32 @@ namespace ProjectoEsw.Models.Identity
 {
     public class RegisterViewModel
     {
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessage = "Obrigatório inserir Email")]
+        [EmailAddress(ErrorMessage = "Email incorrecto")]
         [Display(Name ="Email")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Obrigatório inserir nome completo")]
         public string NomeCompleto { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Obrigatório inserir data de nascimento válida")]
         public DateTime DataNasc { set; get; }
 
-        [Required]
+        [Required(ErrorMessage = "Obrigatório inserir NIF")]
         public int Nif { get; set; }
 
         
         public string Morada { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Obrigatório inserir número de telefone/telemóvel")]
         public string Telefone { get; set; }
 
-        [Required]
-        [DataType(DataType.Password)]
+        [Required(ErrorMessage = "Obrigatório inserir password")]
+        [DataType(DataType.Password, ErrorMessage = "Password deve ter 8 caracteres dos quais 1 letra maiuscula, 1 letra minuscula, 1 digito e um caracter especial (!@#%&)")]
         [Display(Name = "Palavra-chave")]
         public string Password { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Obrigatório confirmar password")]
         [DataType(DataType.Password)]
         [Display(Name = "Confirmar Palavra-chave")]
         [Compare("Password",ErrorMessage ="A password não coecide")]

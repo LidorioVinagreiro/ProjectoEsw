@@ -8,12 +8,12 @@ namespace ProjectoEsw.Models.Identity
 {
     public class LoginViewModel
     {
-        [Required(ErrorMessage ="É obrigatório inserir Email")]
-        [EmailAddress(ErrorMessage ="Este Email está incorrecto")]
+        [Required(ErrorMessage ="Obrigatório inserir Email")]
+        [EmailAddress(ErrorMessage ="Email incorrecto")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage ="")]
-        [DataType(DataType.Password,ErrorMessage ="")]
+        [Required(ErrorMessage = "Obrigatório inserir password")]
+        [DataType(DataType.Password,ErrorMessage ="Password deve ter 8 caracteres dos quais 1 letra maiuscula, 1 letra minuscula, 1 digito e um caracter especial (!@#%&)")]
         public string Password { get; set; }
     }
 }

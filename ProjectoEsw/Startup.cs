@@ -10,6 +10,7 @@ using ProjectoEsw.Models;
 using ProjectoEsw.Models.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using ProjectoEsw.GestorAplicacao;
 
 namespace ProjectoEsw
 {
@@ -28,6 +29,7 @@ namespace ProjectoEsw
             services.AddDbContext<AplicacaoDbContexto>(options => options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=RegistoTeste"));
             services.AddIdentity<AplicacaoUtilizador, IdentityRole>().AddEntityFrameworkStores<AplicacaoDbContexto>();
             services.AddTransient<IdentityUser, AplicacaoUtilizador>();
+            services.AddTransient<Gestor>();
             services.AddMvc();
         }
 

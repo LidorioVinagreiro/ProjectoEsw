@@ -41,8 +41,10 @@ namespace ProjectoEsw.Controllers
 
             return View();
         }
-        
+        public IActionResult RecuperarPassword()
+        {
+            return View();
+        }
 
-        
     }
 }

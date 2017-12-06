@@ -24,8 +24,8 @@ namespace ProjectoEsw.Models.Identity
         [Display(Name ="NIF")]
         //[Required(ErrorMessage = "Obrigatório inserir NIF")]
         public int Nif { get; set; }
-
-        [Required(ErrorMessage = "Obrigatório inserir o Numero de Identificação")]
+        [Display(Name = "Numero de Identificação")]
+        //[Required(ErrorMessage = "Obrigatório inserir o Numero de Identificação")]
         public int NumeroIdentificacao { get; set; }
 
         public string Morada { get; set; }

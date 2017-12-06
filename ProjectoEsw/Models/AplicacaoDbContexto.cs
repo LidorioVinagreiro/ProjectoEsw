@@ -19,6 +19,7 @@ namespace ProjectoEsw.Models
         {
             base.OnModelCreating(builder);
             builder.Entity<Perfil>().ToTable("Perfil");
+            
         }
     }
 }

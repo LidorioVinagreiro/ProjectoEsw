@@ -12,6 +12,7 @@ namespace ProjectoEsw.Controllers
 {
     public class PrincipalController : Controller
     {
+        
         private UserManager<AplicacaoUtilizador> _userManager;
         private SignInManager<AplicacaoUtilizador> _signInManager;
         private Gestor _gestor;
@@ -44,7 +45,9 @@ namespace ProjectoEsw.Controllers
                 {
                     //isto faz signin ao utilizador e o segundo parametro é se o login é persistente..isto é cookies?
                     await _signInManager.SignInAsync(user, false);
-                    _gestor.adicionarPerfilAsync(model);
+                    int id = await _gestor.adicionarPerfilAsync(model);
+                    user.PerfilFK = id;
+                                
                     return RedirectToAction("Index", "Candidato");
                 }
                 //tem que se melhorar isto caso aconteça alguns erros

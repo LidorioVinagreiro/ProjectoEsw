@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using ProjectoEsw.Models.Identity;
 using Microsoft.AspNetCore.Authorization;
+using ProjectoEsw.GestorAplicacao;
 
 namespace ProjectoEsw.Controllers
 {
@@ -13,15 +14,18 @@ namespace ProjectoEsw.Controllers
     {
         private UserManager<AplicacaoUtilizador> _userManager;
         private SignInManager<AplicacaoUtilizador> _signInManager;
+        private Gestor _gestor;
         //o dependidy injection vai tratar destas variaveis, não é necessario criar estes objectos
 
-        public PrincipalController(UserManager<AplicacaoUtilizador> _userManager, SignInManager<AplicacaoUtilizador> _signInManager)
+        public PrincipalController(Gestor _gestor,UserManager<AplicacaoUtilizador> _userManager, SignInManager<AplicacaoUtilizador> _signInManager)
         {
+            this._gestor = _gestor;
             this._userManager = _userManager;
             this._signInManager = _signInManager;
         }
 
         [HttpGet]
+        [AutoValidateAntiforgeryToken]
         public IActionResult Register()
         {
             return View();
@@ -29,6 +33,7 @@ namespace ProjectoEsw.Controllers
         //este metodo é o que corre apos o utilizador submeter informacao e o 
         //RegisterViewModel é o modelo da informacao que é envida pela View do Register
         [HttpPost]
+        [AutoValidateAntiforgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid) {
@@ -39,7 +44,8 @@ namespace ProjectoEsw.Controllers
                 {
                     //isto faz signin ao utilizador e o segundo parametro é se o login é persistente..isto é cookies?
                     await _signInManager.SignInAsync(user, false);
-                    return RedirectToAction("Index", "Home");
+                    _gestor.adicionarPerfilAsync(model);
+                    return RedirectToAction("Index", "Candidato");
                 }
                 //tem que se melhorar isto caso aconteça alguns erros
                 foreach (var error in result.Errors)
@@ -78,5 +84,15 @@ namespace ProjectoEsw.Controllers
         {
             return View();
         }
+
+        /*private void AdicionarPerfil(RegisterViewModel model)
+        {
+            var result = await contex
+        }*/
+
     }
+
+    
+
 }
+

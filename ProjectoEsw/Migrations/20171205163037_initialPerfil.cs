@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace ProjectoEsw.Migrations
 {
-    public partial class initial : Migration
+    public partial class initialPerfil : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -37,6 +37,7 @@ namespace ProjectoEsw.Migrations
                     NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PerfilFK = table.Column<int>(type: "int", nullable: false),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
                     SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -46,6 +47,26 @@ namespace ProjectoEsw.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Perfil",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    DataNasc = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Foto = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Morada = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Nif = table.Column<int>(type: "int", nullable: false),
+                    NomeCompleto = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NumeroIdentificacao = table.Column<int>(type: "int", nullable: false),
+                    Telefone = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Perfil", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -210,6 +231,9 @@ namespace ProjectoEsw.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Perfil");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

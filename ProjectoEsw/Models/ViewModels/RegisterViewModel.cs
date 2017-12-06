@@ -14,18 +14,21 @@ namespace ProjectoEsw.Models.Identity
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Obrigatório inserir nome completo")]
+        [Display(Name ="Nome Completo")]
         public string NomeCompleto { get; set; }
 
-        [Required(ErrorMessage = "Obrigatório inserir data de nascimento válida")]
+        //[Required(ErrorMessage = "Obrigatório inserir data de nascimento válida")]
+        [Display(Name = "Data Nascimento")]
         public DateTime DataNasc { set; get; }
 
-        [Required(ErrorMessage = "Obrigatório inserir NIF")]
+        [Display(Name ="NIF")]
+        //[Required(ErrorMessage = "Obrigatório inserir NIF")]
         public int Nif { get; set; }
 
         
         public string Morada { get; set; }
 
-        [Required(ErrorMessage = "Obrigatório inserir número de telefone/telemóvel")]
+        //[Required(ErrorMessage = "Obrigatório inserir número de telefone/telemóvel")]
         public string Telefone { get; set; }
 
         [Required(ErrorMessage = "Obrigatório inserir password")]

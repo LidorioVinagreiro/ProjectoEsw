@@ -11,10 +11,9 @@ using System;
 namespace ProjectoEsw.Migrations
 {
     [DbContext(typeof(AplicacaoDbContexto))]
-    [Migration("20171122145221_initial")]
-    partial class initial
+    partial class AplicacaoDbContextoModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -129,7 +128,7 @@ namespace ProjectoEsw.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("ProjectoEsw.Models.Identity.ApplicationUser", b =>
+            modelBuilder.Entity("ProjectoEsw.Models.Identity.AplicacaoUtilizador", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -156,6 +155,8 @@ namespace ProjectoEsw.Migrations
 
                     b.Property<string>("PasswordHash");
 
+                    b.Property<int>("PerfilFK");
+
                     b.Property<string>("PhoneNumber");
 
                     b.Property<bool>("PhoneNumberConfirmed");
@@ -180,6 +181,32 @@ namespace ProjectoEsw.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("ProjectoEsw.Models.Identity.Perfil", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("DataNasc");
+
+                    b.Property<string>("Email");
+
+                    b.Property<string>("Foto");
+
+                    b.Property<string>("Morada");
+
+                    b.Property<int>("Nif");
+
+                    b.Property<string>("NomeCompleto");
+
+                    b.Property<int>("NumeroIdentificacao");
+
+                    b.Property<string>("Telefone");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Perfil");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
@@ -190,7 +217,7 @@ namespace ProjectoEsw.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("ProjectoEsw.Models.Identity.ApplicationUser")
+                    b.HasOne("ProjectoEsw.Models.Identity.AplicacaoUtilizador")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -198,7 +225,7 @@ namespace ProjectoEsw.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("ProjectoEsw.Models.Identity.ApplicationUser")
+                    b.HasOne("ProjectoEsw.Models.Identity.AplicacaoUtilizador")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -211,7 +238,7 @@ namespace ProjectoEsw.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("ProjectoEsw.Models.Identity.ApplicationUser")
+                    b.HasOne("ProjectoEsw.Models.Identity.AplicacaoUtilizador")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -219,7 +246,7 @@ namespace ProjectoEsw.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("ProjectoEsw.Models.Identity.ApplicationUser")
+                    b.HasOne("ProjectoEsw.Models.Identity.AplicacaoUtilizador")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);

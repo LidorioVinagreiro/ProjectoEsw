@@ -10,8 +10,10 @@ namespace ProjectoEsw.Models.ViewModels
     {
         [Required(ErrorMessage = "Obrigatório inserir Email")]
         [EmailAddress(ErrorMessage = "Email incorrecto")]
+        [Display(Name = "Email")]
         public string Email { get; set; }
         [Required(ErrorMessage = "Obrigatório inserir NIF")]
+        [Display(Name ="NIF")]
         public int Nif { get; set; }
     }
 }

@@ -34,10 +34,12 @@ namespace ProjectoEsw.Controllers
             }
                 
         }
-        [HttpPost]
-        public IActionResult EditarPerfil(Perfil model) {
+        //argumento - (Perfil model)
+        //returnava("index")
+        //[HttpPost]
+        public IActionResult EditarPerfil() {
 
-            return View("index");
+            return View();
         }
         
 

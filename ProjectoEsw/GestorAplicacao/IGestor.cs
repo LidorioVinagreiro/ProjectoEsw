@@ -8,6 +8,6 @@ namespace ProjectoEsw.GestorAplicacao
 {
     interface IGestor
     {
-       Task<int> adicionarPerfilAsync(RegisterViewModel model);
+       //Task<int> adicionarPerfilAsync(RegisterViewModel model);
     }
 }

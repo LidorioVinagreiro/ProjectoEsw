@@ -10,15 +10,15 @@ using ProjectoEsw.GestorAplicacao;
 
 namespace ProjectoEsw.Controllers
 {
-    public class PrincipalController : Controller
+    public class HomeController : Controller
     {
         
-        private UserManager<AplicacaoUtilizador> _userManager;
-        private SignInManager<AplicacaoUtilizador> _signInManager;
+        private UserManager<Utilizador> _userManager;
+        private SignInManager<Utilizador> _signInManager;
         private Gestor _gestor;
         //o dependidy injection vai tratar destas variaveis, não é necessario criar estes objectos
 
-        public PrincipalController(Gestor _gestor,UserManager<AplicacaoUtilizador> _userManager, SignInManager<AplicacaoUtilizador> _signInManager)
+        public HomeController(Gestor _gestor,UserManager<Utilizador> _userManager, SignInManager<Utilizador> _signInManager)
         {
             this._gestor = _gestor;
             this._userManager = _userManager;
@@ -38,15 +38,15 @@ namespace ProjectoEsw.Controllers
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid) {
-                AplicacaoUtilizador user = new AplicacaoUtilizador { UserName = model.Email };
+                Utilizador user = new Utilizador { UserName = model.Email };
                 //identityResult guarda informacao se a criacao do user ficou guardada e o createAsync cria um utilizador
                 IdentityResult result = await _userManager.CreateAsync(user,model.Password);
                 if (result.Succeeded)
                 {
                     //isto faz signin ao utilizador e o segundo parametro é se o login é persistente..isto é cookies?
                     await _signInManager.SignInAsync(user, false);
-                    int id = await _gestor.adicionarPerfilAsync(model);
-                    user.PerfilFK = id;
+                    //int id = await _gestor.adicionarPerfilAsync(model);
+                    //user.PerfilFK = id;
                                 
                     return RedirectToAction("Index", "Candidato");
                 }

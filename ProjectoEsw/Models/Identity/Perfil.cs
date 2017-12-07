@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,6 +20,8 @@ namespace ProjectoEsw.Models.Identity
         public string Morada { get; set; }
         public string Telefone { get; set; }
         public string Foto { get; set; }
-        
+        [ForeignKey("Utilizador")]
+        public string UtilizadorFK { get; set; }
+        public virtual Utilizador Utilizador { get; set; } 
     }
 }

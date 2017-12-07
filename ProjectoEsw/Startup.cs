@@ -27,8 +27,8 @@ namespace ProjectoEsw
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AplicacaoDbContexto>(options => options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=RegistoTeste"));
-            services.AddIdentity<AplicacaoUtilizador, IdentityRole>().AddEntityFrameworkStores<AplicacaoDbContexto>();
-            services.AddTransient<IdentityUser, AplicacaoUtilizador>();
+            services.AddIdentity<Utilizador, IdentityRole>().AddEntityFrameworkStores<AplicacaoDbContexto>();
+            services.AddTransient<IdentityUser, Utilizador>();
             services.AddTransient<Gestor>();
             services.AddMvc();
         }
@@ -54,7 +54,7 @@ namespace ProjectoEsw
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Principal}/{action=Index}/");
+                    template: "{controller=Home}/{action=Index}/");
 
                 routes.MapRoute(
                     name: "Candidato",

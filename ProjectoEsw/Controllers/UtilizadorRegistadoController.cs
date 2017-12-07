@@ -11,9 +11,9 @@ namespace ProjectoEsw.Controllers
 {
     public class UtilizadorRegistadoController : Controller
     {
-        private UserManager<AplicacaoUtilizador> _userManager;
+        private UserManager<Utilizador> _userManager;
 
-        public UtilizadorRegistadoController(UserManager<AplicacaoUtilizador> _userManager) {
+        public UtilizadorRegistadoController(UserManager<Utilizador> _userManager) {
             this._userManager = _userManager; 
         }
 

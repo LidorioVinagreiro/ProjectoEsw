@@ -14,7 +14,9 @@ namespace ProjectoEsw.GestorAplicacao
         private UserManager<Utilizador> _userManager;
         private SignInManager<Utilizador> _signInManager;
 
-        public Gestor(AplicacaoDbContexto context,UserManager<Utilizador> userManager, SignInManager<Utilizador> signInManager) {
+        public Gestor(AplicacaoDbContexto context,
+            UserManager<Utilizador> userManager,
+            SignInManager<Utilizador> signInManager) {
             _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
@@ -22,35 +24,38 @@ namespace ProjectoEsw.GestorAplicacao
 
         public async Task<bool> criarUtilizador(RegisterViewModel model) {
             Utilizador novoUtilizador = new Utilizador { UserName = model.Email };
+            novoUtilizador.PerfilFK = await criarPerfilUtilizador(model, "0");
             IdentityResult resultado = await _userManager.CreateAsync(novoUtilizador, model.Password);
             if (resultado.Succeeded)
             {
-                var resultadoPerfil = await criarPerfilUtilizador(model, novoUtilizador.Id);
-                novoUtilizador.PerfilFK = resultadoPerfil;
-                await _context.SaveChangesAsync();
-                LoginViewModel loginModel = new LoginViewModel { Email = model.Email, Password = model.Password };
-                return await autenticarUtilizador(loginModel);
-            }
-            else {
-                //adicionar erros?
+                IdentityResult resultadoRole = await atribuirRoleUtilizador(novoUtilizador, "Candidato");
+                if (resultadoRole.Succeeded)
+                {               
+                    await _context.SaveChangesAsync();
+                    LoginViewModel loginModel = new LoginViewModel { Email = model.Email, Password = model.Password };
+                    SignInResult autenticaResultado = await autenticarUtilizador(loginModel);
+                    return autenticaResultado.Succeeded;
+                }
+                else {
+                    //nao existe o role
+                    //nao foi atribuido o role
+                    return false;
+                }
+            } else {
+                //nao foi criado o utilizador
                 return false;
             }
         }
 
-        public async Task<bool> autenticarUtilizador(LoginViewModel model) {
-            var resultado = await _signInManager.PasswordSignInAsync(model.Email, model.Password,false,false);
-            if (resultado.Succeeded)
-            {
-                //autenticado
-                return true;
-            }
-            else {
-                //nao autenticado
-                return false;
-
-            }
+        public async Task<SignInResult> autenticarUtilizador(LoginViewModel model) {
+            SignInResult resultado = await _signInManager.PasswordSignInAsync(model.Email, model.Password,false,false);
+            return resultado;
         }
 
+        public async Task<IdentityResult> atribuirRoleUtilizador(Utilizador utilizador, string role) {
+            return await _userManager.AddToRoleAsync(utilizador, role);
+            
+        }
         public async Task<int> criarPerfilUtilizador(RegisterViewModel model,string utilizadorFK) {
             Perfil perfil = new Perfil
             {
@@ -64,7 +69,8 @@ namespace ProjectoEsw.GestorAplicacao
               UtilizadorFK=utilizadorFK
             };
 
-            await _context.Perfils.AddAsync(perfil);
+            var rsult = await _context.Perfils.AddAsync(perfil);
+
             return perfil.ID;
 
         }

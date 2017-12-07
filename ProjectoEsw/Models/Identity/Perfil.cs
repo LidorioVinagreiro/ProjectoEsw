@@ -20,7 +20,6 @@ namespace ProjectoEsw.Models.Identity
         public string Morada { get; set; }
         public string Telefone { get; set; }
         public string Foto { get; set; }
-        [ForeignKey("Utilizador")]
         public string UtilizadorFK { get; set; }
         public virtual Utilizador Utilizador { get; set; } 
     }

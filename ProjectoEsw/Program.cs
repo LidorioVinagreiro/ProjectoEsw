@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
 using ProjectoEsw.Models;
 using Microsoft.AspNetCore.Identity;
+using ProjectoEsw.Models.Identity;
 
 namespace ProjectoEsw
 {
@@ -25,7 +26,8 @@ namespace ProjectoEsw
                 try
                 {
                     var context = services.GetRequiredService<AplicacaoDbContexto>();
-                    DbInitializer.Initialize(context);
+                    var usermanager = services.GetRequiredService < UserManager<Utilizador> >();
+                    DbInitializer.InitializeAsync(context,usermanager);
                 }
                 catch (Exception ex)
                 {

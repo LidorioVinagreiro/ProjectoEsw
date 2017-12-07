@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace ProjectoEsw.Controllers
 {
-    [Authorize]
+    [Authorize(Roles ="Candidato")]
     public class CandidatoController : Controller
     {
         // GET: /<controller>/

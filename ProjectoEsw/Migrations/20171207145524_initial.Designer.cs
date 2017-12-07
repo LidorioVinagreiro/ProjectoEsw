@@ -11,7 +11,7 @@ using System;
 namespace ProjectoEsw.Migrations
 {
     [DbContext(typeof(AplicacaoDbContexto))]
-    [Migration("20171207022622_initial")]
+    [Migration("20171207145524_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -154,8 +154,6 @@ namespace ProjectoEsw.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("UtilizadorFK");
-
                     b.ToTable("Perfils");
                 });
 
@@ -186,7 +184,7 @@ namespace ProjectoEsw.Migrations
 
                     b.Property<string>("PasswordHash");
 
-                    b.Property<int>("PerfilFK");
+                    b.Property<int?>("PerfilFK");
 
                     b.Property<string>("PhoneNumber");
 
@@ -209,7 +207,9 @@ namespace ProjectoEsw.Migrations
                         .HasName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.HasIndex("PerfilFK");
+                    b.HasIndex("PerfilFK")
+                        .IsUnique()
+                        .HasFilter("[PerfilFK] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
                 });
@@ -259,19 +259,11 @@ namespace ProjectoEsw.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("ProjectoEsw.Models.Identity.Perfil", b =>
-                {
-                    b.HasOne("ProjectoEsw.Models.Identity.Utilizador", "Utilizador")
-                        .WithMany()
-                        .HasForeignKey("UtilizadorFK");
-                });
-
             modelBuilder.Entity("ProjectoEsw.Models.Identity.Utilizador", b =>
                 {
                     b.HasOne("ProjectoEsw.Models.Identity.Perfil", "Perfil")
-                        .WithMany()
-                        .HasForeignKey("PerfilFK")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .WithOne("Utilizador")
+                        .HasForeignKey("ProjectoEsw.Models.Identity.Utilizador", "PerfilFK");
                 });
 #pragma warning restore 612, 618
         }

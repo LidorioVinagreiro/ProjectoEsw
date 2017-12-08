@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ProjectoEsw.Models.Identity;
 using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 namespace ProjectoEsw.GestorAplicacao
 {
@@ -103,6 +104,11 @@ namespace ProjectoEsw.GestorAplicacao
             catch (Exception e) {
 
             }
+        }
+
+        public async Task<Utilizador> getUtilizador(ClaimsPrincipal principal)
+        {
+            return await _userManager.GetUserAsync(principal);
         }
     }
 }

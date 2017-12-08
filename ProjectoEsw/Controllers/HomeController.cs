@@ -52,6 +52,7 @@ namespace ProjectoEsw.Controllers
             if (ModelState.IsValid) {
                 ////1 false = persistent, 2 false = lockdownonfailure
                 Microsoft.AspNetCore.Identity.SignInResult resultado = await _gestor.autenticarUtilizador(model);
+
                 if (resultado.Succeeded)
                 {
                     return RedirectToAction("Index", "Candidato");

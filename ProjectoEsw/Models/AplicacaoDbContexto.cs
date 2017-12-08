@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ProjectoEsw.Models
 {
-    public class AplicacaoDbContexto : IdentityDbContext<AplicacaoUtilizador>
+    public class AplicacaoDbContexto : IdentityDbContext<Utilizador>
     {
         public AplicacaoDbContexto(DbContextOptions<AplicacaoDbContexto> options) : base(options) { }
         public DbSet<Perfil> Perfils { get; set; } 
@@ -18,7 +18,10 @@ namespace ProjectoEsw.Models
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            builder.Entity<Perfil>().ToTable("Perfil");
+           // builder.Entity<Perfil>().ToTable("Perfil");
+
+     
+            
         }
     }
 }

@@ -63,8 +63,9 @@ namespace ProjectoEsw.Controllers
             return View();
         }
 
-        public IActionResult Index()
+        public async Task <IActionResult> Index()
         {
+             await _gestor.adicionarInfo();
             return View();
         }
         

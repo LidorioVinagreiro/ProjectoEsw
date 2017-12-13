@@ -14,5 +14,7 @@ namespace ProjectoEsw.Models.Identity
         public int? PerfilFK { get; set; }
         //identityUser já contem informacao de utilizadores!
         public virtual Perfil Perfil { get; set; }
+
     }
+
 }

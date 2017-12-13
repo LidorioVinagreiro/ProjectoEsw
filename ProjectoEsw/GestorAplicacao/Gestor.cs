@@ -6,9 +6,13 @@ using System.Threading.Tasks;
 using ProjectoEsw.Models.Identity;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
+using ProjectoEsw.Models.ViewModels;
 
 namespace ProjectoEsw.GestorAplicacao
 {
+
+    /*public enum Roles { Candidato, Tecnico, Administrador };*/
+    
     public class Gestor : IGestor
     {
         private AplicacaoDbContexto _context;
@@ -44,6 +48,7 @@ namespace ProjectoEsw.GestorAplicacao
                 }
             } else {
                 //nao foi criado o utilizador
+
                 return false;
             }
         }
@@ -51,6 +56,17 @@ namespace ProjectoEsw.GestorAplicacao
         public async Task<SignInResult> autenticarUtilizador(LoginViewModel model) {
             SignInResult resultado = await _signInManager.PasswordSignInAsync(model.Email, model.Password,false,false);
             return resultado;
+        }
+
+        public async Task<string> getUtilizadorRole(ClaimsPrincipal user) {
+            Utilizador _user = await this.getUtilizador(user);
+            string role = _userManager.GetRolesAsync(_user).Result.FirstOrDefault();
+            return role;
+
+        }
+
+        public async Task LogOut() {
+            await _signInManager.SignOutAsync();
         }
 
         public async Task<IdentityResult> atribuirRoleUtilizador(Utilizador utilizador, string role) {
@@ -76,9 +92,52 @@ namespace ProjectoEsw.GestorAplicacao
 
         }
         public async Task<bool> EditarPerfilUtilizador(RegisterViewModel model) {
-            //quais?
+
+            var perfil = _context.Perfils.Where(utilizadorPerfil => utilizadorPerfil.Email == model.Email).SingleOrDefault();
+            if (perfil != null)
+            {
+                perfil.Email = model.Email;
+                perfil.Morada = model.Morada;
+                perfil.Telefone = model.Telefone;
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            else {
+                //erro nao existe perfil
+                return false;
+
+            }
             
+        }
+
+        public async Task<bool> EditarPassword(RegisterViewModel model) {
+            var perfil = _context.Perfils.Where(utilizadorPerfil => utilizadorPerfil.Email == model.Email).SingleOrDefault();
+            var utilizador = _context.Users.Where(uti => uti.Email == model.Email).FirstOrDefault();
+            await _userManager.RemovePasswordAsync(utilizador);
+            await _userManager.ChangePasswordAsync(utilizador, "", model.Password);
             return true;
+        }
+
+        public async Task<bool> RecuperarPassword(RecuperarPassViewModel model)
+        {
+            Utilizador user = new Utilizador { UserName = model.Email };
+            var query = (from perfils in _context.Perfils
+                        where perfils.Email.Equals(model.Email) && perfils.Nif.Equals(model.Nif)
+                        select  perfils);
+            if (query.Any()) {
+                var query2 = (from aspUsers in _context.Users
+                             where aspUsers.PerfilFK == query.FirstOrDefault().ID
+                             select aspUsers);
+
+                user = query2.FirstOrDefault();
+                await _signInManager.SignInAsync(user, false, null);
+                return true;
+
+            } else {
+                return false;
+
+            }
+            
         }
 
         public async Task adicionarInfo() {
@@ -110,5 +169,10 @@ namespace ProjectoEsw.GestorAplicacao
         {
             return await _userManager.GetUserAsync(principal);
         }
+        /*
+        public List<string> getTiposUtilizadores() {
+            return Enum.GetNames(typeof(Roles)).ToList<string>();
+        }*/
+
     }
 }

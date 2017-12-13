@@ -1,0 +1,14 @@
+﻿@{
+    ViewData["Title"] = "Perfil";
+}
+
+@section links {
+    <a asp-area="" asp-controller="Candidato" asp-action="Perfil" class="btn btn-link btn-xs pull-right"> @Html.DisplayFor(model => model.Email) </a>
+    <a asp-area="" asp-controller="Candidato" asp-action="Logout" class="btn btn-link btn-xs pull-right">Log Out</a>
+    <a asp-area="" asp-controller="Home" asp-action="Login" class="btn btn-link btn-xs pull-right">Login</a>
+}
+
+
+
+<h2>Perfil</h2>
+

@@ -12,6 +12,7 @@ namespace ProjectoEsw.Models.ViewModels
         [EmailAddress(ErrorMessage = "Email incorrecto")]
         [Display(Name = "Email")]
         public string Email { get; set; }
+
         [Required(ErrorMessage = "Obrigatório inserir NIF")]
         [Display(Name ="NIF")]
         public int Nif { get; set; }

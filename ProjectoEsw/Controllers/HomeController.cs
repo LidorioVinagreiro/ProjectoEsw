@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using ProjectoEsw.Models.Identity;
 using Microsoft.AspNetCore.Authorization;
 using ProjectoEsw.GestorAplicacao;
+using ProjectoEsw.Models.ViewModels;
 
 namespace ProjectoEsw.Controllers
 {
@@ -55,13 +56,42 @@ namespace ProjectoEsw.Controllers
 
                 if (resultado.Succeeded)
                 {
-                    return RedirectToAction("Index", "Candidato");
+                    switch (_gestor.getUtilizadorRole(this.User).ToString())
+                    {
+                        case "Candidato":
+                            return RedirectToAction("Index", "Candidato");
+
+                        case "administrador":
+                            return RedirectToAction("Index", "Administrador");
+
+                        case "Tecnico":
+                            return RedirectToAction("Index", "Tecnico");
+
+                        default:
+                            return RedirectToAction("Login", "Home");
+                    }
                 }
                 else {
                     ModelState.AddModelError(string.Empty, "invalid login");
                 }
             }
             return View();
+        }
+
+        public IActionResult RecuperarPassword() {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> RecuperarPassword(RecuperarPassViewModel model)
+        {
+            bool result = await _gestor.RecuperarPassword(model);
+            if (result)
+            {
+                return RedirectToAction("Index", "Candidato");
+            }
+            else {
+                return RedirectToAction("RecuperarPassword", "Home");
+            }
         }
 
         public async Task <IActionResult> Index()

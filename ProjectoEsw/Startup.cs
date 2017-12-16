@@ -26,18 +26,20 @@ namespace ProjectoEsw
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            /*"Server=(localdb)\\mssqllocaldb;Database=RegistoTeste"*/
-            services.AddDbContext<AplicacaoDbContexto>(options => options.UseSqlServer(Configuration.GetConnectionString("ProjectoEsw_grupo2")));
-            services.AddIdentity<Utilizador, IdentityRole>(options=>
+            var conect = "Server=(localdb)\\mssqllocaldb;Database=RegistoTeste";
+            var connect1 = Configuration.GetConnectionString("ProjectoEsw_grupo2");
+            services.AddDbContext<AplicacaoDbContexto>(options => options.UseSqlServer(connect1));
+            services.AddIdentity<Utilizador, IdentityRole>(options =>
                 {
                     options.Password.RequireDigit = false;
                     options.Password.RequiredLength = 4;
                     options.Password.RequiredUniqueChars = 0;
-                    options.Password.RequireNonAlphanumeric =false;
-                    options.Password.RequireUppercase=false;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequireUppercase = false;
                     options.Password.RequireLowercase = false;
                 }
-            ).AddEntityFrameworkStores<AplicacaoDbContexto>();
+            ).AddEntityFrameworkStores<AplicacaoDbContexto>()
+            .AddDefaultTokenProviders();
 
             services.ConfigureApplicationCookie(options => 
             {
@@ -62,8 +64,7 @@ namespace ProjectoEsw
                 app.UseExceptionHandler("/Home/Error");
             }
             app.UseAuthentication();
-            //AuthAppBuilderExtensions.UseAuthentication(app);
-
+            
             app.UseStaticFiles();
 
             app.UseMvc(routes =>
@@ -74,11 +75,11 @@ namespace ProjectoEsw
 
                 routes.MapRoute(
                     name: "Candidato",
-                    template: "{ controller = TiposUtilizador/Candidato}/{ action = Index}/"
+                    template: "{controller=TiposUtilizador/Candidato}/{ action = Index}/"
                     );
                 routes.MapRoute(
                     name: "Tecnico",
-                    template: "{ controller = TiposUtilizador/Tecnico}/{ action = Index}/"
+                    template: "{controller=TiposUtilizador/Tecnico}/{ action = Index}/"
                     );
                 routes.MapRoute(
                     name: "Administrador",

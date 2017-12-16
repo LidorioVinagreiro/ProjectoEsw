@@ -13,9 +13,9 @@ namespace ProjectoEsw.Models
         {
             if (!context.Roles.Any())
             {
-                context.Roles.Add(new IdentityRole("Candidato"));
-                context.Roles.Add(new IdentityRole("Tecnico"));
-                context.Roles.Add(new IdentityRole("Administrador"));
+                context.Roles.Add(new IdentityRole { Name = "Candidato", NormalizedName = "CANDIDATO" });
+                context.Roles.Add(new IdentityRole { Name = "Tecnico", NormalizedName = "TECNICO" });
+                context.Roles.Add(new IdentityRole { Name="Administrador", NormalizedName="ADMINISTRADOR"});
                 context.SaveChanges();
             }
 

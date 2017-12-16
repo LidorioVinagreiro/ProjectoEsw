@@ -22,6 +22,7 @@ namespace ProjectoEsw.Controllers
         }
 
         // GET: /<controller>/
+        [HttpGet]
         public async Task<IActionResult> Index([FromServices] AplicacaoDbContexto context)
         {
            Utilizador user = await _gestor.getUtilizador(this.User);

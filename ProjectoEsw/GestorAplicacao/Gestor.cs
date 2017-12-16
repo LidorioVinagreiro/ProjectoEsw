@@ -26,43 +26,13 @@ namespace ProjectoEsw.GestorAplicacao
             _userManager = userManager;
             _signInManager = signInManager;
         }
-
-        public async Task<bool> criarUtilizador(RegisterViewModel model) {
-            Utilizador novoUtilizador = new Utilizador { UserName = model.Email };
-            novoUtilizador.PerfilFK = await criarPerfilUtilizador(model, "0");
-            IdentityResult resultado = await _userManager.CreateAsync(novoUtilizador, model.Password);
-            if (resultado.Succeeded)
-            {
-                IdentityResult resultadoRole = await atribuirRoleUtilizador(novoUtilizador, "Candidato");
-                if (resultadoRole.Succeeded)
-                {               
-                    await _context.SaveChangesAsync();
-                    LoginViewModel loginModel = new LoginViewModel { Email = model.Email, Password = model.Password };
-                    SignInResult autenticaResultado = await autenticarUtilizador(loginModel);
-                    return autenticaResultado.Succeeded;
-                }
-                else {
-                    //nao existe o role
-                    //nao foi atribuido o role
-                    return false;
-                }
-            } else {
-                //nao foi criado o utilizador
-
-                return false;
-            }
-        }
-
-        public async Task<SignInResult> autenticarUtilizador(LoginViewModel model) {
-            SignInResult resultado = await _signInManager.PasswordSignInAsync(model.Email, model.Password,false,false);
-            return resultado;
-        }
-
-        public async Task<string> getUtilizadorRole(ClaimsPrincipal user) {
-            Utilizador _user = await this.getUtilizador(user);
-            string role = _userManager.GetRolesAsync(_user).Result.FirstOrDefault();
+        
+        public async Task<string> getUtilizadorRole(string email)
+        {
+            Utilizador user = await _userManager.FindByNameAsync(email);
+            IList<string> listaRoles = await _userManager.GetRolesAsync(user);
+            string role = listaRoles.FirstOrDefault();
             return role;
-
         }
 
         public async Task LogOut() {
@@ -70,9 +40,10 @@ namespace ProjectoEsw.GestorAplicacao
         }
 
         public async Task<IdentityResult> atribuirRoleUtilizador(Utilizador utilizador, string role) {
-            return await _userManager.AddToRoleAsync(utilizador, role);
-            
+            IdentityResult result = await _userManager.AddToRoleAsync(utilizador, role);
+            return result;
         }
+
         public async Task<int> criarPerfilUtilizador(RegisterViewModel model,string utilizadorFK) {
             Perfil perfil = new Perfil
             {
@@ -85,12 +56,11 @@ namespace ProjectoEsw.GestorAplicacao
               Telefone=model.Telefone,
               UtilizadorFK=utilizadorFK
             };
-
             var rsult = await _context.Perfils.AddAsync(perfil);
-
+            await _context.SaveChangesAsync();
             return perfil.ID;
-
         }
+
         public async Task<bool> EditarPerfilUtilizador(RegisterViewModel model) {
 
             var perfil = _context.Perfils.Where(utilizadorPerfil => utilizadorPerfil.Email == model.Email).SingleOrDefault();
@@ -122,12 +92,13 @@ namespace ProjectoEsw.GestorAplicacao
         {
             Utilizador user = new Utilizador { UserName = model.Email };
             var query = (from perfils in _context.Perfils
-                        where perfils.Email.Equals(model.Email) && perfils.Nif.Equals(model.Nif)
-                        select  perfils);
+                         where perfils.Email.Equals(model.Email) && perfils.Nif.Equals(model.Nif)
+                         select  perfils);
+
             if (query.Any()) {
                 var query2 = (from aspUsers in _context.Users
-                             where aspUsers.PerfilFK == query.FirstOrDefault().ID
-                             select aspUsers);
+                              where aspUsers.PerfilFK == query.FirstOrDefault().ID
+                              select aspUsers);
 
                 user = query2.FirstOrDefault();
                 await _signInManager.SignInAsync(user, false, null);
@@ -161,7 +132,8 @@ namespace ProjectoEsw.GestorAplicacao
                 await _context.SaveChangesAsync();
             }
             catch (Exception e) {
-
+                //nai faz nada aqui
+                Console.WriteLine(e.ToString());
             }
         }
 
@@ -169,10 +141,6 @@ namespace ProjectoEsw.GestorAplicacao
         {
             return await _userManager.GetUserAsync(principal);
         }
-        /*
-        public List<string> getTiposUtilizadores() {
-            return Enum.GetNames(typeof(Roles)).ToList<string>();
-        }*/
 
     }
 }

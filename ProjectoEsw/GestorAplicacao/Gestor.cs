@@ -88,28 +88,28 @@ namespace ProjectoEsw.GestorAplicacao
             return true;
         }
 
-        public async Task<bool> RecuperarPassword(RecuperarPassViewModel model)
-        {
-            Utilizador user = new Utilizador { UserName = model.Email };
-            var query = (from perfils in _context.Perfils
-                         where perfils.Email.Equals(model.Email) && perfils.Nif.Equals(model.Nif)
-                         select  perfils);
+        //public async Task<bool> RecuperarPassword(RecuperarPassViewModel model)
+        //{
+        //    Utilizador user = new Utilizador { UserName = model.Email };
+        //    var query = (from perfils in _context.Perfils
+        //                 where perfils.Email.Equals(model.Email) && perfils.Nif.Equals(model.Nif)
+        //                 select  perfils);
 
-            if (query.Any()) {
-                var query2 = (from aspUsers in _context.Users
-                              where aspUsers.PerfilFK == query.FirstOrDefault().ID
-                              select aspUsers);
+        //    if (query.Any()) {
+        //        var query2 = (from aspUsers in _context.Users
+        //                      where aspUsers.PerfilFK == query.FirstOrDefault().ID
+        //                      select aspUsers);
 
-                user = query2.FirstOrDefault();
-                await _signInManager.SignInAsync(user, false, null);
-                return true;
+        //        user = query2.FirstOrDefault();
+        //        await _signInManager.SignInAsync(user, false, null);
+        //        return true;
 
-            } else {
-                return false;
+        //    } else {
+        //        return false;
 
-            }
+        //    }
             
-        }
+        //}
 
         public async Task adicionarInfo() {
             Utilizador tec1 = new Utilizador { UserName = "tecnico1@est.pt" };

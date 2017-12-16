@@ -175,18 +175,57 @@ namespace ProjectoEsw.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> RecuperarPassword(RecuperarPassViewModel model)
+        public async Task<IActionResult> RecuperarPassword([Bind] string Email)
         {
-            bool result = await _gestor.RecuperarPassword(model);
-            if (result)
-            {
-                return RedirectToAction("Index", "Candidato");
+            Utilizador user = await _userManager.FindByNameAsync(Email);
+            if(user == null || !(await _userManager.IsEmailConfirmedAsync(user))){
+                //nao ha utilizador ou falta confirmar email.. nao defenir erro
+                View();
             }
-            else {
-                return RedirectToAction("RecuperarPassword", "Home");
-            }
+
+
+            string token = await _userManager.GeneratePasswordResetTokenAsync(user);
+            var callback = Url.Action(
+                "ResetPassword", 
+                "Home", 
+                new { Email = user.UserName , Code = token}, 
+                protocol: HttpContext.Request.Scheme
+                );
+            GestorEmail gm = new GestorEmail();
+            gm.EnviarEmail(user, "reset password", callback.ToString());
+            //falta informacao que pass ja foi enviada
+            return View();
         }
 
+        public IActionResult ResetPassword(string code) {
+            ViewBag.code = code;
+            return code == null ? View("Error") : View() ;
+        }
+            
+        [HttpPost]
+        public async Task<IActionResult> ResetPassword(RecuperarPassViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View("Error");
+
+            Utilizador user = await _userManager.FindByNameAsync(model.Email); 
+            if (user == null || model.Code == null)
+                return View("RecuperarPassword");
+
+            var result = await _userManager.ResetPasswordAsync(user, model.Code, model.Password);
+            
+            if (result.Succeeded) {
+                ModelState.AddModelError(string.Empty, "Password Alterada Faça Login");
+                return View("Login");
+            }
+            else
+            {
+                ModelState.AddModelError(string.Empty, "Password Alterada Faça Login");
+                return View("Error");
+            }
+        
+        }
+      
         public async Task <IActionResult> Index()
         {
              await _gestor.adicionarInfo();

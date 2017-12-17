@@ -2,66 +2,111 @@
 
 
 @section links {
-    <a asp-area="" asp-controller="Candidato" asp-action="Perfil" class="btn btn-link btn-xs pull-right"> @Html.DisplayFor(model => model.Email) </a>
     <a asp-area="" asp-controller="Candidato" asp-action="Logout" class="btn btn-link btn-xs pull-right">Log Out</a>
-    <a asp-area="" asp-controller="Home" asp-action="Login" class="btn btn-link btn-xs pull-right">Login</a>
-}
-
-<form class"form-horizontal" asp-controller="Candidato" asp-action="EditarPerfil" method="post">
-    <h1>perfil</h1>
-    <div asp-validation-summary="All" class="text-danger"></div>
-    <div class="form-group">
-        <label asp-for="NomeCompleto" class="col-sm-2 control-label"></label>
-        <div class="col-sm-10">
-            <input asp-for="@Model.NomeCompleto" class="form-control" />
-            <span asp-validation-for="NomeCompleto" class="text-danger"></span>
+    <a asp-area="" asp-controller="Candidato" asp-action="Index" class="btn btn-link btn-xs pull-right"> @Html.DisplayFor(model => model.Email) </a>
+    }
+<div class="jumbotron col-sm-8">
+        <h2 class=" text-center">Perfil do Candidato</h2>
+        <div class="col-sm-12">
+            <label asp-for="NomeCompleto" class="col-sm-3 control-label"></label>
+            <div class="col-sm-offset-3">
+                @if (@Model.NomeCompleto == null)
+                {
+                    <p><small>Sem Informação</small></p>
+                }
+                else
+                {
+                    <p><small>@Model.NomeCompleto</small></p>
+                }
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <label asp-for="DataNasc" class="col-sm-3 control-label"></label>
+            <div class="col-sm-offset-3">
+                @if (@Model.DataNasc == null)
+            {
+                    <p><small>Sem Informação</small></p>
+                }
+                else
+                {
+                    <p><small>@Model.DataNasc</small></p>
+                }
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <label asp-for="Morada" class="col-sm-3 control-label"></label>
+            <div class="col-sm-offset-3">
+                @if (@Model.Morada == null)
+            {
+                    <p><small>Sem Informação</small></p>
+                }
+                else
+                {
+                    <p><small>@Model.Morada</small></p>
+                }
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <label asp-for="Email" class="col-sm-3 control-label"></label>
+            <div class="col-sm-offset-3">
+                @if (@Model.Email == null)
+            {
+                    <p><small>Sem Informação</small></p>
+                }
+                else
+                {
+                    <p><small>@Model.Email</small></p>
+                }
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <label asp-for="Nif" class="col-sm-3 control-label"></label>
+            <div class="col-sm-offset-3">
+                @if (@Model.Nif == 0)
+            {
+                    <p><small>Sem Informação</small></p>
+                }
+                else
+                {
+                    <p><small>@Model.Nif</small></p>
+                }
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <label asp-for="NumeroIdentificacao" class="col-sm-3 control-label"></label>
+            <div class="col-sm-offset-3">
+                @if (@Model.NumeroIdentificacao == 0)
+            {
+                    <p><small>Sem Informação</small></p>
+                }
+                else
+                {
+                    <p><small>@Model.NumeroIdentificacao</small></p>
+                }
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <label asp-for="Telefone" class="col-sm-3 control-label"></label>
+            <div class="col-sm-offset-3">
+                @if (@Model.Telefone == null)
+            {
+                    <p><small>Sem Informação</small></p>
+                }
+                else
+                {
+                    <p><small>@Model.Telefone</small></p>
+                }
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <label asp-for="Foto" class="col-sm-3 control-label"></label>
+            <div class="col-sm-offset-3">
+                <p>@Model.Foto</p>
+            </div>
         </div>
     </div>
-    <div class="form-group">
-        <label asp-for="Morada" class="col-sm-2 control-label"></label>
-        <div class="col-sm-10">
-            <input asp-for="Morada" class="form-control" />
-            <span asp-validation-for="Morada" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="form-group">
-        <label asp-for="Email" class="col-sm-2 control-label"></label>
-        <div class="col-sm-10">
-            <input asp-for="Email" class="form-control" />
-            <span asp-validation-for="Email" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="form-group">
-        <label asp-for="Nif" class="col-sm-2 control-label"></label>
-        <div class="col-sm-10">
-            <input asp-for="Nif" class="form-control" />
-            <span asp-validation-for="Nif" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="form-group">
-        <label asp-for="NumeroIdentificacao" class="col-sm-2 control-label"></label>
-        <div class="col-sm-10">
-            <input asp-for="NumeroIdentificacao" class="form-control" />
-            <span asp-validation-for="NumeroIdentificacao" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="form-group">
-        <label asp-for="Telefone" class="col-sm-2 control-label"></label>
-        <div class="col-sm-10">
-            <input asp-for="Telefone" class="form-control" />
-            <span asp-validation-for="Telefone" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="form-group">
-        <label asp-for="Foto" class="col-sm-2 control-label"></label>
-        <div class="col-sm-10">
-            <input asp-for="Foto" class="form-control" />
-            <span asp-validation-for="Foto" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-default">Alterar</button>
-        </div>
-    </div>
-</form>
+<div class="jumbotron col-sm-3 col-sm-offset-1">
+    <h5 class="text-center">Opcoes</h5> 
+    <a asp-area="" asp-controller="Candidato" asp-action="Index" class="btn btn-link btn-xs pull-right">Ver Perfil</a>
+    <a asp-area="" asp-controller="Candidato" asp-action="Perfil" class="btn btn-link btn-xs center-block">Editar Perfil</a>
+</div>

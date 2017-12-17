@@ -32,7 +32,12 @@ namespace ProjectoEsw.Controllers
                                {
                                    NomeCompleto = perfil.NomeCompleto,
                                    Email = perfil.Email,
-                                   Morada = perfil.Morada
+                                   Morada = perfil.Morada,
+                                   NumeroIdentificacao = perfil.NumeroIdentificacao,
+                                   DataNasc = perfil.DataNasc,
+                                   Nif = perfil.Nif,
+                                   Telefone = perfil.Telefone
+                                   
                                }).FirstOrDefault();
             user.Perfil = queryPerfil;
            return View(user.Perfil);

@@ -48,6 +48,8 @@ namespace ProjectoEsw
             );
             services.AddTransient<IdentityUser, Utilizador>();
             services.AddTransient<Gestor>();
+            services.AddTransient<GestorAjudas>();
+
             services.AddMvc();
         }
 

@@ -22,6 +22,7 @@ namespace ProjectoEsw.Controllers
         }
 
         // GET: /<controller>/
+        [HttpGet]
         public async Task<IActionResult> Index([FromServices] AplicacaoDbContexto context)
         {
            Utilizador user = await _gestor.getUtilizador(this.User);
@@ -31,31 +32,54 @@ namespace ProjectoEsw.Controllers
                                {
                                    NomeCompleto = perfil.NomeCompleto,
                                    Email = perfil.Email,
-                                   Morada = perfil.Morada
+                                   Morada = perfil.Morada,
+                                   NumeroIdentificacao = perfil.NumeroIdentificacao,
+                                   DataNasc = perfil.DataNasc,
+                                   Nif = perfil.Nif,
+                                   Telefone = perfil.Telefone
+                                   
                                }).FirstOrDefault();
             user.Perfil = queryPerfil;
            return View(user.Perfil);
         }
 
+
+
+
         public IActionResult Perfil() {
-            return View();
+            return View("EditarPerfil");
         }
 
         [HttpPost]
-        public async Task<IActionResult> EditarPerfil() {
-            await _gestor.adicionarInfo();
-            return View();
+        public async Task<IActionResult> EditarPerfil(RegisterViewModel model) {
+            if (await _gestor.EditarPerfilUtilizador(model))
+            {
+                return RedirectToAction("Index", "Candidato");
+            }
+            else {
+                //falta erros?
+                return RedirectToAction("Index", "Candidato");
+            }
+            
         }
 
         [HttpPost]
-        public async Task<IActionResult> AlterarPassword() {
-            await _gestor.adicionarInfo();
-            return View();
+        public async Task<IActionResult> AlterarPassword(RegisterViewModel model) {
+            if (ModelState.IsValid)
+            {
+
+                await _gestor.EditarPassword(model);
+                return RedirectToAction("Index","Candidato");
+            }
+            else {
+                //password nao foi alterada
+                return RedirectToAction("Index", "Candidato");
+            }
         }
 
         public async Task<IActionResult> Logout() {
-
-            return RedirectToAction("Home", "Login");
+            await _gestor.LogOut();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

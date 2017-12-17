@@ -15,11 +15,14 @@ namespace ProjectoEsw.Models.Identity
         public string NomeCompleto { get; set; }
         public string Email { get; set; }
         public int Nif { get; set; }
+        [DisplayName("Numero de Identificação")]
         public int NumeroIdentificacao { get; set; }
+        [DisplayName("Data Nascimento")]
         public DateTime DataNasc { get; set; }
         public string Morada { get; set; }
         public string Telefone { get; set; }
         public string Foto { get; set; }
+        [ForeignKey("Utilizador")]
         public string UtilizadorFK { get; set; }
         public virtual Utilizador Utilizador { get; set; } 
     }

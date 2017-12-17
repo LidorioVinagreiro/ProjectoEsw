@@ -11,7 +11,7 @@ using System;
 namespace ProjectoEsw.Migrations
 {
     [DbContext(typeof(AplicacaoDbContexto))]
-    [Migration("20171207145524_initial")]
+    [Migration("20171216030126_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -129,6 +129,36 @@ namespace ProjectoEsw.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("ProjectoEsw.Models.Ajudas.AjudaCampo", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Campo");
+
+                    b.Property<string>("Descricao");
+
+                    b.Property<int?>("PaginaFK");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("AjudaCampos");
+                });
+
+            modelBuilder.Entity("ProjectoEsw.Models.Ajudas.AjudaPagina", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Descricao");
+
+                    b.Property<string>("Pagina");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("AjudaPaginas");
+                });
+
             modelBuilder.Entity("ProjectoEsw.Models.Identity.Perfil", b =>
                 {
                     b.Property<int>("ID")
@@ -153,6 +183,8 @@ namespace ProjectoEsw.Migrations
                     b.Property<string>("UtilizadorFK");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("UtilizadorFK");
 
                     b.ToTable("Perfils");
                 });
@@ -207,9 +239,7 @@ namespace ProjectoEsw.Migrations
                         .HasName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.HasIndex("PerfilFK")
-                        .IsUnique()
-                        .HasFilter("[PerfilFK] IS NOT NULL");
+                    b.HasIndex("PerfilFK");
 
                     b.ToTable("AspNetUsers");
                 });
@@ -259,11 +289,18 @@ namespace ProjectoEsw.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("ProjectoEsw.Models.Identity.Perfil", b =>
+                {
+                    b.HasOne("ProjectoEsw.Models.Identity.Utilizador", "Utilizador")
+                        .WithMany()
+                        .HasForeignKey("UtilizadorFK");
+                });
+
             modelBuilder.Entity("ProjectoEsw.Models.Identity.Utilizador", b =>
                 {
                     b.HasOne("ProjectoEsw.Models.Identity.Perfil", "Perfil")
-                        .WithOne("Utilizador")
-                        .HasForeignKey("ProjectoEsw.Models.Identity.Utilizador", "PerfilFK");
+                        .WithMany()
+                        .HasForeignKey("PerfilFK");
                 });
 #pragma warning restore 612, 618
         }

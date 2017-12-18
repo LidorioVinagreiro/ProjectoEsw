@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
 using ProjectoEsw.Models;
 using Microsoft.AspNetCore.Identity;
+using ProjectoEsw.Models.Identity;
 
 namespace ProjectoEsw
 {

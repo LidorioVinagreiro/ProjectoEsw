@@ -15,15 +15,20 @@
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="popover"]').popover();
+        });
+    </script>
 </head>
 <body>
     <div class="container">
         <div class="row">
             <div>
-                <a asp-area="" asp-controller="UtilizadorRegistado" asp-action="RecuperarPassword?" class="btn btn-link btn-xs pull-right">Recuperar Password</a>
-                <a asp-area="" asp-controller="Principal" asp-action="Register" class="btn btn-link btn-xs pull-right">Registar</a>
-                <a asp-area="" asp-controller="Principal" asp-action="Login" class="btn btn-link btn-xs pull-right">Login</a>
+                @RenderSection("links", required: true);                
             </div>
             <div class="col-sm-2">
                 <div class="sidebar-nav">
@@ -40,7 +45,7 @@
                             <span class="visible-xs navbar-brand">Sidebar menu</span>
                         </div>
                         <div class="well text-center" role="button">
-                            <a asp-area="" asp-controller="Principal" asp-action="Index">Home</a>
+                            <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </div>  
                         <div class="well text-center" role="button">
                             Programas Mobilidade

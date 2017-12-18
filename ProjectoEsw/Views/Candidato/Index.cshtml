@@ -1,7 +1,112 @@
-﻿
-@{
-    ViewData["Title"] = "Index";
-}
+﻿@model ProjectoEsw.Models.Identity.Perfil;
 
-<h2>Index</h2>
 
+@section links {
+    <a asp-area="" asp-controller="Candidato" asp-action="Logout" class="btn btn-link btn-xs pull-right">Log Out</a>
+    <a asp-area="" asp-controller="Candidato" asp-action="Index" class="btn btn-link btn-xs pull-right"> @Html.DisplayFor(model => model.Email) </a>
+    }
+<div class="jumbotron col-sm-8">
+        <h2 class=" text-center">Perfil do Candidato</h2>
+        <div class="col-sm-12">
+            <label asp-for="NomeCompleto" class="col-sm-3 control-label"></label>
+            <div class="col-sm-offset-3">
+                @if (@Model.NomeCompleto == null)
+                {
+                    <p><small>Sem Informação</small></p>
+                }
+                else
+                {
+                    <p><small>@Model.NomeCompleto</small></p>
+                }
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <label asp-for="DataNasc" class="col-sm-3 control-label"></label>
+            <div class="col-sm-offset-3">
+                @if (@Model.DataNasc == null)
+            {
+                    <p><small>Sem Informação</small></p>
+                }
+                else
+                {
+                    <p><small>@Model.DataNasc</small></p>
+                }
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <label asp-for="Morada" class="col-sm-3 control-label"></label>
+            <div class="col-sm-offset-3">
+                @if (@Model.Morada == null)
+            {
+                    <p><small>Sem Informação</small></p>
+                }
+                else
+                {
+                    <p><small>@Model.Morada</small></p>
+                }
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <label asp-for="Email" class="col-sm-3 control-label"></label>
+            <div class="col-sm-offset-3">
+                @if (@Model.Email == null)
+            {
+                    <p><small>Sem Informação</small></p>
+                }
+                else
+                {
+                    <p><small>@Model.Email</small></p>
+                }
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <label asp-for="Nif" class="col-sm-3 control-label"></label>
+            <div class="col-sm-offset-3">
+                @if (@Model.Nif == 0)
+            {
+                    <p><small>Sem Informação</small></p>
+                }
+                else
+                {
+                    <p><small>@Model.Nif</small></p>
+                }
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <label asp-for="NumeroIdentificacao" class="col-sm-3 control-label"></label>
+            <div class="col-sm-offset-3">
+                @if (@Model.NumeroIdentificacao == 0)
+            {
+                    <p><small>Sem Informação</small></p>
+                }
+                else
+                {
+                    <p><small>@Model.NumeroIdentificacao</small></p>
+                }
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <label asp-for="Telefone" class="col-sm-3 control-label"></label>
+            <div class="col-sm-offset-3">
+                @if (@Model.Telefone == null)
+            {
+                    <p><small>Sem Informação</small></p>
+                }
+                else
+                {
+                    <p><small>@Model.Telefone</small></p>
+                }
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <label asp-for="Foto" class="col-sm-3 control-label"></label>
+            <div class="col-sm-offset-3">
+                <p>@Model.Foto</p>
+            </div>
+        </div>
+    </div>
+<div class="jumbotron col-sm-3 col-sm-offset-1">
+    <h5 class="text-center">Opcoes</h5> 
+        <a asp-area="" asp-controller="Candidato" asp-action="Index" class="btn btn-link btn-xs pull-right col-sm-12">Ver Perfil</a>
+    <a asp-area="" asp-controller="Candidato" asp-action="Perfil" class="btn btn-link btn-xs center-block col-sm-12">Editar Perfil</a>
+</div>

@@ -1,20 +1,27 @@
 ﻿<!-- ProjectoEsw.Models.Identity.Perfil -->
 @model ProjectoEsw.Models.Identity.RegisterViewModel
 @addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+
+@section links {
+    <a asp-area="" asp-controller="Candidato" asp-action="Perfil" class="btn btn-link btn-xs pull-right"> @Html.DisplayFor(model => model.Email) </a>
+    <a asp-area="" asp-controller="Candidato" asp-action="Logout" class="btn btn-link btn-xs pull-right">Log Out</a>
+    <a asp-area="" asp-controller="Home" asp-action="Login" class="btn btn-link btn-xs pull-right">Login</a>
+}
+
 <div class="jumbotron col-sm-10 col-sm-offset-1">
     <div class="container col-lg-offset-2 col-sm-8">
         <h2 class="text-center">Editar Perfil</h2>
-        <form class="form-horizontal" asp-controller="UtilizadorRegistado" asp-action="EditarPerfil" method="post">
+        <form class="form-horizontal" asp-controller="Candidato" asp-action="EditarPerfil" method="post">
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
                 <div class=" help-block"></div>
                 <input asp-for="Email" placeholder="Novo Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
                 <div class=" help-block"></div>
-                <input asp-for="Morada" placeholder="Novo Numero de Telefone" class="form-control" />
+                <input asp-for="Morada" placeholder="Novo Morada" class="form-control" />
                 <span asp-validation-for="Morada" class="text-danger"></span>
                 <div class=" help-block"></div>
-                <input asp-for="Telefone" placeholder="Nova Morada" class="form-control" />
+                <input asp-for="Telefone" placeholder="Telefone" class="form-control" />
                 <span asp-validation-for="Telefone" class="text-danger"></span>
                 <div class=" help-block"></div>
             </div>
@@ -29,7 +36,7 @@
 <div class="jumbotron col-sm-10 col-sm-offset-1">
     <div class="container col-lg-offset-2 col-sm-8">
         <h2 class="text-center">Alterar Password</h2>
-        <form class="form-horizontal" asp-controller="UtilizadorRegistado" asp-action="EditarPerfil" method="post">
+        <form class="form-horizontal" asp-controller="Candidato" asp-action="AlterarPassword" method="post">
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
                 <div class=" help-block"></div>

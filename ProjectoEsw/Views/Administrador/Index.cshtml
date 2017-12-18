@@ -1,0 +1,59 @@
+﻿@model ProjectoEsw.Models.Identity.Perfil;
+
+
+@section links {
+    <a asp-area="" asp-controller="Candidato" asp-action="Logout" class="btn btn-link btn-xs pull-right">Log Out</a>
+    <a asp-area="" asp-controller="Candidato" asp-action="Index" class="btn btn-link btn-xs pull-right"> @Html.DisplayFor(model => model.Email) </a>
+}
+<div class="jumbotron col-sm-9">
+    <h2 class=" text-center">Perfil do Adminstrador</h2>
+    <div class="col-sm-12">
+        <label asp-for="NomeCompleto" class="col-sm-4 control-label"></label>
+        <div class="col-sm-offset-4">
+            @if (@Model.NomeCompleto == null)
+            {
+                <p><small>Sem Informação</small></p>
+            }
+            else
+            {
+                <p><small>@Model.NomeCompleto</small></p>
+            }
+        </div>
+    </div>
+    <div class="col-sm-12">
+        <label asp-for="Email" class="col-sm-4 control-label"></label>
+        <div class="col-sm-offset-4">
+            @if (@Model.Email == null)
+            {
+                <p><small>Sem Informação</small></p>
+            }
+            else
+            {
+                <p><small>@Model.Email</small></p>
+            }
+        </div>
+    </div>
+    <div class="col-sm-12">
+        <label asp-for="Telefone" class="col-sm-4 control-label"></label>
+        <div class="col-sm-offset-4">
+            @if (@Model.Telefone == null)
+            {
+                <p><small>Sem Informação</small></p>
+            }
+            else
+            {
+                <p><small>@Model.Telefone</small></p>
+            }
+        </div>
+    </div>
+    <div class="col-sm-12">
+        <label asp-for="Foto" class="col-sm-4 control-label"></label>
+        <div class="col-sm-offset-4">
+            <p>@Model.Foto</p>
+        </div>
+    </div>
+</div>
+<div class="jumbotron col-sm-2 col-sm-offset-1">
+    <h5 class="text-center">Opcoes</h5>
+    <a asp-area="" asp-controller="Candidato" asp-action="Perfil" class="btn btn-link btn-xs text-center">Editar Perfil</a>
+</div>

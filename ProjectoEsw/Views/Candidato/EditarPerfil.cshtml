@@ -8,8 +8,8 @@
     <a asp-area="" asp-controller="Home" asp-action="Login" class="btn btn-link btn-xs pull-right">Login</a>
 }
 
-<div class="jumbotron col-sm-10 col-sm-offset-1">
-    <div class="container col-lg-offset-2 col-sm-8">
+<div class="jumbotron col-sm-7 col-sm-offset-1">
+    <div class="container col-lg-offset-1 col-sm-10">
         <h2 class="text-center">Editar Perfil</h2>
         <form class="form-horizontal" asp-controller="Candidato" asp-action="EditarPerfil" method="post">
             <div asp-validation-summary="All" class="text-danger"></div>
@@ -24,6 +24,11 @@
                 <input asp-for="Telefone" placeholder="Telefone" class="form-control" />
                 <span asp-validation-for="Telefone" class="text-danger"></span>
                 <div class=" help-block"></div>
+                <div class="form-inline">
+                    <h5 class="pull-left">Foto</h5>
+                    <input type="file" name="files" class="pull-right" />
+                   
+                </div>
             </div>
             <div class="form-group">
                 <div class="text-center">
@@ -33,8 +38,13 @@
         </form>
     </div>
 </div>
-<div class="jumbotron col-sm-10 col-sm-offset-1">
-    <div class="container col-lg-offset-2 col-sm-8">
+<div class="jumbotron col-sm-3 col-sm-offset-1">
+    <h5 class="text-center">Opcoes</h5>
+    <a asp-area="" asp-controller="Candidato" asp-action="Index" class="btn btn-link btn-xs pull-right col-sm-12">Ver Perfil</a>
+    <a asp-area="" asp-controller="Candidato" asp-action="Perfil" class="btn btn-link btn-xs center-block col-sm-12">Editar Perfil</a>
+</div>
+<div class="jumbotron col-sm-7 col-sm-offset-1">
+    <div class="container col-lg-offset-1 col-sm-10">
         <h2 class="text-center">Alterar Password</h2>
         <form class="form-horizontal" asp-controller="Candidato" asp-action="AlterarPassword" method="post">
             <div asp-validation-summary="All" class="text-danger"></div>

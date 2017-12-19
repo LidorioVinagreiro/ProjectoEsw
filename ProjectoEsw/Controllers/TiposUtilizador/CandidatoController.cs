@@ -23,31 +23,28 @@ namespace ProjectoEsw.Controllers
 
         // GET: /<controller>/
         [HttpGet]
-        public async Task<IActionResult> Index([FromServices] AplicacaoDbContexto context)
+        public async Task<IActionResult> Index()
         {
            Utilizador user = await _gestor.getUtilizador(this.User);
-            Perfil queryPerfil = (from perfil in context.Perfils
-                               where perfil.ID == user.PerfilFK
-                               select new Perfil
-                               {
-                                   NomeCompleto = perfil.NomeCompleto,
-                                   Email = perfil.Email,
-                                   Morada = perfil.Morada,
-                                   NumeroIdentificacao = perfil.NumeroIdentificacao,
-                                   DataNasc = perfil.DataNasc,
-                                   Nif = perfil.Nif,
-                                   Telefone = perfil.Telefone
-                                   
-                               }).FirstOrDefault();
+            Perfil queryPerfil = _gestor.getPerfil(user);
             user.Perfil = queryPerfil;
            return View(user.Perfil);
         }
 
 
+        public async Task<IActionResult> EditarPerfil()
+        {
+            Utilizador user = await _gestor.getUtilizador(this.User);
+            Perfil queryPerfil = _gestor.getPerfil(user);
+            user.Perfil = queryPerfil;
+            return View(user.Perfil);
+        }
 
-
-        public IActionResult Perfil() {
-            return View("EditarPerfil");
+        public async Task<IActionResult> Perfil() {
+            Utilizador user = await _gestor.getUtilizador(this.User);
+            Perfil queryPerfil = _gestor.getPerfil(user);
+            user.Perfil = queryPerfil;
+            return View(user.Perfil);
         }
 
         [HttpPost]

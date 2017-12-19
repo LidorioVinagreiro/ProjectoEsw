@@ -6,6 +6,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
 using ProjectoEsw.Models;
+using ProjectoEsw.Models.Calendario;
+using ProjectoEsw.Models.Identity;
 using System;
 
 namespace ProjectoEsw.Migrations
@@ -158,6 +160,42 @@ namespace ProjectoEsw.Migrations
                     b.ToTable("AjudaPaginas");
                 });
 
+            modelBuilder.Entity("ProjectoEsw.Models.Calendario.Eventos", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("CorEvento");
+
+                    b.Property<string>("Descricao");
+
+                    b.Property<bool>("DiaTodo");
+
+                    b.Property<int?>("EntrevistadorFK");
+
+                    b.Property<int?>("EntrevistadorID");
+
+                    b.Property<DateTime>("Fim");
+
+                    b.Property<DateTime>("Inicio");
+
+                    b.Property<int?>("PerfilFK");
+
+                    b.Property<int>("Tipo");
+
+                    b.Property<string>("Titulo");
+
+                    b.Property<int?>("UtilizadorID");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("EntrevistadorID");
+
+                    b.HasIndex("UtilizadorID");
+
+                    b.ToTable("Eventos");
+                });
+
             modelBuilder.Entity("ProjectoEsw.Models.Identity.Perfil", b =>
                 {
                     b.Property<int>("ID")
@@ -169,7 +207,17 @@ namespace ProjectoEsw.Migrations
 
                     b.Property<string>("Foto");
 
-                    b.Property<string>("Morada");
+                    b.Property<int>("Genero");
+
+                    b.Property<string>("MoradaCodigoPostal");
+
+                    b.Property<string>("MoradaConcelho");
+
+                    b.Property<string>("MoradaDistrito");
+
+                    b.Property<string>("MoradaRua");
+
+                    b.Property<int>("Nacionalidade");
 
                     b.Property<int>("Nif");
 
@@ -286,6 +334,17 @@ namespace ProjectoEsw.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("ProjectoEsw.Models.Calendario.Eventos", b =>
+                {
+                    b.HasOne("ProjectoEsw.Models.Identity.Perfil", "Entrevistador")
+                        .WithMany()
+                        .HasForeignKey("EntrevistadorID");
+
+                    b.HasOne("ProjectoEsw.Models.Identity.Perfil", "Utilizador")
+                        .WithMany()
+                        .HasForeignKey("UtilizadorID");
                 });
 
             modelBuilder.Entity("ProjectoEsw.Models.Identity.Perfil", b =>

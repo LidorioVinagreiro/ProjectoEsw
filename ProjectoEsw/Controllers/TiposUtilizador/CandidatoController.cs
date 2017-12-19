@@ -16,9 +16,11 @@ namespace ProjectoEsw.Controllers
     public class CandidatoController : Controller
     {
         private Gestor _gestor;
+        private AplicacaoDbContexto _contexto;
 
-        public CandidatoController(Gestor gestor) {
+        public CandidatoController(Gestor gestor,AplicacaoDbContexto contexto) {
             _gestor = gestor;
+            _contexto = contexto;
         }
 
         // GET: /<controller>/
@@ -32,7 +34,7 @@ namespace ProjectoEsw.Controllers
                                {
                                    NomeCompleto = perfil.NomeCompleto,
                                    Email = perfil.Email,
-                                   Morada = perfil.Morada,
+                                 
                                    NumeroIdentificacao = perfil.NumeroIdentificacao,
                                    DataNasc = perfil.DataNasc,
                                    Nif = perfil.Nif,
@@ -80,6 +82,16 @@ namespace ProjectoEsw.Controllers
         public async Task<IActionResult> Logout() {
             await _gestor.LogOut();
             return RedirectToAction("Index", "Home");
+        }
+
+
+        //METODOS DE AJAX
+        [HttpGet]
+        public async Task<JsonResult> GetEvents()
+        {
+            Utilizador user = await _gestor.getUtilizador(this.User);
+            var events = _contexto.Eventos.Where(Eventos => Eventos.Utilizador.ID == user.PerfilFK).ToList();
+            return Json(events);
         }
     }
 }

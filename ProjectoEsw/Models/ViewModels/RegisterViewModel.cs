@@ -28,8 +28,6 @@ namespace ProjectoEsw.Models.Identity
         //[Required(ErrorMessage = "Obrigatório inserir o Numero de Identificação")]
         public int NumeroIdentificacao { get; set; }
 
-        public string Morada { get; set; }
-
         //[Required(ErrorMessage = "Obrigatório inserir número de telefone/telemóvel")]
         public string Telefone { get; set; }
 

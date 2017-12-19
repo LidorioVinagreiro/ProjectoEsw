@@ -10,18 +10,27 @@ namespace ProjectoEsw.Models.Identity
     {
         [Required(ErrorMessage = "Obrigatório inserir Email")]
         [EmailAddress(ErrorMessage = "Email incorrecto")]
-        [Display(Name ="Email")]
+        [Display(Name = "Email")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Obrigatório inserir nome completo")]
-        [Display(Name ="Nome Completo")]
+        [Display(Name = "Nome Completo")]
         public string NomeCompleto { get; set; }
 
         //[Required(ErrorMessage = "Obrigatório inserir data de nascimento válida")]
         [Display(Name = "Data Nascimento")]
         public DateTime DataNasc { set; get; }
 
-        [Display(Name ="NIF")]
+        public string Genero { get; set; }
+
+        public string Nacionalidade { get; set; }
+
+        public string MoradaRua { get; set; }
+        public string MoradaConcelho { get; set; }
+        public string MoradaDistrito { get; set; }
+        public string MoradaCodigoPostal { get; set; }
+
+        [Display(Name = "NIF")]
         //[Required(ErrorMessage = "Obrigatório inserir NIF")]
         public int Nif { get; set; }
         [Display(Name = "Numero de Identificação")]
@@ -39,7 +48,7 @@ namespace ProjectoEsw.Models.Identity
         [Required(ErrorMessage = "Obrigatório confirmar password")]
         [DataType(DataType.Password)]
         [Display(Name = "Confirmar Palavra-chave")]
-        [Compare("Password",ErrorMessage ="A password não coecide")]
+        [Compare("Password", ErrorMessage = "A password não coecide")]
         public string ConfirmPassword { get; set; }
     }
 }

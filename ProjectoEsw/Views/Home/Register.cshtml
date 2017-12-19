@@ -22,8 +22,23 @@
                 <input asp-for="DataNasc" class="form-control"  data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.Register","Data Nascimento").Descricao"/>
                 <span asp-validation-for="DataNasc" class="text-danger"></span>
                 <div class=" help-block"></div>
-                <input asp-for="Nif" placeholder="Numero de Identifição fiscal" class="form-control"  data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.Register","NIF").Descricao"/>
-                <span asp-validation-for="Nif" class="text-danger"></span>
+                <input asp-for="Genero" placeholder="Rua da morada" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.Register","NIF").Descricao" />
+                <span asp-validation-for="Genero" class="text-danger"></span>
+                <div class=" help-block"></div>
+                <input asp-for="Nacionalidade" placeholder="Rua da morada" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.Register","NIF").Descricao" />
+                <span asp-validation-for="Nacionalidade" class="text-danger"></span>
+                <div class=" help-block"></div>
+                <input asp-for="MoradaRua" placeholder="Rua da morada" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.Register","NIF").Descricao" />
+                <span asp-validation-for="MoradaRua" class="text-danger"></span>
+                <div class=" help-block"></div>
+                <input asp-for="MoradaCodigoPostal" placeholder="Codigo Postal da morada" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.Register","NIF").Descricao" />
+                <span asp-validation-for="MoradaCodigoPostal" class="text-danger"></span>
+                <div class=" help-block"></div>
+                <input asp-for="MoradaConcelho" placeholder="Concelho da morada" class="form-control"  data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.Register","NIF").Descricao"/>
+                <span asp-validation-for="MoradaConcelho" class="text-danger"></span>
+                <div class=" help-block"></div>
+                <input asp-for="MoradaDistrito" placeholder="Distrito da morada" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.Register","NIF").Descricao" />
+                <span asp-validation-for="MoradaDistrito" class="text-danger"></span>
                 <div class=" help-block"></div>
                 <input asp-for="NumeroIdentificacao" placeholder="Numero de Identifição" class="form-control"  data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.Register","Numero Identificação").Descricao)"/>
                 <span asp-validation-for="NumeroIdentificacao" class="text-danger"></span>

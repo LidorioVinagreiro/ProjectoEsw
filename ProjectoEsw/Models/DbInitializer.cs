@@ -12,6 +12,17 @@ namespace ProjectoEsw.Models
     {
         public static void Initialize(AplicacaoDbContexto context)
         {
+            if (!context.Eventos.Any()) {
+                context.Eventos.Add(new Calendario.Eventos {
+                    Inicio = new DateTime(2000, 10, 10),
+                    Fim = new DateTime(2000, 10, 11),
+                    Descricao = "DESCRICAO",
+                    Titulo="TITULO",
+                    DiaTodo=false
+                    }    
+                );
+
+            }
             if (!context.Roles.Any())
             {
                 context.Roles.Add(new IdentityRole { Name = "Candidato", NormalizedName = "CANDIDATO" });

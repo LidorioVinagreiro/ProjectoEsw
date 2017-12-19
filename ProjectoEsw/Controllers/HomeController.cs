@@ -125,41 +125,49 @@ namespace ProjectoEsw.Controllers
             {
                 ////1 false = persistent, 2 false = lockdownonfailure
                 Utilizador user = await _userManager.FindByNameAsync(model.Email);
-                if (user.EmailConfirmed)
+                if (user != null)
                 {
 
-                    Microsoft.AspNetCore.Identity.SignInResult resultado = await _signInManager.PasswordSignInAsync(
-                        model.Email, model.Password, false, false
-                    );
-                    if (resultado.Succeeded)
+                    if (user.EmailConfirmed)
                     {
-                        string role = await _gestor.getUtilizadorRole(model.Email);
-                        switch (role)
+
+                        Microsoft.AspNetCore.Identity.SignInResult resultado = await _signInManager.PasswordSignInAsync(
+                            model.Email, model.Password, false, false
+                        );
+                        if (resultado.Succeeded)
                         {
+                            string role = await _gestor.getUtilizadorRole(model.Email);
+                            switch (role)
+                            {
 
-                            case "Candidato":
-                                return RedirectToAction("Index", "Candidato");
+                                case "Candidato":
+                                    return RedirectToAction("Index", "Candidato");
 
-                            case "administrador":
-                                return RedirectToAction("Index", "Administrador");
+                                case "administrador":
+                                    return RedirectToAction("Index", "Administrador");
 
-                            case "Tecnico":
-                                return RedirectToAction("Index", "Tecnico");
+                                case "Tecnico":
+                                    return RedirectToAction("Index", "Tecnico");
 
-                            default:
-                                ModelState.AddModelError(string.Empty, "Erro no role Login");
-                                return RedirectToAction("Login", "Home");
+                                default:
+                                    ModelState.AddModelError(string.Empty, "Erro no role Login");
+                                    return RedirectToAction("Login", "Home");
+                            }
+                        }
+                        else
+                        {
+                            ModelState.AddModelError(string.Empty, "invalid login");
+                            return View();
                         }
                     }
                     else
                     {
-                        ModelState.AddModelError(string.Empty, "invalid login");
+                        ModelState.AddModelError(string.Empty, "falta Confirmar Email");
                         return View();
                     }
                 }
-                else
-                {
-                    ModelState.AddModelError(string.Empty, "falta Confirmar Email");
+                else {
+                    ModelState.AddModelError(string.Empty, "UTILIZADOR NAO EXISTE");
                     return View();
                 }
             }
@@ -180,9 +188,8 @@ namespace ProjectoEsw.Controllers
             Utilizador user = await _userManager.FindByNameAsync(Email);
             if(user == null || !(await _userManager.IsEmailConfirmedAsync(user))){
                 //nao ha utilizador ou falta confirmar email.. nao defenir erro
-                View();
+                return View();
             }
-
 
             string token = await _userManager.GeneratePasswordResetTokenAsync(user);
             var callback = Url.Action(

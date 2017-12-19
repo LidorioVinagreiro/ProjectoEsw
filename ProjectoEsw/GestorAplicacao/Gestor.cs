@@ -50,7 +50,7 @@ namespace ProjectoEsw.GestorAplicacao
               NomeCompleto =model.NomeCompleto,
               DataNasc=model.DataNasc,
               Email=model.Email,
-              Morada=model.Morada,
+              //Morada=model.Morada,
               Nif=model.Nif,
               NumeroIdentificacao=model.NumeroIdentificacao,
               Telefone=model.Telefone,
@@ -67,7 +67,7 @@ namespace ProjectoEsw.GestorAplicacao
             if (perfil != null)
             {
                 perfil.Email = model.Email;
-                perfil.Morada = model.Morada;
+                //perfil.Morada = model.Morada;
                 perfil.Telefone = model.Telefone;
                 await _context.SaveChangesAsync();
                 return true;

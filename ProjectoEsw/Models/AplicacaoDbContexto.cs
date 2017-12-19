@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using ProjectoEsw.Models.Identity;
 using Microsoft.EntityFrameworkCore;
 using ProjectoEsw.Models.Ajudas;
+using ProjectoEsw.Models.Calendario;
 
 namespace ProjectoEsw.Models
 {
@@ -15,7 +16,7 @@ namespace ProjectoEsw.Models
         public DbSet<Perfil> Perfils { get; set; }
         public DbSet<AjudaCampo> AjudaCampos { get; set; }
         public DbSet<AjudaPagina> AjudaPaginas { get; set; }
-
+        public DbSet<Eventos> Eventos { get; set; }
         //public DbSet<Perfil> Perfils { get; set; }
         //este é a classe da base de dados
         //este serviço tem que ser adicionado no startup

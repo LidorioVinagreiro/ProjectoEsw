@@ -21,6 +21,15 @@ namespace ProjectoEsw.Models.Identity
         [Display(Name = "Data Nascimento")]
         public DateTime DataNasc { set; get; }
 
+        public string Genero { get; set; }
+
+        public string Nacionalidade { get; set; }
+
+        public string MoradaRua { get; set; }
+        public string MoradaConcelho { get; set; }
+        public string MoradaDistrito { get; set; }
+        public string MoradaCodigoPostal { get; set; }
+
         [Display(Name ="NIF")]
         //[Required(ErrorMessage = "Obrigatório inserir NIF")]
         public int Nif { get; set; }

@@ -47,14 +47,19 @@ namespace ProjectoEsw.GestorAplicacao
         public async Task<int> criarPerfilUtilizador(RegisterViewModel model,string utilizadorFK) {
             Perfil perfil = new Perfil
             {
-              NomeCompleto =model.NomeCompleto,
-              DataNasc=model.DataNasc,
-              Email=model.Email,
-              //Morada=model.Morada,
-              Nif=model.Nif,
-              NumeroIdentificacao=model.NumeroIdentificacao,
-              Telefone=model.Telefone,
-              UtilizadorFK=utilizadorFK
+                NomeCompleto = model.NomeCompleto,
+                DataNasc = model.DataNasc,
+                Email = model.Email,
+                Nacionalidade = model.Nacionalidade,
+                Genero = model.Genero,
+                MoradaRua=model.MoradaRua,
+                MoradaDistrito=model.MoradaDistrito,
+                MoradaConcelho = model.MoradaConcelho,
+                MoradaCodigoPostal=model.MoradaCodigoPostal,
+                Nif=model.Nif,
+                NumeroIdentificacao=model.NumeroIdentificacao,
+                Telefone=model.Telefone,
+                UtilizadorFK=utilizadorFK
             };
             var rsult = await _context.Perfils.AddAsync(perfil);
             await _context.SaveChangesAsync();
@@ -66,9 +71,12 @@ namespace ProjectoEsw.GestorAplicacao
             var perfil = _context.Perfils.Where(utilizadorPerfil => utilizadorPerfil.Email == model.Email).SingleOrDefault();
             if (perfil != null)
             {
-                perfil.Email = model.Email;
-                //perfil.Morada = model.Morada;
                 perfil.Telefone = model.Telefone;
+                perfil.MoradaCodigoPostal = model.MoradaCodigoPostal;
+                perfil.MoradaConcelho = model.MoradaConcelho;
+                perfil.MoradaDistrito = model.MoradaDistrito;
+                perfil.NumeroIdentificacao = model.NumeroIdentificacao;
+                perfil.Nif = model.Nif;
                 await _context.SaveChangesAsync();
                 return true;
             }
@@ -88,28 +96,6 @@ namespace ProjectoEsw.GestorAplicacao
             return true;
         }
 
-        //public async Task<bool> RecuperarPassword(RecuperarPassViewModel model)
-        //{
-        //    Utilizador user = new Utilizador { UserName = model.Email };
-        //    var query = (from perfils in _context.Perfils
-        //                 where perfils.Email.Equals(model.Email) && perfils.Nif.Equals(model.Nif)
-        //                 select  perfils);
-
-        //    if (query.Any()) {
-        //        var query2 = (from aspUsers in _context.Users
-        //                      where aspUsers.PerfilFK == query.FirstOrDefault().ID
-        //                      select aspUsers);
-
-        //        user = query2.FirstOrDefault();
-        //        await _signInManager.SignInAsync(user, false, null);
-        //        return true;
-
-        //    } else {
-        //        return false;
-
-        //    }
-            
-        //}
 
         public async Task adicionarInfo() {
             Utilizador tec1 = new Utilizador { UserName = "tecnico1@est.pt" };
@@ -151,7 +137,12 @@ namespace ProjectoEsw.GestorAplicacao
                                   {
                                       NomeCompleto = perfil.NomeCompleto,
                                       Email = perfil.Email,
-                                      Morada = perfil.Morada,
+                                      MoradaRua = perfil.MoradaRua,
+                                      MoradaDistrito = perfil.MoradaDistrito,
+                                      MoradaConcelho = perfil.MoradaConcelho,
+                                      MoradaCodigoPostal = perfil.MoradaCodigoPostal,
+                                      Nacionalidade = perfil.Nacionalidade,
+                                      Genero = perfil.Genero,
                                       NumeroIdentificacao = perfil.NumeroIdentificacao,
                                       DataNasc = perfil.DataNasc,
                                       Nif = perfil.Nif,

@@ -58,8 +58,10 @@ namespace ProjectoEsw.Models.Identity
         public int ID { get; set; }
         [DisplayName("Nome Completo")]
         public string NomeCompleto { get; set; }
-        public Genero Genero { get; set; }
-        public Nacionalidade Nacionalidade { get; set; }
+
+        public string Genero { get; set; }
+        public string Nacionalidade { get; set; }
+
         public string Email { get; set; }
         public int Nif { get; set; }
         [DisplayName("Numero de Identificação")]

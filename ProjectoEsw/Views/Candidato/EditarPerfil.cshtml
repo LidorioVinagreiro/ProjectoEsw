@@ -1,7 +1,12 @@
 ﻿@inject ProjectoEsw.GestorAplicacao.GestorAjudas gestorAjudas
+@inject ProjectoEsw.GestorAplicacao.Gestor gestor
 @model ProjectoEsw.Models.Identity.RegisterViewModel
 @addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
 
+@section links {
+    <a asp-area="" asp-controller="Candidato" asp-action="Logout" class="btn btn-link btn-xs pull-right">Log Out</a>
+    <a asp-area="" asp-controller="Candidato" asp-action="Perfil" class="btn btn-link btn-xs pull-right"> @Model.Email </a>
+}
 
 <div class="jumbotron col-sm-7 col-sm-offset-1">
     <div class="container col-lg-offset-1 col-sm-10">

@@ -142,6 +142,7 @@ namespace ProjectoEsw.GestorAplicacao
             return await _userManager.GetUserAsync(principal);
         }
 
+
              public Perfil getPerfil(Utilizador user)
         {
             Perfil queryPerfil = (from perfil in _context.Perfils
@@ -155,7 +156,6 @@ namespace ProjectoEsw.GestorAplicacao
                                       DataNasc = perfil.DataNasc,
                                       Nif = perfil.Nif,
                                       Telefone = perfil.Telefone
-
                                   }).FirstOrDefault();
             return queryPerfil;
         }

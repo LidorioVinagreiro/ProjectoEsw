@@ -37,7 +37,12 @@ namespace ProjectoEsw.Controllers
             Utilizador user = await _gestor.getUtilizador(this.User);
             Perfil queryPerfil = _gestor.getPerfil(user);
             user.Perfil = queryPerfil;
-            return View(user.Perfil);
+            return View(new RegisterViewModel
+            {
+                Email = user.Perfil.Email,
+                Telefone = user.Perfil.Telefone
+                
+            });
         }
 
         public async Task<IActionResult> Perfil() {

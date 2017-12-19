@@ -5,95 +5,108 @@
     <a asp-area="" asp-controller="Candidato" asp-action="Logout" class="btn btn-link btn-xs pull-right">Log Out</a>
     <a asp-area="" asp-controller="Candidato" asp-action="Index" class="btn btn-link btn-xs pull-right"> @Html.DisplayFor(model => model.Email) </a>
 }
-<div class="jumbotron col-sm-9">
-    <h2 class=" text-center">Perfil do Candidato</h2>
+<div class="jumbotron col-sm-8">
+    <h2 class=" text-center">Perfil do Tecnico</h2>
     <div class="col-sm-12">
-        <label asp-for="NomeCompleto" class="col-sm-4 control-label"></label>
-        <div class="col-sm-offset-4">
+        <label asp-for="NomeCompleto" class="col-sm-3 control-label"></label>
+        <div class="col-sm-offset-3">
             @if (@Model.NomeCompleto == null)
             {
-                <p><small>Sem Informação</small></p>
+                <h5>Sem Informação</h5>
             }
             else
             {
-                <p><small>@Model.NomeCompleto</small></p>
+                <h5>@Model.NomeCompleto</h5>
             }
         </div>
     </div>
     <div class="col-sm-12">
-        <label asp-for="DataNasc" class="col-sm-4 control-label"></label>
-        <div class="col-sm-offset-4">
+        <label asp-for="DataNasc" class="col-sm-3 control-label"></label>
+        <div class="col-sm-offset-3">
             @if (@Model.DataNasc == null)
             {
-                <p><small>Sem Informação</small></p>
+                <h5>Sem Informação</h5>
             }
             else
             {
-                <p><small>@Model.DataNasc</small></p>
+                <h5>@Model.DataNasc</h5>
             }
         </div>
     </div>
     <div class="col-sm-12">
-        <label asp-for="Morada" class="col-sm-4 control-label"></label>
-        <div class="col-sm-offset-4">
+        <label asp-for="Morada" class="col-sm-3 control-label"></label>
+        <div class="col-sm-offset-3">
             @if (@Model.Morada == null)
             {
-                <p><small>Sem Informação</small></p>
+                <h5>Sem Informação</h5>
             }
             else
             {
-                <p><small>@Model.Morada</small></p>
+                <h5> @Model.Morada</h5>
             }
         </div>
     </div>
     <div class="col-sm-12">
-        <label asp-for="Email" class="col-sm-4 control-label"></label>
-        <div class="col-sm-offset-4">
+        <label asp-for="Email" class="col-sm-3 control-label"></label>
+        <div class="col-sm-offset-3">
             @if (@Model.Email == null)
             {
-                <p><small>Sem Informação</small></p>
+                <h5>Sem Informação</h5>
             }
             else
             {
-                <p><small>@Model.Email</small></p>
+                <h5>@Model.Email</h5>
             }
         </div>
     </div>
-
     <div class="col-sm-12">
-        <label asp-for="NumeroIdentificacao" class="col-sm-4 control-label"></label>
-        <div class="col-sm-offset-4">
+        <label asp-for="Nif" class="col-sm-3 control-label"></label>
+        <div class="col-sm-offset-3">
+            @if (@Model.Nif == 0)
+            {
+                <h5>Sem Informação</h5>
+            }
+            else
+            {
+                <h5>@Model.Nif</h5>
+            }
+        </div>
+    </div>
+    <div class="col-sm-12">
+        <label asp-for="NumeroIdentificacao" class="col-sm-3 control-label"></label>
+        <div class="col-sm-offset-3">
             @if (@Model.NumeroIdentificacao == 0)
             {
-                <p><small>Sem Informação</small></p>
+                <h5>Sem Informação</h5>
             }
             else
             {
-                <p><small>@Model.NumeroIdentificacao</small></p>
+                <h5>@Model.NumeroIdentificacao</h5>
             }
         </div>
     </div>
     <div class="col-sm-12">
-        <label asp-for="Telefone" class="col-sm-4 control-label"></label>
-        <div class="col-sm-offset-4">
+        <label asp-for="Telefone" class="col-sm-3 control-label"></label>
+        <div class="col-sm-offset-3">
             @if (@Model.Telefone == null)
             {
-                <p><small>Sem Informação</small></p>
+                <h5>Sem Informação</h5>
             }
             else
             {
-                <p><small>@Model.Telefone</small></p>
+                <h5>@Model.Telefone</h5>
             }
         </div>
     </div>
     <div class="col-sm-12">
-        <label asp-for="Foto" class="col-sm-4 control-label"></label>
-        <div class="col-sm-offset-4">
-            <p>@Model.Foto</p>
+        <label asp-for="Foto" class="col-sm-3 control-label"></label>
+        <div class="col-sm-offset-3">
+            
         </div>
     </div>
 </div>
-<div class="jumbotron col-sm-2 col-sm-offset-1">
+<div class="jumbotron col-sm-3 col-sm-offset-1">
     <h5 class="text-center">Opcoes</h5>
-    <a asp-area="" asp-controller="Candidato" asp-action="Perfil" class="btn btn-link btn-xs text-center">Editar Perfil</a>
+    <a asp-area="" asp-controller="Candidato" asp-action="Index" class="btn btn-link btn-xs pull-right col-sm-12">Ver Perfil</a>
+    <a asp-area="" asp-controller="Candidato" asp-action="Perfil" class="btn btn-link btn-xs center-block col-sm-12">Editar Perfil</a>
 </div>

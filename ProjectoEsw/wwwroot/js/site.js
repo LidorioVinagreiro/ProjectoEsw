@@ -62,14 +62,23 @@
                 },
 
                 events: eventos,
+                navLinks: true,
+
+                navLinkDayClick: function (date, jsEvent) {
+                    console.log('day', date.format()); // date is a moment
+                    console.log('coords', jsEvent.pageX, jsEvent.pageY);
+                },
+                
                 dayClick: function (date, jsEvent, view) {
                     renderCalendario();
+                    alert('CLICOU DIA');
                     $('#myModal').modal().hide();
                     $('#MyModalSave').modal();
 
                 },
                 eventClick: function (calEvent, jsEvent, view) {
                     renderCalendario();
+                    alert('CLICOU DIA');
                     $('#myModal').modal().hide();
                     $('#MyModalSave').modal();
 

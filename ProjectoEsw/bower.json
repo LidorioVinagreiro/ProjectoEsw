@@ -5,6 +5,7 @@
     "fullcalendar": "v3.8.0",
     "bootstrap": "v3.3.7",
     "jquery-validation": "1.17.0",
-    "jquery-validation-unobtrusive": "v3.2.6"
+    "jquery-validation-unobtrusive": "v3.2.6",
+    "bootstrap-datepicker": "v1.7.1"
   }
 }

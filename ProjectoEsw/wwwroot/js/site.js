@@ -66,14 +66,12 @@
                 dayClick: function (date, jsEvent, view) {
                     renderCalendario();
                     alert('CLICOU DIA');
-                    $('#myModal').modal().hide();
                     $('#MyModalSave').modal();
 
                 },
                 eventClick: function (calEvent, jsEvent, view) {
                     renderCalendario();
-                    alert('CLICOU DIA');
-                    $('#myModal').modal().hide();
+                    alert('CLICOU Evento');
                     $('#MyModalSave').modal();
 
                 }

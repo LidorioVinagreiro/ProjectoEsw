@@ -17,6 +17,11 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
     <script src="~/lib/fullcalendar/dist/fullcalendar.js"></script>
     <script src="~/js/site.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="popover"]').popover();
+        });
+    </script>
     
 </head>
 <body>
@@ -40,7 +45,7 @@
                             <span class="visible-xs navbar-brand">Sidebar menu</span>
                         </div>
                         <div class="well text-center" role="button">
-                            <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a asp-area="" asp-controller="Candidato" asp-action="Index">Home</a>
                         </div>  
                         <div class="well text-center" role="button">
                             Programas Mobilidade
@@ -57,11 +62,11 @@
             <div class="col-sm-10">
                 <div class="help-block"></div>
                 @RenderBody()
-                @RenderSection("Calendario", false);    
+                @RenderSection("Calendario", false)
             </div>
         </div>
     </div>
-   
+    
 
     <div class="container body-content">
         <hr />

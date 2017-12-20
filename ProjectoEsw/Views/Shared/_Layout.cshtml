@@ -9,13 +9,13 @@
     <link href="~/lib/fullcalendar/dist/fullcalendar.css" rel="stylesheet" />
     <link href="~/lib/fullcalendar/dist/fullcalendar.print.css" rel="stylesheet" media="print" />
     <link href="~/css/site.css" rel="stylesheet"/>
-    
-    
-    <script src="~/lib/moment/moment.js"></script>
-    <script src="~/lib/jquery/dist/jquery.js"></script>
-    <script src="~/lib/fullcalendar/dist/fullcalendar.js"></script>
+    <link href="~/lib/bootstrap-datepicker/dist/css/bootstrap-datepicker.css" rel="stylesheet" />
 
+
+    <script src="~/lib/moment/moment.js"></script>       
+    <script src="~/lib/jquery/dist/jquery.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="~/lib/fullcalendar/dist/fullcalendar.js"></script>
     <script src="~/js/site.js"></script>
     
 </head>
@@ -57,11 +57,11 @@
             <div class="col-sm-10">
                 <div class="help-block"></div>
                 @RenderBody()
-
+                @RenderSection("Calendario", false);    
             </div>
         </div>
     </div>
-    @RenderSection("Calendario",false);
+   
 
     <div class="container body-content">
         <hr />

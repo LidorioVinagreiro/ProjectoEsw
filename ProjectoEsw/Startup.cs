@@ -88,10 +88,7 @@ namespace ProjectoEsw
                     template: "{ controller = TiposUtilizador/Administrador}/{ action = Index}/"
                     );
 
-                routes.MapRoute(
-                    name: "Calendario",
-                    template: "{ controller = testeCalendario/Calendario}/{ action = Index}/"
-                    );
+
             });
         }
     }

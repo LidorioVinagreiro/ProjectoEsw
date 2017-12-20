@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
 using ProjectoEsw.Models;
 using ProjectoEsw.Models.Calendario;
-using ProjectoEsw.Models.Identity;
 using System;
 
 namespace ProjectoEsw.Migrations
@@ -207,7 +206,7 @@ namespace ProjectoEsw.Migrations
 
                     b.Property<string>("Foto");
 
-                    b.Property<int>("Genero");
+                    b.Property<string>("Genero");
 
                     b.Property<string>("MoradaCodigoPostal");
 
@@ -217,7 +216,7 @@ namespace ProjectoEsw.Migrations
 
                     b.Property<string>("MoradaRua");
 
-                    b.Property<int>("Nacionalidade");
+                    b.Property<string>("Nacionalidade");
 
                     b.Property<int>("Nif");
 

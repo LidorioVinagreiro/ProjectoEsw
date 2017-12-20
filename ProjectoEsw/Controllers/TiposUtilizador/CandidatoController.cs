@@ -42,8 +42,13 @@ namespace ProjectoEsw.Controllers
             return View(new RegisterViewModel
             {
                 Email = user.Perfil.Email,
-                Telefone = user.Perfil.Telefone
-                
+                Telefone = user.Perfil.Telefone,
+                MoradaRua = user.Perfil.MoradaRua,
+                MoradaCodigoPostal = user.Perfil.MoradaCodigoPostal,
+                MoradaConcelho = user.Perfil.MoradaConcelho,
+                MoradaDistrito = user.Perfil.MoradaDistrito,
+                Nif = user.Perfil.Nif,
+                NumeroIdentificacao = user.Perfil.NumeroIdentificacao   
             });
         }
 

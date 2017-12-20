@@ -65,35 +65,33 @@ namespace ProjectoEsw.Models
 
             if (!context.AjudaCampos.Any())
             {
-                context.AjudaCampos.Add(new AjudaCampo
-                {
-                    PaginaFK = 1,
-                    Campo = "Email",
-                    Descricao = "Deverá inserir o seu email pessoal do tipo(ex: jbvc@hotmail.com)"
-                });
-                context.AjudaCampos.Add(new AjudaCampo
-                {
-                    PaginaFK = 2,
-                    Campo = "Email",
-                    Descricao = "Neste campo deverá inserir o seu email do tipo(ex: jbvc@hotmail.com)"
-                });
-                context.AjudaCampos.Add(new AjudaCampo
-                {
-                    PaginaFK = 3,
-                    Campo = "Email",
-                    Descricao = "Neste campo deverá inserir o seu email do tipo(ex: jbvc@hotmail.com)"
-                });
+                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 1, Campo = "Email", Descricao = "Deverá inserir o seu email pessoal do tipo(ex: jbvc@hotmail.com)"});
                 context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 1, Campo = "Password", Descricao = "Neste campo deverá inserir a sua password com letras maiusculas, letras minusculas e digitos" });
+
                 context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "Nome Completo", Descricao = "Neste campo deverá inserir um nome completo com apenas letras" });
                 context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "Data Nascimento", Descricao = "Neste campo deverá inserir a data nascimento no formato mês/dia/ano" });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "NIF", Descricao = "Neste campo deverá inserir o seu numero de identificação fiscal que deverá conter 9 digitos numéricos" });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "Numero Identificação", Descricao = "Neste campo deverá inserir o seu numero de identificação com apenas digitos" });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "Numero Telefone", Descricao = "Neste campo deverá inserir o seu numero telfone com 9 digitos numericos" });
+                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "Numero Telefone", Descricao = "Neste campo deverá inserir o seu numero telefone com 9 digitos numericos" });
+                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "Email", Descricao = "Neste campo deverá inserir o seu email do tipo(ex: jbvc@hotmail.com)" });
                 context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "Password", Descricao = "Neste campo deverá definir a sua password com letras maiusculas, letras minusculas e digitos" });
                 context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "Confirmar Password", Descricao = "Neste campo deverá inserir novamente a password definida anteriormente" });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 4, Campo = "Novo Email", Descricao = "Neste campo deverá inserir o novo email para o seu perfil" });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 4, Campo = "Nova Morada", Descricao = "Neste campo deverá inserir a nova morada para o seu perfil" });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 4, Campo = "Novo Telefone   ", Descricao = "Neste campo deverá inserir o seu novo numero de telefone" });
+                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "Morada Rua", Descricao = "Neste campo deverá inserir a rua da sua morada (Ex. Rua aberto delgado)" });
+                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "Morada Concelho", Descricao = "Neste campo deverá inserir o concelho da sua morada " });
+                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "Morada Distrito", Descricao = "Neste campo deverá inserir o codigo de postal da sua morada " });
+                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "Morada Codigo Postal", Descricao = "Neste campo deverá inserir o seu codigo postal (Ex. 0000-000)" });
+                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "Genero", Descricao = "Neste campo deverá inserir a nova morada para o seu perfil" });
+                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "Nacionalidade", Descricao = "Neste campo deverá inserir a sua nacionalidade" });
+                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "Numero Identificação", Descricao = "Neste campo deverá inserir o seu numero de identificação da escola com apenas digitos" });
+
+
+                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 3, Campo = "Email", Descricao = "Neste campo deverá inserir o seu email do tipo(ex: jbvc@hotmail.com)" });
+
+                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 4, Campo = "Novo Numero Identificação", Descricao = "Neste campo deverá inserir o seu novo numero de identificação da escola com apenas digitos" });
+                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 4, Campo = "Novo NIF", Descricao = "Neste campo deverá inserir o seu novo numero de identificação fiscal que deverá conter 9 digitos numéricos" });
+                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 4, Campo = "Nova Morada Rua", Descricao = "Neste campo deverá inserir a sua nova rua da sua morada (Ex. Rua aberto delgado) " });
+                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 4, Campo = "Nova Morada Concelho", Descricao = "Neste campo deverá inserir o novo concelho da sua morada" });
+                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 4, Campo = "Nova Morada Distrito", Descricao = "Neste campo deverá inserir a novo distrito da sua morada" });
+                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 4, Campo = "Nova Morada Codigo Postal", Descricao = "Neste campo deverá inserir o novo codigo postal da sua morada" });
+                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 4, Campo = "Novo Telefone", Descricao = "Neste campo deverá inserir o seu novo numero de telefone" });
                 context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 4, Campo = "Nova Password", Descricao = "Neste campo deverá definir a sua nova password com letras maiusculas, letras minusculas e digitos" });
                 context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 4, Campo = "Confirmar Nova Password", Descricao = "Neste campo deverá inserir novamente a sua nova password definida anteriormente" });
                 context.SaveChanges();

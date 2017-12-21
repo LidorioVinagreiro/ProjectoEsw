@@ -66,7 +66,9 @@
                 dayClick: function (date, jsEvent, view) {
                     var data = new Date(date.format('MM/DD/YYYY')); 
                     $('#InicioInput').datepicker({
-                        format: 'dd/mm/yyyy'
+                        locale:'pt-pt',
+                        format: 'dd/mm/yyyy',
+                        timeFormat: 'hh:mm'
                     });
                     
                     $('#InicioInput').datepicker('setDate', data);

@@ -64,15 +64,17 @@
                 events: eventos,
                 
                 dayClick: function (date, jsEvent, view) {
-                    renderCalendario();
-                    alert('CLICOU DIA');
-                    $('#MyModalSave').modal();
+                    var data = new Date(date.format('MM/DD/YYYY')); 
+                    $('#InicioInput').datepicker({
+                        format: 'dd/mm/yyyy'
+                    });
+                    
+                    $('#InicioInput').datepicker('setDate', data);
+                    $("#myModalSave").modal();
 
                 },
                 eventClick: function (calEvent, jsEvent, view) {
-                    renderCalendario();
-                    alert('CLICOU Evento');
-                    $('#MyModalSave').modal();
+                    $("#myModalSave").modal();
 
                 }
 

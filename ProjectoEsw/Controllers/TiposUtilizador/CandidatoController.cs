@@ -28,10 +28,10 @@ namespace ProjectoEsw.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-           Utilizador user = await _gestor.getUtilizador(this.User);
-            Perfil queryPerfil = _gestor.getPerfil(user);                            
+            Utilizador user = await _gestor.getUtilizador(this.User);
+            Perfil queryPerfil = _gestor.getPerfil(user);
             user.Perfil = queryPerfil;
-            var model = user.Perfil;    
+            var model = user.Perfil; 
            return View(model);
         }
 

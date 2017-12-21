@@ -7,6 +7,7 @@ using ProjectoEsw.Models.Identity;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using ProjectoEsw.Models.ViewModels;
+using ProjectoEsw.Models.Calendario;
 
 namespace ProjectoEsw.GestorAplicacao
 {
@@ -149,6 +150,10 @@ namespace ProjectoEsw.GestorAplicacao
                                       Telefone = perfil.Telefone
                                   }).FirstOrDefault();
             return queryPerfil;
+        }
+        /* nao sei se faz falta*/
+        public List<Eventos> getEventos(Perfil perfil) {
+            return _context.Eventos.Select(even => even).Where(even => even.PerfilFK == perfil.ID).ToList();
         }
     }
 }

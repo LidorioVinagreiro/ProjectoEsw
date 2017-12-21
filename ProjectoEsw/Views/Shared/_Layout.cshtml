@@ -11,11 +11,12 @@
     <link href="~/css/site.css" rel="stylesheet"/>
     <link href="~/lib/bootstrap-datepicker/dist/css/bootstrap-datepicker.css" rel="stylesheet" />
 
-
+    
     <script src="~/lib/moment/moment.js"></script>       
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
     <script src="~/lib/fullcalendar/dist/fullcalendar.js"></script>
+    <script src="~/lib/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
     <script src="~/js/site.js"></script>
     <script>
         $(document).ready(function () {
@@ -44,8 +45,9 @@
                             </button>
                             <span class="visible-xs navbar-brand">Sidebar menu</span>
                         </div>
+                        <!-- render section fazer-->
                         <div class="well text-center" role="button">
-                            <a asp-area="" asp-controller="Candidato" asp-action="Index">Home</a>
+                            <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </div>  
                         <div class="well text-center" role="button">
                             Programas Mobilidade
@@ -66,7 +68,6 @@
             </div>
         </div>
     </div>
-    
 
     <div class="container body-content">
         <hr />

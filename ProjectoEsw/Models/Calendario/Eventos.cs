@@ -1,6 +1,7 @@
 ﻿using ProjectoEsw.Models.Identity;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,7 +16,6 @@ namespace ProjectoEsw.Models.Calendario
         public int ID { get; set; }
         public string Titulo { get; set; }
         public string Descricao { get; set; }
-
         public DateTime Inicio { get; set; }
         public DateTime Fim { get; set; }
         public bool DiaTodo { get; set; }

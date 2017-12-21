@@ -43,3 +43,6 @@ FilePathResult – Represents a downloadable file (with a path).
 FileStreamResult – Represents a downloadable file (with a file stream).
 ---->tipos de action results!!!!
 
+@model Tuple<ProjectoEsw.Models.Identity.Perfil, ProjectoEsw.Models.Calendario.Eventos>;
+
+no controller : var model = new Tuple<Perfil,Eventos>(user.Perfil, new Eventos { });    

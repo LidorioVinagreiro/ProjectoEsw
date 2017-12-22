@@ -145,7 +145,7 @@
                 var data2GreaterData1 = moment(data2).diff(moment(data1)) > 0;
                 if (!data2GreaterData1 || !titulo || !descricao) {
                     alert("Falta inserir Titulo ou Descricao ou a Data final nao é superior à inicial");
-                    alert(data1+" DATA 2: "+data2+"_DESCRICAO: "+ descricao+"TITULO: "+ titulo);
+                    renderCalendario();
                 } else {
                     var evento = {
                         descricao : descricao,

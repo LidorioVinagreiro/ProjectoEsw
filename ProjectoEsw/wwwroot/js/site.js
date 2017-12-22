@@ -18,8 +18,8 @@
                             id: v.id,
                             title : v.Titulo,
                             description: v.Descricao,
-                            start: moment(v.Inicio).format('DD/MM/YYYY HH:mm'),
-                            end: moment(v.Fim).format('DD/MM/YYYY HH:mm'),
+                            start: v.Inicio,
+                            end: v.Fim,
                             PerfilFk: v.PerfilFK
                         });
                     })
@@ -66,7 +66,7 @@
                 },
 
                 events: eventos,
-                eventSources : events,
+                //eventSources : events,
                 
                 dayClick: function (date, jsEvent, view) {                   
                     var dataSelecionada = new Date(date.format('MM/DD/YYYY')); 

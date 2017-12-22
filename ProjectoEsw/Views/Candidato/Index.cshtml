@@ -1,9 +1,8 @@
 ﻿@model ProjectoEsw.Models.Identity.Perfil;
 
-    
-@section links {
+    @section links {
     <a asp-area="" asp-controller="Candidato" asp-action="Logout" class="btn btn-link btn-xs pull-right">Log Out</a>
-    <a asp-area="" asp-controller="Candidato" asp-action="Perfil" class="btn btn-link btn-xs pull-right"> @Html.DisplayFor(Model=> Model.Email) </a>
+    <a asp-area="" asp-controller="Candidato" asp-action="Perfil" class="btn btn-link btn-xs pull-right"> @Html.DisplayFor(Model => Model.Email) </a>
     
     }
 @section Home{ 
@@ -43,93 +42,14 @@
     <a asp-area="" asp-controller="Candidato" asp-action="Perfil" class="btn btn-link btn-xs pull-right col-sm-12">Ver Perfil</a>
     <a asp-area="" asp-controller="Candidato" asp-action="EditarPerfil" class="btn btn-link btn-xs center-block col-sm-12">Editar Perfil</a>
 </div>
-@section calendario {
 
-<script> CriarCalendario("Candidato")</script>
 
+@Html.Partial("Calendario",new ProjectoEsw.Models.Calendario.Eventos { });
+
+@section calendario{
+<script> 
+        CriarCalendario("Candidato", @Model.ID);
+    </script>
 }
-<div class="col-sm-offset-1 col-sm-3">
-    <div id="calendar"></div>
-
-    <div id="myModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title"><span id="eventoTitulo"></span></h4>
-                </div>
-                <div class="modal-body">
-                    <button id="btnDelete" class="btn btn-default btn-sm pull-right">
-                        <span class="glyphicon glyphicon-remove"> Remover </span>
-                    </button>
-                    <button id="btnEditar" class="btn btn-default btn-sm pull-right" style="margin-right:5px;">
-                        <span class="glyphicon glyphicon-remove"> Editar </span>
-                    </button>
-                    <p id="pDetails"></p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    
-    <div id="myModalSave" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title"><span id="eventoTitulo"></span></h4>
-                </div>
-                <div class="modal-body">
-                    @using (Html.BeginForm("SaveEvents", "Candidato", FormMethod.Post))
-                    {
-                        @Html.Label("Titulo");
-                        @Html.TextBox("Titulo")
-                        <input type="submit" value="Sign In">
-                    }
-                    @*<form class="form-horizontal" action="/Candidato/SaveEvents" method="post">
-                        <input type="hidden" id ="id" value="0"/>
-                        <div class="form-group">
-                            <label>Titulo</label>
-                            <input type="text" id="Titulo" class="form-control"/>
-                        </div>
-                        <div class="form-group">
-                            <label>Inicio</label>
-                            <div class="input-group date" id="dtp1">
-                                <input type="text" id="InicioInput" class="form-control"/>
-                                <span class="glyphicon glyphicon-calendar"> gdkigkdgdlk</span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Fim</label>
-                            <div class="input-group date" id="dtp1">
-                                <input type="text" id="FimInput" class="form-control" />
-                                <span class="glyphicon glyphicon-calendar"></span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Descrição</label>
-                            <div class="input-group" id="Descricao">
-                                <input type="text" id="DescricaoInput" class="form-control" />
-                                <span class="glyphicon glyphicon-calendar"></span>
-                            </div>
-                        </div>
-
-                    </form>*@
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-
-</div>
-
 
 

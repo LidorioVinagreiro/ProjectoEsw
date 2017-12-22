@@ -1,25 +1,29 @@
-﻿function CriarCalendario(tipoutilizador) {
+﻿function CriarCalendario(tipoutilizador,perfil) {
     $(document).ready(function () {
-        var events = [];
+        var eventsAux = [];
         var selectedEvent = null;
+        var _perfil = perfil;
         renderCalendario();
         //pode dar barrada se nao passar o tipo de utilizador...nao me lembro...
         function renderCalendario() {
-            events = [];
             $.ajax({
                 type: "GET",
                 url: "/" + tipoutilizador + "/GetEvents",
-                success: function (eventos) {
-                    $.each(eventos, function (i, v) {
-                        events.push({
-                            id : v.id,
-                            titulo: v.Titulo,
-                            decricao: v.Descricao,
-                            inicio: v.Inicio,
-                            fim: v.Fim
+                contentType: 'application/json',
+                data: { idPerfil: perfil },
+                dataType: 'json',
+                success: function (data) {
+                    $.each(data, function (i, v) {
+                        eventsAux.push({
+                            id: v.id,
+                            title : v.titulo,
+                            description: v.descricao,
+                            start: v.inicio,
+                            end: v.fim,
+                            PerfilFk: v.perfilfK
                         });
                     })
-                    GerarCalendario(events);
+                    GerarCalendario(eventsAux);
                 },
                 error: function (error) {
                     alert("FALHOU ALGO");
@@ -62,17 +66,28 @@
                 },
 
                 events: eventos,
+                //eventSources : events,
                 
-                dayClick: function (date, jsEvent, view) {
-                    renderCalendario();
-                    alert('CLICOU DIA');
-                    $('#MyModalSave').modal();
+                dayClick: function (date, jsEvent, view) {                   
+                    var dataSelecionada = new Date(date.format('MM/DD/YYYY')); 
+                    $('#InicioInput').datetimepicker({
+                        format: 'DD/MM/YYYY HH:mm',
+                        inline: true,
+                        sideBySide:true
+                    });
+                    $('#InicioInput').data("DateTimePicker").date(dataSelecionada);
+
+                    $('#FimInput').datetimepicker({
+                        format: 'DD/MM/YYYY HH:mm',
+                        inline: true,
+                        sideBySide: true
+                    });
+                    $('#FimInput').data("DateTimePicker").date(dataSelecionada);                    
+                    $("#myModalSave").modal();
 
                 },
                 eventClick: function (calEvent, jsEvent, view) {
-                    renderCalendario();
-                    alert('CLICOU Evento');
-                    $('#MyModalSave').modal();
+                    $("#myModalSave").modal();
 
                 }
 
@@ -120,6 +135,49 @@
             $('#btnEditar').click(function () {
 
             });
+
+            $('#btnSave').click(function () {
+                var data1 = $('#InicioInput').val();
+                var data2 = $('#FimInput').val();
+                var descricao = $('#DescricaoInput').val();
+                var titulo = $('#Titulo').val();
+                var tipo = $('#Tipo').find(":selected").text();
+                var data2GreaterData1 = moment(data2).diff(moment(data1)) > 0;
+                if (!data2GreaterData1 || !titulo || !descricao) {
+                    alert("Falta inserir Titulo ou Descricao ou a Data final nao é superior à inicial");                    
+
+                } else {
+                    var evento = {
+                        descricao : descricao,
+                        inicio : data1,
+                        fim : data2,
+                        titulo : titulo,
+                        perfilfK : _perfil
+                    };
+                    SaveEvents(evento);
+                    $('#myModalSave').modal().hide();    
+                }    
+
+            });
+
+            function SaveEvents(evento) {
+                $.ajax({
+                    type: "POST",
+                    url: "/" + tipoutilizador + "/SaveEvents",
+                    data: evento,
+                    success: function (status) {
+                        if (!status) {
+                            alert("Algo correu mal");
+                        } else {
+                            alert("Evento guardado");
+                        }
+                    },error: function (error) {
+                        alert("Erro a gravar evento");
+                    }
+
+                })
+            };
+
         }
     });
 }

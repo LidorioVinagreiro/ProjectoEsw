@@ -31,7 +31,7 @@
                 </select>
                 <span asp-validation-for="Genero" class="text-danger"></span>
                 <div class=" help-block"></div>
-                <input asp-for="Nif" placeholder="NIF" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.Register","Nif").Descricao" />
+                <input asp-for="Nif" placeholder="NIF" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.Register","NIF").Descricao" />
                 <span asp-validation-for="Nif" class="text-danger"></span>
                 <div class=" help-block"></div>
                 <select asp-for="Nacionalidade" asp-items="Html.GetEnumSelectList<Nacionalidade>()" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.Register","Nacionalidade").Descricao">

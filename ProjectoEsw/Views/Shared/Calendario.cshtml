@@ -37,7 +37,7 @@
                 <h4 class="modal-title"><span id="eventoTitulo"></span></h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" asp-controller="Candidato" asp-action="GetEvents" method="post">
+                <form class="form-horizontal">
                     <div class="form-group">
 
                         <label>Titulo</label>
@@ -59,11 +59,11 @@
                         </div>
                         @Html.DropDownListFor(Model=> Model.Tipo,
                                               new SelectList(Model.Tipo.GetType().GetEnumNames()),
-                                              "Selectionar Tipo")
+                                              "Selectionar Tipo", new  { @id="Tipo" })
                     </div>
                     <div class="form-group">
                         <div class="text-center">
-                            <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Salvar Evento</span></button>
+                            <button id ="btnSave" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span> Salvar Evento</button>
                         </div>
                     </div>
                 </form>

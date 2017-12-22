@@ -46,3 +46,12 @@ FileStreamResult – Represents a downloadable file (with a file stream).
 @model Tuple<ProjectoEsw.Models.Identity.Perfil, ProjectoEsw.Models.Calendario.Eventos>;
 
 no controller : var model = new Tuple<Perfil,Eventos>(user.Perfil, new Eventos { });    
+
+
+pesquisar como fazer coisas async
+public Task<JsonResult> GetEvents(int idPerfil)
+        {          
+            var events = Task.Run ( () => _contexto.Eventos.Where(Eventos => Eventos.PerfilFK == idPerfil).ToList());
+            events.Wait();
+            return Json(events);
+        }

@@ -31,7 +31,7 @@ namespace ProjectoEsw.Controllers
             Utilizador user = await _gestor.getUtilizador(this.User);
             Perfil queryPerfil = _gestor.getPerfil(user);
             user.Perfil = queryPerfil;
-            var model = user.Perfil; 
+            var model = user.Perfil;
            return View(model);
         }
 
@@ -96,10 +96,9 @@ namespace ProjectoEsw.Controllers
 
         //METODOS DE AJAX
         [HttpGet]
-        public async Task<JsonResult> GetEvents()
+        public JsonResult GetEvents(int idPerfil)
         {
-            Utilizador user = await _gestor.getUtilizador(this.User);
-            var events = _contexto.Eventos.Where(Eventos => Eventos.Utilizador.ID == user.PerfilFK).ToList();
+            var events = _contexto.Eventos.Where(Eventos => Eventos.PerfilFK == idPerfil).ToList();
             return Json(events);
         }
 

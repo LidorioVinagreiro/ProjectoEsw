@@ -1,22 +1,28 @@
-﻿function CriarCalendario(tipoutilizador) {
+﻿function CriarCalendario(tipoutilizador,perfil) {
     $(document).ready(function () {
         var events = [];
         var selectedEvent = null;
+        var _perfil = perfil;
         renderCalendario();
         //pode dar barrada se nao passar o tipo de utilizador...nao me lembro...
         function renderCalendario() {
             events = [];
+
             $.ajax({
                 type: "GET",
                 url: "/" + tipoutilizador + "/GetEvents",
-                success: function (eventos) {
-                    $.each(eventos, function (i, v) {
+                contentType: 'application/json',
+                data: { idPerfil: perfil },
+                dataType: 'json',
+                success: function (data) {
+                    $.each(data, function (i, v) {
                         events.push({
-                            id : v.id,
-                            titulo: v.Titulo,
-                            decricao: v.Descricao,
-                            inicio: v.Inicio,
-                            fim: v.Fim
+                            eventID: v.id,
+                            Title : v.Titulo,
+                            Description : v.Descricao,
+                            Start : v.Inicio,
+                            End: v.Fim,
+                            PerfilFk: v.PerfilFK
                         });
                     })
                     GerarCalendario(events);
@@ -63,15 +69,21 @@
 
                 events: eventos,
                 
-                dayClick: function (date, jsEvent, view) {
-                    var data = new Date(date.format('MM/DD/YYYY')); 
-                    $('#InicioInput').datepicker({
-                        locale:'pt-pt',
-                        format: 'dd/mm/yyyy',
-                        timeFormat: 'hh:mm'
+                dayClick: function (date, jsEvent, view) {                   
+                    var dataSelecionada = new Date(date.format('MM/DD/YYYY')); 
+                    $('#InicioInput').datetimepicker({
+                        format: 'DD/MM/YYYY HH:mm',
+                        inline: true,
+                        sideBySide:true
                     });
-                    
-                    $('#InicioInput').datepicker('setDate', data);
+                    $('#InicioInput').data("DateTimePicker").date(dataSelecionada);
+
+                    $('#FimInput').datetimepicker({
+                        format: 'DD/MM/YYYY HH:mm',
+                        inline: true,
+                        sideBySide: true
+                    });
+                    $('#FimInput').data("DateTimePicker").date(dataSelecionada);                    
                     $("#myModalSave").modal();
 
                 },
@@ -124,6 +136,50 @@
             $('#btnEditar').click(function () {
 
             });
+
+            $('#btnSave').click(function () {
+                var data1 = $('#InicioInput').val();
+                var data2 = $('#FimInput').val();
+                var descricao = $('#DescricaoInput').val();
+                var titulo = $('#Titulo').val();
+                var tipo = $('#Tipo').find(":selected").text();
+                var data2GreaterData1 = moment(data2).diff(moment(data1)) > 0;
+                if (!data2GreaterData1 || !titulo || !descricao) {
+                    alert("Falta inserir Titulo ou Descricao ou a Data final nao é superior à inicial");                    
+
+                } else {
+                    var evento = {
+                        Descricao : descricao,
+                        Inicio : moment(data1),
+                        Fim : moment(data2),
+                        Titulo : titulo,
+                        PerfilFK : _perfil
+                    };
+                    SaveEvents(evento);
+                    $('#myModalSave').modal().hide();    
+                }    
+
+            });
+
+            function SaveEvents(evento) {
+                $.ajax({
+                    type: "POST",
+                    url: "/" + tipoutilizador + "/SaveEvents",
+                    contentType: 'application/json',
+                    data: JSON.stringify(evento),
+                    success: function (status) {
+                        if (!status) {
+                            alert("Algo correu mal");
+                        } else {
+                            alert("Evento guardado");
+                        }
+                    },error: function (error) {
+                        alert("Erro a gravar evento");
+                    }
+
+                })
+            };
+
         }
     });
 }

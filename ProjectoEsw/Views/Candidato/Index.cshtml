@@ -1,6 +1,6 @@
 ﻿@model ProjectoEsw.Models.Identity.Perfil;
-    
-@section links {
+
+    @section links {
     <a asp-area="" asp-controller="Candidato" asp-action="Logout" class="btn btn-link btn-xs pull-right">Log Out</a>
     <a asp-area="" asp-controller="Candidato" asp-action="Perfil" class="btn btn-link btn-xs pull-right"> @Html.DisplayFor(Model => Model.Email) </a>
     
@@ -43,9 +43,10 @@
 
 @Html.Partial("Calendario",new ProjectoEsw.Models.Calendario.Eventos { });
 
-@section calendario {
-
-    <script> CriarCalendario("Candidato")</script>
-
+@section calendario{
+<script> 
+        CriarCalendario("Candidato", @Model.ID);
+    </script>
 }
+
 

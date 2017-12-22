@@ -136,6 +136,7 @@ namespace ProjectoEsw.GestorAplicacao
                                   where perfil.ID == user.PerfilFK
                                   select new Perfil
                                   {
+                                      ID = perfil.ID,  
                                       NomeCompleto = perfil.NomeCompleto,
                                       Email = perfil.Email,
                                       MoradaRua = perfil.MoradaRua,
@@ -150,6 +151,10 @@ namespace ProjectoEsw.GestorAplicacao
                                       Telefone = perfil.Telefone
                                   }).FirstOrDefault();
             return queryPerfil;
+        }
+        public async Task<Utilizador> getUtilizadorByEmail(string email) {
+            Utilizador user = await _userManager.FindByNameAsync(email);
+            return user;
         }
         /* nao sei se faz falta*/
         public List<Eventos> getEventos(Perfil perfil) {

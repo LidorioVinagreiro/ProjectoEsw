@@ -144,8 +144,8 @@
                 var tipo = $('#Tipo').find(":selected").text();
                 var data2GreaterData1 = moment(data2).diff(moment(data1)) > 0;
                 if (!data2GreaterData1 || !titulo || !descricao) {
-                    alert("Falta inserir Titulo ou Descricao ou a Data final nao é superior à inicial");                    
-
+                    alert("Falta inserir Titulo ou Descricao ou a Data final nao é superior à inicial");
+                    alert(data1, data2, descricao, titulo);
                 } else {
                     var evento = {
                         descricao : descricao,

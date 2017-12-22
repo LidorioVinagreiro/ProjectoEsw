@@ -1,7 +1,8 @@
-﻿@inject ProjectoEsw.GestorAplicacao.GestorAjudas gestorAjudas
+﻿@using ProjectoEsw.Models.Identity;
+@inject ProjectoEsw.GestorAplicacao.GestorAjudas gestorAjudas
 @model ProjectoEsw.Models.Identity.RegisterViewModel
 @addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
-@using ProjectoEsw.Models.Identity;
+
 
 @section links {
     <a asp-area="" asp-controller="Candidato" asp-action="Logout" class="btn btn-link btn-xs pull-right">Log Out</a>

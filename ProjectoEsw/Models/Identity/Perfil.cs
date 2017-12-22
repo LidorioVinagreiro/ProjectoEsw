@@ -77,8 +77,9 @@ namespace ProjectoEsw.Models.Identity
         [DisplayName("Numero de Identificação")]
         public int NumeroIdentificacao { get; set; }
         [DisplayName("Data Nascimento")]
+        [DataType(DataType.Date)]
         public DateTime DataNasc { get; set; }
-
+        [DisplayName("Rua")]
         public string MoradaRua { get; set; }
         [DisplayName("Concelho")]
         public Concelho MoradaConcelho { get; set; }

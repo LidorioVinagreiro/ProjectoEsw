@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 
 namespace ProjectoEsw.Models.Identity
 {
+
     public class RegisterViewModel
     {
         [Required(ErrorMessage = "Obrigatório inserir Email")]
@@ -25,12 +26,14 @@ namespace ProjectoEsw.Models.Identity
         [Display(Name = "Nome Completo")]
         public string NomeCompleto { get; set; }
 
-        //[Required(ErrorMessage = "Obrigatório inserir data de nascimento válida")]
+        [Required(ErrorMessage = "Obrigatório inserir data de nascimento válida")]
         [Display(Name = "Data Nascimento")]
         [DataType(DataType.Date)]
         public DateTime DataNasc { set; get; }
+        [Required(ErrorMessage = "Obrigatório inserir data de nascimento válida")]
 
         public string Genero { get; set; }
+        [Required(ErrorMessage = "Obrigatório inserir data de nascimento válida")]
 
         public string Nacionalidade { get; set; }
 

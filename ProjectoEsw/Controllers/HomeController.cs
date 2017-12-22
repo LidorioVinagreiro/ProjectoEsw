@@ -9,6 +9,7 @@ using ProjectoEsw.GestorAplicacao;
 using ProjectoEsw.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using ProjectoEsw.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ProjectoEsw.Controllers
 {

@@ -5,6 +5,9 @@
     <a asp-area="" asp-controller="Candidato" asp-action="Logout" class="btn btn-link btn-xs pull-right">Log Out</a>
     <a asp-area="" asp-controller="Candidato" asp-action="perfil" class="btn btn-link btn-xs pull-right"> @Html.DisplayFor(model => model.Email) </a>
 }
+@section Home {
+    <a asp-area="" asp-controller="Candidato" asp-action="Index">Home</a>
+}
 <div class="jumbotron col-sm-8">
     <h2 class=" text-center">Perfil do Candidato</h2>
     <div class="col-sm-12">

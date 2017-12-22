@@ -48,7 +48,8 @@
                         </div>
                         <!-- render section fazer-->
                         <div class="well text-center" role="button">
-                            <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            @RenderSection("Home", required: true)
+                            
                         </div>  
                         <div class="well text-center" role="button">
                             Programas Mobilidade

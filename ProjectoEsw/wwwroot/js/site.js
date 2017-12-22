@@ -155,7 +155,7 @@
                         perfilfK : _perfil
                     };
                     SaveEvents(evento);
-                    $('#myModalSave').modal().hide();    
+                    $('#myModalSave').modal('hide');    
                 }    
 
             });

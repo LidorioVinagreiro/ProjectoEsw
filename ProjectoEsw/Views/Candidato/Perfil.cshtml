@@ -39,27 +39,14 @@
     <div class="col-sm-12">
         <label asp-for="Genero" class="col-sm-3 control-label"></label>
         <div class="col-sm-offset-4">
-            @if (@Model.Genero == null)
-            {
-                <h5>Sem Informação</h5>
-            }
-            else
-            {
+
                 <h5> @Model.Genero</h5>
-            }
         </div>
     </div>
     <div class="col-sm-12">
         <label asp-for="Nacionalidade" class="col-sm-3 control-label"></label>
         <div class="col-sm-offset-4">
-            @if (@Model.Nacionalidade == null)
-            {
-                <h5>Sem Informação</h5>
-            }
-            else
-            {
                 <h5> @Model.Nacionalidade</h5>
-            }
         </div>
     </div>
     <div class="col-sm-12">
@@ -91,27 +78,13 @@
     <div class="col-sm-12">
         <label asp-for="MoradaConcelho" class="col-sm-3 control-label"></label>
         <div class="col-sm-offset-4">
-            @if (@Model.MoradaConcelho == null)
-            {
-                <h5>Sem Informação</h5>
-            }
-            else
-            {
                 <h5>@Model.MoradaConcelho </h5>
-            }
         </div>
     </div>
     <div class="col-sm-12">
         <label asp-for="MoradaDistrito" class="col-sm-3 control-label"></label>
         <div class="col-sm-offset-4">
-            @if (@Model.MoradaDistrito == null)
-            {
-                <h5>Sem Informação</h5>
-            }
-            else
-            {
                 <h5> @Model.MoradaDistrito</h5>
-            }
         </div>
     </div>
     <div class="col-sm-12">

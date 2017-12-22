@@ -8,16 +8,21 @@ using System.Threading.Tasks;
 
 namespace ProjectoEsw.Models.Identity
 {
-    public enum Genero {
-        MASCULINO,
-        FEMENINO
+
+    public enum Genero
+    {
+        Masculino,
+        Femenino
     };
-    public enum Nacionalidade {
-        PORTUGUESA,
-        INGLESA,
-        ESPANHOLA
+    public enum Nacionalidade
+    {
+        Portuguesa,
+        Inglesa,
+        Espanhola
     };
-    public enum Concelho {
+    public enum Concelho
+    {
+        [Display(Name = "Alcácer do Sal")]
         Alcácer_do_Sal,
         Alcochete,
         Almada,
@@ -26,17 +31,20 @@ namespace ProjectoEsw.Models.Identity
         Moita,
         Montijo,
         Palmela,
+        [Display(Name = "Santiago do Cacém")]
         Santiago_do_Cacém,
         Seixal,
         Sesimbra,
         Setúbal,
         Sines
     };
-    public enum Distrito {
+    public enum Distrito
+    {
         Aveiro,
         Beja,
         Braga,
         Bragança,
+        [Display(Name = "Castelo Branco")]
         Castelo_Branco,
         Coimbra,
         Évora,
@@ -48,18 +56,22 @@ namespace ProjectoEsw.Models.Identity
         Porto,
         Santarém,
         Setúbal,
+        [Display(Name = "Viana do Castelo")]
         Viana_do_Castelo,
+        [Display(Name = "Vila Real")]
         Vila_Real,
         Viseu
-        };
+    };
 
     public class Perfil
     {
+       
+
         public int ID { get; set; }
         [DisplayName("Nome Completo")]
         public string NomeCompleto { get; set; }
-        public string Genero { get; set; }
-        public string Nacionalidade { get; set; }
+        public Genero Genero { get; set; }
+        public Nacionalidade Nacionalidade { get; set; }
         public string Email { get; set; }
         public int Nif { get; set; }
         [DisplayName("Numero de Identificação")]
@@ -68,8 +80,11 @@ namespace ProjectoEsw.Models.Identity
         public DateTime DataNasc { get; set; }
 
         public string MoradaRua { get; set; }
-        public string MoradaConcelho { get; set; }
-        public string MoradaDistrito { get; set; }
+        [DisplayName("Concelho")]
+        public Concelho MoradaConcelho { get; set; }
+        [DisplayName("Distrito")]
+        public Distrito MoradaDistrito { get; set; }
+        [DisplayName("Codigo Postal")]
         public string MoradaCodigoPostal { get; set; }
 
         public string Telefone { get; set; }

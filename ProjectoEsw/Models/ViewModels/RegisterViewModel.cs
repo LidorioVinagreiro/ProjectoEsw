@@ -17,6 +17,8 @@ namespace ProjectoEsw.Models.Identity
 
     public class RegisterViewModel
     {
+       
+
         [Required(ErrorMessage = "Obrigatório inserir Email")]
         [EmailAddress(ErrorMessage = "Email incorrecto")]
         [Display(Name = "Email")]
@@ -31,15 +33,17 @@ namespace ProjectoEsw.Models.Identity
         [DataType(DataType.Date)]
         public DateTime DataNasc { set; get; }
         [Required(ErrorMessage = "Obrigatório inserir data de nascimento válida")]
-
-        public string Genero { get; set; }
+        public Genero Genero { get; set; }
         [Required(ErrorMessage = "Obrigatório inserir data de nascimento válida")]
 
-        public string Nacionalidade { get; set; }
-
+        public Nacionalidade Nacionalidade { get; set; }
+        [Display(Name = "Rua")]
         public string MoradaRua { get; set; }
-        public string MoradaConcelho { get; set; }
-        public string MoradaDistrito { get; set; }
+        [Display(Name = "Concelho")]
+        public Concelho MoradaConcelho { get; set; }
+        [Display(Name = "Distrito")]
+        public Distrito MoradaDistrito { get; set; }
+        [Display(Name = "Codigo Postal")]
         public string MoradaCodigoPostal { get; set; }
 
         [Display(Name = "NIF")]
@@ -63,4 +67,6 @@ namespace ProjectoEsw.Models.Identity
         [Compare("Password", ErrorMessage = "A password não coecide")]
         public string ConfirmPassword { get; set; }
     }
+
+   
 }

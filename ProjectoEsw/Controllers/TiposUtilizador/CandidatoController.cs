@@ -103,7 +103,7 @@ namespace ProjectoEsw.Controllers
         }
 
         [HttpPost]
-        public async Task<JsonResult> SaveEvents(Eventos evento)
+        public async Task<JsonResult> SaveEvents([FromBody] Eventos evento)
         {
             var status = false;
             if (evento.ID > 0)

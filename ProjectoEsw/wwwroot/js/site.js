@@ -1,13 +1,11 @@
 ﻿function CriarCalendario(tipoutilizador,perfil) {
     $(document).ready(function () {
-        var events = [];
+        var eventsAux = [];
         var selectedEvent = null;
         var _perfil = perfil;
         renderCalendario();
         //pode dar barrada se nao passar o tipo de utilizador...nao me lembro...
         function renderCalendario() {
-            events = [];
-
             $.ajax({
                 type: "GET",
                 url: "/" + tipoutilizador + "/GetEvents",
@@ -16,16 +14,16 @@
                 dataType: 'json',
                 success: function (data) {
                     $.each(data, function (i, v) {
-                        events.push({
-                            eventID: v.id,
-                            Title : v.Titulo,
-                            Description : v.Descricao,
-                            Start : v.Inicio,
-                            End: v.Fim,
+                        eventsAux.push({
+                            id: v.id,
+                            title : v.Titulo,
+                            description: v.Descricao,
+                            start: moment(v.Inicio).format('DD/MM/YYYY HH:mm'),
+                            end: moment(v.Fim).format('DD/MM/YYYY HH:mm'),
                             PerfilFk: v.PerfilFK
                         });
                     })
-                    GerarCalendario(events);
+                    GerarCalendario(eventsAux);
                 },
                 error: function (error) {
                     alert("FALHOU ALGO");
@@ -68,6 +66,7 @@
                 },
 
                 events: eventos,
+                eventSources : events,
                 
                 dayClick: function (date, jsEvent, view) {                   
                     var dataSelecionada = new Date(date.format('MM/DD/YYYY')); 
@@ -165,8 +164,9 @@
                 $.ajax({
                     type: "POST",
                     url: "/" + tipoutilizador + "/SaveEvents",
-                    contentType: 'application/json',
-                    data: JSON.stringify(evento),
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    data: evento,
                     success: function (status) {
                         if (!status) {
                             alert("Algo correu mal");

@@ -53,7 +53,7 @@ namespace ProjectoEsw.Models.Identity
         [Display(Name = "Distrito")]
         public Distrito MoradaDistrito { get; set; }
 
-        [RegularExpression("[0-9]{4}-[0-9]{3}")]
+        [RegularExpression("[0-9]{4}-[0-9]{3}",ErrorMessage = "Insira o codigo postal correcto no formato (0000-000)")]
         [Required(ErrorMessage = "Obrigatório inserir o codigo postal")]
         [Display(Name = "Codigo Postal")]
         public string MoradaCodigoPostal { get; set; }

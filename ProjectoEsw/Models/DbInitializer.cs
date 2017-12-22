@@ -63,6 +63,7 @@ namespace ProjectoEsw.Models
 
             }
             context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "NIF", Descricao = "Neste campo deverá inserir o seu numero de identificação fiscal que deverá conter 9 digitos numéricos" });
+            context.SaveChanges();
 
             if (!context.AjudaCampos.Any())
             {
@@ -82,7 +83,7 @@ namespace ProjectoEsw.Models
                 context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "Genero", Descricao = "Neste campo deverá inserir a nova morada para o seu perfil" });
                 context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "Nacionalidade", Descricao = "Neste campo deverá inserir a sua nacionalidade" });
                 context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "Numero Identificação", Descricao = "Neste campo deverá inserir o seu numero de identificação da escola com apenas digitos" });
-                
+                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "NIF", Descricao = "Neste campo deverá inserir o seu numero de identificação fiscal que deverá conter 9 digitos numéricos" });
 
                 context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 3, Campo = "Email", Descricao = "Neste campo deverá inserir o seu email do tipo(ex: jbvc@hotmail.com)" });
 

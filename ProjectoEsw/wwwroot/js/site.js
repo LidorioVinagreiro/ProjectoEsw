@@ -164,8 +164,6 @@
                 $.ajax({
                     type: "POST",
                     url: "/" + tipoutilizador + "/SaveEvents",
-                    contentType: 'application/json; charset=utf-8',
-                    dataType: 'json',
                     data: evento,
                     success: function (status) {
                         if (!status) {

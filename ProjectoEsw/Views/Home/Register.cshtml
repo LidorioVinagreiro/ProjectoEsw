@@ -7,7 +7,7 @@
     <a asp-area="" asp-controller="Home" asp-action="Register" class="btn btn-link btn-xs pull-right">Registar</a>
     <a asp-area="" asp-controller="Home" asp-action="Login" class="btn btn-link btn-xs pull-right">Login</a>
 }
-
+@Html.ActionLink("home", "login", "login")
 
 <div class="jumbotron col-sm-10 col-sm-offset-1">
     <span class="glyphicon glyphicon-question-sign" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaPagina("Home.Register").Descricao"></span>
@@ -23,9 +23,12 @@
                 <input asp-for="DataNasc" class="form-control"  data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.Register","Data Nascimento").Descricao"/>
                 <span asp-validation-for="DataNasc" class="text-danger"></span>
                 <div class=" help-block"></div>
-                <input asp-for="Genero" placeholder="Genero" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.Register","Genero").Descricao" />
+                <select asp-for="Genero" placeholder="Genero" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.Register","Genero").Descricao" />
                 <span asp-validation-for="Genero" class="text-danger"></span>
                 <div class=" help-block"></div>
+                <input asp-for="Nif" placeholder="Distrito da morada" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.Register","Nid").Descricao" />
+                <span asp-validation-for="Nif" class="text-danger"></span>
+
                 <input asp-for="Nacionalidade" placeholder="Nacionalidade" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.Register","Nacionalidade").Descricao" />
                 <span asp-validation-for="Nacionalidade" class="text-danger"></span>
                 <div class=" help-block"></div>

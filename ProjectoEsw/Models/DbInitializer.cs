@@ -82,7 +82,6 @@ namespace ProjectoEsw.Models
                 context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "Nacionalidade", Descricao = "Neste campo deverá inserir a sua nacionalidade" });
                 context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "Numero Identificação", Descricao = "Neste campo deverá inserir o seu numero de identificação da escola com apenas digitos" });
 
-
                 context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 3, Campo = "Email", Descricao = "Neste campo deverá inserir o seu email do tipo(ex: jbvc@hotmail.com)" });
 
                 context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 4, Campo = "Novo Numero Identificação", Descricao = "Neste campo deverá inserir o seu novo numero de identificação da escola com apenas digitos" });

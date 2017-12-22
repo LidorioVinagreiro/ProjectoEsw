@@ -130,10 +130,7 @@ namespace ProjectoEsw.Controllers
 
                     if (user.EmailConfirmed)
                     {
-
-                        Microsoft.AspNetCore.Identity.SignInResult resultado = await _signInManager.PasswordSignInAsync(
-                            model.Email, model.Password, false, false
-                        );
+                        Microsoft.AspNetCore.Identity.SignInResult resultado = await _signInManager.PasswordSignInAsync( model.Email, model.Password, false, false );
                         if (resultado.Succeeded)
                         {
                             string role = await _gestor.getUtilizadorRole(model.Email);
@@ -156,18 +153,18 @@ namespace ProjectoEsw.Controllers
                         }
                         else
                         {
-                            ModelState.AddModelError(string.Empty, "invalid login");
+                            ModelState.AddModelError(string.Empty, "Email e/ou password do utilizador está incorrecta");
                             return View();
                         }
                     }
                     else
                     {
-                        ModelState.AddModelError(string.Empty, "falta Confirmar Email");
+                        ModelState.AddModelError(string.Empty, "Falta Confirmar Email");
                         return View();
                     }
                 }
                 else {
-                    ModelState.AddModelError(string.Empty, "UTILIZADOR NAO EXISTE");
+                    ModelState.AddModelError(string.Empty, "tilizador Nao Existe");
                     return View();
                 }
             }

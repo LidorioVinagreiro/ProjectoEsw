@@ -4,6 +4,14 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
+/*
+ * Fazer Validacoes Dos campos no registo e afins
+ * Adicionar Nif Registo
+ * Ver porque nao aparece datetime no modizila firefox
+ * Fazer section links para o menu lateral do Shared layout
+ * ao recuperar password fazer redirect to uma pagina com a confirmacao
+ */
+
 namespace ProjectoEsw.Models.Identity
 {
     public class RegisterViewModel
@@ -19,6 +27,7 @@ namespace ProjectoEsw.Models.Identity
 
         //[Required(ErrorMessage = "Obrigatório inserir data de nascimento válida")]
         [Display(Name = "Data Nascimento")]
+        [DataType(DataType.Date)]
         public DateTime DataNasc { set; get; }
 
         public string Genero { get; set; }

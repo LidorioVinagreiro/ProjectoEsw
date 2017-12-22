@@ -201,7 +201,7 @@ namespace ProjectoEsw.Controllers
             GestorEmail gm = new GestorEmail();
             gm.EnviarEmail(user, "reset password", callback.ToString());
             //falta informacao que pass ja foi enviada
-            return View();
+            return View("ConfirmarPassword");
         }
 
         public IActionResult ResetPassword(string code) {

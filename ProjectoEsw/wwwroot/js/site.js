@@ -16,11 +16,11 @@
                     $.each(data, function (i, v) {
                         eventsAux.push({
                             id: v.id,
-                            title : v.Titulo,
-                            description: v.Descricao,
-                            start: v.Inicio,
-                            end: v.Fim,
-                            PerfilFk: v.PerfilFK
+                            title : v.titulo,
+                            description: v.descricao,
+                            start: v.inicio,
+                            end: v.fim,
+                            PerfilFk: v.perfilfK
                         });
                     })
                     GerarCalendario(eventsAux);
@@ -148,11 +148,11 @@
 
                 } else {
                     var evento = {
-                        Descricao : descricao,
-                        Inicio : moment(data1),
-                        Fim : moment(data2),
-                        Titulo : titulo,
-                        PerfilFK : _perfil
+                        descricao : descricao,
+                        inicio : data1,
+                        fim : data2,
+                        titulo : titulo,
+                        perfilfK : _perfil
                     };
                     SaveEvents(evento);
                     $('#myModalSave').modal().hide();    

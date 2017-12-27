@@ -10,6 +10,8 @@ namespace ProjectoEsw.GestorAplicacao
 {
     public class GestorEmail
     {
+        private string ServerEmail = "cimobgrupo2@gmail.com";
+        private string EmailPassword = "gruposw2017";
 
         public GestorEmail() {
 
@@ -17,7 +19,7 @@ namespace ProjectoEsw.GestorAplicacao
 
         public void EnviarEmail(Utilizador user,string titulo,string body) {
             var message = new MimeMessage();
-            message.From.Add(new MailboxAddress("Server side", "cimobgrupo2@gmail.com"));
+            message.From.Add(new MailboxAddress("Server side", ServerEmail));
             message.To.Add(new MailboxAddress("Novo Utilizador", user.Email.ToString() ));
             message.Subject = titulo;
             //acho que tenho que user body builder
@@ -28,7 +30,7 @@ namespace ProjectoEsw.GestorAplicacao
             using (var client = new SmtpClient())
             {
                 client.Connect("smtp.gmail.com", 587, false);
-                client.Authenticate("cimobgrupo2@gmail.com", "gruposw2017");
+                client.Authenticate(ServerEmail, EmailPassword);
                 client.Send(message);
                 client.Disconnect(true);
             }

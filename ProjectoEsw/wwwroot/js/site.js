@@ -13,16 +13,20 @@
                 data: { idPerfil: perfil },
                 dataType: 'json',
                 success: function (data) {
+                    eventsAux = [];
                     $.each(data, function (i, v) {
                         eventsAux.push({
                             id: v.id,
-                            title : v.titulo,
+                            title: v.titulo,
                             description: v.descricao,
                             start: v.inicio,
                             end: v.fim,
                             PerfilFk: v.perfilfK
                         });
-                    })
+                    });
+                    $('#btnSave').unbind();
+                    $('#btnDelete').unbind();
+                    $('#btnEditar').unbind();
                     GerarCalendario(eventsAux);
                 },
                 error: function (error) {
@@ -66,7 +70,6 @@
                 },
 
                 events: eventos,
-                //eventSources : events,
                 
                 dayClick: function (date, jsEvent, view) {                   
                     var dataSelecionada = new Date(date.format('MM/DD/YYYY')); 
@@ -87,8 +90,63 @@
 
                 },
                 eventClick: function (calEvent, jsEvent, view) {
-                    $("#myModalSave").modal();
+                    $('#btnDelete').unbind();
+                    $('#btnEditar').unbind();
+                    selectedEvent = calEvent;
+                    $('#inicioEvento').text(calEvent.start);
+                    $('#fimEvento').text(calEvent.end);
+                    $('#descricaoEvento').text(calEvent.description);
 
+                    $('#btnDelete').click(function () {
+                        if (selectedEvent != null && confirm("apagar evento selecionado?")) {
+                            $.ajax({
+                                type: 'POST',
+                                url: '/' + "Candidato" + '/DeleteEvent',
+                                data: { 'id': selectedEvent.id },
+                                success: function (data) {
+                                    if (data.status) {
+                                        $('#myModal').modal('hide');
+                                        selectedEvent = null;
+                                        renderCalendario();
+                                    }
+                                },
+                                error: function () {
+                                    alert("OCORREU UM ERRO AO APAGAR EVENTO");
+                                }
+                            });
+                        } else {
+                            alert('nao ha evento selecionado');
+                        }
+                    });
+                    
+                    $('#btnEditar').click(function () {
+                        $('#myModal').modal('hide');
+                        var data1 = moment(selectedEvent.start);
+                        var data2 = moment(selectedEvent.end);
+                        var dataSelecionada1 = new Date(data1);
+                        $('#InicioInput').datetimepicker({
+                            format: 'DD/MM/YYYY HH:mm',
+                            inline: true,
+                            sideBySide: true,
+                            defaultDate: moment(selectedEvent.start)
+                        });
+                        //$('#InicioInput').data("DateTimePicker").date(data1);
+
+                        var dataSelecionada2 = new Date(data2);
+                        $('#FimInput').datetimepicker({
+                            format: 'DD/MM/YYYY HH:mm',
+                            inline: true,
+                            sideBySide: true,
+                            defaultDate: moment(selectedEvent.end)
+                        });
+                       //$('#FimInput').data("DateTimePicker").date(data2);
+
+                        $('#Descricao').text(selectedEvent.description);
+                        $('#Titulo').val(selectedEvent.title);
+                        $('#myModalSave').modal();
+                    });
+
+                    $("#myModal").modal();
                 }
 
                 //quando se clica num evento
@@ -109,74 +167,75 @@
                 
             });
 
-            $('#btnDelete').click(function () {
-                if (selectedEvent != null && confirm("apagar evento selecionado?")) {
-                    $.ajax({
-                        type: 'POST',
-                        url: '/' + tipoUtilizador + '/DeleteEvent',
-                        data: { 'id': selectedEvent.eventID },
-                        success: function (data) {
-                            if (data.status) {
-                                //refazer calendario
-                                renderCalendario();
-                                $('#myModal').modal().hide();
-                            } 
-                        },
-                        error: function () {
-                            alert("OCORREU UM ERRO AO APAGAR EVENTO");
-                        }
-                    });
-                } else {
-                    alert('nao ha evento selecionado');
-                }
-            });
+            //$('#btnDelete').click(function () {
+            //    if (selectedEvent != null && confirm("apagar evento selecionado?")) {
+            //        $.ajax({
+            //            type: 'POST',
+            //            url: '/' + tipoUtilizador + '/DeleteEvent',
+            //            data: { 'id': selectedEvent.eventID },
+            //            success: function (data) {
+            //                if (data.status) {
+            //                    renderCalendario();
+            //                    $('#myModal').modal().hide();
+            //                } 
+            //            },
+            //            error: function () {
+            //                alert("OCORREU UM ERRO AO APAGAR EVENTO");
+            //            }
+            //        });
+            //    } else {
+            //        alert('nao ha evento selecionado');
+            //    }
+            //});
             
-
-            $('#btnEditar').click(function () {
-
-            });
-
+            
             $('#btnSave').click(function () {
-                var data1 = $('#InicioInput').val();
-                var data2 = $('#FimInput').val();
+                var data1 = moment($('#InicioInput').val(), "DD/MM/YYYY HH:mm");
+                var data2 = moment($('#FimInput').val(), "DD/MM/YYYY HH:mm");
+                var data1String = $('#InicioInput').val();
+                var data2String = $('#FimInput').val();
                 var descricao = $('#DescricaoInput').val();
                 var titulo = $('#Titulo').val();
                 var tipo = $('#Tipo').find(":selected").text();
-                var data2GreaterData1 = moment(data2).diff(moment(data1)) > 0;
-                if (!data2GreaterData1 || !titulo || !descricao) {
-                    alert("Falta inserir Titulo ou Descricao ou a Data final nao é superior à inicial");                    
-
+                var diff = data2.diff(data1);
+                if (!diff || !titulo || !descricao) {
+                    alert("Falta inserir Titulo ou Descricao ou a Data final nao é superior à inicial");
+                    alert("data1: " + data1 + " data2: " + data2 + " datadiff: " + (moment(data2).diff(moment(data1))).toString() +""+ titulo + " " + descricao);
                 } else {
                     var evento = {
-                        descricao : descricao,
-                        inicio : data1,
-                        fim : data2,
-                        titulo : titulo,
-                        perfilfK : _perfil
+                        descricao: descricao,
+                        inicio: data1String,
+                        fim: data2String,
+                        titulo: titulo,
+                        perfilfK: _perfil
                     };
                     SaveEvents(evento);
-                    $('#myModalSave').modal().hide();    
+                    $('#InicioInput').data("DateTimePicker").date();
+                    $('#FimInput').data("DateTimePicker").date();
+                    $('#DescricaoInput').val = "";
+                    $('#Titulo').val = "";
+                    $('#myModalSave').modal('hide');    
                 }    
-
             });
+
 
             function SaveEvents(evento) {
                 $.ajax({
                     type: "POST",
                     url: "/" + tipoutilizador + "/SaveEvents",
+                    //dataType: 'json',
+                    //contentType: dataType,
                     data: evento,
                     success: function (status) {
-                        if (!status) {
-                            alert("Algo correu mal");
-                        } else {
-                            alert("Evento guardado");
-                        }
+                        alert("Evento guardado");
+                        renderCalendario();
                     },error: function (error) {
                         alert("Erro a gravar evento");
                     }
 
                 })
             };
+
 
         }
     });

@@ -21,17 +21,19 @@ namespace ProjectoEsw.Controllers
         private SignInManager<Utilizador> _signInManager;
         private UserManager<Utilizador> _userManager;
         private AplicacaoDbContexto _context;
-
+        private GestorEmail _gestorEmail;
         public HomeController(
             SignInManager<Utilizador> signInManager,
             UserManager<Utilizador> userManager,
             AplicacaoDbContexto contexto,
-            Gestor gestor)
+            Gestor gestor,
+            GestorEmail gestorEmail)
         {
             _context = contexto;
             _signInManager = signInManager;
             _userManager = userManager;
             _gestor = gestor;
+            _gestorEmail = gestorEmail;
         }
 
         [HttpGet]
@@ -42,7 +44,11 @@ namespace ProjectoEsw.Controllers
 
         //este metodo é o que corre apos o utilizador submeter informacao e o 
         //RegisterViewModel é o modelo da informacao que é envida pela View do Register
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="RegisterViewModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
@@ -66,8 +72,8 @@ namespace ProjectoEsw.Controllers
                         }, protocol: HttpContext.Request.Scheme);
 
                         await _context.SaveChangesAsync();
-                        GestorEmail gm = new GestorEmail();
-                        gm.EnviarEmail(user, "Novo Utilizador", tokenlink);
+                        //GestorEmail gm = new GestorEmail();
+                        _gestorEmail.EnviarEmail(user, "Novo Utilizador", tokenlink);
 
                         return View("ConfirmarEmail");
                     }
@@ -196,9 +202,8 @@ namespace ProjectoEsw.Controllers
                 new { Email = user.UserName , Code = token}, 
                 protocol: HttpContext.Request.Scheme
                 );
-            GestorEmail gm = new GestorEmail();
-            gm.EnviarEmail(user, "reset password", callback.ToString());
-            //falta informacao que pass ja foi enviada
+            //GestorEmail gm = new GestorEmail();
+            _gestorEmail.EnviarEmail(user, "reset password", callback.ToString());
             return View("ConfirmarPassword");
         }
 

@@ -136,7 +136,7 @@ namespace ProjectoEsw.Controllers
                 status = true;
             }
             await _contexto.SaveChangesAsync();
-            return new JsonResult(new { Data = new { status = status} }); 
+            return new JsonResult(new { status = status} ); 
         }
     }
 }

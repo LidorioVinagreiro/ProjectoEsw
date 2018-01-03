@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjectoEsw.Validadores.Perfil;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -60,10 +61,12 @@ namespace ProjectoEsw.Models.Identity
         public string NomeCompleto { get; set; }
         public string Genero { get; set; }
         public string Nacionalidade { get; set; }
+        [EmailAddress(ErrorMessage ="nao é um email valida")]
         public string Email { get; set; }
         public int Nif { get; set; }
         [DisplayName("Numero de Identificação")]
         public int NumeroIdentificacao { get; set; }
+
         [DisplayName("Data Nascimento")]
         public DateTime DataNasc { get; set; }
 

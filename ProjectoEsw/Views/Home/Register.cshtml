@@ -64,3 +64,16 @@
         </form>
     </div>
 </div>
+
+
+<script>
+    $.validator.addMethod("_17ormore",
+        function (value, element, parameters) {
+            return moment(value) < moment("01/01/2000");
+        });
+
+    $.validator.unobtrusive.adapters.add("_17ormore", [], function (options) {
+        options.rules._17ormore = {};
+        options.messages["_17ormore"] = options.message;
+    });
+</script>

@@ -55,3 +55,48 @@ public Task<JsonResult> GetEvents(int idPerfil)
             events.Wait();
             return Json(events);
         }
+
+_______________________________________________________CUSTOM VALIDATION__________________________________________________
+
+Validacoes sem jquery só temos que criar a validacao :
+customValidation : ValidationAttribute
+assim so faz server side validation....
+se queremos clientsidevalidation temos que:
+
+C#
+ public void AddValidation(ClientModelValidationContext context)
+        {
+            MergeAttribute(context.Attributes, "data-val", "true");
+            var errorMessage = FormatErrorMessage(context.ModelMetadata.GetDisplayName());
+            MergeAttribute(context.Attributes, "data-val-_17ormore", errorMessage);
+
+        }
+
+        private bool MergeAttribute(
+        IDictionary<string, string> attributes,
+        string key,
+        string value)
+        {
+            if (attributes.ContainsKey(key))
+            {
+                return false;
+            }
+            attributes.Add(key, value);
+            return true;
+        }
+
++ javascript/jquery
+   adicionar o metodo que faz a validacao do objecto
+   $.validator.addMethod("_17ormore",
+        function (value, element, parameters) {
+            return moment(value) < moment("01/01/2000");
+        });
+
+	adaptar ao unobtrusive e se for necessario adicionar rules:
+
+    $.validator.unobtrusive.adapters.add("_17ormore", [], function (options) {
+        options.rules._17ormore = {};
+        options.messages["_17ormore"] = options.message;
+    });
+
+___________________________________________//////////////////////////////____________________________________________

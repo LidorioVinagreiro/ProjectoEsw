@@ -3,11 +3,16 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-
+using ProjectoEsw.Validadores.Perfil;
 namespace ProjectoEsw.Models.Identity
 {
     public class RegisterViewModel
     {
+        [Required(ErrorMessage = "Obrigatório inserir data de nascimento válida")]
+        [Display(Name = "Data Nascimento")]
+        [DataNascValidation(ErrorMessage ="A idade do candidato tem de ser superior a 17")]
+        public DateTime DataNasc { set; get; }
+
         [Required(ErrorMessage = "Obrigatório inserir Email")]
         [EmailAddress(ErrorMessage = "Email incorrecto")]
         [Display(Name = "Email")]
@@ -16,11 +21,8 @@ namespace ProjectoEsw.Models.Identity
         [Required(ErrorMessage = "Obrigatório inserir nome completo")]
         [Display(Name = "Nome Completo")]
         public string NomeCompleto { get; set; }
-
-        //[Required(ErrorMessage = "Obrigatório inserir data de nascimento válida")]
-        [Display(Name = "Data Nascimento")]
-        public DateTime DataNasc { set; get; }
-
+       
+        
         public string Genero { get; set; }
 
         public string Nacionalidade { get; set; }

@@ -240,7 +240,7 @@ namespace ProjectoEsw.Controllers
       
         public async Task <IActionResult> Index()
         {
-             await _gestor.adicionarInfo();
+            // await _gestor.adicionarInfo();
             return View();
         }
         

@@ -12,17 +12,34 @@ namespace ProjectoEsw.Models
     {
         public static void Initialize(AplicacaoDbContexto context)
         {
-            if (!context.Eventos.Any()) {
-                context.Eventos.Add(new Calendario.Eventos {
-                    Inicio = new DateTime(2000, 10, 10),
-                    Fim = new DateTime(2000, 10, 11),
-                    Descricao = "DESCRICAO",
-                    Titulo="TITULO",
-                    DiaTodo=false
-                    }    
-                );
+            //ver se isto a comentado ta bem
+            //var tecnicoID = (from roles in context.Roles where roles.Name.Equals("Tecnico") select roles).SingleOrDefault().Id;
+            //var tecnico = (from userRoles in context.UserRoles where userRoles.RoleId == tecnicoID select userRoles.RoleId);
+            //var usersTecnicos = (from users in context.Users where tecnico.Contains(users.Id) select users);
 
-            }
+            //if (!usersTecnicos.Any()) {
+            //    PasswordHasher<Utilizador> hash = new PasswordHasher<Utilizador>();
+            //    Utilizador tec1 = new Utilizador { UserName = "tecnico1@est.pt" };
+            //    Utilizador tec2 = new Utilizador { UserName = "tecnico2@est.pt" };
+            //    Utilizador tec3 = new Utilizador { UserName = "tecnico3@est.pt" };
+            //    Utilizador admin = new Utilizador { UserName = "admin@est.pt" };
+
+            //    context.Users.Add(new Utilizador { UserName = "tecnico1@est.pt", PasswordHash = hash.HashPassword(tec1, "tecnico1"), EmailConfirmed = true });
+            //    context.Users.Add(new Utilizador { UserName = "tecnico2@est.pt", PasswordHash = hash.HashPassword(tec2, "tecnico2"),EmailConfirmed = true });
+            //    context.Users.Add(new Utilizador { UserName = "tecnico3@est.pt", PasswordHash = hash.HashPassword(tec3, "tecnico3"),EmailConfirmed = true });
+            //    context.Users.Add(new Utilizador { UserName = "admin@est.pt", PasswordHash = hash.HashPassword(admin, "admin"), EmailConfirmed=true });
+            //    context.SaveChanges();
+
+            //    context.UserRoles.Add(new IdentityUserRole<string> { RoleId = tecnicoID, UserId = tec1.Id });
+            //    context.UserRoles.Add(new IdentityUserRole<string> { RoleId = tecnicoID, UserId = tec2.Id });
+            //    context.UserRoles.Add(new IdentityUserRole<string> { RoleId = tecnicoID, UserId = tec3.Id });
+            //    context.SaveChanges();
+
+            //    var idAdmin = (from roles in context.Roles where roles.Name.Equals("Administrador") select roles).SingleOrDefault().Id;
+            //    context.UserRoles.Add(new IdentityUserRole<string> { RoleId = idAdmin, UserId = admin.Id });
+            //    context.SaveChanges();
+            //}
+
             if (!context.Roles.Any())
             {
                 context.Roles.Add(new IdentityRole { Name = "Candidato", NormalizedName = "CANDIDATO" });

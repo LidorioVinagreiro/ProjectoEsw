@@ -1,13 +1,16 @@
 ﻿@inject ProjectoEsw.GestorAplicacao.GestorAjudas gestorAjudas;
 @addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers;
 @model ProjectoEsw.Models.Identity.RegisterViewModel;
+@using ProjectoEsw.Models.Identity;
 
 @section links {
     <a asp-area="" asp-controller="Home" asp-action="RecuperarPassword" class="btn btn-link btn-xs pull-right">Recuperar Password</a>
     <a asp-area="" asp-controller="Home" asp-action="Register" class="btn btn-link btn-xs pull-right">Registar</a>
     <a asp-area="" asp-controller="Home" asp-action="Login" class="btn btn-link btn-xs pull-right">Login</a>
 }
-
+@section Home {
+    <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+}
 
 <div class="jumbotron col-sm-10 col-sm-offset-1">
     <span class="glyphicon glyphicon-question-sign" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaPagina("Home.Register").Descricao"></span>
@@ -17,16 +20,23 @@
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
                 <div class=" help-block"></div>
-                <input asp-for="NomeCompleto" placeholder="Nome Completo" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.Register","Nome Completo").Descricao"/>
-                <span asp-validation-for="NomeCompleto" class="text-danger" ></span>
+                <input asp-for="NomeCompleto" placeholder="Nome Completo" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.Register","Nome Completo").Descricao" />
+                <span asp-validation-for="NomeCompleto" class="text-danger"></span>
                 <div class=" help-block"></div>
-                <input asp-for="DataNasc" class="form-control"  data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.Register","Data Nascimento").Descricao"/>
+                <input asp-for="DataNasc" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.Register","Data Nascimento").Descricao" />
                 <span asp-validation-for="DataNasc" class="text-danger"></span>
                 <div class=" help-block"></div>
-                <input asp-for="Genero" placeholder="Genero" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.Register","Genero").Descricao" />
+                <select asp-for="Genero" asp-items ="Html.GetEnumSelectList<Genero>()" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.Register","Genero").Descricao">
+                    <option selected="selected" value="0">Escolha o Genero</option>
+                </select>
                 <span asp-validation-for="Genero" class="text-danger"></span>
                 <div class=" help-block"></div>
-                <input asp-for="Nacionalidade" placeholder="Nacionalidade" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.Register","Nacionalidade").Descricao" />
+                <input asp-for="Nif" placeholder="NIF" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.Register","NIF").Descricao" />
+                <span asp-validation-for="Nif" class="text-danger"></span>
+                <div class=" help-block"></div>
+                <select asp-for="Nacionalidade" asp-items="Html.GetEnumSelectList<Nacionalidade>()" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.Register","Nacionalidade").Descricao">
+                    <option selected="selected" value="0">Escolha a Nacionalidade</option>
+                </select>
                 <span asp-validation-for="Nacionalidade" class="text-danger"></span>
                 <div class=" help-block"></div>
                 <input asp-for="MoradaRua" placeholder="Rua da morada" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.Register","Morada Rua").Descricao" />
@@ -35,25 +45,29 @@
                 <input asp-for="MoradaCodigoPostal" placeholder="Codigo Postal da morada" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.Register","Morada Codigo Postal").Descricao" />
                 <span asp-validation-for="MoradaCodigoPostal" class="text-danger"></span>
                 <div class=" help-block"></div>
-                <input asp-for="MoradaConcelho" placeholder="Concelho da morada" class="form-control"  data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.Register","Morada Concelho").Descricao"/>
+                <select asp-for="MoradaConcelho" asp-items="Html.GetEnumSelectList<Concelho>()" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.Register","Morada Concelho").Descricao">
+                    <option selected="selected" value="0">Escolha o Concelho</option>
+                </select>
                 <span asp-validation-for="MoradaConcelho" class="text-danger"></span>
                 <div class=" help-block"></div>
-                <input asp-for="MoradaDistrito" placeholder="Distrito da morada" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.Register","Morada Distrito").Descricao" />
+                <select asp-for="MoradaDistrito" asp-items="Html.GetEnumSelectList<Distrito>()" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.Register","Morada Distrito").Descricao">
+                    <option selected="selected" value="0">Escolha o Distrito</option>
+                </select>
                 <span asp-validation-for="MoradaDistrito" class="text-danger"></span>
                 <div class=" help-block"></div>
-                <input asp-for="NumeroIdentificacao" placeholder="Numero de Identifição" class="form-control"  data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.Register","Numero Identificação").Descricao)"/>
+                <input asp-for="NumeroIdentificacao" placeholder="Numero de Identifição" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.Register","Numero Identificação").Descricao)" />
                 <span asp-validation-for="NumeroIdentificacao" class="text-danger"></span>
                 <div class=" help-block"></div>
-                <input asp-for="Telefone" placeholder="Numero de Telefone" class="form-control"  data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.Register","Numero Telefone").Descricao" />
+                <input asp-for="Telefone" placeholder="Numero de Telefone" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.Register","Numero Telefone").Descricao" />
                 <span asp-validation-for="Telefone" class="text-danger"></span>
                 <div class=" help-block"></div>
-                <input asp-for="Email" placeholder="Email" class="form-control"  data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.Register","Email").Descricao" />
+                <input asp-for="Email" placeholder="Email" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.Register","Email").Descricao" />
                 <span asp-validation-for="Email" class="text-danger"></span>
                 <div class=" help-block"></div>
-                <input asp-for="Password" placeholder="Password" class="form-control"  data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.Register","Password").Descricao">
+                <input asp-for="Password" placeholder="Password" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.Register","Password").Descricao">
                 <span asp-validation-for="Password" class="text-danger"></span>
                 <div class=" help-block"></div>
-                <input asp-for="ConfirmPassword" placeholder="Confirmar Password" class="form-control"  data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.Register","Confirmar password").Descricao">
+                <input asp-for="ConfirmPassword" placeholder="Confirmar Password" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.Register","Confirmar password").Descricao">
                 <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
             </div>
             <div class="form-group">

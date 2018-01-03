@@ -7,12 +7,13 @@ using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
 using ProjectoEsw.Models;
 using ProjectoEsw.Models.Calendario;
+using ProjectoEsw.Models.Identity;
 using System;
 
 namespace ProjectoEsw.Migrations
 {
     [DbContext(typeof(AplicacaoDbContexto))]
-    [Migration("20171222124511_initial")]
+    [Migration("20180103135046_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -207,17 +208,17 @@ namespace ProjectoEsw.Migrations
 
                     b.Property<string>("Foto");
 
-                    b.Property<string>("Genero");
+                    b.Property<int>("Genero");
 
                     b.Property<string>("MoradaCodigoPostal");
 
-                    b.Property<string>("MoradaConcelho");
+                    b.Property<int>("MoradaConcelho");
 
-                    b.Property<string>("MoradaDistrito");
+                    b.Property<int>("MoradaDistrito");
 
                     b.Property<string>("MoradaRua");
 
-                    b.Property<string>("Nacionalidade");
+                    b.Property<int>("Nacionalidade");
 
                     b.Property<int>("Nif");
 

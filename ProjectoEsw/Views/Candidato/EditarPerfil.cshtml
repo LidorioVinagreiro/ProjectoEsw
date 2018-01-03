@@ -1,10 +1,15 @@
-﻿@inject ProjectoEsw.GestorAplicacao.GestorAjudas gestorAjudas
+﻿@using ProjectoEsw.Models.Identity;
+@inject ProjectoEsw.GestorAplicacao.GestorAjudas gestorAjudas
 @model ProjectoEsw.Models.Identity.RegisterViewModel
 @addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+
 
 @section links {
     <a asp-area="" asp-controller="Candidato" asp-action="Logout" class="btn btn-link btn-xs pull-right">Log Out</a>
     <a asp-area="" asp-controller="Candidato" asp-action="Perfil" class="btn btn-link btn-xs pull-right"> @Model.Email </a>
+}
+@section Home {
+    <a asp-area="" asp-controller="Candidato" asp-action="Index">Home</a>
 }
 
 <div class="jumbotron col-sm-7 col-sm-offset-1">
@@ -28,10 +33,14 @@
                 <input asp-for="MoradaCodigoPostal" placeholder="Novo Codigo Postal" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.EditarPerfil","Nova Morada Codigo Postal").Descricao" />
                 <span asp-validation-for="MoradaCodigoPostal" class="text-danger"></span>
                 <div class=" help-block"></div>
-                <input asp-for="MoradaConcelho" placeholder="Novo Concelho" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.EditarPerfil","Nova Morada Concelho").Descricao" />
+                <select asp-for="MoradaConcelho" asp-items="Html.GetEnumSelectList<Concelho>()" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.EditarPerfil","Nova Morada Concelho").Descricao">
+                    <option selected="selected" value="0">Escolha o Concelho</option>
+                </select>
                 <span asp-validation-for="MoradaConcelho" class="text-danger"></span>
                 <div class=" help-block"></div>
-                <input asp-for="MoradaDistrito" placeholder="Novo Distrito" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.EditarPerfil","Nova Morada Distrito").Descricao" />
+                <select asp-for="MoradaDistrito" asp-items="Html.GetEnumSelectList<Distrito>()" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.EditarPerfil","Nova Morada Distrito").Descricao">
+                    <option selected="selected" value="0">Escolha o Distrito</option>
+                </select>
                 <span asp-validation-for="MoradaDistrito" class="text-danger"></span>
                 <div class=" help-block"></div>
                 <input asp-for="Telefone" placeholder="Novo Telefone" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.EditarPerfil","Novo Telefone").Descricao" />
@@ -52,8 +61,8 @@
 </div>
 <div class="jumbotron col-sm-3 col-sm-offset-1">
     <h5 class="text-center">Opcoes</h5>
-    <a asp-area="" asp-controller="Candidato" asp-action="Index" class="btn btn-link btn-xs pull-right col-sm-12">Ver Perfil</a>
-    <a asp-area="" asp-controller="Candidato" asp-action="Perfil" class="btn btn-link btn-xs center-block col-sm-12">Editar Perfil</a>
+    <a asp-area="" asp-controller="Candidato" asp-action="Perfil" class="btn btn-link btn-xs pull-right col-sm-12">Ver Perfil</a>
+    <a asp-area="" asp-controller="Candidato" asp-action="EditarPerfil" class="btn btn-link btn-xs center-block col-sm-12">Editar Perfil</a>
 </div>
 <div class="jumbotron col-sm-7 col-sm-offset-1">
     <div class="container col-lg-offset-1 col-sm-10">

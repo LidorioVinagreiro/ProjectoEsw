@@ -27,7 +27,7 @@ namespace ProjectoEsw
         public void ConfigureServices(IServiceCollection services)
         {
             var conect = "Server=(localdb)\\mssqllocaldb;Database=RegistoTeste";
-            var connect1 = Configuration.GetConnectionString("ProjectoEsw_grupo2");
+            //var connect1 = Configuration.GetConnectionString("ProjectoEsw_grupo2");
             services.AddDbContext<AplicacaoDbContexto>(options => options.UseSqlServer(conect));
             services.AddIdentity<Utilizador, IdentityRole>(options =>
                 {

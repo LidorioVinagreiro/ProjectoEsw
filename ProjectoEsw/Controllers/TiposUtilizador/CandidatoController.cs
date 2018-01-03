@@ -63,7 +63,9 @@ namespace ProjectoEsw.Controllers
 
         [HttpPost]
         public async Task<IActionResult> EditarPerfil(RegisterViewModel model) {
-            if (await _gestor.EditarPerfilUtilizador(model))
+            Utilizador user = await _gestor.getUtilizador(this.User);
+            Perfil queryPerfil = _gestor.getPerfil(user);
+            if (await _gestor.EditarPerfilUtilizador(model, user.Email))
             {
                 return RedirectToAction("Index", "Candidato");
             }

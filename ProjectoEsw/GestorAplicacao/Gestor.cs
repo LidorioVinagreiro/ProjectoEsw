@@ -67,9 +67,9 @@ namespace ProjectoEsw.GestorAplicacao
             return perfil.ID;
         }
 
-        public async Task<bool> EditarPerfilUtilizador(RegisterViewModel model) {
+        public async Task<bool> EditarPerfilUtilizador(RegisterViewModel model, string email) {
 
-            var perfil = _context.Perfils.Where(utilizadorPerfil => utilizadorPerfil.Email == model.Email).SingleOrDefault();
+            var perfil = _context.Perfils.Where(utilizadorPerfil => utilizadorPerfil.Email == email).SingleOrDefault();
             if (perfil != null)
             {
                 perfil.Telefone = model.Telefone;

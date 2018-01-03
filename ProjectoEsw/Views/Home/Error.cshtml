@@ -8,9 +8,11 @@
     <a asp-area="" asp-controller="Home" asp-action="Register" class="btn btn-link btn-xs pull-right">Registar</a>
     <a asp-area="" asp-controller="Home" asp-action="Login" class="btn btn-link btn-xs pull-right">Login</a>
 }
-
+@section Home {
+    <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+}
 <div class="jumbotron">
     <h2 class=" text-center"><strong>Erro</strong></h2>
-    <p><strong>Aconteceu um erro ao fazer o login </strong></p>
+    <p><strong>Aconteceu um erro inesperado, volte a tentar novamente </strong></p>
     <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-link btn-xs text-center">Voltar Pagina Inicial</a>
 </div>

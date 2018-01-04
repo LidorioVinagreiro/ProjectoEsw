@@ -9,8 +9,6 @@ namespace ProjectoEsw.Sprint_2_features.Models
     public class Candidatura
     {
         public int ID { get; set; }
-        public int PerfilCandidatoFK { get; set; }
-        public virtual Perfil PerfilCandidato { get; set; }
         public string UtilizadorFK { get; set; }
         public virtual Utilizador Candidato { get; set; }
     }

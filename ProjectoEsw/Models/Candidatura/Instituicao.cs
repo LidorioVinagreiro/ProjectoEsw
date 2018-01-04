@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace ProjectoEsw.Sprint_2_features.Models
 {
-    public class Escola
+    public class Instituicao
     {
         public int ID { get; set; }
-        public string NomeEscola { get; set; }
+        public string NomeInstituicao { get; set; }
         public string Longitude { get; set; }
         public string Latitude { get; set; }
     }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjectoEsw.Validadores.Perfil;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -31,6 +32,7 @@ namespace ProjectoEsw.Models.Identity
         [Required(ErrorMessage = "Obrigatório inserir data de nascimento válida")]
         [Display(Name = "Data Nascimento")]
         [DataType(DataType.Date)]
+        [DataNascValidation(ErrorMessage ="Utilizador não pode ter idade inferior a 17 anos")]
         public DateTime DataNasc { set; get; }
 
         [Required(ErrorMessage = "Obrigatório inserir Genero")]
@@ -58,23 +60,22 @@ namespace ProjectoEsw.Models.Identity
         [Display(Name = "Codigo Postal")]
         public string MoradaCodigoPostal { get; set; }
 
-        [Range(100000000, 999999999, ErrorMessage = "Insira uma numero de identificacao com 9 digitos")]
-        [RegularExpression("^[0-9]+$", ErrorMessage = "Insira só digitos")]
+        [RegularExpression("[0-9]{9}", ErrorMessage = "NIF Incorrecto (Deve conter so numeros com 9 digitos")]
         [Display(Name = "NIF")]
         [Required(ErrorMessage = "Obrigatório inserir NIF")]
         public int Nif { get; set; }
 
-        [Range(100000000, 999999999, ErrorMessage = "Insira uma numero de identificacao com 9 digitos")]
-        [RegularExpression("^[0-9]+$", ErrorMessage = "O numero de Identificação deve ser so numeros")]
+
+        [RegularExpression("[0-9]{9}", ErrorMessage = "O numero de Identificação incorrecto (Deve conter so numeros e ter 9 digitos)")]
         [Display(Name = "Numero de Identificação")]
         [Required(ErrorMessage = "Obrigatório inserir o Numero de Identificação")]
         public int NumeroIdentificacao { get; set; }
-        [Range(910000000,969999999, ErrorMessage = "Insira um numero de telefone valido")]
-        [RegularExpression("^[0-9]+$", ErrorMessage = "O numero de telefone deve ser so numeros")]
+
+        [RegularExpression("(9)[1236]{1}[0-9]{7}", ErrorMessage = "O numero de telefone incorrecto (Deve conter so numeros e ter 9 digitos")]
         [Required(ErrorMessage = "Obrigatório inserir número de telefone/telemóvel")]
         public string Telefone { get; set; }
 
-        [RegularExpression("[a-zA-Z0-9]{8,15}", ErrorMessage = "Tem de inserir uma password com 8 caracteres no minimo, e 1 digito e 1 caracter " )]
+        
         [Required(ErrorMessage = "Obrigatório inserir password")]
         [DataType(DataType.Password, ErrorMessage = "Password deve ter 8 caracteres dos quais 1 letra maiuscula, 1 letra minuscula, 1 digito e um caracter especial (!@#%&)")]
         [Display(Name = "Palavra-chave")]

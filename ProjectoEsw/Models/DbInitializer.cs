@@ -86,7 +86,7 @@ namespace ProjectoEsw.Models
                 context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 1, Campo = "Password", Descricao = "Neste campo deverá inserir a sua password com letras maiusculas, letras minusculas e digitos" });
 
                 context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "Nome Completo", Descricao = "Neste campo deverá inserir um nome completo com apenas letras" });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "Data Nascimento", Descricao = "Neste campo deverá inserir a data nascimento no formato mês/dia/ano" });
+                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "Data Nascimento", Descricao = "Neste campo deverá inserir a data nascimento no formato dia/mês/ano" });
                 context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "Numero Telefone", Descricao = "Neste campo deverá inserir o seu numero telefone com 9 digitos numericos" });
                 context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "Email", Descricao = "Neste campo deverá inserir o seu email do tipo(ex: jbvc@hotmail.com)" });
                 context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "Password", Descricao = "Neste campo deverá definir a sua password com letras maiusculas, letras minusculas e digitos" });

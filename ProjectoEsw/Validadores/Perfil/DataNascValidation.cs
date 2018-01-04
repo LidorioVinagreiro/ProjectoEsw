@@ -18,7 +18,7 @@ namespace ProjectoEsw.Validadores.Perfil
         {
             var datanasc = (DateTime)value;
             var diff = (System.DateTime.Now.Subtract(datanasc).TotalDays) / 365.0;
-            return diff >= 17 ? new ValidationResult(base.ErrorMessage): ValidationResult.Success;
+            return diff >= 17 ?  ValidationResult.Success: new ValidationResult(base.ErrorMessage);
 
         }
 

@@ -69,7 +69,7 @@
                     }
                 },
 
-                events: eventos,
+                events: eventsAux,
                 
                 dayClick: function (date, jsEvent, view) {                   
                     var dataSelecionada = new Date(date.format('MM/DD/YYYY')); 

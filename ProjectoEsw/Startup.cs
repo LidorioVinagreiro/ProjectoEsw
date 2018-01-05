@@ -31,14 +31,14 @@ namespace ProjectoEsw
             //var conect = "Server=(localdb)\\mssqllocaldb;Database=RegistoTeste";
             var connect1 = Configuration.GetConnectionString("ProjectoEsw_grupo2");
 
+            
             services.Configure<RequestLocalizationOptions>(options =>
             {
-                options.DefaultRequestCulture = new RequestCulture("pt-PT");
-                options.DefaultRequestCulture.Culture.DateTimeFormat.ShortDatePattern = "dd/MM/yyyy";
-                options.DefaultRequestCulture.Culture.DateTimeFormat.DateSeparator = "/";
-                options.DefaultRequestCulture.Culture.DateTimeFormat.FullDateTimePattern = "dd/MM/yyyy HH:mm";
+                options.SupportedUICultures = new[] { new CultureInfo("pt-PT") };
+                options.SupportedCultures = new [] { new CultureInfo("pt-PT") };
+                options.DefaultRequestCulture = new RequestCulture("pt-PT");             
             });
-        
+            
             services.AddDbContext<AplicacaoDbContexto>(options => options.UseSqlServer(connect1));
             services.AddIdentity<Utilizador, IdentityRole>(options =>
                 {

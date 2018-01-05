@@ -74,16 +74,21 @@ namespace ProjectoEsw.Models.Identity
         public Nacionalidade Nacionalidade { get; set; }
         public string Email { get; set; }
         public int Nif { get; set; }
+
         [DisplayName("Numero de Identificação")]
         public int NumeroIdentificacao { get; set; }
+
         [DisplayName("Data Nascimento")]
-        [DataType(DataType.DateTime)]
-        [DisplayFormat(DataFormatString ="{0:dd/MM/yyyy}")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime DataNasc { get; set; }
+
         [DisplayName("Rua")]
         public string MoradaRua { get; set; }
+
         [DisplayName("Concelho")]
         public Concelho MoradaConcelho { get; set; }
+
         [DisplayName("Distrito")]
         public Distrito MoradaDistrito { get; set; }
         [DisplayName("Codigo Postal")]

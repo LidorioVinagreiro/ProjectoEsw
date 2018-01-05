@@ -11,6 +11,7 @@ using ProjectoEsw.Models.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using ProjectoEsw.GestorAplicacao;
+using Microsoft.AspNetCore.Localization;
 
 namespace ProjectoEsw
 {
@@ -28,6 +29,12 @@ namespace ProjectoEsw
         {
             //var conect = "Server=(localdb)\\mssqllocaldb;Database=RegistoTeste";
             var connect1 = Configuration.GetConnectionString("ProjectoEsw_grupo2");
+
+            services.Configure<RequestLocalizationOptions>(options =>
+            {
+                options.DefaultRequestCulture = new RequestCulture("pt-PT");
+            });
+
             services.AddDbContext<AplicacaoDbContexto>(options => options.UseSqlServer(connect1));
             services.AddIdentity<Utilizador, IdentityRole>(options =>
                 {
@@ -46,6 +53,7 @@ namespace ProjectoEsw
                 options.LoginPath = "/Home/Login";
             }
             );
+            
             services.AddTransient<IdentityUser, Utilizador>();
             services.AddTransient<Gestor>();
             services.AddTransient<GestorAjudas>();
@@ -66,7 +74,9 @@ namespace ProjectoEsw
                 app.UseExceptionHandler("/Home/Error");
             }
             app.UseAuthentication();
-            
+
+            app.UseRequestLocalization();
+
             app.UseStaticFiles();
 
             app.UseMvc(routes =>

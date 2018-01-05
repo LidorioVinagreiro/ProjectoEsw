@@ -190,8 +190,8 @@
             
             
             $('#btnSave').click(function () {
-                var data1 = moment($('#InicioInput').val(), "DD/MM/YYYY HH:mm");
-                var data2 = moment($('#FimInput').val(), "DD/MM/YYYY HH:mm");
+                var data1 = moment($('#InicioInput').val(), "MM/DD/YYYY HH:mm");
+                var data2 = moment($('#FimInput').val(), "MM/DD/YYYY HH:mm");
                 var data1String = $('#InicioInput').val();
                 var data2String = $('#FimInput').val();
                 var descricao = $('#DescricaoInput').val();

@@ -69,8 +69,6 @@ namespace ProjectoEsw
             
             app.UseStaticFiles();
 
-            app.UseRequestLocalization();
-
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

@@ -13,7 +13,7 @@ using System;
 namespace ProjectoEsw.Migrations
 {
     [DbContext(typeof(AplicacaoDbContexto))]
-    [Migration("20180103135046_initial")]
+    [Migration("20180105172713_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using ProjectoEsw.GestorAplicacao;
 using Microsoft.AspNetCore.Localization;
+using System.Globalization;
 
 namespace ProjectoEsw
 {
@@ -33,8 +34,11 @@ namespace ProjectoEsw
             services.Configure<RequestLocalizationOptions>(options =>
             {
                 options.DefaultRequestCulture = new RequestCulture("pt-PT");
+                options.DefaultRequestCulture.Culture.DateTimeFormat.ShortDatePattern = "dd/MM/yyyy";
+                options.DefaultRequestCulture.Culture.DateTimeFormat.DateSeparator = "/";
+                options.DefaultRequestCulture.Culture.DateTimeFormat.FullDateTimePattern = "dd/MM/yyyy HH:mm";
             });
-
+        
             services.AddDbContext<AplicacaoDbContexto>(options => options.UseSqlServer(connect1));
             services.AddIdentity<Utilizador, IdentityRole>(options =>
                 {
@@ -74,7 +78,7 @@ namespace ProjectoEsw
                 app.UseExceptionHandler("/Home/Error");
             }
             app.UseAuthentication();
-
+            
             app.UseRequestLocalization();
 
             app.UseStaticFiles();

@@ -98,31 +98,31 @@ namespace ProjectoEsw.GestorAplicacao
         }
 
 
-        public async Task adicionarInfo() {
-            Utilizador tec1 = new Utilizador { UserName = "tecnico1@est.pt" };
-            Utilizador tec2 = new Utilizador { UserName = "tecnico2@est.pt" };
-            Utilizador tec3 = new Utilizador { UserName = "tecnico3@est.pt" };
-            Utilizador admin = new Utilizador { UserName = "admin@est.pt" };
+        //public async Task adicionarInfo() {
+        //    Utilizador tec1 = new Utilizador { UserName = "tecnico1@est.pt" };
+        //    Utilizador tec2 = new Utilizador { UserName = "tecnico2@est.pt" };
+        //    Utilizador tec3 = new Utilizador { UserName = "tecnico3@est.pt" };
+        //    Utilizador admin = new Utilizador { UserName = "admin@est.pt" };
 
-            try
-            {
-                IdentityResult a1 = await _userManager.CreateAsync(tec1, "tecnico1");
-                IdentityResult a2 = await _userManager.CreateAsync(tec2, "tecnico2");
-                IdentityResult a3 = await _userManager.CreateAsync(tec3, "tecnico3");
-                IdentityResult a4 = await _userManager.CreateAsync(admin, "admin");
-                await _context.SaveChangesAsync();
+        //    try
+        //    {
+        //        IdentityResult a1 = await _userManager.CreateAsync(tec1, "tecnico1");
+        //        IdentityResult a2 = await _userManager.CreateAsync(tec2, "tecnico2");
+        //        IdentityResult a3 = await _userManager.CreateAsync(tec3, "tecnico3");
+        //        IdentityResult a4 = await _userManager.CreateAsync(admin, "admin");
+        //        await _context.SaveChangesAsync();
 
-                IdentityResult a5 = await _userManager.AddToRoleAsync(tec1, "Tecnico");
-                IdentityResult a6 = await _userManager.AddToRoleAsync(tec2, "Tecnico");
-                IdentityResult a7 = await _userManager.AddToRoleAsync(tec3, "Tecnico");
-                IdentityResult a8 = await _userManager.AddToRoleAsync(admin, "Administrador");
-                await _context.SaveChangesAsync();
-            }
-            catch (Exception e) {
-                //nai faz nada aqui
-                Console.WriteLine(e.ToString());
-            }
-        }
+        //        IdentityResult a5 = await _userManager.AddToRoleAsync(tec1, "Tecnico");
+        //        IdentityResult a6 = await _userManager.AddToRoleAsync(tec2, "Tecnico");
+        //        IdentityResult a7 = await _userManager.AddToRoleAsync(tec3, "Tecnico");
+        //        IdentityResult a8 = await _userManager.AddToRoleAsync(admin, "Administrador");
+        //        await _context.SaveChangesAsync();
+        //    }
+        //    catch (Exception e) {
+        //        //nai faz nada aqui
+        //        Console.WriteLine(e.ToString());
+        //    }
+        //}
 
         public async Task<Utilizador> getUtilizador(ClaimsPrincipal principal)
         {

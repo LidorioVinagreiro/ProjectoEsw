@@ -233,10 +233,21 @@ namespace ProjectoEsw.Controllers
       
         public async Task <IActionResult> Index()
         {
-             await _gestor.adicionarInfo();
+             await _gestor.adicionarInfo(); // pq?
             return View();
         }
-        
+        public IActionResult ProgramasMobilidade()
+        {
+            return View();
+        }
+        public IActionResult Bolsas()
+        {
+            return View();
+        }
+        public IActionResult SobreNos()
+        {
+            return View();
+        }
     }
 
     

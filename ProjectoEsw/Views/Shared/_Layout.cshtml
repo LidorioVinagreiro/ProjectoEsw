@@ -23,14 +23,11 @@
             $('[data-toggle="popover"]').popover();
         });
     </script>
-    
 </head>
 <body>
     <div class="container">
         <div class="row">
-
             <div>
-
                 @RenderSection("links", required: true)                
             </div>
             <div class="col-sm-2">
@@ -53,13 +50,14 @@
                             
                         </div>  
                         <div class="well text-center" role="button">
-                            Programas Mobilidade
+                            @RenderSection("ProgramasMobilidade", required: true)
+
                         </div>
                         <div class="well text-center" role="button">
-                            Bolsas
+                            @RenderSection("Bolsas", required: true)
                         </div>
                         <div class="well text-center" role="button">
-                            Sobre Nós
+                            @RenderSection("SobreNos", required: true)
                         </div>
                     </div>
                 </div>
@@ -83,3 +81,4 @@
     @RenderSection("Scripts", required: false)
 </body>
 </html>
+

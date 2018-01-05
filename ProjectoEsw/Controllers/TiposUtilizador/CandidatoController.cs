@@ -140,5 +140,27 @@ namespace ProjectoEsw.Controllers
             await _contexto.SaveChangesAsync();
             return new JsonResult(new { Data = new { status = status} }); 
         }
+        [HttpGet]
+        public async Task<IActionResult> ProgramasMobilidade()
+        {
+            Utilizador user = await _gestor.getUtilizador(this.User);
+            Perfil queryPerfil = _gestor.getPerfil(user);
+            user.Perfil = queryPerfil;
+            return View(user.Perfil);
+        }
+        public async Task<IActionResult> Bolsas()
+        {
+            Utilizador user = await _gestor.getUtilizador(this.User);
+            Perfil queryPerfil = _gestor.getPerfil(user);
+            user.Perfil = queryPerfil;
+            return View(user.Perfil);
+        }
+        public async Task<IActionResult> SobreNos()
+        {
+            Utilizador user = await _gestor.getUtilizador(this.User);
+            Perfil queryPerfil = _gestor.getPerfil(user);
+            user.Perfil = queryPerfil;
+            return View(user.Perfil);
+        }
     }
 }

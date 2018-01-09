@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ProjectoEsw.Sprint_2_features.Models
+namespace ProjectoEsw.Candidatura_sprint2.Models
 {
     public enum Estado {APROVADA,INCOMPLETA,REJEITADA }
     public class Candidatura

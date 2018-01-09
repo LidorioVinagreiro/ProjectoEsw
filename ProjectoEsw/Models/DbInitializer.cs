@@ -12,6 +12,16 @@ namespace ProjectoEsw.Models
     {
         public static void Initialize(AplicacaoDbContexto context)
         {
+            
+
+            if (!context.Roles.Any())
+            {
+                context.Roles.Add(new IdentityRole { Name = "Candidato", NormalizedName = "CANDIDATO" });
+                context.Roles.Add(new IdentityRole { Name = "Tecnico", NormalizedName = "TECNICO" });
+                context.Roles.Add(new IdentityRole { Name="Administrador", NormalizedName="ADMINISTRADOR"});
+                context.SaveChanges();
+            }
+
             //ver se isto a comentado ta bem
             //var tecnicoID = (from roles in context.Roles where roles.Name.Equals("Tecnico") select roles).SingleOrDefault().Id;
             //var tecnico = (from userRoles in context.UserRoles where userRoles.RoleId == tecnicoID select userRoles.RoleId);
@@ -40,15 +50,7 @@ namespace ProjectoEsw.Models
             //    context.SaveChanges();
             //}
 
-            if (!context.Roles.Any())
-            {
-                context.Roles.Add(new IdentityRole { Name = "Candidato", NormalizedName = "CANDIDATO" });
-                context.Roles.Add(new IdentityRole { Name = "Tecnico", NormalizedName = "TECNICO" });
-                context.Roles.Add(new IdentityRole { Name="Administrador", NormalizedName="ADMINISTRADOR"});
-                context.SaveChanges();
-            }
-           
-            if(!context.AjudaPaginas.Any())
+            if (!context.AjudaPaginas.Any())
             {
                 context.AjudaPaginas.Add(new AjudaPagina
                {Pagina="Home.Login",

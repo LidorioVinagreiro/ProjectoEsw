@@ -7,6 +7,7 @@ using ProjectoEsw.Models.Identity;
 using Microsoft.EntityFrameworkCore;
 using ProjectoEsw.Models.Ajudas;
 using ProjectoEsw.Models.Calendario;
+
 namespace ProjectoEsw.Models
 {
     public class AplicacaoDbContexto : IdentityDbContext<Utilizador>

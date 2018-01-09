@@ -9,7 +9,11 @@ namespace ProjectoEsw.Sprint_2_features.Models
     {
         public int ID { get; set; }
         public string NomeInstituicao { get; set; }
-        public string Longitude { get; set; }
-        public string Latitude { get; set; }
+        public string PaisInstituicao { get; set; }
+        public string SiteInstituicao { get; set; }
+        public bool Interno { get; set; }
+        public string LongitudeInstituicao { get; set; }
+        public string LatitudeInstituicao { get; set; }
+
     }
 }

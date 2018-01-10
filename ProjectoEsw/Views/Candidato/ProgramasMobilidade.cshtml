@@ -1,0 +1,31 @@
+﻿@model ProjectoEsw.Models.Identity.Perfil;
+
+@section links {
+    <a asp-area="" asp-controller="Candidato" asp-action="Logout" class="btn btn-link btn-xs pull-right">Log Out</a>
+    <a asp-area="" asp-controller="Candidato" asp-action="Perfil" class="btn btn-link btn-xs pull-right"> @Html.DisplayFor(Model => Model.Email) </a>
+
+}
+@section Home{
+    <a asp-area="" asp-controller="Candidato" asp-action="Index">Home</a>
+    
+}
+@section ProgramasMobilidade{
+    <a asp-area="" asp-controller="Candidato" asp-action="ProgramasMobilidade">Programas Mobilidade</a>
+}
+@section Bolsas{
+    <a asp-area="" asp-controller="Candidato" asp-action="Bolsas">Bolsas</a>
+}
+@section SobreNos{
+    <a asp-area="" asp-controller="Candidato" asp-action="SobreNos">Sobre Nós</a>
+}
+<!--Candidato-->
+<div class="jumbotron col-sm-5">
+    <h3>Erasmus+</h3>
+    <p> Resto Informacao + links + prazos</p>
+    <a asp-area="" asp-controller="Candidato" asp-action="CandidaturaErasmus" class="btn btn-default center-block">Candidatar-me</a>
+</div>
+<div class="jumbotron col-sm-5 col-sm-offset-1">
+    <h3>Programa Santander</h3>
+    <p> Resto Informacao + links + prazos</p>
+    <a asp-area="" asp-controller="Candidato" asp-action="CandidaturaSantander" class="btn btn-default center-block">Candidatar-me</a>
+</div>

@@ -1,15 +1,13 @@
-﻿
-@{
-    ViewData["Title"] = "ResetPassword";
-}
+﻿@model ProjectoEsw.Models.Identity.Perfil;
 
 @section links {
     <a asp-area="" asp-controller="Home" asp-action="RecuperarPassword" class="btn btn-link btn-xs pull-right">Recuperar Password</a>
     <a asp-area="" asp-controller="Home" asp-action="Register" class="btn btn-link btn-xs pull-right">Registar</a>
     <a asp-area="" asp-controller="Home" asp-action="Login" class="btn btn-link btn-xs pull-right">Login</a>
 }
-@section Home {
-    <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+@section Home{
+    <a asp-area="" asp-controller="Candidato" asp-action="Index">Home</a>
+
 }
 @section ProgramasMobilidade{
     <a asp-area="" asp-controller="Home" asp-action="ProgramasMobilidade">Programas Mobilidade</a>
@@ -20,10 +18,8 @@
 @section SobreNos{
     <a asp-area="" asp-controller="Home" asp-action="SobreNos">Sobre Nós</a>
 }
-<div class="jumbotron">
-    <h2 class=" text-center"><strong>Reset Password</strong></h2>
-    <p><strong>Verifique a sua caixa de correio para efectuar o reset de password. </strong></p>
-    <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-link btn-xs text-center">Voltar Pagina Inicial</a>
+<!--Home-->
+<div class="jumbotron col-sm-12">
+    <h1 class="text-center">Sobre Nós</h1>
+    <p class=" text-center"> Resto Informacao/p>
 </div>
-
-

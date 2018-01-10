@@ -1,9 +1,4 @@
-﻿
-@{
-    ViewData["Title"] = "ResetPassword";
-}
-
-@section links {
+﻿@section links {
     <a asp-area="" asp-controller="Home" asp-action="RecuperarPassword" class="btn btn-link btn-xs pull-right">Recuperar Password</a>
     <a asp-area="" asp-controller="Home" asp-action="Register" class="btn btn-link btn-xs pull-right">Registar</a>
     <a asp-area="" asp-controller="Home" asp-action="Login" class="btn btn-link btn-xs pull-right">Login</a>
@@ -20,10 +15,14 @@
 @section SobreNos{
     <a asp-area="" asp-controller="Home" asp-action="SobreNos">Sobre Nós</a>
 }
-<div class="jumbotron">
-    <h2 class=" text-center"><strong>Reset Password</strong></h2>
-    <p><strong>Verifique a sua caixa de correio para efectuar o reset de password. </strong></p>
-    <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-link btn-xs text-center">Voltar Pagina Inicial</a>
+<!--Home-->
+<h1 class="text-center">Programas Mobilidade</h1>
+
+<div class="jumbotron col-sm-5">
+    <h3 class="text-center">Erasmus+</h3>
+    <p class="text-center">Resto Informacao</p>
 </div>
-
-
+<div class="jumbotron col-sm-5 col-sm-offset-1">
+    <h3 class="text-center">Programa Santander</h3>
+    <p class="text-center"> Resto Informacao</p>
+</div>

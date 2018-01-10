@@ -143,7 +143,27 @@ namespace ProjectoEsw.Models
                             "Poderá escolher alterar o perfil ou as password, para tal terá de inserir os campos necessarios á sua conclusão" +
                             " que estao especificados na pagina"
                 });
-
+                context.AjudaPaginas.Add(new AjudaPagina
+                {
+                    Pagina = "Candidato.CandidaturaEramus",
+                    Descricao = "Esta página tem como função a submição da Candidatura Erasmus+. " +
+                            "Tera de preencher os campos necessarios a candidatura, que serão os seus dados pessoais, os dados da pessoa que será o seu contacto de emergencia" +
+                            " e os dados referentes ao seu estatuto escolar"
+                });
+                context.AjudaPaginas.Add(new AjudaPagina
+                {
+                    Pagina = "Candidato.CandidaturaSantander",
+                    Descricao = "Esta página tem como função a submição da Candidatura Santander. " +
+                            "Tera de preencher os campos necessarios a candidatura, que serão os seus dados pessoais, os dados da pessoa que será o seu contacto de emergencia" +
+                            " e os dados referentes ao seu estatuto escolar"
+                });
+                context.AjudaPaginas.Add(new AjudaPagina
+                {
+                    Pagina = "Candidato.Perfil",
+                    Descricao = "Esta página tem como função a submição da Candidatura Erasmus+. " +
+                            "Tera de preencher os campos necessarios a candidatura, que serão os seus dados pessoais, os dados da pessoa que será o seu contacto de emergencia" +
+                            " e os dados referentes ao seu estatuto escolar"
+                });
                 context.SaveChanges();
 
             }
@@ -166,7 +186,6 @@ namespace ProjectoEsw.Models
                 context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "Genero", Descricao = "Neste campo deverá inserir a nova morada para o seu perfil" });
                 context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "Nacionalidade", Descricao = "Neste campo deverá inserir a sua nacionalidade" });
                 context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "Numero Identificação", Descricao = "Neste campo deverá inserir o seu numero de identificação da escola com apenas digitos" });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "NIF", Descricao = "Neste campo deverá inserir o seu numero de identificação fiscal que deverá conter 9 digitos numéricos" });
                 context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "NIF", Descricao = "Neste campo deverá inserir o seu numero de identificação fiscal que deverá conter 9 digitos numéricos" });
 
                 context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 3, Campo = "Email", Descricao = "Neste campo deverá inserir o seu email do tipo(ex: jbvc@hotmail.com)" });

@@ -191,6 +191,7 @@ namespace ProjectoEsw.Controllers
         {
             Utilizador user = await _userManager.FindByNameAsync(Email);
             if(user == null || !(await _userManager.IsEmailConfirmedAsync(user))){
+                //nao ha utilizador ou falta confirmar email.. nao defenir erro
                 return View();
             }
 
@@ -201,6 +202,7 @@ namespace ProjectoEsw.Controllers
                 new { Email = user.UserName , Code = token}, 
                 protocol: HttpContext.Request.Scheme
                 );
+            //GestorEmail gm = new GestorEmail();
             _gestorEmail.EnviarEmail(user, "reset password", callback.ToString());
             return View("ConfirmarPassword");
         }
@@ -231,17 +233,25 @@ namespace ProjectoEsw.Controllers
                 ModelState.AddModelError(string.Empty, "Password Alterada Faça Login");
                 return View("Error");
             }
-        
+        } 
+        public async Task <IActionResult> Index()
+        {
+            // await _gestor.adicionarInfo();
+            return View();
         }
-      
-        public IActionResult Index()
+
+        public IActionResult ProgramasMobilidade()
         {
             return View();
         }
-        
+        public IActionResult SobreNos()
+        {
+            return View();
+        }
+        public IActionResult Bolsas()
+        {
+            return View();
+        }
     }
-
-    
-
 }
 

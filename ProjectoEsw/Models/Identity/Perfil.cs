@@ -91,7 +91,7 @@ namespace ProjectoEsw.Models.Identity
 
         [DisplayName("Distrito")]
         public Distrito MoradaDistrito { get; set; }
-        [DisplayName("Codigo Postal")]
+        [DisplayName("Código Postal")]
         public string MoradaCodigoPostal { get; set; }
 
         public string Telefone { get; set; }

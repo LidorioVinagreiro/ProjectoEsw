@@ -9,6 +9,7 @@ using ProjectoEsw.Models.Identity;
 using ProjectoEsw.Models;
 using ProjectoEsw.Models.Calendario;
 using ProjectoEsw.Models.Candidatura_sprint2;
+using ProjectoEsw.Models.Candidatura_sprint2.ViewModels;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -100,16 +101,18 @@ namespace ProjectoEsw.Controllers
 
 
         public IActionResult CandidaturaErasmus() {
-            return View("candidaturaErasmus");
+            List<Instituicao> instituicoes = _contexto.Instituicoes.Where(row => row.Interno == false).ToList();
+            return View("candidaturaErasmus",instituicoes);
         }
 
         public IActionResult CandidaturaSantander()
         {
+            List<Instituicao> instituicoes = _contexto.Instituicoes.Where(row => row.Interno == true).ToList();
             return View("CandidaturaSantander");
         }
 
         [HttpPost]
-        public async Task<IActionResult> CandidaturaErasmus(Candidatura model) {           
+        public async Task<IActionResult> CandidaturaErasmus(CandidaturaViewModel model) {           
             if (ModelState.IsValid) {
                 TipoCandidatura tipo = _contexto.TipoCandidatuas.Single(row => row.Tipo == "Erasmus");
                 Utilizador user = await _gestor.getUtilizador(this.User);
@@ -119,12 +122,12 @@ namespace ProjectoEsw.Controllers
                     //não cumpre os prazos
                     return View();
                 }
+                
                 Candidatura candidatura = new Candidatura
                 {
                     UtilizadorFK = user.Id,
                     TipoCandidaturaFK = tipo.ID,
                     Candidato = user,
-                    Instituicoes = model.Instituicoes,
                     CartaMotivacao = model.CartaMotivacao,
                     IBAN = model.IBAN,
                     AnoCurricular = model.AnoCurricular,
@@ -134,8 +137,9 @@ namespace ProjectoEsw.Controllers
                     AfiliacaoEmergencia = model.AfiliacaoEmergencia,
                     NumeroEmergencia = model.NumeroEmergencia,
                     NomeEmergencia = model.NomeEmergencia,
+                    CursoFrequentado = model.CursoFrequentado
                 };
-                bool done = await _gestor.adicionarCandidatura(user, candidatura);
+                bool done = await _gestor.adicionarCandidatura(user, candidatura,model);
                 if (done) {
                     _gestorEmail.EnviarEmail(user, "Efectuou a candidatura", candidatura.ToString());
                     //sucesso
@@ -149,7 +153,7 @@ namespace ProjectoEsw.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CandidaturaSantander(Candidatura model)
+        public async Task<IActionResult> CandidaturaSantander(CandidaturaViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -167,7 +171,6 @@ namespace ProjectoEsw.Controllers
                     UtilizadorFK = user.Id,
                     TipoCandidaturaFK = tipo.ID,
                     Candidato = user,
-                    Instituicoes = model.Instituicoes,
                     CartaMotivacao = model.CartaMotivacao,
                     IBAN = model.IBAN,
                     AnoCurricular = model.AnoCurricular,
@@ -178,7 +181,7 @@ namespace ProjectoEsw.Controllers
                     NumeroEmergencia = model.NumeroEmergencia,
                     NomeEmergencia = model.NomeEmergencia,
                 };
-                bool done = await _gestor.adicionarCandidatura(user, candidatura);
+                bool done = await _gestor.adicionarCandidatura(user, candidatura,model);
                 if (done)
                 {
                     _gestorEmail.EnviarEmail(user, "Efectuou a candidatura", candidatura.ToString());
@@ -203,7 +206,7 @@ namespace ProjectoEsw.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AlterarCandidatura(Candidatura model) {
+        public async Task<IActionResult> AlterarCandidatura(CandidaturaViewModel model) {
             return await Task.Run(() => View());
         }
 

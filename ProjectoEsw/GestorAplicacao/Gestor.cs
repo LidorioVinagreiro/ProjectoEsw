@@ -9,6 +9,7 @@ using System.Security.Claims;
 using ProjectoEsw.Models.ViewModels;
 using ProjectoEsw.Models.Calendario;
 using ProjectoEsw.Models.Candidatura_sprint2;
+using ProjectoEsw.Models.Candidatura_sprint2.ViewModels;
 
 namespace ProjectoEsw.GestorAplicacao
 {
@@ -96,11 +97,23 @@ namespace ProjectoEsw.GestorAplicacao
             return true;
         }
 
-        public Task<bool> adicionarCandidatura(Utilizador user, Candidatura candidatura)
+        public Task<bool> adicionarCandidatura(Utilizador user, Candidatura candidatura,CandidaturaViewModel model)
         {
             try
             {
                 _context.Candidaturas.AddAsync(candidatura);
+                _context.SaveChangesAsync();
+                List<Instituicoes_Candidatura> instituicoes = new List<Instituicoes_Candidatura>();
+                for (int i = 0; i < model.Instituicoes.Count; i++)
+                {
+                    instituicoes.Add(new Instituicoes_Candidatura
+                    {
+                        CandidaturaId = candidatura.ID,
+                        InstituicaoId = model.Instituicoes[i].ID
+
+                    });
+                }
+                _context.InstituicoesCandidatura.AddRange(instituicoes);
                 _context.SaveChangesAsync();
                 return Task.Run( () => true);
             }
@@ -109,6 +122,7 @@ namespace ProjectoEsw.GestorAplicacao
                 return Task.Run( () => false );
             }
         }
+
 
 
         public async Task<Utilizador> getUtilizador(ClaimsPrincipal principal)

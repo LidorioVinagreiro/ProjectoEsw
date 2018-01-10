@@ -186,8 +186,9 @@ namespace ProjectoEsw.Controllers
             return View("AlterarCandidatura");
         }
 
+        [HttpPost]
         public async Task<IActionResult> AlterarCandidatura(Candidatura model) {
-
+            return await Task.Run(() => View());
         }
 
 

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace ProjectoEsw.Migrations
 {
-    public partial class initial : Migration
+    public partial class sprint2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -50,6 +50,39 @@ namespace ProjectoEsw.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetRoles", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Instituicoes",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Interno = table.Column<bool>(type: "bit", nullable: false),
+                    LatitudeInstituicao = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LongitudeInstituicao = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NomeInstituicao = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PaisInstituicao = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SiteInstituicao = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Instituicoes", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TipoCandidatuas",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    DataFim = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DataInicio = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Tipo = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TipoCandidatuas", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -132,6 +165,61 @@ namespace ProjectoEsw.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Candidaturas",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    AfiliacaoEmergencia = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AnoCurricular = table.Column<int>(type: "int", nullable: false),
+                    Bolsa = table.Column<bool>(type: "bit", nullable: false),
+                    CandidatoId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    CartaMotivacao = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Escola = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Estado = table.Column<int>(type: "int", nullable: false),
+                    IBAN = table.Column<int>(type: "int", nullable: false),
+                    NomeEmergencia = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NumeroEmergencia = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TipoCandidaturaFK = table.Column<int>(type: "int", nullable: false),
+                    TipoCandidaturaID = table.Column<int>(type: "int", nullable: true),
+                    UtilizadorFK = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Candidaturas", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Candidaturas_TipoCandidatuas_TipoCandidaturaID",
+                        column: x => x.TipoCandidaturaID,
+                        principalTable: "TipoCandidatuas",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Instituicoes_Candidatura",
+                columns: table => new
+                {
+                    CandidaturaId = table.Column<int>(type: "int", nullable: false),
+                    InstituicaoId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Instituicoes_Candidatura", x => new { x.CandidaturaId, x.InstituicaoId });
+                    table.ForeignKey(
+                        name: "FK_Instituicoes_Candidatura_Candidaturas_CandidaturaId",
+                        column: x => x.CandidaturaId,
+                        principalTable: "Candidaturas",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Instituicoes_Candidatura_Instituicoes_InstituicaoId",
+                        column: x => x.InstituicaoId,
+                        principalTable: "Instituicoes",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -272,6 +360,16 @@ namespace ProjectoEsw.Migrations
                 column: "PerfilFK");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Candidaturas_CandidatoId",
+                table: "Candidaturas",
+                column: "CandidatoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Candidaturas_TipoCandidaturaID",
+                table: "Candidaturas",
+                column: "TipoCandidaturaID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Eventos_EntrevistadorID",
                 table: "Eventos",
                 column: "EntrevistadorID");
@@ -280,6 +378,11 @@ namespace ProjectoEsw.Migrations
                 name: "IX_Eventos_UtilizadorID",
                 table: "Eventos",
                 column: "UtilizadorID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Instituicoes_Candidatura_InstituicaoId",
+                table: "Instituicoes_Candidatura",
+                column: "InstituicaoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Perfils_UtilizadorFK",
@@ -317,6 +420,14 @@ namespace ProjectoEsw.Migrations
                 principalTable: "AspNetUsers",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Candidaturas_AspNetUsers_CandidatoId",
+                table: "Candidaturas",
+                column: "CandidatoId",
+                principalTable: "AspNetUsers",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Perfils_AspNetUsers_UtilizadorFK",
@@ -358,7 +469,19 @@ namespace ProjectoEsw.Migrations
                 name: "Eventos");
 
             migrationBuilder.DropTable(
+                name: "Instituicoes_Candidatura");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Candidaturas");
+
+            migrationBuilder.DropTable(
+                name: "Instituicoes");
+
+            migrationBuilder.DropTable(
+                name: "TipoCandidatuas");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

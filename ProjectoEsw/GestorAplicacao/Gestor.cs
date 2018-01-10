@@ -106,6 +106,7 @@ namespace ProjectoEsw.GestorAplicacao
                 return Task.Run( () => true);
             }
             catch (Exception e) {
+                e.ToString();
                 return Task.Run( () => false );
             }
         }

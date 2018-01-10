@@ -7,14 +7,15 @@ using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
 using ProjectoEsw.Models;
 using ProjectoEsw.Models.Calendario;
+using ProjectoEsw.Models.Candidatura_sprint2;
 using ProjectoEsw.Models.Identity;
 using System;
 
 namespace ProjectoEsw.Migrations
 {
     [DbContext(typeof(AplicacaoDbContexto))]
-    [Migration("20180105172713_initial")]
-    partial class initial
+    [Migration("20180110021811_sprint2")]
+    partial class sprint2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -197,6 +198,97 @@ namespace ProjectoEsw.Migrations
                     b.ToTable("Eventos");
                 });
 
+            modelBuilder.Entity("ProjectoEsw.Models.Candidatura_sprint2.Candidatura", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AfiliacaoEmergencia");
+
+                    b.Property<int>("AnoCurricular");
+
+                    b.Property<bool>("Bolsa");
+
+                    b.Property<string>("CandidatoId");
+
+                    b.Property<string>("CartaMotivacao");
+
+                    b.Property<string>("Escola");
+
+                    b.Property<int>("Estado");
+
+                    b.Property<int>("IBAN");
+
+                    b.Property<string>("NomeEmergencia");
+
+                    b.Property<string>("NumeroEmergencia");
+
+                    b.Property<int>("TipoCandidaturaFK");
+
+                    b.Property<int?>("TipoCandidaturaID");
+
+                    b.Property<string>("UtilizadorFK");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("CandidatoId");
+
+                    b.HasIndex("TipoCandidaturaID");
+
+                    b.ToTable("Candidaturas");
+                });
+
+            modelBuilder.Entity("ProjectoEsw.Models.Candidatura_sprint2.Instituicao", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("Interno");
+
+                    b.Property<string>("LatitudeInstituicao");
+
+                    b.Property<string>("LongitudeInstituicao");
+
+                    b.Property<string>("NomeInstituicao");
+
+                    b.Property<string>("PaisInstituicao");
+
+                    b.Property<string>("SiteInstituicao");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Instituicoes");
+                });
+
+            modelBuilder.Entity("ProjectoEsw.Models.Candidatura_sprint2.Instituicoes_Candidatura", b =>
+                {
+                    b.Property<int>("CandidaturaId");
+
+                    b.Property<int>("InstituicaoId");
+
+                    b.HasKey("CandidaturaId", "InstituicaoId");
+
+                    b.HasIndex("InstituicaoId");
+
+                    b.ToTable("Instituicoes_Candidatura");
+                });
+
+            modelBuilder.Entity("ProjectoEsw.Models.Candidatura_sprint2.TipoCandidatura", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("DataFim");
+
+                    b.Property<DateTime>("DataInicio");
+
+                    b.Property<string>("Tipo");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("TipoCandidatuas");
+                });
+
             modelBuilder.Entity("ProjectoEsw.Models.Identity.Perfil", b =>
                 {
                     b.Property<int>("ID")
@@ -346,6 +438,30 @@ namespace ProjectoEsw.Migrations
                     b.HasOne("ProjectoEsw.Models.Identity.Perfil", "Utilizador")
                         .WithMany()
                         .HasForeignKey("UtilizadorID");
+                });
+
+            modelBuilder.Entity("ProjectoEsw.Models.Candidatura_sprint2.Candidatura", b =>
+                {
+                    b.HasOne("ProjectoEsw.Models.Identity.Utilizador", "Candidato")
+                        .WithMany()
+                        .HasForeignKey("CandidatoId");
+
+                    b.HasOne("ProjectoEsw.Models.Candidatura_sprint2.TipoCandidatura")
+                        .WithMany("Candidaturas")
+                        .HasForeignKey("TipoCandidaturaID");
+                });
+
+            modelBuilder.Entity("ProjectoEsw.Models.Candidatura_sprint2.Instituicoes_Candidatura", b =>
+                {
+                    b.HasOne("ProjectoEsw.Models.Candidatura_sprint2.Candidatura", "Candidatura")
+                        .WithMany("Instituicoes")
+                        .HasForeignKey("CandidaturaId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("ProjectoEsw.Models.Candidatura_sprint2.Instituicao", "Instituicao")
+                        .WithMany("Candidaturas")
+                        .HasForeignKey("InstituicaoId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("ProjectoEsw.Models.Identity.Perfil", b =>

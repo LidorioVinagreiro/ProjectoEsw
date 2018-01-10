@@ -8,6 +8,7 @@ namespace ProjectoEsw.Models.Candidatura_sprint2.ViewModels
 {
     public class CandidaturaViewModel
     {
+        public int ID { get; set; }
         public string NumeroEmergencia { get; set; }
         public string NomeEmergencia { get; set; }
         public string AfiliacaoEmergencia { get; set; }

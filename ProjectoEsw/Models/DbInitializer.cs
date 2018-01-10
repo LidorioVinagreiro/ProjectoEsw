@@ -75,7 +75,27 @@ namespace ProjectoEsw.Models
                             "Poderá escolher alterar o perfil ou as password, para tal terá de inserir os campos necessarios á sua conclusão" +
                             " que estao especificados na pagina"
                 });
-
+                context.AjudaPaginas.Add(new AjudaPagina
+                {
+                    Pagina = "Candidato.CandidaturaEramus",
+                    Descricao = "Esta página tem como função a submição da Candidatura Erasmus+. " +
+                            "Tera de preencher os campos necessarios a candidatura, que serão os seus dados pessoais, os dados da pessoa que será o seu contacto de emergencia" +
+                            " e os dados referentes ao seu estatuto escolar"
+                });
+                context.AjudaPaginas.Add(new AjudaPagina
+                {
+                    Pagina = "Candidato.CandidaturaSantander",
+                    Descricao = "Esta página tem como função a submição da Candidatura Santander. " +
+                            "Tera de preencher os campos necessarios a candidatura, que serão os seus dados pessoais, os dados da pessoa que será o seu contacto de emergencia" +
+                            " e os dados referentes ao seu estatuto escolar"
+                });
+                context.AjudaPaginas.Add(new AjudaPagina
+                {
+                    Pagina = "Candidato.Perfil",
+                    Descricao = "Esta página tem como função a submição da Candidatura Erasmus+. " +
+                            "Tera de preencher os campos necessarios a candidatura, que serão os seus dados pessoais, os dados da pessoa que será o seu contacto de emergencia" +
+                            " e os dados referentes ao seu estatuto escolar"
+                });
                 context.SaveChanges();
 
             }

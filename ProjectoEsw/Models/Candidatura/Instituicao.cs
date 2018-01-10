@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ProjectoEsw.Sprint_2_features.Models
+namespace ProjectoEsw.Models.Candidatura
 {
     public class Instituicao
     {

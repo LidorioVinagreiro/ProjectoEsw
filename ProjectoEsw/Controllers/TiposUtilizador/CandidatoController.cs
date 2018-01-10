@@ -8,6 +8,7 @@ using ProjectoEsw.GestorAplicacao;
 using ProjectoEsw.Models.Identity;
 using ProjectoEsw.Models;
 using ProjectoEsw.Models.Calendario;
+using ProjectoEsw.Models.Candidatura;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -161,6 +162,30 @@ namespace ProjectoEsw.Controllers
             Perfil queryPerfil = _gestor.getPerfil(user);
             user.Perfil = queryPerfil;
             return View(user.Perfil);
+        }
+
+        public async Task<IActionResult> CandidaturaErasmus()
+        {
+            Utilizador user = await _gestor.getUtilizador(this.User);
+            Perfil queryPerfil = _gestor.getPerfil(user);
+            user.Perfil = queryPerfil;
+            return View(new Candidatura
+            {
+                UtilizadorFK = queryPerfil.UtilizadorFK,
+                Candidato = user
+            });
+        }
+
+        public async Task<IActionResult> CandidaturaSantander()
+        {
+            Utilizador user = await _gestor.getUtilizador(this.User);
+            Perfil queryPerfil = _gestor.getPerfil(user);
+            user.Perfil = queryPerfil;
+            return View(new Candidatura
+            {
+                UtilizadorFK = queryPerfil.UtilizadorFK,
+                Candidato = user
+            });
         }
     }
 }

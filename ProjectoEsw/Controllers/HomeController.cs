@@ -233,18 +233,25 @@ namespace ProjectoEsw.Controllers
                 ModelState.AddModelError(string.Empty, "Password Alterada Faça Login");
                 return View("Error");
             }
-        
-        }
-      
+        } 
         public async Task <IActionResult> Index()
         {
             // await _gestor.adicionarInfo();
             return View();
         }
-        
+
+        public IActionResult ProgramasMobilidade()
+        {
+            return View();
+        }
+        public IActionResult SobreNos()
+        {
+            return View();
+        }
+        public IActionResult Bolsas()
+        {
+            return View();
+        }
     }
-
-    
-
 }
 

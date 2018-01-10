@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using ProjectoEsw.Models.ViewModels;
 using ProjectoEsw.Models.Calendario;
+using ProjectoEsw.Models.Candidatura_sprint2;
 
 namespace ProjectoEsw.GestorAplicacao
 {
@@ -19,7 +20,6 @@ namespace ProjectoEsw.GestorAplicacao
         private AplicacaoDbContexto _context;
         private UserManager<Utilizador> _userManager;
         private SignInManager<Utilizador> _signInManager;
-
         public Gestor(AplicacaoDbContexto context,
             UserManager<Utilizador> userManager,
             SignInManager<Utilizador> signInManager) {
@@ -95,6 +95,19 @@ namespace ProjectoEsw.GestorAplicacao
             await _userManager.RemovePasswordAsync(utilizador);
             await _userManager.ChangePasswordAsync(utilizador, "", model.Password);
             return true;
+        }
+
+        public Task<bool> adicionarCandidatura(Utilizador user, Candidatura candidatura)
+        {
+            try
+            {
+                _context.Candidaturas.AddAsync(candidatura);
+                _context.SaveChangesAsync();
+                return Task.Run( () => true);
+            }
+            catch (Exception e) {
+                return Task.Run( () => false );
+            }
         }
 
 

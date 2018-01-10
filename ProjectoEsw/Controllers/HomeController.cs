@@ -191,7 +191,6 @@ namespace ProjectoEsw.Controllers
         {
             Utilizador user = await _userManager.FindByNameAsync(Email);
             if(user == null || !(await _userManager.IsEmailConfirmedAsync(user))){
-                //nao ha utilizador ou falta confirmar email.. nao defenir erro
                 return View();
             }
 
@@ -202,7 +201,6 @@ namespace ProjectoEsw.Controllers
                 new { Email = user.UserName , Code = token}, 
                 protocol: HttpContext.Request.Scheme
                 );
-            //GestorEmail gm = new GestorEmail();
             _gestorEmail.EnviarEmail(user, "reset password", callback.ToString());
             return View("ConfirmarPassword");
         }
@@ -236,9 +234,8 @@ namespace ProjectoEsw.Controllers
         
         }
       
-        public async Task <IActionResult> Index()
+        public IActionResult Index()
         {
-            // await _gestor.adicionarInfo();
             return View();
         }
         

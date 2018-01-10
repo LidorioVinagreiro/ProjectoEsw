@@ -11,5 +11,7 @@ namespace ProjectoEsw.Models.Candidatura_sprint2
         public string Tipo { get; set; }
         public DateTime DataInicio { get; set; }
         public DateTime DataFim { get; set; }
+        
+        public IList<Candidatura> Candidaturas { get; set; }
     }
 }

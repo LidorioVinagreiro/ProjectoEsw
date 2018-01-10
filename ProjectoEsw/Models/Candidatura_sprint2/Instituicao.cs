@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ProjectoEsw.Candidatura_sprint2.Models
+namespace ProjectoEsw.Models.Candidatura_sprint2
 {
     public class Instituicao
     {
@@ -14,6 +14,6 @@ namespace ProjectoEsw.Candidatura_sprint2.Models
         public bool Interno { get; set; }
         public string LongitudeInstituicao { get; set; }
         public string LatitudeInstituicao { get; set; }
-
+        public ICollection<Instituicoes_Candidatura> Candidaturas { get; set; }
     }
 }

@@ -8,6 +8,7 @@ using ProjectoEsw.GestorAplicacao;
 using ProjectoEsw.Models.Identity;
 using ProjectoEsw.Models;
 using ProjectoEsw.Models.Calendario;
+using ProjectoEsw.Models.Candidatura_sprint2;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -18,10 +19,11 @@ namespace ProjectoEsw.Controllers
     {
         private Gestor _gestor;
         private AplicacaoDbContexto _contexto;
-
-        public CandidatoController(Gestor gestor,AplicacaoDbContexto contexto) {
+        private GestorEmail _gestorEmail;
+        public CandidatoController(Gestor gestor,AplicacaoDbContexto contexto,GestorEmail gestorEmail) {
             _gestor = gestor;
             _contexto = contexto;
+            _gestorEmail = gestorEmail;
         }
 
         // GET: /<controller>/
@@ -93,6 +95,99 @@ namespace ProjectoEsw.Controllers
         public async Task<IActionResult> Logout() {
             await _gestor.LogOut();
             return RedirectToAction("Index", "Home");
+        }
+
+
+
+        public IActionResult CandidaturaErasmus() {
+            return View("candidaturaErasmus");
+        }
+
+        public IActionResult CandidaturaSantander()
+        {
+            return View("candidaturaSantander");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CandidaturaErasmus(Candidatura model) {           
+            if (ModelState.IsValid) {
+                TipoCandidatura tipo = _contexto.TipoCandidatuas.Single(row => row.Tipo == "Erasmus");
+                Utilizador user = await _gestor.getUtilizador(this.User);
+
+                Candidatura candidatura = new Candidatura
+                {
+                    UtilizadorFK = user.Id,
+                    TipoCandidaturaFK = tipo.ID,
+                    Candidato = user,
+                    Instituicoes = model.Instituicoes,
+                    CartaMotivacao = model.CartaMotivacao,
+                    IBAN = model.IBAN,
+                    AnoCurricular = model.AnoCurricular,
+                    Bolsa = model.Bolsa,
+                    Escola = model.Escola,
+                    Estado = Estado.EM_ANALISE,
+                    AfiliacaoEmergencia = model.AfiliacaoEmergencia,
+                    NumeroEmergencia = model.NumeroEmergencia,
+                    NomeEmergencia = model.NomeEmergencia,
+                };
+                bool done = await _gestor.adicionarCandidatura(user, candidatura);
+                if (done) {
+                    _gestorEmail.EnviarEmail(user, "Efectuou a candidatura", candidatura.ToString());
+                    //sucesso
+                    return View();
+                }
+                //erro
+                return View();
+            }
+            //Erro
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CandidaturaSantander(Candidatura model)
+        {
+            if (ModelState.IsValid)
+            {
+                TipoCandidatura tipo = _contexto.TipoCandidatuas.Single(row => row.Tipo == "Santander");
+                Utilizador user = await _gestor.getUtilizador(this.User);
+
+                Candidatura candidatura = new Candidatura
+                {
+                    UtilizadorFK = user.Id,
+                    TipoCandidaturaFK = tipo.ID,
+                    Candidato = user,
+                    Instituicoes = model.Instituicoes,
+                    CartaMotivacao = model.CartaMotivacao,
+                    IBAN = model.IBAN,
+                    AnoCurricular = model.AnoCurricular,
+                    Bolsa = model.Bolsa,
+                    Escola = model.Escola,
+                    Estado = Estado.EM_ANALISE,
+                    AfiliacaoEmergencia = model.AfiliacaoEmergencia,
+                    NumeroEmergencia = model.NumeroEmergencia,
+                    NomeEmergencia = model.NomeEmergencia,
+                };
+                bool done = await _gestor.adicionarCandidatura(user, candidatura);
+                if (done)
+                {
+                    _gestorEmail.EnviarEmail(user, "Efectuou a candidatura", candidatura.ToString());
+                    //sucesso
+                    return View();
+                }
+                //erro
+                return View();
+            }
+            //Erro
+            return View();
+
+        }
+
+        public IActionResult AlterarCandidatura() {
+            return View("AlterarCandidatura");
+        }
+
+        public async Task<IActionResult> AlterarCandidatura(Candidatura model) {
+
         }
 
 

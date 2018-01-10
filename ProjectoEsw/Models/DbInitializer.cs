@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using ProjectoEsw.Models.Identity;
 using ProjectoEsw.Models.Ajudas;
+using ProjectoEsw.Models.Candidatura_sprint2;
 
 namespace ProjectoEsw.Models
 {
@@ -12,8 +13,22 @@ namespace ProjectoEsw.Models
     {
         public static void Initialize(AplicacaoDbContexto context,UserManager<Utilizador> userManager)
         {
-            
 
+            if (!context.TipoCandidatuas.Any()) {
+                context.TipoCandidatuas.Add(new TipoCandidatura
+                {
+                    Tipo = "Erasmus",
+                    DataInicio = System.DateTime.Now,
+                    DataFim = System.DateTime.Now.AddMonths(4)
+                });
+
+                context.TipoCandidatuas.Add(new TipoCandidatura
+                {
+                    Tipo = "Santander",
+                    DataInicio = System.DateTime.Now,
+                    DataFim = System.DateTime.Now.AddMonths(4)
+                });
+            }
             if (!context.Roles.Any())
             {
                 context.Roles.Add(new IdentityRole { Name = "Candidato", NormalizedName = "CANDIDATO" });
@@ -21,11 +36,6 @@ namespace ProjectoEsw.Models
                 context.Roles.Add(new IdentityRole { Name="Administrador", NormalizedName="ADMINISTRADOR"});
                 context.SaveChanges();
             }
-
-            //ver se isto a comentado ta bem
-            //var tecnicoID = context.Roles.Where(row => row.Name.Equals("Tecnico")).Single().Id;
-            //var tecnico = context.UserRoles.Where(row => row.RoleId == tecnicoID).Single().UserId;
-            //var usersTecnicos = context.Users.Where(row => row.Id == tecnico);
 
             if (userManager.FindByEmailAsync("tecnico1@est.pt").Result == null)
             {
@@ -44,23 +54,7 @@ namespace ProjectoEsw.Models
                 }catch(Exception e) {
 
                 }
-                //try
-                //{
-                //    userManager.AddToRoleAsync(tec1, "Tecnico");
-                //    userManager.AddToRoleAsync(tec2, "Tecnico");
-                //    userManager.AddToRoleAsync(tec3, "Tecnico");
-                //    userManager.AddToRoleAsync(admin, "Administrador");
-                //    context.SaveChangesAsync();
-                //}
-                //catch (Exception e) {
 
-
-                //}
-                //context.Users.Add(new Utilizador { UserName = "tecnico1@est.pt", PasswordHash = hash.HashPassword(tec1, "tecnico1"), EmailConfirmed = true });
-                //context.Users.Add(new Utilizador { UserName = "tecnico2@est.pt", PasswordHash = hash.HashPassword(tec2, "tecnico2"), EmailConfirmed = true });
-                //context.Users.Add(new Utilizador { UserName = "tecnico3@est.pt", PasswordHash = hash.HashPassword(tec3, "tecnico3"), EmailConfirmed = true });
-                //context.Users.Add(new Utilizador { UserName = "admin@est.pt", PasswordHash = hash.HashPassword(admin, "admin"), EmailConfirmed = true });
-                //context.SaveChanges();
                 var id = context.Roles.Where(row => row.Name.Equals("Tecnico")).Single().Id;
                 var id1 = context.Roles.Where(row => row.Name.Equals("Administrador")).Single().Id;
                 context.UserRoles.Add(new IdentityUserRole<string> { RoleId = id, UserId = tec1.Id });
@@ -68,10 +62,6 @@ namespace ProjectoEsw.Models
                 context.UserRoles.Add(new IdentityUserRole<string> { RoleId = id, UserId = tec3.Id });
                 context.UserRoles.Add(new IdentityUserRole<string> { RoleId = id1, UserId = admin.Id });
                 context.SaveChanges();
-
-                //var idAdmin = (from roles in context.Roles where roles.Name.Equals("Administrador") select roles).SingleOrDefault().Id;
-                //context.UserRoles.Add(new IdentityUserRole<string> { RoleId = idAdmin, UserId = admin.Id });
-                //context.SaveChanges();
             }
 
             if (!context.AjudaPaginas.Any())

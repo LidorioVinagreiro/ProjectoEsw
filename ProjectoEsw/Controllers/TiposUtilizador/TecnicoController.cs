@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using ProjectoEsw.Models.Candidatura_sprint2;
 using ProjectoEsw.Models;
+using ProjectoEsw.GestorAplicacao;
+using ProjectoEsw.Models.Identity;
 
 namespace ProjectoEsw.Controllers
 {
@@ -13,8 +15,11 @@ namespace ProjectoEsw.Controllers
     public class TecnicoController : Controller
     {
         private AplicacaoDbContexto _context;
-        public TecnicoController(AplicacaoDbContexto context) {
+        private Gestor _gestor;
+
+        public TecnicoController(AplicacaoDbContexto context,Gestor gestor) {
             _context = context;
+            _gestor = gestor;
         }
         public IActionResult Index()
         {
@@ -33,6 +38,13 @@ namespace ProjectoEsw.Controllers
                 return View("AnalisarCandidatura", model);
             }
             //erro
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AnaliseCandidatura(Candidatura model) {
+            Utilizador user = await _gestor.getUtilizador(this.User);
+            //falta
             return View();
         }
     }

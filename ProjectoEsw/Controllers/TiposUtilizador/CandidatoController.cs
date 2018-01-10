@@ -113,7 +113,12 @@ namespace ProjectoEsw.Controllers
             if (ModelState.IsValid) {
                 TipoCandidatura tipo = _contexto.TipoCandidatuas.Single(row => row.Tipo == "Erasmus");
                 Utilizador user = await _gestor.getUtilizador(this.User);
-
+                bool dataInicio = System.DateTime.Now.CompareTo(tipo.DataInicio) >=0;
+                bool dataFim = System.DateTime.Now.CompareTo(tipo.DataFim) < 0;
+                if (!(dataInicio && dataFim)) {
+                    //não cumpre os prazos
+                    return View();
+                }
                 Candidatura candidatura = new Candidatura
                 {
                     UtilizadorFK = user.Id,
@@ -136,10 +141,10 @@ namespace ProjectoEsw.Controllers
                     //sucesso
                     return View();
                 }
-                //erro
+                //erro adicionar candidatura
                 return View();
             }
-            //Erro
+            //Erro model
             return View();
         }
 
@@ -150,7 +155,13 @@ namespace ProjectoEsw.Controllers
             {
                 TipoCandidatura tipo = _contexto.TipoCandidatuas.Single(row => row.Tipo == "Santander");
                 Utilizador user = await _gestor.getUtilizador(this.User);
-
+                bool dataInicio = System.DateTime.Now.CompareTo(tipo.DataInicio) >= 0;
+                bool dataFim = System.DateTime.Now.CompareTo(tipo.DataFim) < 0;
+                if (!(dataInicio && dataFim))
+                {
+                    //não cumpre os prazos
+                    return View();
+                }
                 Candidatura candidatura = new Candidatura
                 {
                     UtilizadorFK = user.Id,
@@ -182,6 +193,11 @@ namespace ProjectoEsw.Controllers
 
         }
 
+        public async Task<IActionResult> VisualizarCandidatura() {
+            Utilizador user = await _gestor.getUtilizador(this.User);
+            Candidatura model = _contexto.Candidaturas.Where(row => row.Candidato.Id == user.Id).Single();
+            return View("VisualizarCandidatura", model);
+        }
         public IActionResult AlterarCandidatura() {
             return View("AlterarCandidatura");
         }

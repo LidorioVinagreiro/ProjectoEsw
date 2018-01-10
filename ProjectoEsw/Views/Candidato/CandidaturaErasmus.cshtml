@@ -1,7 +1,7 @@
 ﻿@using ProjectoEsw.Models.Identity;
 @inject ProjectoEsw.GestorAplicacao.GestorAjudas gestorAjudas
 @inject ProjectoEsw.Models.AplicacaoDbContexto context
-@model ProjectoEsw.Models.Candidatura.Candidatura;
+@model ProjectoEsw.Models.Candidatura_sprint2.Candidatura
 
 @section links {
     <a asp-area="" asp-controller="Candidato" asp-action="Logout" class="btn btn-link btn-xs pull-right">Log Out</a>
@@ -75,11 +75,11 @@
                 <input asp-for="NomeEmergencia" placeholder="Nome da pessoa a contactar" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.EditarPerfil","Novo Numero Identificação").Descricao" />
                 <span asp-validation-for="NomeEmergencia" class="text-danger"></span>
                 <div class=" help-block"></div>
-                <input asp-for="Afiliacao" placeholder="Afiliação" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.EditarPerfil","Novo Numero Identificação").Descricao" />
-                <span asp-validation-for="Afiliacao" class="text-danger"></span>
+                <input asp-for="AfiliacaoEmergencia" placeholder="Afiliação" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.EditarPerfil","Novo Numero Identificação").Descricao" />
+                <span asp-validation-for="AfiliacaoEmergencia" class="text-danger"></span>
                 <div class=" help-block"></div>
-                <input asp-for="telefone" placeholder="Telefone do contacto de emergencia" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.EditarPerfil","Novo Numero Identificação").Descricao" />
-                <span asp-validation-for="telefone" class="text-danger"></span>
+                <input asp-for="NumeroEmergencia" placeholder="Telefone do contacto de emergencia" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.EditarPerfil","Novo Numero Identificação").Descricao" />
+                <span asp-validation-for="NumeroEmergencia" class="text-danger"></span>
                 <div class=" help-block"></div>
 
                 <p> Dados para Candidatura</p>
@@ -94,7 +94,7 @@
                 <input asp-for="AnoCurricular" placeholder="Seu ano curricular" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.EditarPerfil","Novo Numero Identificação").Descricao" />
                 <span asp-validation-for="AnoCurricular" class="text-danger"></span>
                 <div class=" help-block"></div>
-                <select asp-for="InstituicoesFrequentar" asp-items="Html.GetEnumSelectList<Concelho>()" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.EditarPerfil","Nova Morada Concelho").Descricao">
+                <select asp-for="Instituicoes" asp-items="Html.GetEnumSelectList<Concelho>()" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.EditarPerfil","Nova Morada Concelho").Descricao">
                     <option value="0">Escolha a Instituicao</option>
                 </select>
                 <div class=" form-inline">

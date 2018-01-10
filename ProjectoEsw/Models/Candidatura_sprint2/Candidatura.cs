@@ -14,6 +14,7 @@ namespace ProjectoEsw.Models.Candidatura_sprint2
         public string NumeroEmergencia { get; set; }
         public string NomeEmergencia { get; set; }
         public string AfiliacaoEmergencia { get; set; }
+        public string CursoFrequentado { get; set; }
         public string Escola { get; set; }
         public int IBAN { get; set; }
         public int AnoCurricular { get; set; }

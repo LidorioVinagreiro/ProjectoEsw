@@ -105,7 +105,7 @@ namespace ProjectoEsw.Controllers
 
         public IActionResult CandidaturaSantander()
         {
-            return View("candidaturaSantander");
+            return View("CandidaturaSantander");
         }
 
         [HttpPost]
@@ -207,7 +207,18 @@ namespace ProjectoEsw.Controllers
             return await Task.Run(() => View());
         }
 
+        public IActionResult ProgramasMobilidade() {
+            return View();
+        }
 
+        public IActionResult Bolsas()
+        {
+            return View();
+        }
+        public IActionResult SobreNos()
+        {
+            return View();
+        }
         //METODOS DE AJAX
         [HttpGet]
         public JsonResult GetEvents(int idPerfil)

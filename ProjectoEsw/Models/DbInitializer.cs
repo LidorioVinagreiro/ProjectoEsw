@@ -10,7 +10,7 @@ namespace ProjectoEsw.Models
 {
     public static class DbInitializer
     {
-        public static void Initialize(AplicacaoDbContexto context)
+        public static void Initialize(AplicacaoDbContexto context,UserManager<Utilizador> userManager)
         {
             
 
@@ -23,32 +23,55 @@ namespace ProjectoEsw.Models
             }
 
             //ver se isto a comentado ta bem
-            var tecnicoID = (from roles in context.Roles where roles.Name.Equals("Tecnico") select roles).SingleOrDefault().Id;
-            var tecnico = (from userRoles in context.UserRoles where userRoles.RoleId == tecnicoID select userRoles.RoleId);
-            var usersTecnicos = (from users in context.Users where tecnico.Contains(users.Id) select users);
+            //var tecnicoID = context.Roles.Where(row => row.Name.Equals("Tecnico")).Single().Id;
+            //var tecnico = context.UserRoles.Where(row => row.RoleId == tecnicoID).Single().UserId;
+            //var usersTecnicos = context.Users.Where(row => row.Id == tecnico);
 
-            if (!usersTecnicos.Any())
+            if (userManager.FindByEmailAsync("tecnico1@est.pt").Result == null)
             {
-                PasswordHasher<Utilizador> hash = new PasswordHasher<Utilizador>();
-                Utilizador tec1 = new Utilizador { UserName = "tecnico1@est.pt" };
-                Utilizador tec2 = new Utilizador { UserName = "tecnico2@est.pt" };
-                Utilizador tec3 = new Utilizador { UserName = "tecnico3@est.pt" };
-                Utilizador admin = new Utilizador { UserName = "admin@est.pt" };
+                //    //PasswordHasher<Utilizador> hash = new PasswordHasher<Utilizador>();
+                Utilizador tec1 = new Utilizador { UserName = "tecnico1@est.pt" ,EmailConfirmed=true};
+                Utilizador tec2 = new Utilizador { UserName = "tecnico2@est.pt" ,EmailConfirmed=true};
+                Utilizador tec3 = new Utilizador { UserName = "tecnico3@est.pt" ,EmailConfirmed=true};
+                Utilizador admin = new Utilizador { UserName = "admin@est.pt" ,EmailConfirmed=true};
+                try
+                {
+                    userManager.CreateAsync(tec1, "tecnico1");
+                    userManager.CreateAsync(tec2, "tecnico2");
+                    userManager.CreateAsync(tec3, "tecnico3");
+                    userManager.CreateAsync(admin, "admin");
+                    context.SaveChangesAsync();
+                }catch(Exception e) {
 
-                context.Users.Add(new Utilizador { UserName = "tecnico1@est.pt", PasswordHash = hash.HashPassword(tec1, "tecnico1"), EmailConfirmed = true });
-                context.Users.Add(new Utilizador { UserName = "tecnico2@est.pt", PasswordHash = hash.HashPassword(tec2, "tecnico2"), EmailConfirmed = true });
-                context.Users.Add(new Utilizador { UserName = "tecnico3@est.pt", PasswordHash = hash.HashPassword(tec3, "tecnico3"), EmailConfirmed = true });
-                context.Users.Add(new Utilizador { UserName = "admin@est.pt", PasswordHash = hash.HashPassword(admin, "admin"), EmailConfirmed = true });
+                }
+                //try
+                //{
+                //    userManager.AddToRoleAsync(tec1, "Tecnico");
+                //    userManager.AddToRoleAsync(tec2, "Tecnico");
+                //    userManager.AddToRoleAsync(tec3, "Tecnico");
+                //    userManager.AddToRoleAsync(admin, "Administrador");
+                //    context.SaveChangesAsync();
+                //}
+                //catch (Exception e) {
+
+
+                //}
+                //context.Users.Add(new Utilizador { UserName = "tecnico1@est.pt", PasswordHash = hash.HashPassword(tec1, "tecnico1"), EmailConfirmed = true });
+                //context.Users.Add(new Utilizador { UserName = "tecnico2@est.pt", PasswordHash = hash.HashPassword(tec2, "tecnico2"), EmailConfirmed = true });
+                //context.Users.Add(new Utilizador { UserName = "tecnico3@est.pt", PasswordHash = hash.HashPassword(tec3, "tecnico3"), EmailConfirmed = true });
+                //context.Users.Add(new Utilizador { UserName = "admin@est.pt", PasswordHash = hash.HashPassword(admin, "admin"), EmailConfirmed = true });
+                //context.SaveChanges();
+                var id = context.Roles.Where(row => row.Name.Equals("Tecnico")).Single().Id;
+                var id1 = context.Roles.Where(row => row.Name.Equals("Administrador")).Single().Id;
+                context.UserRoles.Add(new IdentityUserRole<string> { RoleId = id, UserId = tec1.Id });
+                context.UserRoles.Add(new IdentityUserRole<string> { RoleId = id, UserId = tec2.Id });
+                context.UserRoles.Add(new IdentityUserRole<string> { RoleId = id, UserId = tec3.Id });
+                context.UserRoles.Add(new IdentityUserRole<string> { RoleId = id1, UserId = admin.Id });
                 context.SaveChanges();
 
-                context.UserRoles.Add(new IdentityUserRole<string> { RoleId = tecnicoID, UserId = tec1.Id });
-                context.UserRoles.Add(new IdentityUserRole<string> { RoleId = tecnicoID, UserId = tec2.Id });
-                context.UserRoles.Add(new IdentityUserRole<string> { RoleId = tecnicoID, UserId = tec3.Id });
-                context.SaveChanges();
-
-                var idAdmin = (from roles in context.Roles where roles.Name.Equals("Administrador") select roles).SingleOrDefault().Id;
-                context.UserRoles.Add(new IdentityUserRole<string> { RoleId = idAdmin, UserId = admin.Id });
-                context.SaveChanges();
+                //var idAdmin = (from roles in context.Roles where roles.Name.Equals("Administrador") select roles).SingleOrDefault().Id;
+                //context.UserRoles.Add(new IdentityUserRole<string> { RoleId = idAdmin, UserId = admin.Id });
+                //context.SaveChanges();
             }
 
             if (!context.AjudaPaginas.Any())

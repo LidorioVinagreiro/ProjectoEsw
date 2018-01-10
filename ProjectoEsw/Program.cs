@@ -26,12 +26,13 @@ namespace ProjectoEsw
                 try
                 {
                     var context = services.GetRequiredService<AplicacaoDbContexto>();
-                    DbInitializer.Initialize(context);
+                    var userManager = services.GetRequiredService<UserManager<Utilizador>>();
+                    DbInitializer.Initialize(context,userManager);
                 }
                 catch (Exception ex)
                 {
                     var logger = services.GetRequiredService<ILogger<Program>>();
-                    logger.LogError(ex, "An error occurred while seeding the database.");
+                    logger.LogError(ex, "Ocurreu um erro a popular a BD");
                 }
             }
             BuildWebHost(args).Run();

@@ -14,6 +14,57 @@ namespace ProjectoEsw.Models
         public static void Initialize(AplicacaoDbContexto context,UserManager<Utilizador> userManager)
         {
 
+            if (!context.Instituicoes.Any()) {
+                context.Instituicoes.Add(new Instituicao
+                {
+                    Interno = true,
+                    LatitudeInstituicao = "n/a",
+                    LongitudeInstituicao = "n/a",
+                    NomeInstituicao = "IPS Setubal",
+                    PaisInstituicao = "Portugal",
+                    SiteInstituicao = "wwww.google.pt",
+                });
+                context.Instituicoes.Add(new Instituicao
+                {
+                    Interno = true,
+                    LatitudeInstituicao = "n/a",
+                    LongitudeInstituicao = "n/a",
+                    NomeInstituicao = "IPS Barreiro",
+                    PaisInstituicao = "Portugal",
+                    SiteInstituicao = "wwww.google.pt",
+                });
+
+                context.Instituicoes.Add(new Instituicao
+                {
+                    Interno = false,
+                    LatitudeInstituicao = "n/a",
+                    LongitudeInstituicao = "n/a",
+                    NomeInstituicao = "IPS Espanha",
+                    PaisInstituicao = "Espanha",
+                    SiteInstituicao = "wwww.espanha.com",
+                });
+
+                context.Instituicoes.Add(new Instituicao
+                {
+                    Interno = false,
+                    LatitudeInstituicao = "n/a",
+                    LongitudeInstituicao = "n/a",
+                    NomeInstituicao = "Franca IPS",
+                    PaisInstituicao = "Franca",
+                    SiteInstituicao = "wwww.Franca.com",
+                });
+
+                context.Instituicoes.Add(new Instituicao
+                {
+                    Interno = false,
+                    LatitudeInstituicao = "n/a",
+                    LongitudeInstituicao = "n/a",
+                    NomeInstituicao = "IPS Inglaterra",
+                    PaisInstituicao = "Inglaterra",
+                    SiteInstituicao = "wwww.inglaterra.com",
+                });
+            }
+
             if (!context.TipoCandidatuas.Any()) {
                 context.TipoCandidatuas.Add(new TipoCandidatura
                 {
@@ -28,6 +79,7 @@ namespace ProjectoEsw.Models
                     DataInicio = System.DateTime.Now,
                     DataFim = System.DateTime.Now.AddMonths(4)
                 });
+                context.SaveChanges();
             }
             if (!context.Roles.Any())
             {

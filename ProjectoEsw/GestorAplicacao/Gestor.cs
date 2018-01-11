@@ -11,7 +11,6 @@ using ProjectoEsw.Models.Calendario;
 using ProjectoEsw.Models.Candidatura_sprint2;
 using ProjectoEsw.Models.Candidatura_sprint2.ViewModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using ProjectoEsw.Models.TaskModels;
 
 namespace ProjectoEsw.GestorAplicacao
 {

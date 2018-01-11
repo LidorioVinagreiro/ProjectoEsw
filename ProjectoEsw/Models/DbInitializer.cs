@@ -221,7 +221,7 @@ namespace ProjectoEsw.Models
                 }
                 catch (Exception e)
                 {
-
+                   e.ToString();
                 }
 
                 var id = context.Roles.Where(row => row.Name.Equals("Tecnico")).Single().Id;

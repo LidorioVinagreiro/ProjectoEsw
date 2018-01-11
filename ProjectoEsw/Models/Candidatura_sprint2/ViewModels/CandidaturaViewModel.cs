@@ -21,7 +21,5 @@ namespace ProjectoEsw.Models.Candidatura_sprint2.ViewModels
         public List<Instituicao> Instituicoes;
         public string UtilizadorFK { get; set; } 
         public virtual Utilizador Candidato { get; set; }
-        public string CursoFrequentado { get; set; }
-        public List<Instituicao> Instituicoes { get; set; }
     }
 }

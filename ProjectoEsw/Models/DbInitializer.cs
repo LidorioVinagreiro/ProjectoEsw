@@ -63,6 +63,7 @@ namespace ProjectoEsw.Models
                     PaisInstituicao = "Inglaterra",
                     SiteInstituicao = "wwww.inglaterra.com",
                 });
+                context.SaveChanges();
             }
 
             if (!context.TipoCandidatuas.Any()) {

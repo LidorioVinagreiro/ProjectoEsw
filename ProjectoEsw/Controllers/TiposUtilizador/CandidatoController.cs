@@ -120,10 +120,10 @@ namespace ProjectoEsw.Controllers
         }
 
         [HttpPost]
-        public IActionResult CandidaturaErasmus(CandidaturaViewModel model) {           
+        public async Task<IActionResult> CandidaturaErasmus(CandidaturaViewModel model) {           
             if (ModelState.IsValid) {
                 TipoCandidatura tipo = _contexto.TipoCandidatuas.Single(row => row.Tipo == "Erasmus");
-                Utilizador user = _gestor.getUtilizador(this.User).Result;
+                Utilizador user = await _gestor.getUtilizador(this.User);
                 bool dataInicio = System.DateTime.Now.CompareTo(tipo.DataInicio) >=0;
                 bool dataFim = System.DateTime.Now.CompareTo(tipo.DataFim) < 0;
                 if (!(dataInicio && dataFim)) {
@@ -147,11 +147,11 @@ namespace ProjectoEsw.Controllers
                     NomeEmergencia = model.NomeEmergencia,
                     CursoFrequentado = model.CursoFrequentado
                 };
-                bool done = _gestor.adicionarCandidatura(user, candidatura,model).Result;
+                bool done = await _gestor.adicionarCandidatura(user, candidatura,model);
                 if (done) {
                     _gestorEmail.EnviarEmail(user, "Efectuou a candidatura", candidatura.ToString());
                     //sucesso
-                    return View();
+                    return View("Index");
                 }
                 //erro adicionar candidatura
                 return View();
@@ -161,12 +161,12 @@ namespace ProjectoEsw.Controllers
         }
 
         [HttpPost]
-        public IActionResult CandidaturaSantander(CandidaturaViewModel model)
+        public async Task<IActionResult> CandidaturaSantander(CandidaturaViewModel model)
         {
             if (ModelState.IsValid)
             {
                 TipoCandidatura tipo = _contexto.TipoCandidatuas.Single(row => row.Tipo == "Santander");
-                Utilizador user = _gestor.getUtilizador(this.User).Result;
+                Utilizador user = await _gestor.getUtilizador(this.User);
                 bool dataInicio = System.DateTime.Now.CompareTo(tipo.DataInicio) >= 0;
                 bool dataFim = System.DateTime.Now.CompareTo(tipo.DataFim) < 0;
                 if (!(dataInicio && dataFim))
@@ -189,12 +189,12 @@ namespace ProjectoEsw.Controllers
                     NumeroEmergencia = model.NumeroEmergencia,
                     NomeEmergencia = model.NomeEmergencia,
                 };
-                bool done = _gestor.adicionarCandidatura(user, candidatura,model).Result;
+                bool done = await _gestor.adicionarCandidatura(user, candidatura,model);
                 if (done)
                 {
                     _gestorEmail.EnviarEmail(user, "Efectuou a candidatura", candidatura.ToString());
                     //sucesso
-                    return View();
+                    return View("Index");
                 }
                 //erro
                 return View();
@@ -206,6 +206,9 @@ namespace ProjectoEsw.Controllers
 
         public IActionResult VisualizarCandidatura() {
             Utilizador user = _gestor.getUtilizador(this.User).Result;
+            Perfil p1 = _gestor.getPerfil(user);
+            user.Perfil = p1;
+            user.PerfilFK = p1.ID;
             Candidatura model = _contexto.Candidaturas.Where(row => row.Candidato.Id == user.Id).Single();
             return View("VisualizarCandidatura", model);
         }

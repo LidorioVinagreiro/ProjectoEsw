@@ -11,6 +11,7 @@ using ProjectoEsw.Models.Calendario;
 using ProjectoEsw.Models.Candidatura_sprint2;
 using ProjectoEsw.Models.Candidatura_sprint2.ViewModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace ProjectoEsw.GestorAplicacao
 {
@@ -100,12 +101,12 @@ namespace ProjectoEsw.GestorAplicacao
             return true;
         }
 
-        public Task<bool> adicionarCandidatura(Utilizador user, Candidatura candidatura,CandidaturaViewModel model)
+        public async Task<bool> adicionarCandidatura(Utilizador user, Candidatura candidatura,CandidaturaViewModel model)
         {
             try
             {
-                _context.Candidaturas.AddAsync(candidatura);
-                _context.SaveChangesAsync();
+                await _context.Candidaturas.AddAsync(candidatura);
+                await _context.SaveChangesAsync();
                 List<Instituicoes_Candidatura> instituicoes = new List<Instituicoes_Candidatura>();
                 for (int i = 0; i < model.Instituicoes.Count; i++)
                 {
@@ -117,12 +118,12 @@ namespace ProjectoEsw.GestorAplicacao
                     });
                 }
                 _context.InstituicoesCandidatura.AddRange(instituicoes);
-                _context.SaveChangesAsync();
-                return Task.Run( () => true);
+                await _context.SaveChangesAsync();
+                return true;
             }
             catch (Exception e) {
                 e.ToString();
-                return Task.Run( () => false );
+                return false;
             }
         }
 
@@ -153,7 +154,7 @@ namespace ProjectoEsw.GestorAplicacao
                                       DataNasc = perfil.DataNasc,
                                       Nif = perfil.Nif,
                                       Telefone = perfil.Telefone
-                                  }).FirstOrDefault();
+                                  }).Include(x => x.Utilizador).FirstOrDefault();
             return queryPerfil;
         }
         public async Task<Utilizador> getUtilizadorByEmail(string email) {

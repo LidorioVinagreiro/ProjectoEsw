@@ -98,7 +98,10 @@ namespace ProjectoEsw.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-
+        public IActionResult ProgramasMobilidade()
+        {
+            return View();
+        }
 
         public IActionResult CandidaturaErasmus() {
             List<Instituicao> instituicoes = _contexto.Instituicoes.Where(row => row.Interno == false).ToList();

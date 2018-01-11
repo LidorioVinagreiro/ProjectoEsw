@@ -23,6 +23,7 @@ namespace ProjectoEsw.Models.Candidatura_sprint2
         public Estado Estado { get; set; }
         [ForeignKey("TipoCandidatura")]
         public int TipoCandidaturaFK { get; set; }
+        public virtual TipoCandidatura TipoCandidatura { get; set; }
         [ForeignKey("Utilizador")]
         public string UtilizadorFK { get; set; } 
         public virtual Utilizador Candidato { get; set; } 

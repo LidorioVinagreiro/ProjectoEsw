@@ -104,21 +104,19 @@ namespace ProjectoEsw.Controllers
         }
 
         public IActionResult CandidaturaErasmus() {
-            List<Instituicao> instituicoes = _contexto.Instituicoes.Where(row => row.Interno == false).ToList();
-            return View("candidaturaErasmus",instituicoes);
+            return View("candidaturaErasmus");
         }
 
         public IActionResult CandidaturaSantander()
         {
-            List<Instituicao> instituicoes = _contexto.Instituicoes.Where(row => row.Interno == true).ToList();
             return View("CandidaturaSantander");
         }
 
         [HttpPost]
-        public async Task<IActionResult> CandidaturaErasmus(CandidaturaViewModel model) {           
+        public IActionResult CandidaturaErasmus(CandidaturaViewModel model) {           
             if (ModelState.IsValid) {
                 TipoCandidatura tipo = _contexto.TipoCandidatuas.Single(row => row.Tipo == "Erasmus");
-                Utilizador user = await _gestor.getUtilizador(this.User);
+                Utilizador user = _gestor.getUtilizador(this.User).Result;
                 bool dataInicio = System.DateTime.Now.CompareTo(tipo.DataInicio) >=0;
                 bool dataFim = System.DateTime.Now.CompareTo(tipo.DataFim) < 0;
                 if (!(dataInicio && dataFim)) {
@@ -142,7 +140,7 @@ namespace ProjectoEsw.Controllers
                     NomeEmergencia = model.NomeEmergencia,
                     CursoFrequentado = model.CursoFrequentado
                 };
-                bool done = await _gestor.adicionarCandidatura(user, candidatura,model);
+                bool done = _gestor.adicionarCandidatura(user, candidatura,model).Result;
                 if (done) {
                     _gestorEmail.EnviarEmail(user, "Efectuou a candidatura", candidatura.ToString());
                     //sucesso
@@ -156,12 +154,12 @@ namespace ProjectoEsw.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CandidaturaSantander(CandidaturaViewModel model)
+        public IActionResult CandidaturaSantander(CandidaturaViewModel model)
         {
             if (ModelState.IsValid)
             {
                 TipoCandidatura tipo = _contexto.TipoCandidatuas.Single(row => row.Tipo == "Santander");
-                Utilizador user = await _gestor.getUtilizador(this.User);
+                Utilizador user = _gestor.getUtilizador(this.User).Result;
                 bool dataInicio = System.DateTime.Now.CompareTo(tipo.DataInicio) >= 0;
                 bool dataFim = System.DateTime.Now.CompareTo(tipo.DataFim) < 0;
                 if (!(dataInicio && dataFim))
@@ -184,7 +182,7 @@ namespace ProjectoEsw.Controllers
                     NumeroEmergencia = model.NumeroEmergencia,
                     NomeEmergencia = model.NomeEmergencia,
                 };
-                bool done = await _gestor.adicionarCandidatura(user, candidatura,model);
+                bool done = _gestor.adicionarCandidatura(user, candidatura,model).Result;
                 if (done)
                 {
                     _gestorEmail.EnviarEmail(user, "Efectuou a candidatura", candidatura.ToString());
@@ -199,18 +197,20 @@ namespace ProjectoEsw.Controllers
 
         }
 
-        public async Task<IActionResult> VisualizarCandidatura() {
-            Utilizador user = await _gestor.getUtilizador(this.User);
+        public IActionResult VisualizarCandidatura() {
+            Utilizador user = _gestor.getUtilizador(this.User).Result;
             Candidatura model = _contexto.Candidaturas.Where(row => row.Candidato.Id == user.Id).Single();
             return View("VisualizarCandidatura", model);
         }
         public IActionResult AlterarCandidatura() {
-            return View("AlterarCandidatura");
+            Utilizador user = _gestor.getUtilizador(this.User).Result;
+            Candidatura candidatura = _contexto.Candidaturas.Where(x => x.Candidato.Id == user.Id).Single();
+            return View("AlterarCandidatura",candidatura);
         }
 
         [HttpPost]
-        public async Task<IActionResult> AlterarCandidatura(CandidaturaViewModel model) {
-            return await Task.Run(() => View());
+        public IActionResult AlterarCandidatura(CandidaturaViewModel model) {
+            return View();
         }
 
         public IActionResult ProgramasMobilidade() {

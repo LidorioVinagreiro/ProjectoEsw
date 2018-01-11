@@ -8,6 +8,7 @@ using ProjectoEsw.Models.Candidatura_sprint2;
 using ProjectoEsw.Models;
 using ProjectoEsw.GestorAplicacao;
 using ProjectoEsw.Models.Identity;
+using ProjectoEsw.Models.Candidatura_sprint2.ViewModels;
 
 namespace ProjectoEsw.Controllers
 {
@@ -42,10 +43,47 @@ namespace ProjectoEsw.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AnaliseCandidatura(Candidatura model) {
-            Utilizador user = await _gestor.getUtilizador(this.User);
-            //falta
-            return View();
+        public IActionResult RejeitarCandidatura(CandidaturaViewModel model) {
+            if (ModelState.IsValid)
+            {
+                Candidatura candidatura = _context.Candidaturas.Where(x => x.ID == model.ID).Single();
+                Task<Utilizador> tecnico = _gestor.getUtilizador(this.User);
+                if (_gestor.RejeitarCandidatura(candidatura, tecnico.Result))
+                    return View();// rejeitada
+                return View(); // erro a rejeitar
+            }
+            return View(); // modelstate invalid
+        }
+
+        [HttpPost]
+        public IActionResult AprovarCandidatura(CandidaturaViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Candidatura candidatura = _context.Candidaturas.Where(x => x.ID == model.ID).Single();
+                Task<Utilizador> tecnico = _gestor.getUtilizador(this.User);
+                if (_gestor.AprovarCandidatura(candidatura, tecnico.Result))
+                    return View();// aprovado
+                return View(); // erro a aprovar
+            }
+            return View(); // modelstate invalid
+
+        }
+
+        [HttpPost]
+        public IActionResult PedirAlteracaoCandidatura(CandidaturaViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Candidatura candidatura = _context.Candidaturas.Where(x => x.ID == model.ID).Single();
+                Task<Utilizador> tecnico = _gestor.getUtilizador(this.User);
+                if (_gestor.PedirAlteracaoCandidatura(candidatura, tecnico.Result))
+                    return View();// pedido alteracao
+                return View(); // erro a alterar
+            }
+            return View(); // modelstate invalid
+
         }
     }
-}
+
+    }

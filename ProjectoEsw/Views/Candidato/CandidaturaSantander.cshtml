@@ -95,18 +95,18 @@
                 <input asp-for="AnoCurricular" placeholder="Seu ano curricular" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Candidato.Candidatura","Ano Curricular").Descricao" />
                 <span asp-validation-for="AnoCurricular" class="text-danger"></span>
                 <div class=" help-block"></div>
-                <select asp-items="context.Instituicoes.Where(row => row.Interno == true).Select(x=> new SelectListItem { Text = x.NomeInstituicao , Value = x.NomeInstituicao})" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Candidato.Candidatura","Instituicoes").Descricao">
+                <select asp-for="Instituicoes" asp-items="context.Instituicoes.Where(row => row.Interno == true).Select(x=> new SelectListItem { Text = x.NomeInstituicao , Value = x.NomeInstituicao})" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Candidato.Candidatura","Instituicoes").Descricao">
                     <option value="0">Escolha a Instituicao</option>
                 </select>
+                <div class="help-block"></div>
+                <input asp-for="IBAN" placeholder="Nome da Escola" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Candidato.Candidatura","IBAN").Descricao" />
+                <span asp-validation-for="IBAN" class="text-danger"></span>
                 <div class="help-block"></div>
                 <div class=" form-inline">
                     <label asp-for="Bolsa" class="control-label"></label>
                     <input asp-for="Bolsa" placeholder="Seu ano curricular" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Candidato.Candidatura","Bolsa").Descricao" />
                     <div class=" help-block"></div>
-                </div>
-                <input asp-for="IBAN" placeholder="Nome da Escola" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Candidato.Candidatura","IBAN").Descricao" />
-                <span asp-validation-for="IBAN" class="text-danger"></span>
-
+                </div>             
                 <div class="form-inline">
                     <h5 class="pull-left">Carta Motivação</h5>
                     <input type="file" name="files" class="pull-right" />

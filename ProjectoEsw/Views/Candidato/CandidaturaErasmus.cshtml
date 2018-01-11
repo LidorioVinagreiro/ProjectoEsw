@@ -6,7 +6,7 @@
 
 @section links {
     <a asp-area="" asp-controller="Candidato" asp-action="Logout" class="btn btn-link btn-xs pull-right">Log Out</a>
-    <a asp-area="" asp-controller="Candidato" asp-action="Perfil" class="btn btn-link btn-xs pull-right">@Html.DisplayFor(Model => Model.Candidato.Perfil.Email) </a>
+    <a asp-area="" asp-controller="Candidato" asp-action="Perfil" class="btn btn-link btn-xs pull-right"></a>
 
 }
 @section Home{
@@ -98,14 +98,14 @@
                 <select asp-for="Instituicoes" asp-items="context.Instituicoes.Where(row => row.Interno == false).Select(x=> new SelectListItem { Text = x.NomeInstituicao , Value = x.NomeInstituicao})" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Candidato.Candidatura","Instituicoes").Descricao">
                     <option value="0">Escolha a Instituicao</option>
                 </select>
+                <div class="help-block"></div>
+                <input asp-for="IBAN" placeholder="IBAN" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Candidato.Candidatura","IBAN").Descricao" />
+                <span asp-validation-for="IBAN" class="text-danger"></span>
                 <div class=" form-inline">
                     <label asp-for="Bolsa" class="control-label"></label>
                     <input asp-for="Bolsa" placeholder="Seu ano curricular" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Candidato.Candidatura","Bolsa").Descricao" />
                     <div class=" help-block"></div>
                 </div>
-                <input asp-for="IBAN" placeholder="Nome da Escola" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Candidato.Candidatura","IBAN").Descricao" />
-                <span asp-validation-for="IBAN" class="text-danger"></span>
-
                 <div class="form-inline">
                     <h5 class="pull-left">Carta Motivação</h5>
                     <input type="file" name="files" class="pull-right" />
@@ -114,7 +114,7 @@
             <div class="form-group">
                 <div class="text-center">
                     <button type="submit" class="btn btn-default">Cancelar</button>
-                    <button type="submit" class="btn btn-default">SUbmeter</button>
+                    <button type="submit" class="btn btn-default">Submeter</button>
                 </div>
             </div>
         </form>

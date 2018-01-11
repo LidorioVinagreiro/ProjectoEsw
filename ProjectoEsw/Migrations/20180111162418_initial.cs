@@ -185,18 +185,17 @@ namespace ProjectoEsw.Migrations
                     NomeEmergencia = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NumeroEmergencia = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TipoCandidaturaFK = table.Column<int>(type: "int", nullable: false),
-                    TipoCandidaturaID = table.Column<int>(type: "int", nullable: true),
                     UtilizadorFK = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Candidaturas", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Candidaturas_TipoCandidatuas_TipoCandidaturaID",
-                        column: x => x.TipoCandidaturaID,
+                        name: "FK_Candidaturas_TipoCandidatuas_TipoCandidaturaFK",
+                        column: x => x.TipoCandidaturaFK,
                         principalTable: "TipoCandidatuas",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -366,9 +365,9 @@ namespace ProjectoEsw.Migrations
                 column: "CandidatoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Candidaturas_TipoCandidaturaID",
+                name: "IX_Candidaturas_TipoCandidaturaFK",
                 table: "Candidaturas",
-                column: "TipoCandidaturaID");
+                column: "TipoCandidaturaFK");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Eventos_EntrevistadorID",

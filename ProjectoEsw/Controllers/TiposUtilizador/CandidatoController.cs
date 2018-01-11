@@ -97,7 +97,10 @@ namespace ProjectoEsw.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-
+        public IActionResult ProgramasMobilidade()
+        {
+            return View();
+        }
 
         public IActionResult CandidaturaErasmus() {
             return View("candidaturaErasmus");

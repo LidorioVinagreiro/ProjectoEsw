@@ -212,6 +212,8 @@ namespace ProjectoEsw.Migrations
 
                     b.Property<string>("CartaMotivacao");
 
+                    b.Property<string>("CursoFrequentado");
+
                     b.Property<string>("Escola");
 
                     b.Property<int>("Estado");

@@ -17,6 +17,7 @@ namespace ProjectoEsw.Models.Candidatura_sprint2.ViewModels
         public bool Bolsa { get; set; }
         public string CartaMotivacao { get; set; }
         public string UtilizadorFK { get; set; } 
-        public virtual Utilizador Candidato { get; set; } 
+        public virtual Utilizador Candidato { get; set; }
+        public string CursoFrequentado { get; set; }
     }
 }

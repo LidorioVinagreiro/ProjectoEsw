@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace ProjectoEsw.Migrations
 {
-    public partial class sprint2 : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -178,6 +178,7 @@ namespace ProjectoEsw.Migrations
                     Bolsa = table.Column<bool>(type: "bit", nullable: false),
                     CandidatoId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     CartaMotivacao = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CursoFrequentado = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Escola = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Estado = table.Column<int>(type: "int", nullable: false),
                     IBAN = table.Column<int>(type: "int", nullable: false),

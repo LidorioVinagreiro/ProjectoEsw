@@ -101,12 +101,22 @@ namespace ProjectoEsw.Controllers
 
 
         public IActionResult CandidaturaErasmus() {
-            return View("candidaturaErasmus");
+            Utilizador user = _gestor.getUtilizador(this.User).Result;
+            Perfil perfil = _gestor.getPerfil(user);
+            user.Perfil = perfil;
+            user.PerfilFK = perfil.ID;
+            CandidaturaViewModel model = new CandidaturaViewModel { UtilizadorFK = user.Id ,Candidato = user };
+            return View("candidaturaErasmus",model);
         }
 
         public IActionResult CandidaturaSantander()
         {
-            return View("CandidaturaSantander");
+            Utilizador user = _gestor.getUtilizador(this.User).Result;
+            Perfil perfil = _gestor.getPerfil(user);
+            user.Perfil = perfil;
+            user.PerfilFK = perfil.ID;
+            CandidaturaViewModel model = new CandidaturaViewModel { UtilizadorFK = user.Id,Candidato = user };
+            return View("CandidaturaSantander",model);
         }
 
         [HttpPost]

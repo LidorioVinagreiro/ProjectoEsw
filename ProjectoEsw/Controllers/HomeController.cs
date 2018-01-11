@@ -234,7 +234,7 @@ namespace ProjectoEsw.Controllers
                 return View("Error");
             }
         } 
-        public async Task <IActionResult> Index()
+        public IActionResult Index()
         {
             // await _gestor.adicionarInfo();
             return View();

@@ -20,6 +20,6 @@ namespace ProjectoEsw.Models.Candidatura_sprint2.ViewModels
         public string CartaMotivacao { get; set; }
         public List<Instituicao> Instituicoes;
         public string UtilizadorFK { get; set; } 
-        public virtual Utilizador Candidato { get; set; } 
+        public virtual Utilizador Candidato { get; set; }
     }
 }

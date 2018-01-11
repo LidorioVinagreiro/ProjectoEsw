@@ -14,8 +14,8 @@ using System;
 namespace ProjectoEsw.Migrations
 {
     [DbContext(typeof(AplicacaoDbContexto))]
-    [Migration("20180110021811_sprint2")]
-    partial class sprint2
+    [Migration("20180111162418_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -213,6 +213,8 @@ namespace ProjectoEsw.Migrations
 
                     b.Property<string>("CartaMotivacao");
 
+                    b.Property<string>("CursoFrequentado");
+
                     b.Property<string>("Escola");
 
                     b.Property<int>("Estado");
@@ -225,15 +227,13 @@ namespace ProjectoEsw.Migrations
 
                     b.Property<int>("TipoCandidaturaFK");
 
-                    b.Property<int?>("TipoCandidaturaID");
-
                     b.Property<string>("UtilizadorFK");
 
                     b.HasKey("ID");
 
                     b.HasIndex("CandidatoId");
 
-                    b.HasIndex("TipoCandidaturaID");
+                    b.HasIndex("TipoCandidaturaFK");
 
                     b.ToTable("Candidaturas");
                 });
@@ -446,9 +446,10 @@ namespace ProjectoEsw.Migrations
                         .WithMany()
                         .HasForeignKey("CandidatoId");
 
-                    b.HasOne("ProjectoEsw.Models.Candidatura_sprint2.TipoCandidatura")
+                    b.HasOne("ProjectoEsw.Models.Candidatura_sprint2.TipoCandidatura", "TipoCandidatura")
                         .WithMany("Candidaturas")
-                        .HasForeignKey("TipoCandidaturaID");
+                        .HasForeignKey("TipoCandidaturaFK")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("ProjectoEsw.Models.Candidatura_sprint2.Instituicoes_Candidatura", b =>

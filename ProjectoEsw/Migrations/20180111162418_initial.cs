@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace ProjectoEsw.Migrations
 {
-    public partial class sprint2 : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -178,24 +178,24 @@ namespace ProjectoEsw.Migrations
                     Bolsa = table.Column<bool>(type: "bit", nullable: false),
                     CandidatoId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     CartaMotivacao = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CursoFrequentado = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Escola = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Estado = table.Column<int>(type: "int", nullable: false),
                     IBAN = table.Column<int>(type: "int", nullable: false),
                     NomeEmergencia = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NumeroEmergencia = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TipoCandidaturaFK = table.Column<int>(type: "int", nullable: false),
-                    TipoCandidaturaID = table.Column<int>(type: "int", nullable: true),
                     UtilizadorFK = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Candidaturas", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Candidaturas_TipoCandidatuas_TipoCandidaturaID",
-                        column: x => x.TipoCandidaturaID,
+                        name: "FK_Candidaturas_TipoCandidatuas_TipoCandidaturaFK",
+                        column: x => x.TipoCandidaturaFK,
                         principalTable: "TipoCandidatuas",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -365,9 +365,9 @@ namespace ProjectoEsw.Migrations
                 column: "CandidatoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Candidaturas_TipoCandidaturaID",
+                name: "IX_Candidaturas_TipoCandidaturaFK",
                 table: "Candidaturas",
-                column: "TipoCandidaturaID");
+                column: "TipoCandidaturaFK");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Eventos_EntrevistadorID",

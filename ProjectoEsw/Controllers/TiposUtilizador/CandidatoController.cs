@@ -11,6 +11,7 @@ using ProjectoEsw.Models.Calendario;
 using ProjectoEsw.Models.Candidatura_sprint2;
 using ProjectoEsw.Models.Candidatura_sprint2.ViewModels;
 
+
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace ProjectoEsw.Controllers
@@ -97,7 +98,6 @@ namespace ProjectoEsw.Controllers
             await _gestor.LogOut();
             return RedirectToAction("Index", "Home");
         }
-
 
 
         public IActionResult CandidaturaErasmus() {

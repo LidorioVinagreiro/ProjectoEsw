@@ -25,7 +25,6 @@
   <ItemGroup>
     <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="Views\Administrador\" />
-    <Folder Include="Views\Tecnico\" />
   </ItemGroup>
 
 </Project>

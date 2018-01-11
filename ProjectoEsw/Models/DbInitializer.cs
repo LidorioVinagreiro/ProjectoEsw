@@ -63,6 +63,7 @@ namespace ProjectoEsw.Models
                     PaisInstituicao = "Inglaterra",
                     SiteInstituicao = "wwww.inglaterra.com",
                 });
+                context.SaveChanges();
             }
 
             if (!context.TipoCandidatuas.Any()) {
@@ -89,33 +90,7 @@ namespace ProjectoEsw.Models
                 context.SaveChanges();
             }
 
-            if (userManager.FindByEmailAsync("tecnico1@est.pt").Result == null)
-            {
-                //    //PasswordHasher<Utilizador> hash = new PasswordHasher<Utilizador>();
-                Utilizador tec1 = new Utilizador { UserName = "tecnico1@est.pt" ,EmailConfirmed=true};
-                Utilizador tec2 = new Utilizador { UserName = "tecnico2@est.pt" ,EmailConfirmed=true};
-                Utilizador tec3 = new Utilizador { UserName = "tecnico3@est.pt" ,EmailConfirmed=true};
-                Utilizador admin = new Utilizador { UserName = "admin@est.pt" ,EmailConfirmed=true};
-                try
-                {
-                    userManager.CreateAsync(tec1, "tecnico1");
-                    userManager.CreateAsync(tec2, "tecnico2");
-                    userManager.CreateAsync(tec3, "tecnico3");
-                    userManager.CreateAsync(admin, "admin");
-                    context.SaveChangesAsync();
-                }catch(Exception e) {
-
-                }
-
-                var id = context.Roles.Where(row => row.Name.Equals("Tecnico")).Single().Id;
-                var id1 = context.Roles.Where(row => row.Name.Equals("Administrador")).Single().Id;
-                context.UserRoles.Add(new IdentityUserRole<string> { RoleId = id, UserId = tec1.Id });
-                context.UserRoles.Add(new IdentityUserRole<string> { RoleId = id, UserId = tec2.Id });
-                context.UserRoles.Add(new IdentityUserRole<string> { RoleId = id, UserId = tec3.Id });
-                context.UserRoles.Add(new IdentityUserRole<string> { RoleId = id1, UserId = admin.Id });
-                context.SaveChanges();
-            }
-
+            
             if (!context.AjudaPaginas.Any())
             {
                 context.AjudaPaginas.Add(new AjudaPagina
@@ -199,6 +174,35 @@ namespace ProjectoEsw.Models
                 context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 4, Campo = "Novo Telefone", Descricao = "Neste campo deverá inserir o seu novo numero de telefone" });
                 context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 4, Campo = "Nova Password", Descricao = "Neste campo deverá definir a sua nova password com letras maiusculas, letras minusculas e digitos" });
                 context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 4, Campo = "Confirmar Nova Password", Descricao = "Neste campo deverá inserir novamente a sua nova password definida anteriormente" });
+                context.SaveChanges();
+            }
+
+            if (userManager.FindByEmailAsync("tecnico1@est.pt").Result == null)
+            {
+                //    //PasswordHasher<Utilizador> hash = new PasswordHasher<Utilizador>();
+                Utilizador tec1 = new Utilizador { UserName = "tecnico1@est.pt", EmailConfirmed = true };
+                Utilizador tec2 = new Utilizador { UserName = "tecnico2@est.pt", EmailConfirmed = true };
+                Utilizador tec3 = new Utilizador { UserName = "tecnico3@est.pt", EmailConfirmed = true };
+                Utilizador admin = new Utilizador { UserName = "admin@est.pt", EmailConfirmed = true };
+                try
+                {
+                    userManager.CreateAsync(tec1, "tecnico1");
+                    userManager.CreateAsync(tec2, "tecnico2");
+                    userManager.CreateAsync(tec3, "tecnico3");
+                    userManager.CreateAsync(admin, "admin");
+                    context.SaveChangesAsync();
+                }
+                catch (Exception e)
+                {
+
+                }
+
+                var id = context.Roles.Where(row => row.Name.Equals("Tecnico")).Single().Id;
+                var id1 = context.Roles.Where(row => row.Name.Equals("Administrador")).Single().Id;
+                context.UserRoles.Add(new IdentityUserRole<string> { RoleId = id, UserId = tec1.Id });
+                context.UserRoles.Add(new IdentityUserRole<string> { RoleId = id, UserId = tec2.Id });
+                context.UserRoles.Add(new IdentityUserRole<string> { RoleId = id, UserId = tec3.Id });
+                context.UserRoles.Add(new IdentityUserRole<string> { RoleId = id1, UserId = admin.Id });
                 context.SaveChanges();
             }
 

@@ -10,6 +10,8 @@ using ProjectoEsw.Models.ViewModels;
 using ProjectoEsw.Models.Calendario;
 using ProjectoEsw.Models.Candidatura_sprint2;
 using ProjectoEsw.Models.Candidatura_sprint2.ViewModels;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using ProjectoEsw.Models.TaskModels;
 
 namespace ProjectoEsw.GestorAplicacao
 {
@@ -19,13 +21,15 @@ namespace ProjectoEsw.GestorAplicacao
         private AplicacaoDbContexto _context;
         private UserManager<Utilizador> _userManager;
         private SignInManager<Utilizador> _signInManager;
-
+        private GestorEmail _gestorEmail;
         public Gestor(AplicacaoDbContexto context,
             UserManager<Utilizador> userManager,
-            SignInManager<Utilizador> signInManager) {
+            SignInManager<Utilizador> signInManager,
+            GestorEmail gestorEmail) {
             _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
+            _gestorEmail = gestorEmail;
         }
         
         public async Task<string> getUtilizadorRole(string email)
@@ -161,5 +165,42 @@ namespace ProjectoEsw.GestorAplicacao
         public List<Eventos> getEventos(Perfil perfil) {
             return _context.Eventos.Select(even => even).Where(even => even.PerfilFK == perfil.ID).ToList();
         }
+
+
+        public List<Instituicao> InstituicoesInternas() {
+            return _context.Instituicoes.Where(x => x.Interno == true).ToList();
+        }
+        public List<Instituicao> InstituicoesExternas()
+        {
+            return _context.Instituicoes.Where(x => x.Interno == false).ToList();
+        }
+
+        public bool RejeitarCandidatura(Candidatura candidatura,Utilizador Tecnico) {
+            if (!candidatura.Estado.Equals(Estado.EM_ANALISE))
+                return false;
+            candidatura.Estado = Estado.REJEITADA;
+            _context.SaveChanges();
+            _gestorEmail.EnviarEmail(candidatura.Candidato, "Candidatura rejeitada", candidatura.ToString());
+            return true;            
+        }
+        public bool AprovarCandidatura(Candidatura candidatura, Utilizador Tecnico)
+        {
+            if (!candidatura.Estado.Equals(Estado.EM_ANALISE))
+                return false;
+            candidatura.Estado = Estado.APROVADA;
+            _context.SaveChanges();
+            _gestorEmail.EnviarEmail(candidatura.Candidato, "Candidatura aprovada", candidatura.ToString());
+            return true;
+        }
+        public bool PedirAlteracaoCandidatura(Candidatura candidatura, Utilizador Tecnico)
+        {
+            if (!candidatura.Estado.Equals(Estado.EM_ANALISE))
+                return false;
+            candidatura.Estado = Estado.INCOMPLETA;
+            _context.SaveChanges();
+            _gestorEmail.EnviarEmail(candidatura.Candidato, "Candidatura necessita de alteracao", candidatura.ToString());
+            return true;
+        }
+
     }
 }

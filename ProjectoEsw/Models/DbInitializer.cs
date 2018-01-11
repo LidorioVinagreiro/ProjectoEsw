@@ -134,14 +134,12 @@ namespace ProjectoEsw.Models
                 context.AjudaPaginas.Add(new AjudaPagina
                 {
                     Pagina = "Candidato.Perfil",
-                    Descricao = "Esta página tem como função a submição da Candidatura Erasmus+. " +
-                            "Tera de preencher os campos necessarios a candidatura, que serão os seus dados pessoais, os dados da pessoa que será o seu contacto de emergencia" +
-                            " e os dados referentes ao seu estatuto escolar"
+                    Descricao = "Esta página é para demonstrar ao utilizador os dados que ele inseriu relativamente ao seu perfil. "
                 });
                 context.AjudaPaginas.Add(new AjudaPagina
                 {
                     Pagina = "Candidato.Candidatura",
-                    Descricao = "Esta página tem como função a submição da Candidatura Erasmus+. " +
+                    Descricao = "Esta página tem como função a submição da Candidatura. " +
                            "Tera de preencher os campos necessarios a candidatura, que serão os seus dados pessoais, os dados da pessoa que será o seu contacto de emergencia" +
                            " e os dados referentes ao seu estatuto escolar"
                 });
@@ -183,25 +181,25 @@ namespace ProjectoEsw.Models
 
                 context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Nome Completo", Descricao = "Neste campo deverá inserir um nome completo com apenas letras" });
                 context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Data Nascimento", Descricao = "Neste campo deverá inserir a data nascimento no formato dia/mês/ano" });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Telefone", Descricao = "Neste campo deverá inserir a sua nacionalidade" });
+                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Telefone", Descricao = "Neste campo deverá inserir o seu telefone com 9 digitos" });
                 context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Email", Descricao = "Neste campo deverá inserir o seu email do tipo(ex: jbvc@hotmail.com)" });
                 context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "NIF", Descricao = "Neste campo deverá inserir o seu numero de identificação fiscal que deverá conter 9 digitos numéricos" });
                 context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Numero Identificação", Descricao = "Neste campo deverá inserir o seu numero de identificação da escola com apenas digitos" });
                 context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Numero Telefone", Descricao = "Neste campo deverá inserir o seu numero telefone com 9 digitos numericos" });
                 context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Morada Rua", Descricao = "Neste campo deverá inserir a rua da sua morada (Ex. Rua aberto delgado)" });
                 context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Morada Concelho", Descricao = "Neste campo deverá inserir o concelho da sua morada " });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Morada Distrito", Descricao = "Neste campo deverá inserir o codigo de postal da sua morada " });
+                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Morada Distrito", Descricao = "Neste campo deverá inserir o distrito da sua morada " });
                 context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Morada Codigo Postal", Descricao = "Neste campo deverá inserir o seu codigo postal (Ex. 0000-000)" });
                 context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Nacionalidade", Descricao = "Neste campo deverá inserir a sua nacionalidade" });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Nome Emergencia", Descricao = "Neste campo deverá inserir a sua nacionalidade" });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Afiliacao Emergencia", Descricao = "Neste campo deverá inserir a sua nacionalidade" });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Telefone Emergencia", Descricao = "Neste campo deverá inserir a sua nacionalidade" });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Escola", Descricao = "Neste campo deverá inserir a sua nacionalidade" });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Curso Frequentado", Descricao = "Neste campo deverá inserir a sua nacionalidade" });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Ano Curricular", Descricao = "Neste campo deverá inserir a sua nacionalidade" });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Instituicoes", Descricao = "Neste campo deverá inserir a sua nacionalidade" });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Bolsa", Descricao = "Neste campo deverá inserir a sua nacionalidade" });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "IBAN", Descricao = "Neste campo deverá inserir a sua nacionalidade" });
+                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Nome Emergencia", Descricao = "Neste campo deverá inserir o nome da pessoa que será o seu contacto de emergência" });
+                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Afiliacao Emergencia", Descricao = "Neste campo deverá inserir a afiliação da pessoa em questão " });
+                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Telefone Emergencia", Descricao = "Neste campo deverá inserir o numero de telefone do seu contacto de emergência" });
+                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Escola", Descricao = "Neste campo deverá inserir a sua Escola" });
+                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Curso Frequentado", Descricao = "Neste campo deverá inserir o nome do seu curso" });
+                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Ano Curricular", Descricao = "Neste campo deverá inserir o seu ano curricular actual" });
+                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Instituicoes", Descricao = "Neste campo deverá selecior as instituições que irá se candidatar" });
+                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Bolsa", Descricao = "Neste campo deverá selecionar se pretender bolsa" });
+                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "IBAN", Descricao = "Neste campo deverá inserir o seu IBAN para a bolsa" });
 
                 context.SaveChanges();
             }

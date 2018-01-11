@@ -269,7 +269,7 @@ namespace ProjectoEsw.Migrations
 
                     b.HasIndex("InstituicaoId");
 
-                    b.ToTable("Instituicoes_Candidatura");
+                    b.ToTable("InstituicoesCandidatura");
                 });
 
             modelBuilder.Entity("ProjectoEsw.Models.Candidatura_sprint2.TipoCandidatura", b =>

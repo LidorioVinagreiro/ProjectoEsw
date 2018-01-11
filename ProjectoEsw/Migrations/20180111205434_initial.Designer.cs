@@ -14,7 +14,7 @@ using System;
 namespace ProjectoEsw.Migrations
 {
     [DbContext(typeof(AplicacaoDbContexto))]
-    [Migration("20180111162418_initial")]
+    [Migration("20180111205434_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -270,7 +270,7 @@ namespace ProjectoEsw.Migrations
 
                     b.HasIndex("InstituicaoId");
 
-                    b.ToTable("Instituicoes_Candidatura");
+                    b.ToTable("InstituicoesCandidatura");
                 });
 
             modelBuilder.Entity("ProjectoEsw.Models.Candidatura_sprint2.TipoCandidatura", b =>

@@ -23,7 +23,7 @@ namespace ProjectoEsw.Models
 
         public DbSet<Instituicao> Instituicoes { get; set; }
 
-        public DbSet<Instituicoes_Candidatura> InstituicoesCandidatura { get; set; }
+        public DbSet<Instituicoes_Candidatura> Instituicoes_Candidatura { get; set; }
         //public DbSet<Perfil> Perfils { get; set; }
         //este é a classe da base de dados
         //este serviço tem que ser adicionado no startup

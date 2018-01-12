@@ -10,6 +10,7 @@ using ProjectoEsw.Models;
 using ProjectoEsw.Models.Calendario;
 using ProjectoEsw.Models.Candidatura_sprint2;
 using ProjectoEsw.Models.Candidatura_sprint2.ViewModels;
+using Microsoft.EntityFrameworkCore;
 
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -209,7 +210,10 @@ namespace ProjectoEsw.Controllers
             Perfil p1 = _gestor.getPerfil(user);
             user.Perfil = p1;
             user.PerfilFK = p1.ID;
-            Candidatura model = _contexto.Candidaturas.Where(row => row.Candidato.Id == user.Id).Single();
+            Candidatura model = _contexto.Candidaturas.Where(row => row.Candidato.Id == user.Id)
+                .Include(x=> x.Instituicoes)
+                .Single();
+            
             return View("VisualizarCandidatura", model);
         }
         public IActionResult AlterarCandidatura() {

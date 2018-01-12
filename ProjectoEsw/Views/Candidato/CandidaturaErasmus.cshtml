@@ -2,6 +2,7 @@
 @using System.Linq
 @inject ProjectoEsw.GestorAplicacao.GestorAjudas gestorAjudas
 @inject ProjectoEsw.Models.AplicacaoDbContexto context
+@inject ProjectoEsw.GestorAplicacao.Gestor gestor
 @model ProjectoEsw.Models.Candidatura_sprint2.ViewModels.CandidaturaViewModel
 
 @section links {
@@ -95,7 +96,7 @@
                 <input asp-for="AnoCurricular" placeholder="Seu ano curricular" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Candidato.Candidatura","Ano Curricular").Descricao" />
                 <span asp-validation-for="AnoCurricular" class="text-danger"></span>
                 <div class=" help-block"></div>
-                <select asp-for="Instituicoes" asp-items="context.Instituicoes.Where(row => row.Interno == false).Select(x=> new SelectListItem { Text = x.NomeInstituicao , Value = x.NomeInstituicao})" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Candidato.Candidatura","Instituicoes").Descricao">
+                <select name="Instituicoes" asp-items="gestor.InstituicoesInternasSelect()" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Candidato.Candidatura","Instituicoes").Descricao">
                     <option value="0">Escolha a Instituicao</option>
                 </select>
                 <div class="help-block"></div>

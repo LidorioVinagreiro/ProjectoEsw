@@ -117,7 +117,7 @@ namespace ProjectoEsw.GestorAplicacao
 
                     });
                 }
-                _context.InstituicoesCandidatura.AddRange(instituicoes);
+                _context.Instituicoes_Candidatura.AddRange(instituicoes);
                 await _context.SaveChangesAsync();
                 return true;
             }
@@ -166,7 +166,10 @@ namespace ProjectoEsw.GestorAplicacao
             return _context.Eventos.Select(even => even).Where(even => even.PerfilFK == perfil.ID).ToList();
         }
 
+        public List<SelectListItem> InstituicoesInternasSelect() {
+            return _context.Instituicoes.Where(row => row.Interno == true).Select(x => new SelectListItem { Text = x.NomeInstituicao, Value = x.NomeInstituicao }).ToList();
 
+        }
         public List<Instituicao> InstituicoesInternas() {
             return _context.Instituicoes.Where(x => x.Interno == true).ToList();
         }

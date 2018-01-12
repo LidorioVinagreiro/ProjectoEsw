@@ -10,6 +10,8 @@ using ProjectoEsw.Models;
 using ProjectoEsw.Models.Calendario;
 using ProjectoEsw.Models.Candidatura_sprint2;
 using ProjectoEsw.Models.Candidatura_sprint2.ViewModels;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Primitives;
 
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -105,6 +107,17 @@ namespace ProjectoEsw.Controllers
             Perfil perfil = _gestor.getPerfil(user);
             user.Perfil = perfil;
             user.PerfilFK = perfil.ID;
+            try
+            {
+                Candidatura aux = _contexto.Candidaturas.Where(row => row.UtilizadorFK == user.Id).Single();
+                if (aux.UtilizadorFK == user.Id)
+                {
+                    return RedirectToAction("Index", "Candidato");
+                }
+            }
+            catch
+            {
+            }
             CandidaturaViewModel model = new CandidaturaViewModel { UtilizadorFK = user.Id ,Candidato = user, Instituicoes = _contexto.Instituicoes.Where(row => row.Interno == false).ToList() };
             return View("candidaturaErasmus",model);
         }
@@ -115,7 +128,18 @@ namespace ProjectoEsw.Controllers
             Perfil perfil = _gestor.getPerfil(user);
             user.Perfil = perfil;
             user.PerfilFK = perfil.ID;
-            CandidaturaViewModel model = new CandidaturaViewModel { UtilizadorFK = user.Id, Candidato = user, Instituicoes = _contexto.Instituicoes.Where(row => row.Interno == false).ToList() };
+            try
+            {
+                Candidatura aux = _contexto.Candidaturas.Where(row => row.UtilizadorFK == user.Id).Single();
+                if(aux.UtilizadorFK == user.Id)
+                {
+                    return RedirectToAction("Index", "Candidato");
+                }
+            }
+            catch
+            {
+            }
+            CandidaturaViewModel model = new CandidaturaViewModel { UtilizadorFK = user.Id, Candidato = user, Instituicoes = _contexto.Instituicoes.Where(row => row.Interno == true).ToList() };
             return View("CandidaturaSantander",model);
         }
 
@@ -124,6 +148,8 @@ namespace ProjectoEsw.Controllers
             if (ModelState.IsValid) {
                 TipoCandidatura tipo = _contexto.TipoCandidatuas.Single(row => row.Tipo == "Erasmus");
                 Utilizador user = await _gestor.getUtilizador(this.User);
+                StringValues x = Request.Form["lista"];
+    //            List<Instituicao> insti = _contexto.Instituicoes.Where(row => x.AsParallel<IEnumerable<string>>.Contains(row.ID));
                 bool dataInicio = System.DateTime.Now.CompareTo(tipo.DataInicio) >=0;
                 bool dataFim = System.DateTime.Now.CompareTo(tipo.DataFim) < 0;
                 if (!(dataInicio && dataFim)) {
@@ -151,10 +177,10 @@ namespace ProjectoEsw.Controllers
                 if (done) {
                     _gestorEmail.EnviarEmail(user, "Efectuou a candidatura", candidatura.ToString());
                     //sucesso
-                    return View("Index");
+                    return RedirectToAction("Index", "Candidato");
                 }
                 //erro adicionar candidatura
-                return View();
+                return RedirectToAction("Index", "Candidato");
             }
             //Erro model
             return View();
@@ -167,6 +193,7 @@ namespace ProjectoEsw.Controllers
             {
                 TipoCandidatura tipo = _contexto.TipoCandidatuas.Single(row => row.Tipo == "Santander");
                 Utilizador user = await _gestor.getUtilizador(this.User);
+                var x = Request.Form["lista"];
                 bool dataInicio = System.DateTime.Now.CompareTo(tipo.DataInicio) >= 0;
                 bool dataFim = System.DateTime.Now.CompareTo(tipo.DataFim) < 0;
                 if (!(dataInicio && dataFim))
@@ -194,10 +221,10 @@ namespace ProjectoEsw.Controllers
                 {
                     _gestorEmail.EnviarEmail(user, "Efectuou a candidatura", candidatura.ToString());
                     //sucesso
-                    return View("Index");
+                    return RedirectToAction("Index", "Candidato");
                 }
                 //erro
-                return View();
+                return RedirectToAction("Index", "Candidato");
             }
             //Erro
             return View();
@@ -209,9 +236,19 @@ namespace ProjectoEsw.Controllers
             Perfil p1 = _gestor.getPerfil(user);
             user.Perfil = p1;
             user.PerfilFK = p1.ID;
-            Candidatura model = _contexto.Candidaturas.Where(row => row.Candidato.Id == user.Id).Single();
-            model.Candidato = user;
-            return View("VisualizarCandidatura", model);
+            try
+            {
+                Candidatura model = _contexto.Candidaturas.Where(row => row.Candidato.Id == user.Id)
+                    .Include(x => x.Candidato)
+                    .Include(x => x.Instituicoes)
+                    .Single();
+                return View("VisualizarCandidatura", model);
+            }
+            catch
+            {
+                return View("VisualizarCandidatura");
+            }
+            //model.Candidato = user;
         }
         public IActionResult AlterarCandidatura() {
             Utilizador user = _gestor.getUtilizador(this.User).Result;
@@ -228,6 +265,7 @@ namespace ProjectoEsw.Controllers
         public IActionResult ProgramasMobilidade() {
             Utilizador user = _gestor.getUtilizador(this.User).Result;
             Perfil p1 = _gestor.getPerfil(user);
+            
             return View(p1);
         }
 

@@ -29,13 +29,15 @@
        {
            for (int i = 0; i < Model.Count; i++)
            {
-                 var checkbox1 = "checkbox" + i;
-                <input name = @checkbox1 type ="checkbox"/>
+               var checkbox1 = "checkbox" + i;
+            <div>               
+                <input name=@checkbox1 type="checkbox" />
                 <label>@Model[i].Candidato.Perfil.NomeCompleto</label>
                 <label>@Model[i].TipoCandidatura.Tipo</label>
                 <input asp-for="@Model[i].ID" type="hidden" />
-            }
-        }
+            </div>
+           }
+       }
     </div>
     @if(Model.Any() == true){
         <a asp-area="" asp-controller="Tecnico" asp-action="AnalisarCandidatura" class="btn btn-default btn-xs center-block col-sm-12">Analisar Candidatura</a>

@@ -22,7 +22,6 @@
 @section SobreNos{
     <a asp-area="" asp-controller="Candidato" asp-action="SobreNos">Sobre Nós</a>
 }
-
 <div class="jumbotron col-sm-7 col-sm-offset-1">
     <span class="glyphicon glyphicon-question-sign" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaPagina("Candidato.Candidatura").Descricao"></span>
     <div class="container col-lg-offset-1 col-sm-10">
@@ -95,13 +94,13 @@
                 <input asp-for="AnoCurricular" placeholder="Seu ano curricular" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Candidato.Candidatura","Ano Curricular").Descricao" />
                 <span asp-validation-for="AnoCurricular" class="text-danger"></span>
                 <div class=" help-block"></div>
-                @for (int i = 0; i < @Model.Instituicoes.Count; i++)
+                <!--for (int i = 0; i < Model.Instituicoes.Count; i++)
                 {
                     var checkbox1 = "checkbox" + i;
-                    <input name=@checkbox1 type="checkbox" />
-                    <label>@Model.Instituicoes[i].NomeInstituicao</label>
-                    <input asp-for="@Model.Instituicoes[i].ID" type="hidden" />
-                }
+                    <input name="lista" type="checkbox" value="Model.Instituicoes[i].ID"/>
+                    <label>Model.Instituicoes[i].NomeInstituicao</label>
+                    <input asp-for="Model.Instituicoes[i].ID" type="hidden" />
+                }-->
                 <div class="help-block"></div>
                 <input asp-for="IBAN" placeholder="IBAN" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Candidato.Candidatura","IBAN").Descricao" />
                 <span asp-validation-for="IBAN" class="text-danger"></span>
@@ -117,7 +116,7 @@
             </div>
             <div class="form-group">
                 <div class="text-center">
-                    <button type="submit" class="btn btn-default">Cancelar</button>
+                    <a asp-area="" asp-controller="Candidato" asp-action="ProgramasMobilidade" class="btn btn-default">Voltar Atras</a>
                     <button type="submit" class="btn btn-default">Submeter</button>
                 </div>
             </div>

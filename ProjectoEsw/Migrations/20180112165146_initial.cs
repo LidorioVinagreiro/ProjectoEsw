@@ -199,7 +199,7 @@ namespace ProjectoEsw.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Instituicoes_Candidatura",
+                name: "InstituicoesCandidatura",
                 columns: table => new
                 {
                     CandidaturaId = table.Column<int>(type: "int", nullable: false),
@@ -207,15 +207,15 @@ namespace ProjectoEsw.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Instituicoes_Candidatura", x => new { x.CandidaturaId, x.InstituicaoId });
+                    table.PrimaryKey("PK_InstituicoesCandidatura", x => new { x.CandidaturaId, x.InstituicaoId });
                     table.ForeignKey(
-                        name: "FK_Instituicoes_Candidatura_Candidaturas_CandidaturaId",
+                        name: "FK_InstituicoesCandidatura_Candidaturas_CandidaturaId",
                         column: x => x.CandidaturaId,
                         principalTable: "Candidaturas",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Instituicoes_Candidatura_Instituicoes_InstituicaoId",
+                        name: "FK_InstituicoesCandidatura_Instituicoes_InstituicaoId",
                         column: x => x.InstituicaoId,
                         principalTable: "Instituicoes",
                         principalColumn: "ID",
@@ -380,8 +380,8 @@ namespace ProjectoEsw.Migrations
                 column: "UtilizadorID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Instituicoes_Candidatura_InstituicaoId",
-                table: "Instituicoes_Candidatura",
+                name: "IX_InstituicoesCandidatura_InstituicaoId",
+                table: "InstituicoesCandidatura",
                 column: "InstituicaoId");
 
             migrationBuilder.CreateIndex(
@@ -469,7 +469,7 @@ namespace ProjectoEsw.Migrations
                 name: "Eventos");
 
             migrationBuilder.DropTable(
-                name: "Instituicoes_Candidatura");
+                name: "InstituicoesCandidatura");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

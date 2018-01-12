@@ -1,0 +1,100 @@
+﻿@model ProjectoEsw.Models.Identity.Perfil;
+
+
+@section links {
+    <a asp-area="" asp-controller="Tecnico" asp-action="Logout" class="btn btn-link btn-xs pull-right">Log Out</a>
+    <a asp-area="" asp-controller="Tecnico" asp-action="Perfil" class="btn btn-link btn-xs pull-right"> @Html.DisplayFor(model => model.Email) </a>
+}
+@section Home {
+    <a asp-area="" asp-controller="Tecnico" asp-action="Index">Home</a>
+}
+@section ProgramasMobilidade{
+    <a asp-area="" asp-controller="Tecnico" asp-action="ProgramasMobilidade">Programas Mobilidade</a>
+}
+@section Bolsas{
+    <a asp-area="" asp-controller="Tecnico" asp-action="Bolsas">Bolsas</a>
+}
+@section SobreNos{
+    <a asp-area="" asp-controller="Tecnico" asp-action="SobreNos">Sobre Nós</a>
+}
+<div class="jumbotron col-sm-8">
+    <h2 class=" text-center">Perfil do Tecnico</h2>
+    <div class="col-sm-12">
+        <label asp-for="NomeCompleto" class="col-sm-3 control-label"></label>
+        <div class="col-sm-offset-3">
+            @if (@Model.NomeCompleto == "")
+            {
+                <h5>Sem Informacao</h5>
+            }
+            else
+            {
+                <h5>@Model.NomeCompleto</h5>
+            }
+        </div>
+    </div>
+    <div class="col-sm-12">
+        <label asp-for="DataNasc" class="col-sm-3 control-label"></label>
+        <div class="col-sm-offset-3">
+            <h5>@Model.DataNasc</h5>
+        </div>
+    </div>
+
+    <div class="col-sm-12">
+        <label asp-for="Email" class="col-sm-3 control-label"></label>
+        <div class="col-sm-offset-3">
+            <h5>@Model.Email</h5>
+        </div>
+    </div>
+    <div class="col-sm-12">
+        <label asp-for="Nif" class="col-sm-3 control-label"></label>
+        <div class="col-sm-offset-3">
+            @if (@Model.Nif == 0)
+            {
+                <h5>Sem Informacao</h5>
+            }
+            else
+            {
+                <h5>@Model.Nif</h5>
+            }
+        </div>
+    </div>
+    <div class="col-sm-12">
+        <label asp-for="NumeroIdentificacao" class="col-sm-3 control-label"></label>
+        <div class="col-sm-offset-3">
+            @if (@Model.NumeroIdentificacao == 0)
+            {
+                <h5>Sem Informacao</h5>
+            }
+            else
+            {
+                <h5>@Model.NumeroIdentificacao</h5>
+            }
+        </div>
+    </div>
+    <div class="col-sm-12">
+        <label asp-for="Telefone" class="col-sm-3 control-label"></label>
+        <div class="col-sm-offset-3">
+            @if (@Model.Telefone == "")
+            {
+                <h5>Sem Informacao</h5>
+            }
+            else
+            {
+                <h5>@Model.Telefone</h5>
+            }
+        </div>
+    </div>
+    <div class="col-sm-12">
+        <label asp-for="Foto" class="col-sm-3 control-label"></label>
+        <div class="col-sm-offset-3">
+
+        </div>
+    </div>
+</div>
+<div class="jumbotron col-sm-3 col-sm-offset-1">
+    <h5 class="text-center">Opcoes</h5>
+    <!--<a asp-area="" asp-controller="Tecnico" asp-action="Perfil" class="btn btn-link btn-xs pull-right col-sm-12">Ver Perfil</a>
+    <a asp-area="" asp-controller="Tecnico" asp-action="Perfil" class="btn btn-link btn-xs center-block col-sm-12">Editar Perfil</a>-->
+
+    <a asp-area="" asp-controller="Tecnico" asp-action="ListaCandidaturas" class="btn btn-link btn-xs pull-right col-sm-12">Lista Candidaturas</a>
+</div>

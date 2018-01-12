@@ -10,7 +10,6 @@ using ProjectoEsw.Models;
 using ProjectoEsw.Models.Calendario;
 using ProjectoEsw.Models.Candidatura_sprint2;
 using ProjectoEsw.Models.Candidatura_sprint2.ViewModels;
-using Microsoft.EntityFrameworkCore;
 
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -106,7 +105,7 @@ namespace ProjectoEsw.Controllers
             Perfil perfil = _gestor.getPerfil(user);
             user.Perfil = perfil;
             user.PerfilFK = perfil.ID;
-            CandidaturaViewModel model = new CandidaturaViewModel { UtilizadorFK = user.Id ,Candidato = user };
+            CandidaturaViewModel model = new CandidaturaViewModel { UtilizadorFK = user.Id ,Candidato = user, Instituicoes = _contexto.Instituicoes.Where(row => row.Interno == false).ToList() };
             return View("candidaturaErasmus",model);
         }
 
@@ -116,15 +115,13 @@ namespace ProjectoEsw.Controllers
             Perfil perfil = _gestor.getPerfil(user);
             user.Perfil = perfil;
             user.PerfilFK = perfil.ID;
-            CandidaturaViewModel model = new CandidaturaViewModel { UtilizadorFK = user.Id,Candidato = user };
+            CandidaturaViewModel model = new CandidaturaViewModel { UtilizadorFK = user.Id, Candidato = user, Instituicoes = _contexto.Instituicoes.Where(row => row.Interno == false).ToList() };
             return View("CandidaturaSantander",model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> CandidaturaErasmus(CandidaturaViewModel model) {
-            IList<Instituicao> a = model.Instituicoes;
+        public async Task<IActionResult> CandidaturaErasmus(CandidaturaViewModel model) {           
             if (ModelState.IsValid) {
-                var x = Request.Form["Instituicoes"];
                 TipoCandidatura tipo = _contexto.TipoCandidatuas.Single(row => row.Tipo == "Erasmus");
                 Utilizador user = await _gestor.getUtilizador(this.User);
                 bool dataInicio = System.DateTime.Now.CompareTo(tipo.DataInicio) >=0;
@@ -154,7 +151,7 @@ namespace ProjectoEsw.Controllers
                 if (done) {
                     _gestorEmail.EnviarEmail(user, "Efectuou a candidatura", candidatura.ToString());
                     //sucesso
-                    return View("Index",user);
+                    return View("Index");
                 }
                 //erro adicionar candidatura
                 return View();
@@ -212,14 +209,13 @@ namespace ProjectoEsw.Controllers
             Perfil p1 = _gestor.getPerfil(user);
             user.Perfil = p1;
             user.PerfilFK = p1.ID;
-            Candidatura model = _contexto.Candidaturas.Where(row => row.Candidato.Id == user.Id)
-                .Include(x=> x.Instituicoes)
-                .Single();
-            
+            Candidatura model = _contexto.Candidaturas.Where(row => row.Candidato.Id == user.Id).Single();
+            model.Candidato = user;
             return View("VisualizarCandidatura", model);
         }
         public IActionResult AlterarCandidatura() {
             Utilizador user = _gestor.getUtilizador(this.User).Result;
+            Perfil p1 = _gestor.getPerfil(user);
             Candidatura candidatura = _contexto.Candidaturas.Where(x => x.Candidato.Id == user.Id).Single();
             return View("AlterarCandidatura",candidatura);
         }
@@ -230,16 +226,22 @@ namespace ProjectoEsw.Controllers
         }
 
         public IActionResult ProgramasMobilidade() {
-            return View();
+            Utilizador user = _gestor.getUtilizador(this.User).Result;
+            Perfil p1 = _gestor.getPerfil(user);
+            return View(p1);
         }
 
         public IActionResult Bolsas()
         {
-            return View();
+            Utilizador user = _gestor.getUtilizador(this.User).Result;
+            Perfil p1 = _gestor.getPerfil(user);
+            return View(p1);
         }
         public IActionResult SobreNos()
         {
-            return View();
+            Utilizador user = _gestor.getUtilizador(this.User).Result;
+            Perfil p1 = _gestor.getPerfil(user);
+            return View(p1);
         }
         //METODOS DE AJAX
         [HttpGet]

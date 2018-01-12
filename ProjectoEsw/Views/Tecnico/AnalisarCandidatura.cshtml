@@ -1,21 +1,21 @@
 ﻿@model ProjectoEsw.Models.Candidatura_sprint2.Candidatura;
 
-
+<!-- Tecnico Logout-->
 @section links {
-    <a asp-area="" asp-controller="Candidato" asp-action="Logout" class="btn btn-link btn-xs pull-right">Log Out</a>
-    <a asp-area="" asp-controller="Candidato" asp-action="perfil" class="btn btn-link btn-xs pull-right"> @Html.DisplayFor(model => model.Candidato.Email) </a>
+    <a asp-area="" asp-controller="Tecnico" asp-action="Logout" class="btn btn-link btn-xs pull-right">Log Out</a>
+    <a asp-area="" asp-controller="Tecnico" asp-action="perfil" class="btn btn-link btn-xs pull-right"> @Html.DisplayFor(model => model.Candidato.Email) </a>
 }
 @section Home {
-    <a asp-area="" asp-controller="Candidato" asp-action="Index">Home</a>
+    <a asp-area="" asp-controller="Tecnico" asp-action="Index">Home</a>
 }
 @section ProgramasMobilidade{
-    <a asp-area="" asp-controller="Candidato" asp-action="ProgramasMobilidade">Programas Mobilidade</a>
+    <a asp-area="" asp-controller="Tecnico" asp-action="ProgramasMobilidade">Programas Mobilidade</a>
 }
 @section Bolsas{
-    <a asp-area="" asp-controller="Candidato" asp-action="Bolsas">Bolsas</a>
+    <a asp-area="" asp-controller="Tecnico" asp-action="Bolsas">Bolsas</a>
 }
 @section SobreNos{
-    <a asp-area="" asp-controller="Candidato" asp-action="SobreNos">Sobre Nós</a>
+    <a asp-area="" asp-controller="Tecnico" asp-action="SobreNos">Sobre Nós</a>
 }
 <div class="jumbotron col-sm-8">
     <h2 class=" text-center">Candidatura Submetida</h2>
@@ -98,70 +98,67 @@
     <div class="col-sm-12">
         <label asp-for="AfiliacaoEmergencia" class="col-sm-3 control-label"></label>
         <div class="col-sm-offset-4">
-            <p>@Model.AfiliacaoEmergencia</p>
+            <h5>@Model.AfiliacaoEmergencia</h5>
         </div>
     </div>
     <div class="col-sm-12">
         <label asp-for="NumeroEmergencia" class="col-sm-3 control-label"></label>
         <div class="col-sm-offset-4">
-            <p>@Model.NumeroEmergencia</p>
+            <h5>@Model.NumeroEmergencia</h5>
         </div>
     </div>
     <h4>Dados Candidatura</h4>
     <div class="col-sm-12">
         <label asp-for="Escola" class="col-sm-3 control-label"></label>
         <div class="col-sm-offset-4">
-            <p>@Model.Escola</p>
+            <h5>@Model.Escola</h5>
         </div>
     </div>
     <div class="col-sm-12">
         <label asp-for="CursoFrequentado" class="col-sm-3 control-label"></label>
         <div class="col-sm-offset-4">
-            <p>@Model.CursoFrequentado</p>
+            <h5>@Model.CursoFrequentado</h5>
         </div>
     </div>
     <div class="col-sm-12">
         <label asp-for="AnoCurricular" class="col-sm-3 control-label"></label>
         <div class="col-sm-offset-4">
-            <p>@Model.AnoCurricular</p>
+            <h5>@Model.AnoCurricular</h5>
         </div>
     </div>
     <div class="col-sm-12">
         <label asp-for="Instituicoes" class="col-sm-3 control-label"></label>
-        @foreach (var item in Model.Instituicoes)
-        {
             <div class="col-sm-offset-4">
-                <p>@item.Instituicao.NomeInstituicao</p>
+                <h5></h5>
             </div>
-        }
     </div>
     <div class="col-sm-12">
         <label asp-for="Bolsa" class="col-sm-3 control-label"></label>
         <div class="col-sm-offset-4">
             @if (Model.Bolsa == true)
             {
-                <p>Sim</p>
+                <h5>Sim</h5>
             }
             else
             {
-                <p>Não</p>
+                <h5>Não</h5>
             }
         </div>
     </div>
 
-    <div class="col-sm-12">
+    <div class="col-sm-8">
         <label asp-for="CartaMotivacao" class="col-sm-3 control-label"></label>
         <div class="col-sm-offset-4">
             <p>@Model.CartaMotivacao</p>
         </div>
     </div>
-    <a asp-area="" asp-controller="Candidato" asp-action="AlterarCandidatura" class="btn btn-default btn-xs center-block col-sm-12">Rejeitar</a>
-    <a asp-area="" asp-controller="Candidato" asp-action="AlterarCandidatura" class="btn btn-default btn-xs center-block col-sm-12">Incompleta</a>
-    <a asp-area="" asp-controller="Candidato" asp-action="AlterarCandidatura" class="btn btn-default btn-xs center-block col-sm-12">Aceitar</a>
+    <a asp-area="" asp-controller="Tecnico" asp-action="RejeitarCandidatura" class="btn btn-default btn-xs center-block col-sm-12">Rejeitar</a>
+    <a asp-area="" asp-controller="Tecnico" asp-action="PedirAlteracaoCandidatura" class="btn btn-default btn-xs center-block col-sm-12">Incompleta</a>
+    <a asp-area="" asp-controller="Tecnico" asp-action="AprovarCandidatura" class="btn btn-default btn-xs center-block col-sm-12">Aceitar</a>
 </div>
 <div class="jumbotron col-sm-3 col-sm-offset-1">
     <h5 class="text-center">Opcoes</h5>
-    <a asp-area="" asp-controller="Candidato" asp-action="Perfil" class="btn btn-link btn-xs pull-right col-sm-12">Ver Perfil</a>
-    <a asp-area="" asp-controller="Candidato" asp-action="EditarPerfil" class="btn btn-link btn-xs center-block col-sm-12">Editar Perfil</a>
-    <a asp-area="" asp-controller="Candidato" asp-action="Visualizar Candidatura" class="btn btn-link btn-xs pull-right col-sm-12">Lista Candidaturas</a>
+    <!--<a asp-area="" asp-controller="Tecnico" asp-action="Perfil" class="btn btn-link btn-xs pull-right col-sm-12">Ver Perfil</a>
+    <a asp-area="" asp-controller="Tecnico" asp-action="Perfil" class="btn btn-link btn-xs center-block col-sm-12">Editar Perfil</a>-->
+    <a asp-area="" asp-controller="Tecnico" asp-action="ListaCandidaturas" class="btn btn-link btn-xs pull-right col-sm-12">Lista Candidaturas</a>
 </div>

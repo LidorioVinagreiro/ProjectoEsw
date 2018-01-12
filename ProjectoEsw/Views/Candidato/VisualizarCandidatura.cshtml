@@ -18,7 +18,7 @@
     <a asp-area="" asp-controller="Candidato" asp-action="SobreNos">Sobre Nós</a>
 }
 <div class="jumbotron col-sm-8">
-    <h2 class=" text-center">Candidatura Submetida</h2>
+    <h2 class=" text-center">Candidatura</h2>
     <div class="col-sm-12">
         <label asp-for="Candidato.Perfil.NomeCompleto" class="col-sm-3 control-label"></label>
         <div class="col-sm-offset-4">
@@ -92,59 +92,55 @@
         <label asp-for="NomeEmergencia" class="col-sm-3 control-label"></label>
         <div class="col-sm-offset-4">
             <h5>@Model.NomeEmergencia</h5>
-            }
         </div>
     </div>
     <div class="col-sm-12">
         <label asp-for="AfiliacaoEmergencia" class="col-sm-3 control-label"></label>
         <div class="col-sm-offset-4">
-            <p>@Model.AfiliacaoEmergencia</p>
+            <h5>@Model.AfiliacaoEmergencia</h5>
         </div>
     </div>
     <div class="col-sm-12">
         <label asp-for="NumeroEmergencia" class="col-sm-3 control-label"></label>
         <div class="col-sm-offset-4">
-            <p>@Model.NumeroEmergencia</p>
+            <h5>@Model.NumeroEmergencia</h5>
         </div>
     </div>
     <h4>Dados Candidatura</h4>
     <div class="col-sm-12">
         <label asp-for="Escola" class="col-sm-3 control-label"></label>
         <div class="col-sm-offset-4">
-            <p>@Model.Escola</p>
+            <h5>@Model.Escola</h5>
         </div>
     </div>
     <div class="col-sm-12">
         <label asp-for="CursoFrequentado" class="col-sm-3 control-label"></label>
         <div class="col-sm-offset-4">
-            <p>@Model.CursoFrequentado</p>
+            <h5>@Model.CursoFrequentado</h5>
         </div>
     </div>
     <div class="col-sm-12">
         <label asp-for="AnoCurricular" class="col-sm-3 control-label"></label>
         <div class="col-sm-offset-4">
-            <p>@Model.AnoCurricular</p>
+            <h5>@Model.AnoCurricular</h5>
         </div>
     </div>
     <div class="col-sm-12">
         <label asp-for="Instituicoes" class="col-sm-3 control-label"></label>
-        @foreach (var item in Model.Instituicoes)
-        {
             <div class="col-sm-offset-4">
-                <p>@item.Instituicao.NomeInstituicao</p>
+                <h5></h5>
             </div>
-        }
     </div>
     <div class="col-sm-12">
         <label asp-for="Bolsa" class="col-sm-3 control-label"></label>
         <div class="col-sm-offset-4">
             @if (Model.Bolsa == true)
             {
-                <p>Sim</p>
+                <h5>Sim</h5>
             }
             else
             {
-                <p>Não</p>
+                <h5>Não</h5>
             }
         </div>
     </div>
@@ -152,7 +148,7 @@
     <div class="col-sm-12">
         <label asp-for="CartaMotivacao" class="col-sm-3 control-label"></label>
         <div class="col-sm-offset-4">
-            <p>@Model.CartaMotivacao</p>
+            <h5>@Model.CartaMotivacao</h5>
         </div>
     </div>
     @if (@Model.Estado.ToString().Equals("INCOMPLETA"))

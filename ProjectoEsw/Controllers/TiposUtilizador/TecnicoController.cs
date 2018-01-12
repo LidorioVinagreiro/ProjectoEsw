@@ -22,14 +22,62 @@ namespace ProjectoEsw.Controllers
             _context = context;
             _gestor = gestor;
         }
-        public IActionResult Index()
+       
+        public async Task<IActionResult> Logout()
         {
-            return View();
+            await _gestor.LogOut();
+            return RedirectToAction("Index", "Home");
         }
 
-        public IActionResult ListaCandidaturas() {
-            List<Candidatura> candidaturas = _context.Candidaturas.Where(row => row.Estado == Estado.EM_ANALISE).ToList();
-            return View("ListaCandidaturas", candidaturas);
+        public async Task<IActionResult> Perfil()
+        {
+            Utilizador user = await _gestor.getUtilizador(this.User);
+            Perfil queryPerfil = _gestor.getPerfil(user);
+            user.Perfil = queryPerfil;
+            return View(user.Perfil);
+        }
+
+        public async Task<IActionResult> EditarPerfil()
+        {
+            Utilizador user = await _gestor.getUtilizador(this.User);
+            Perfil queryPerfil = _gestor.getPerfil(user);
+            user.Perfil = queryPerfil;
+            return View(new RegisterViewModel
+            {
+                Email = user.Perfil.Email,
+                Telefone = user.Perfil.Telefone,
+                MoradaRua = user.Perfil.MoradaRua,
+                MoradaCodigoPostal = user.Perfil.MoradaCodigoPostal,
+                MoradaConcelho = user.Perfil.MoradaConcelho,
+                MoradaDistrito = user.Perfil.MoradaDistrito,
+                Nif = user.Perfil.Nif,
+                NumeroIdentificacao = user.Perfil.NumeroIdentificacao
+            });
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditarPerfil(RegisterViewModel model)
+        {
+            Utilizador user = await _gestor.getUtilizador(this.User);
+            Perfil queryPerfil = _gestor.getPerfil(user);
+            if (await _gestor.EditarPerfilUtilizador(model, user.Email))
+            {
+                return RedirectToAction("Index", "Tecnico");
+            }
+            else
+            {
+                //falta erros?
+                return RedirectToAction("Index", "Tecnico");
+            }
+        }
+            public IActionResult ListaCandidaturas() {
+                List<Candidatura> candidaturas = _context.Candidaturas.Where(row => row.Estado == Estado.EM_ANALISE).ToList();
+            for(int i = 0; i < candidaturas.Count(); i++)
+            {
+                candidaturas[i].Candidato = _context.Users.Where(row => row.Id == candidaturas[i].UtilizadorFK).Single();
+                candidaturas[i].Candidato.Perfil = _context.Perfils.Where(row => row.UtilizadorFK == candidaturas[i].UtilizadorFK).Single();
+                candidaturas[i].TipoCandidatura = _context.TipoCandidatuas.Single(row => row.ID == candidaturas[i].TipoCandidaturaFK);
+            }
+            return View(candidaturas);
         }
 
         public IActionResult AnalisarCandidatura(Candidatura model) {
@@ -83,6 +131,31 @@ namespace ProjectoEsw.Controllers
             }
             return View(); // modelstate invalid
 
+        }
+        public IActionResult ProgramasMobilidade()
+        {
+            Utilizador user = _gestor.getUtilizador(this.User).Result;
+            Perfil p1 = _gestor.getPerfil(user);
+            return View(p1);
+        }
+
+        public IActionResult Bolsas()
+        {
+            Utilizador user = _gestor.getUtilizador(this.User).Result;
+            Perfil p1 = _gestor.getPerfil(user);
+            return View(p1);
+        }
+        public IActionResult SobreNos()
+        {
+            Utilizador user = _gestor.getUtilizador(this.User).Result;
+            Perfil p1 = _gestor.getPerfil(user);
+            return View(p1);
+        }
+        public IActionResult Index()
+        {
+            Utilizador user = _gestor.getUtilizador(this.User).Result;
+            Perfil p1 = _gestor.getPerfil(user);
+            return View(p1);
         }
     }
 

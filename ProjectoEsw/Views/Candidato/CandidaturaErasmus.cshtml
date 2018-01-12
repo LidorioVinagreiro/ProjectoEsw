@@ -2,7 +2,6 @@
 @using System.Linq
 @inject ProjectoEsw.GestorAplicacao.GestorAjudas gestorAjudas
 @inject ProjectoEsw.Models.AplicacaoDbContexto context
-@inject ProjectoEsw.GestorAplicacao.Gestor gestor
 @model ProjectoEsw.Models.Candidatura_sprint2.ViewModels.CandidaturaViewModel
 
 @section links {
@@ -96,9 +95,13 @@
                 <input asp-for="AnoCurricular" placeholder="Seu ano curricular" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Candidato.Candidatura","Ano Curricular").Descricao" />
                 <span asp-validation-for="AnoCurricular" class="text-danger"></span>
                 <div class=" help-block"></div>
-                <select asp-for="Instituicoes" asp-items="gestor.InstituicoesInternasSelect()" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Candidato.Candidatura","Instituicoes").Descricao">
-                    <option value="0">Escolha a Instituicao</option>
-                </select>
+                @for (int i = 0; i < @Model.Instituicoes.Count; i++)
+                {
+                    var checkbox1 = "checkbox" + i;
+                    <input name=@checkbox1 type="checkbox" />
+                    <label>@Model.Instituicoes[i].NomeInstituicao</label>
+                    <input asp-for="@Model.Instituicoes[i].ID" type="hidden" />
+                }
                 <div class="help-block"></div>
                 <input asp-for="IBAN" placeholder="IBAN" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Candidato.Candidatura","IBAN").Descricao" />
                 <span asp-validation-for="IBAN" class="text-danger"></span>
@@ -123,7 +126,8 @@
 </div>
 <div class="jumbotron col-sm-3 col-sm-offset-1">
     <h5 class="text-center">Opcoes</h5>
+    <a asp-area="" asp-controller="Candidato" asp-action="VisualizarCandidatura" class="btn btn-link btn-xs pull-right col-sm-12">Ver Candidatura</a>
     <a asp-area="" asp-controller="Candidato" asp-action="Perfil" class="btn btn-link btn-xs pull-right col-sm-12">Ver Perfil</a>
     <a asp-area="" asp-controller="Candidato" asp-action="EditarPerfil" class="btn btn-link btn-xs center-block col-sm-12">Editar Perfil</a>
-    <a asp-area="" asp-controller="Candidato" asp-action="VisualizarCandidatura" class="btn btn-link btn-xs pull-right col-sm-12">Ver Candidatura</a>
+
 </div>

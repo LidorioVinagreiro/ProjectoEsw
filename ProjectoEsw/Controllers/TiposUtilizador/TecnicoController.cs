@@ -37,7 +37,39 @@ namespace ProjectoEsw.Controllers
             return View(user.Perfil);
         }
 
-        public IActionResult ListaCandidaturas() {
+        public async Task<IActionResult> EditarPerfil()
+        {
+            Utilizador user = await _gestor.getUtilizador(this.User);
+            Perfil queryPerfil = _gestor.getPerfil(user);
+            user.Perfil = queryPerfil;
+            return View(new RegisterViewModel
+            {
+                Email = user.Perfil.Email,
+                Telefone = user.Perfil.Telefone,
+                MoradaRua = user.Perfil.MoradaRua,
+                MoradaCodigoPostal = user.Perfil.MoradaCodigoPostal,
+                MoradaConcelho = user.Perfil.MoradaConcelho,
+                MoradaDistrito = user.Perfil.MoradaDistrito,
+                Nif = user.Perfil.Nif,
+                NumeroIdentificacao = user.Perfil.NumeroIdentificacao
+            });
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditarPerfil(RegisterViewModel model)
+        {
+            Utilizador user = await _gestor.getUtilizador(this.User);
+            Perfil queryPerfil = _gestor.getPerfil(user);
+            if (await _gestor.EditarPerfilUtilizador(model, user.Email))
+            {
+                return RedirectToAction("Index", "Tecnico");
+            }
+            else
+            {
+                //falta erros?
+                return RedirectToAction("Index", "Tecnico");
+            }
+
+            public IActionResult ListaCandidaturas() {
             List<Candidatura> candidaturas = _context.Candidaturas.Where(row => row.Estado == Estado.EM_ANALISE).ToList();
             return View("ListaCandidaturas", candidaturas);
         }
@@ -96,20 +128,28 @@ namespace ProjectoEsw.Controllers
         }
         public IActionResult ProgramasMobilidade()
         {
-            return View();
+            Utilizador user = _gestor.getUtilizador(this.User).Result;
+            Perfil p1 = _gestor.getPerfil(user);
+            return View(p1);
         }
 
         public IActionResult Bolsas()
         {
-            return View();
+            Utilizador user = _gestor.getUtilizador(this.User).Result;
+            Perfil p1 = _gestor.getPerfil(user);
+            return View(p1);
         }
         public IActionResult SobreNos()
         {
-            return View();
+            Utilizador user = _gestor.getUtilizador(this.User).Result;
+            Perfil p1 = _gestor.getPerfil(user);
+            return View(p1);
         }
         public IActionResult Index()
         {
-            return View();
+            Utilizador user = _gestor.getUtilizador(this.User).Result;
+            Perfil p1 = _gestor.getPerfil(user);
+            return View(p1);
         }
     }
 

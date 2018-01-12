@@ -1,0 +1,97 @@
+﻿@using ProjectoEsw.Models.Identity;
+@inject ProjectoEsw.GestorAplicacao.GestorAjudas gestorAjudas
+@model ProjectoEsw.Models.Identity.RegisterViewModel
+@addTagHelper *,Microsoft.AspNetCore.Mvc.TagHelpers
+
+
+@section links {
+    <a asp-area="" asp-controller="Candidato" asp-action="Logout" class="btn btn-link btn-xs pull-right">Log Out</a>
+    <a asp-area="" asp-controller="Candidato" asp-action="Perfil" class="btn btn-link btn-xs pull-right"> @Model.Email </a>
+}
+@section Home {
+    <a asp-area="" asp-controller="Candidato" asp-action="Index">Home</a>
+}
+@section ProgramasMobilidade{
+    <a asp-area="" asp-controller="Candidato" asp-action="ProgramasMobilidade">Programas Mobilidade</a>
+}
+@section Bolsas{
+    <a asp-area="" asp-controller="Candidato" asp-action="Bolsas">Bolsas</a>
+}
+@section SobreNos{
+    <a asp-area="" asp-controller="Candidato" asp-action="SobreNos">Sobre Nós</a>
+}
+<div class="jumbotron col-sm-7 col-sm-offset-1">
+    <span class="glyphicon glyphicon-question-sign" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaPagina("Home.EditarPerfil").Descricao"></span>
+
+    <div class="container col-lg-offset-1 col-sm-10">
+        <h2 class="text-center">Editar Perfil</h2>
+        <form class="form-horizontal" asp-controller="Tecnico" asp-action="EditarPerfil" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <div class=" help-block"></div>
+                <input asp-for="Nif" placeholder="Nova NIF" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.EditarPerfil","Novo NIF").Descricao" />
+                <span asp-validation-for="Nif" class="text-danger"></span>
+                <div class=" help-block"></div>
+                <input asp-for="NumeroIdentificacao" placeholder="Novo Numero de Identificação" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.EditarPerfil","Novo Numero Identificação").Descricao" />
+                <span asp-validation-for="NumeroIdentificacao" class="text-danger"></span>
+                <div class=" help-block"></div>
+                <input asp-for="MoradaRua" placeholder="Nova Rua" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.EditarPerfil","Nova Morada Rua").Descricao" />
+                <span asp-validation-for="MoradaRua" class="text-danger"></span>
+                <div class=" help-block"></div>
+                <input asp-for="MoradaCodigoPostal" placeholder="Novo Codigo Postal" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.EditarPerfil","Nova Morada Codigo Postal").Descricao" />
+                <span asp-validation-for="MoradaCodigoPostal" class="text-danger"></span>
+                <div class=" help-block"></div>
+                <select asp-for="MoradaConcelho" asp-items="Html.GetEnumSelectList<Concelho>()" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.EditarPerfil","Nova Morada Concelho").Descricao">
+                    <option selected="selected" value="0">Escolha o Concelho</option>
+                </select>
+                <span asp-validation-for="MoradaConcelho" class="text-danger"></span>
+                <div class=" help-block"></div>
+                <select asp-for="MoradaDistrito" asp-items="Html.GetEnumSelectList<Distrito>()" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.EditarPerfil","Nova Morada Distrito").Descricao">
+                    <option selected="selected" value="0">Escolha o Distrito</option>
+                </select>
+                <span asp-validation-for="MoradaDistrito" class="text-danger"></span>
+                <div class=" help-block"></div>
+                <input asp-for="Telefone" placeholder="Novo Telefone" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.EditarPerfil","Novo Telefone").Descricao" />
+                <span asp-validation-for="Telefone" class="text-danger"></span>
+                <div class=" help-block"></div>
+                <div class="form-inline">
+                    <h5 class="pull-left">Foto</h5>
+                    <input type="file" name="files" class="pull-right" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="text-center">
+                    <button type="submit" class="btn btn-default">Alterar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="jumbotron col-sm-3 col-sm-offset-1">
+    <h5 class="text-center">Opcoes</h5>
+    <a asp-area="" asp-controller="Tecnico" asp-action="Perfil" class="btn btn-link btn-xs pull-right col-sm-12">Ver Perfil</a>
+    <!--<a asp-area="" asp-controller="Tecnico" asp-action="Perfil" class="btn btn-link btn-xs center-block col-sm-12">Editar Perfil</a>-->
+    <a asp-area="" asp-controller="Tecnico" asp-action="ListaCandidatura" class="btn btn-link btn-xs pull-right col-sm-12">Lista Candidaturas</a>
+</div>
+<div class="jumbotron col-sm-7 col-sm-offset-1">
+    <div class="container col-lg-offset-1 col-sm-10">
+        <h2 class="text-center">Alterar Password</h2>
+        <form class="form-horizontal" asp-controller="Tecnico" asp-action="AlterarPassword" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <div class=" help-block"></div>
+                <input asp-for="Password" placeholder="Nova Password" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.EditarPerfil","Nova Password").Descricao">
+                <span asp-validation-for="Password" class="text-danger"></span>
+                <div class=" help-block"></div>
+                <input asp-for="ConfirmPassword" placeholder="Confirmar Nova Password" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Home.EditarPerfil","Confirmar Nova Password").Descricao">
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                <div class=" help-block"></div>
+            </div>
+            <div class="form-group">
+                <div class="text-center">
+                    <button type="submit" class="btn btn-default">Alterar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -121,8 +121,10 @@ namespace ProjectoEsw.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CandidaturaErasmus(CandidaturaViewModel model) {           
+        public async Task<IActionResult> CandidaturaErasmus(CandidaturaViewModel model) {
+            IList<Instituicao> a = model.Instituicoes;
             if (ModelState.IsValid) {
+                var x = Request.Form["Instituicoes"];
                 TipoCandidatura tipo = _contexto.TipoCandidatuas.Single(row => row.Tipo == "Erasmus");
                 Utilizador user = await _gestor.getUtilizador(this.User);
                 bool dataInicio = System.DateTime.Now.CompareTo(tipo.DataInicio) >=0;
@@ -152,7 +154,7 @@ namespace ProjectoEsw.Controllers
                 if (done) {
                     _gestorEmail.EnviarEmail(user, "Efectuou a candidatura", candidatura.ToString());
                     //sucesso
-                    return View("Index");
+                    return View("Index",user);
                 }
                 //erro adicionar candidatura
                 return View();

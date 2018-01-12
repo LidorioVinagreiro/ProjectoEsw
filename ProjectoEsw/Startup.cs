@@ -31,7 +31,6 @@ namespace ProjectoEsw
             var conect = "Server=(localdb)\\mssqllocaldb;Database=RegistoTeste;";
             //var connect1 = Configuration.GetConnectionString("ProjectoEsw_grupo2");
 
-            
             services.Configure<RequestLocalizationOptions>(options =>
             {
                 options.SupportedUICultures = new[] { new CultureInfo("pt-PT") };
@@ -68,10 +67,12 @@ namespace ProjectoEsw
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment())
+            if (true)
             {
                 app.UseDeveloperExceptionPage();
                 app.UseBrowserLink();
+                app.UseDatabaseErrorPage();
+
             }
             else
             {

@@ -1,12 +1,13 @@
-﻿@model List<ProjectoEsw.Models.Candidatura_sprint2.Candidatura>;
-
+﻿@model ProjectoEsw.Models.Identity.Perfil;
 
 @section links {
     <a asp-area="" asp-controller="Tecnico" asp-action="Logout" class="btn btn-link btn-xs pull-right">Log Out</a>
-    <!--<a asp-area="" asp-controller="Tecnico" asp-action="perfil" class="btn btn-link btn-xs pull-right"> @Html.DisplayFor(model => model) </a>-->
+    <a asp-area="" asp-controller="Tecnico" asp-action="Perfil" class="btn btn-link btn-xs pull-right"> @Html.DisplayFor(Model => Model.Email) </a>
+
 }
-@section Home {
+@section Home{
     <a asp-area="" asp-controller="Tecnico" asp-action="Index">Home</a>
+
 }
 @section ProgramasMobilidade{
     <a asp-area="" asp-controller="Tecnico" asp-action="ProgramasMobilidade">Programas Mobilidade</a>
@@ -17,22 +18,11 @@
 @section SobreNos{
     <a asp-area="" asp-controller="Tecnico" asp-action="SobreNos">Sobre Nós</a>
 }
-<div class="jumbotron col-sm-8">
-    <h2 class=" text-center">Lista De Candidaturas</h2>
-    <div class="checkbox checkboxList col-sm-12">
-        @{ 
-            for(int i = 0; i < Model.Count; i++)
-            {
-                <input asp-for="@Model[i]" type ="checkbox"/>
-                <label asp-for="@Model[i].Candidato.Perfil.NomeCompleto"></label>
-                <label asp-for="@Model[i].TipoCandidatura.Tipo"></label>
-                <input asp-for="@Model[i].ID" type="hidden" />
-            }
-        }
-    
-    </div>
-    <a asp-area="" asp-controller="Tecnico" asp-action="AnalisarCandidatura" class="btn btn-default btn-xs center-block col-sm-12">Analisar Candidatura</a>
+<div class="jumbotron col-sm-12">
+    <h1 class="text-center">Bolsas</h1>
+    <p class="text-center"> Resto Informacao + links + prazos</p>
 </div>
+
 <div class="jumbotron col-sm-3 col-sm-offset-1">
     <h5 class="text-center">Opcoes</h5>
     <a asp-area="" asp-controller="Tecnico" asp-action="Perfil" class="btn btn-link btn-xs pull-right col-sm-12">Ver Perfil</a>

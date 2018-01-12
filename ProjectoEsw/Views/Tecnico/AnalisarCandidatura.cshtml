@@ -1,8 +1,8 @@
 ﻿@model ProjectoEsw.Models.Candidatura_sprint2.Candidatura;
 
-
+<!-- Tecnico Logout-->
 @section links {
-    <a asp-area="" asp-controller="Candidato" asp-action="Logout" class="btn btn-link btn-xs pull-right">Log Out</a>
+    <a asp-area="" asp-controller="Tecnico" asp-action="Logout" class="btn btn-link btn-xs pull-right">Log Out</a>
     <a asp-area="" asp-controller="Tecnico" asp-action="perfil" class="btn btn-link btn-xs pull-right"> @Html.DisplayFor(model => model.Candidato.Email) </a>
 }
 @section Home {

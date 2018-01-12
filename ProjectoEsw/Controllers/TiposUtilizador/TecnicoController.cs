@@ -22,9 +22,19 @@ namespace ProjectoEsw.Controllers
             _context = context;
             _gestor = gestor;
         }
-        public IActionResult Index()
+       
+        public async Task<IActionResult> Logout()
         {
-            return View();
+            await _gestor.LogOut();
+            return RedirectToAction("Index", "Home");
+        }
+
+        public async Task<IActionResult> Perfil()
+        {
+            Utilizador user = await _gestor.getUtilizador(this.User);
+            Perfil queryPerfil = _gestor.getPerfil(user);
+            user.Perfil = queryPerfil;
+            return View(user.Perfil);
         }
 
         public IActionResult ListaCandidaturas() {
@@ -83,6 +93,23 @@ namespace ProjectoEsw.Controllers
             }
             return View(); // modelstate invalid
 
+        }
+        public IActionResult ProgramasMobilidade()
+        {
+            return View();
+        }
+
+        public IActionResult Bolsas()
+        {
+            return View();
+        }
+        public IActionResult SobreNos()
+        {
+            return View();
+        }
+        public IActionResult Index()
+        {
+            return View();
         }
     }
 

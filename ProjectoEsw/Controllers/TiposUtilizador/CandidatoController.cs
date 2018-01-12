@@ -210,10 +210,12 @@ namespace ProjectoEsw.Controllers
             user.Perfil = p1;
             user.PerfilFK = p1.ID;
             Candidatura model = _contexto.Candidaturas.Where(row => row.Candidato.Id == user.Id).Single();
+            model.Candidato = user;
             return View("VisualizarCandidatura", model);
         }
         public IActionResult AlterarCandidatura() {
             Utilizador user = _gestor.getUtilizador(this.User).Result;
+            Perfil p1 = _gestor.getPerfil(user);
             Candidatura candidatura = _contexto.Candidaturas.Where(x => x.Candidato.Id == user.Id).Single();
             return View("AlterarCandidatura",candidatura);
         }
@@ -224,16 +226,22 @@ namespace ProjectoEsw.Controllers
         }
 
         public IActionResult ProgramasMobilidade() {
-            return View();
+            Utilizador user = _gestor.getUtilizador(this.User).Result;
+            Perfil p1 = _gestor.getPerfil(user);
+            return View(p1);
         }
 
         public IActionResult Bolsas()
         {
-            return View();
+            Utilizador user = _gestor.getUtilizador(this.User).Result;
+            Perfil p1 = _gestor.getPerfil(user);
+            return View(p1);
         }
         public IActionResult SobreNos()
         {
-            return View();
+            Utilizador user = _gestor.getUtilizador(this.User).Result;
+            Perfil p1 = _gestor.getPerfil(user);
+            return View(p1);
         }
         //METODOS DE AJAX
         [HttpGet]

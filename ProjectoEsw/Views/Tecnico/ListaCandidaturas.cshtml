@@ -3,7 +3,7 @@
 
 @section links {
     <a asp-area="" asp-controller="Tecnico" asp-action="Logout" class="btn btn-link btn-xs pull-right">Log Out</a>
-    <!--<a asp-area="" asp-controller="Tecnico" asp-action="perfil" class="btn btn-link btn-xs pull-right"> @Html.DisplayFor(model => model) </a>-->
+    <!--<a asp-area="" asp-controller="Tecnico" asp-action="perfil" class="btn btn-link btn-xs pull-right"> </a>-->
 }
 @section Home {
     <a asp-area="" asp-controller="Tecnico" asp-action="Index">Home</a>
@@ -20,22 +20,30 @@
 <div class="jumbotron col-sm-8">
     <h2 class=" text-center">Lista De Candidaturas</h2>
     <div class="checkbox checkboxList col-sm-12">
-        @{ 
-            for(int i = 0; i < Model.Count; i++)
-            {
-                <input asp-for="@Model[i]" type ="checkbox"/>
-                <label asp-for="@Model[i].Candidato.Perfil.NomeCompleto"></label>
-                <label asp-for="@Model[i].TipoCandidatura.Tipo"></label>
+       @if (Model.Any() == false)
+       {
+           <h4>Sem Candidaturas</h4>
+
+       }
+       else
+       {
+           for (int i = 0; i < Model.Count; i++)
+           {
+                 var checkbox1 = "checkbox" + i;
+                <input name = @checkbox1 type ="checkbox"/>
+                <label>@Model[i].Candidato.Perfil.NomeCompleto</label>
+                <label>@Model[i].TipoCandidatura.Tipo</label>
                 <input asp-for="@Model[i].ID" type="hidden" />
             }
         }
-    
     </div>
-    <a asp-area="" asp-controller="Tecnico" asp-action="AnalisarCandidatura" class="btn btn-default btn-xs center-block col-sm-12">Analisar Candidatura</a>
+    @if(Model.Any() == true){
+        <a asp-area="" asp-controller="Tecnico" asp-action="AnalisarCandidatura" class="btn btn-default btn-xs center-block col-sm-12">Analisar Candidatura</a>
+    }
 </div>
 <div class="jumbotron col-sm-3 col-sm-offset-1">
     <h5 class="text-center">Opcoes</h5>
-    <a asp-area="" asp-controller="Tecnico" asp-action="Perfil" class="btn btn-link btn-xs pull-right col-sm-12">Ver Perfil</a>
+    <!--<a asp-area="" asp-controller="Tecnico" asp-action="Perfil" class="btn btn-link btn-xs pull-right col-sm-12">Ver Perfil</a>-->
     <!--<a asp-area="" asp-controller="Tecnico" asp-action="Perfil" class="btn btn-link btn-xs center-block col-sm-12">Editar Perfil</a>-->
-    <a asp-area="" asp-controller="Tecnico" asp-action="ListaCandidatura" class="btn btn-link btn-xs pull-right col-sm-12">Lista Candidaturas</a>
+    <a asp-area="" asp-controller="Tecnico" asp-action="ListaCandidaturas" class="btn btn-link btn-xs pull-right col-sm-12">Lista Candidaturas</a>
 </div>

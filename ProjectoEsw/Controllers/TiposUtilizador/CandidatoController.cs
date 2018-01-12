@@ -105,7 +105,7 @@ namespace ProjectoEsw.Controllers
             Perfil perfil = _gestor.getPerfil(user);
             user.Perfil = perfil;
             user.PerfilFK = perfil.ID;
-            CandidaturaViewModel model = new CandidaturaViewModel { UtilizadorFK = user.Id ,Candidato = user };
+            CandidaturaViewModel model = new CandidaturaViewModel { UtilizadorFK = user.Id ,Candidato = user, Instituicoes = _contexto.Instituicoes.Where(row => row.Interno == false).ToList() };
             return View("candidaturaErasmus",model);
         }
 
@@ -115,7 +115,7 @@ namespace ProjectoEsw.Controllers
             Perfil perfil = _gestor.getPerfil(user);
             user.Perfil = perfil;
             user.PerfilFK = perfil.ID;
-            CandidaturaViewModel model = new CandidaturaViewModel { UtilizadorFK = user.Id,Candidato = user };
+            CandidaturaViewModel model = new CandidaturaViewModel { UtilizadorFK = user.Id, Candidato = user, Instituicoes = _contexto.Instituicoes.Where(row => row.Interno == false).ToList() };
             return View("CandidaturaSantander",model);
         }
 

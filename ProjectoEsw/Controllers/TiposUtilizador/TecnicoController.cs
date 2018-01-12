@@ -68,10 +68,16 @@ namespace ProjectoEsw.Controllers
                 //falta erros?
                 return RedirectToAction("Index", "Tecnico");
             }
-
+        }
             public IActionResult ListaCandidaturas() {
-            List<Candidatura> candidaturas = _context.Candidaturas.Where(row => row.Estado == Estado.EM_ANALISE).ToList();
-            return View("ListaCandidaturas", candidaturas);
+                List<Candidatura> candidaturas = _context.Candidaturas.Where(row => row.Estado == Estado.EM_ANALISE).ToList();
+            for(int i = 0; i < candidaturas.Count(); i++)
+            {
+                candidaturas[i].Candidato = _context.Users.Where(row => row.Id == candidaturas[i].UtilizadorFK).Single();
+                candidaturas[i].Candidato.Perfil = _context.Perfils.Where(row => row.UtilizadorFK == candidaturas[i].UtilizadorFK).Single();
+                candidaturas[i].TipoCandidatura = _context.TipoCandidatuas.Single(row => row.ID == candidaturas[i].TipoCandidaturaFK);
+            }
+            return View(candidaturas);
         }
 
         public IActionResult AnalisarCandidatura(Candidatura model) {

@@ -10,6 +10,8 @@ using ProjectoEsw.Models;
 using ProjectoEsw.Models.Calendario;
 using ProjectoEsw.Models.Candidatura_sprint2;
 using ProjectoEsw.Models.Candidatura_sprint2.ViewModels;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Primitives;
 
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -115,7 +117,7 @@ namespace ProjectoEsw.Controllers
             Perfil perfil = _gestor.getPerfil(user);
             user.Perfil = perfil;
             user.PerfilFK = perfil.ID;
-            CandidaturaViewModel model = new CandidaturaViewModel { UtilizadorFK = user.Id, Candidato = user, Instituicoes = _contexto.Instituicoes.Where(row => row.Interno == false).ToList() };
+            CandidaturaViewModel model = new CandidaturaViewModel { UtilizadorFK = user.Id, Candidato = user, Instituicoes = _contexto.Instituicoes.Where(row => row.Interno == true).ToList() };
             return View("CandidaturaSantander",model);
         }
 
@@ -124,6 +126,8 @@ namespace ProjectoEsw.Controllers
             if (ModelState.IsValid) {
                 TipoCandidatura tipo = _contexto.TipoCandidatuas.Single(row => row.Tipo == "Erasmus");
                 Utilizador user = await _gestor.getUtilizador(this.User);
+                StringValues x = Request.Form["lista"];
+    //            List<Instituicao> insti = _contexto.Instituicoes.Where(row => x.AsParallel<IEnumerable<string>>.Contains(row.ID));
                 bool dataInicio = System.DateTime.Now.CompareTo(tipo.DataInicio) >=0;
                 bool dataFim = System.DateTime.Now.CompareTo(tipo.DataFim) < 0;
                 if (!(dataInicio && dataFim)) {
@@ -167,6 +171,7 @@ namespace ProjectoEsw.Controllers
             {
                 TipoCandidatura tipo = _contexto.TipoCandidatuas.Single(row => row.Tipo == "Santander");
                 Utilizador user = await _gestor.getUtilizador(this.User);
+                var x = Request.Form["lista"];
                 bool dataInicio = System.DateTime.Now.CompareTo(tipo.DataInicio) >= 0;
                 bool dataFim = System.DateTime.Now.CompareTo(tipo.DataFim) < 0;
                 if (!(dataInicio && dataFim))
@@ -209,8 +214,11 @@ namespace ProjectoEsw.Controllers
             Perfil p1 = _gestor.getPerfil(user);
             user.Perfil = p1;
             user.PerfilFK = p1.ID;
-            Candidatura model = _contexto.Candidaturas.Where(row => row.Candidato.Id == user.Id).Single();
-            model.Candidato = user;
+            Candidatura model = _contexto.Candidaturas.Where(row => row.Candidato.Id == user.Id)
+                .Include(x=>x.Candidato)
+                .Include(x=>x.Instituicoes)
+                .Single();
+            //model.Candidato = user;
             return View("VisualizarCandidatura", model);
         }
         public IActionResult AlterarCandidatura() {

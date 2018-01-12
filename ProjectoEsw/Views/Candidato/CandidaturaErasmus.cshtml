@@ -22,7 +22,6 @@
 @section SobreNos{
     <a asp-area="" asp-controller="Candidato" asp-action="SobreNos">Sobre Nós</a>
 }
-
 <div class="jumbotron col-sm-7 col-sm-offset-1">
     <span class="glyphicon glyphicon-question-sign" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaPagina("Candidato.Candidatura").Descricao"></span>
     <div class="container col-lg-offset-1 col-sm-10">
@@ -117,7 +116,7 @@
             </div>
             <div class="form-group">
                 <div class="text-center">
-                    <button type="submit" class="btn btn-default">Cancelar</button>
+                    <a asp-area="" asp-controller="Candidato" asp-action="ProgramasMobilidade" class="btn btn-default">Voltar Atras</a>
                     <button type="submit" class="btn btn-default">Submeter</button>
                 </div>
             </div>

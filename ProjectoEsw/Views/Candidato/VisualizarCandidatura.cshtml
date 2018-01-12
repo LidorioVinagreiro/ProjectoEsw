@@ -17,6 +17,21 @@
 @section SobreNos{
     <a asp-area="" asp-controller="Candidato" asp-action="SobreNos">Sobre Nós</a>
 }
+@if (@Model == null)
+{
+    <div class="jumbotron col-sm-7 col-sm-offset-1">
+        <h3 class="center-block">Sem Candidatura</h3>
+    </div>
+    <div class="jumbotron col-sm-3 col-sm-offset-1">
+        <h5 class="text-center">Opcoes</h5>
+        <a asp-area="" asp-controller="Candidato" asp-action="VisualizarCandidatura" class="btn btn-link btn-xs pull-right col-sm-12">Ver Candidatura</a>
+        <a asp-area="" asp-controller="Candidato" asp-action="Perfil" class="btn btn-link btn-xs pull-right col-sm-12">Ver Perfil</a>
+        <a asp-area="" asp-controller="Candidato" asp-action="EditarPerfil" class="btn btn-link btn-xs center-block col-sm-12">Editar Perfil</a>
+
+    </div>
+}
+else
+{
 <div class="jumbotron col-sm-8">
     <h2 class=" text-center">Candidatura</h2>
     <div class="col-sm-12">
@@ -162,3 +177,4 @@
     <a asp-area="" asp-controller="Candidato" asp-action="Perfil" class="btn btn-link btn-xs pull-right col-sm-12">Ver Perfil</a>
     <a asp-area="" asp-controller="Candidato" asp-action="EditarPerfil" class="btn btn-link btn-xs center-block col-sm-12">Editar Perfil</a>
 </div>
+}

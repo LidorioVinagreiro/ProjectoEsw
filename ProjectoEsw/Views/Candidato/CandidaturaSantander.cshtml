@@ -95,9 +95,13 @@
                 <input asp-for="AnoCurricular" placeholder="Seu ano curricular" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Candidato.Candidatura","Ano Curricular").Descricao" />
                 <span asp-validation-for="AnoCurricular" class="text-danger"></span>
                 <div class=" help-block"></div>
-                <select asp-for="Instituicoes" asp-items="context.Instituicoes.Where(row => row.Interno == true).Select(x=> new SelectListItem { Text = x.NomeInstituicao , Value = x.NomeInstituicao})" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Candidato.Candidatura","Instituicoes").Descricao">
-                    <option value="0">Escolha a Instituicao</option>
-                </select>
+               <!-- for (int i = 0; i < Model.Instituicoes.Count; i++)
+                {
+                    var checkbox1 = "checkbox" + i;
+                    <input name="lista" type="checkbox" value="Model.Instituicoes[i].ID" />
+                    <label>Model.Instituicoes[i].NomeInstituicao</label>
+                    <input asp-for="Model.Instituicoes[i].ID" type="hidden" />
+                }-->
                 <div class="help-block"></div>
                 <input asp-for="IBAN" placeholder="Nome da Escola" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Candidato.Candidatura","IBAN").Descricao" />
                 <span asp-validation-for="IBAN" class="text-danger"></span>
@@ -114,8 +118,8 @@
             </div>
             <div class="form-group">
                 <div class="text-center">
-                    <button type="submit" class="btn btn-default">Cancelar</button>
-                    <button type="submit" class="btn btn-default">Proximo</button>
+                    <a asp-area="" asp-controller="Candidato" asp-action="ProgramasMobilidade" class="btn btn-default">Voltar Atras</a>
+                    <button type="submit" class="btn btn-default">Submeter</button>
                 </div>
             </div>
         </form>

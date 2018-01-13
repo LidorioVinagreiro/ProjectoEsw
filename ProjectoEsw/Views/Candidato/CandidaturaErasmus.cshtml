@@ -99,7 +99,6 @@
                     var checkbox1 = "checkbox" + i;
                     <input name="lista" type="checkbox" value="@Model.Instituicoes[i].ID"/>
                     <label>@Model.Instituicoes[i].NomeInstituicao</label>
-                    <input asp-for="@Model.Instituicoes[i].ID" type="hidden" />
                 }
                 <div class="help-block"></div>
                 <input asp-for="IBAN" placeholder="IBAN" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Candidato.Candidatura","IBAN").Descricao" />

@@ -141,10 +141,13 @@ else
         </div>
     </div>
     <div class="col-sm-12">
-        <label asp-for="Instituicoes" class="col-sm-3 control-label"></label>
+        @foreach (var item in Model.Instituicoes)
+        {
+        <span>@item.Instituicao.NomeInstituicao</span>
             <div class="col-sm-offset-4">
                 <h5></h5>
             </div>
+        }
     </div>
     <div class="col-sm-12">
         <label asp-for="Bolsa" class="col-sm-3 control-label"></label>

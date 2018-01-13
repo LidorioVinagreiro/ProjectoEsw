@@ -120,7 +120,7 @@ namespace ProjectoEsw.GestorAplicacao
                 _context.Instituicoes_Candidatura.AddRange(instituicoes);
                 await _context.SaveChangesAsync();
                 return true;
-            }
+            }   
             catch (Exception e) {
                 e.ToString();
                 return false;

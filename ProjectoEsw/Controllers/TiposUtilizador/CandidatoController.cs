@@ -148,8 +148,23 @@ namespace ProjectoEsw.Controllers
             if (ModelState.IsValid) {
                 TipoCandidatura tipo = _contexto.TipoCandidatuas.Single(row => row.Tipo == "Erasmus");
                 Utilizador user = await _gestor.getUtilizador(this.User);
-                StringValues x = Request.Form["lista"];
-    //            List<Instituicao> insti = _contexto.Instituicoes.Where(row => x.AsParallel<IEnumerable<string>>.Contains(row.ID));
+
+                List<string> x = Request.Form["lista"].ToList();
+                if (x.Count <= 0)
+                    return RedirectToAction("Index", "Candidato"); // caso não selecione nada
+                List<int> aux = new List<int>();
+                for (int i = 0; i < x.Count; i++)
+                {
+                    int a = 0;
+                    Int32.TryParse(x[i],out a);
+                    if (a != 0)
+                        aux.Add(a);
+                }
+                List<Instituicao> listaIns = _contexto.Instituicoes.Where(row => aux.Contains(row.ID)).ToList();
+                if (listaIns.Where(row => row.Interno != false).Any())
+                    return RedirectToAction("index","Candidato"); // form as been tempered isto é os forms foram mudados manualmente
+
+                model.Instituicoes = listaIns;
                 bool dataInicio = System.DateTime.Now.CompareTo(tipo.DataInicio) >=0;
                 bool dataFim = System.DateTime.Now.CompareTo(tipo.DataFim) < 0;
                 if (!(dataInicio && dataFim)) {
@@ -173,6 +188,7 @@ namespace ProjectoEsw.Controllers
                     NomeEmergencia = model.NomeEmergencia,
                     CursoFrequentado = model.CursoFrequentado
                 };
+
                 bool done = await _gestor.adicionarCandidatura(user, candidatura,model);
                 if (done) {
                     _gestorEmail.EnviarEmail(user, "Efectuou a candidatura", candidatura.ToString());
@@ -193,7 +209,23 @@ namespace ProjectoEsw.Controllers
             {
                 TipoCandidatura tipo = _contexto.TipoCandidatuas.Single(row => row.Tipo == "Santander");
                 Utilizador user = await _gestor.getUtilizador(this.User);
-                var x = Request.Form["lista"];
+
+                List<string> x = Request.Form["lista"].ToList();
+                if (x.Count <= 0)
+                    return RedirectToAction("Index", "Candidato"); // caso não selecione nada
+                List<int> aux = new List<int>();
+                for (int i = 0; i < x.Count; i++)
+                {
+                    int a = 0;
+                    Int32.TryParse(x[i], out a);
+                    if (a != 0)
+                        aux.Add(a);
+                }
+                List<Instituicao> listaIns = _contexto.Instituicoes.Where(row => aux.Contains(row.ID)).ToList();
+                if (listaIns.Where(row => row.Interno != true).Any())               
+                    return View(); // form as been tempered isto é os forms foram mudados manualmente
+
+                model.Instituicoes = listaIns;
                 bool dataInicio = System.DateTime.Now.CompareTo(tipo.DataInicio) >= 0;
                 bool dataFim = System.DateTime.Now.CompareTo(tipo.DataFim) < 0;
                 if (!(dataInicio && dataFim))
@@ -216,6 +248,7 @@ namespace ProjectoEsw.Controllers
                     NumeroEmergencia = model.NumeroEmergencia,
                     NomeEmergencia = model.NomeEmergencia,
                 };
+
                 bool done = await _gestor.adicionarCandidatura(user, candidatura,model);
                 if (done)
                 {
@@ -240,8 +273,9 @@ namespace ProjectoEsw.Controllers
             {
                 Candidatura model = _contexto.Candidaturas.Where(row => row.Candidato.Id == user.Id)
                     .Include(x => x.Candidato)
-                    .Include(x => x.Instituicoes)
                     .Single();
+                model.Instituicoes = _contexto.Instituicoes_Candidatura.Where(row => row.CandidaturaId == model.ID)
+                    .Include(x => x.Instituicao).ToList();
                 return View("VisualizarCandidatura", model);
             }
             catch

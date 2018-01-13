@@ -11,7 +11,7 @@ namespace ProjectoEsw.Models
 {
     public static class DbInitializer
     {
-        public static void Initialize(AplicacaoDbContexto context,UserManager<Utilizador> userManager)
+        public static void Initialize(AplicacaoDbContexto context)
         {
 
             if (!context.Instituicoes.Any()) {
@@ -204,32 +204,49 @@ namespace ProjectoEsw.Models
 
                 context.SaveChanges();
             }
-            if (userManager.FindByEmailAsync("tecnico1@est.pt").Result == null)
+            if (!context.UserRoles.Any())
             {
-                //    //PasswordHasher<Utilizador> hash = new PasswordHasher<Utilizador>();
-                Utilizador tec1 = new Utilizador { UserName = "tecnico1@est.pt", EmailConfirmed = true };
-                Utilizador tec2 = new Utilizador { UserName = "tecnico2@est.pt", EmailConfirmed = true };
-                Utilizador tec3 = new Utilizador { UserName = "tecnico3@est.pt", EmailConfirmed = true };
-                Utilizador admin = new Utilizador { UserName = "admin@est.pt", EmailConfirmed = true };
-                try
-                {
-                    userManager.CreateAsync(tec1, "tecnico1");
-                    userManager.CreateAsync(tec2, "tecnico2");
-                    userManager.CreateAsync(tec3, "tecnico3");
-                    userManager.CreateAsync(admin, "admin");
-                    context.SaveChangesAsync();
-                }
-                catch (Exception e)
-                {
-                   e.ToString();
-                }
+                PasswordHasher<Utilizador> hash = new PasswordHasher<Utilizador>();
+                Utilizador tec1 = new Utilizador {SecurityStamp = Guid.NewGuid().ToString(), UserName = "tecnico1@est.pt", EmailConfirmed = true ,NormalizedUserName="TECNICO1@EST.PT", Email = "tecnico1@est.pt"};
+                tec1.PasswordHash = hash.HashPassword(tec1, "tecnico1");
+                Utilizador tec2 = new Utilizador { SecurityStamp = Guid.NewGuid().ToString(),UserName = "tecnico2@est.pt", EmailConfirmed = true, NormalizedUserName = "TECNICO2@EST.PT", Email = "tecnico2@est.pt" };
+                tec2.PasswordHash = hash.HashPassword(tec2, "tecnico2");
+                Utilizador tec3 = new Utilizador { SecurityStamp = Guid.NewGuid().ToString(), UserName = "tecnico3@est.pt", EmailConfirmed = true, NormalizedUserName = "TECNICO3@EST.PT", Email = "tecnico3@est.pt" };
+                tec3.PasswordHash = hash.HashPassword(tec3, "tecnico3");
+                Utilizador admin = new Utilizador { SecurityStamp = Guid.NewGuid().ToString(), UserName = "admin@est.pt", EmailConfirmed = true, NormalizedUserName = "ADMIN@EST.PT", Email = "admin@est.pt" };
+                admin.PasswordHash = hash.HashPassword(admin, "admin");
+
+                context.Users.Add(tec1);
+                context.Users.Add(tec2);
+                context.Users.Add(tec3);
+                context.Users.Add(admin);
+                context.SaveChanges();
+                
 
                 var id = context.Roles.Where(row => row.Name.Equals("Tecnico")).Single().Id;
                 var id1 = context.Roles.Where(row => row.Name.Equals("Administrador")).Single().Id;
+     
                 context.UserRoles.Add(new IdentityUserRole<string> { RoleId = id, UserId = tec1.Id });
                 context.UserRoles.Add(new IdentityUserRole<string> { RoleId = id, UserId = tec2.Id });
                 context.UserRoles.Add(new IdentityUserRole<string> { RoleId = id, UserId = tec3.Id });
                 context.UserRoles.Add(new IdentityUserRole<string> { RoleId = id1, UserId = admin.Id });
+                context.SaveChanges();
+
+                Perfil aux = new Perfil { UtilizadorFK = tec1.Id };
+                Perfil aux1 = new Perfil { UtilizadorFK = tec2.Id };
+                Perfil aux2 = new Perfil { UtilizadorFK = tec3.Id };
+                Perfil aux3 = new Perfil { UtilizadorFK = admin.Id };
+
+                context.Perfils.Add(aux);
+                context.Perfils.Add(aux1);
+                context.Perfils.Add(aux2);
+                context.Perfils.Add(aux3);
+                context.SaveChanges();
+
+                tec1.PerfilFK = aux.ID;
+                tec2.PerfilFK = aux1.ID;
+                tec3.PerfilFK = aux2.ID;
+                admin.PerfilFK = aux3.ID;
                 context.SaveChanges();
             }
 

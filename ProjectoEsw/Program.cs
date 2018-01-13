@@ -26,8 +26,8 @@ namespace ProjectoEsw
                 try
                 {
                     var context = services.GetRequiredService<AplicacaoDbContexto>();
-                    var userManager = services.GetRequiredService<UserManager<Utilizador>>();
-                    DbInitializer.Initialize(context,userManager);
+                    
+                    DbInitializer.Initialize(context);
                 }
                 catch (Exception ex)
                 {

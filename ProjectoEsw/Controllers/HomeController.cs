@@ -171,7 +171,7 @@ namespace ProjectoEsw.Controllers
                     }
                 }
                 else {
-                    ModelState.AddModelError(string.Empty, "tilizador Nao Existe");
+                    ModelState.AddModelError(string.Empty, "Utilizador Nao Existe");
                     return View();
                 }
             }

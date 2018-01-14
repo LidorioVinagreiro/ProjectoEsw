@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Identity;
 using ProjectoEsw.GestorAplicacao;
 using Microsoft.AspNetCore.Localization;
 using System.Globalization;
+using System.IO;
 
 namespace ProjectoEsw
 {
@@ -67,6 +68,13 @@ namespace ProjectoEsw
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            string users = "\\Utilizadores";
+            string path = env.WebRootPath + users;
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -83,7 +91,7 @@ namespace ProjectoEsw
             app.UseRequestLocalization();
 
             app.UseStaticFiles();
-
+            
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

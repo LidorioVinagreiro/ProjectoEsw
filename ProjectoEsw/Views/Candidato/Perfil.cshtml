@@ -1,5 +1,5 @@
 ﻿@model ProjectoEsw.Models.Identity.Perfil;
-
+@inject ProjectoEsw.GestorAplicacao.Gestor gestor;
 
 @section links {
     <a asp-area="" asp-controller="Candidato" asp-action="Logout" class="btn btn-link btn-xs pull-right">Log Out</a>
@@ -19,6 +19,7 @@
 }
 <div class="jumbotron col-sm-8">
     <h2 class=" text-center">Perfil do Candidato</h2>
+    <img src="@Url.Content(gestor.getImagePath(gestor.getUtilizadorByPerfilId(Model.ID)))" alt="logo" width="200" height="200"/>
     <div class="col-sm-12">
         <label asp-for="NomeCompleto" class="col-sm-3 control-label"></label>
         <div class="col-sm-offset-4">

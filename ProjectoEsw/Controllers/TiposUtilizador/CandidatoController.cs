@@ -12,6 +12,7 @@ using ProjectoEsw.Models.Candidatura_sprint2;
 using ProjectoEsw.Models.Candidatura_sprint2.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Primitives;
+using Microsoft.AspNetCore.Http;
 
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -71,8 +72,10 @@ namespace ProjectoEsw.Controllers
         public async Task<IActionResult> EditarPerfil(RegisterViewModel model) {
             Utilizador user = await _gestor.getUtilizador(this.User);
             Perfil queryPerfil = _gestor.getPerfil(user);
+
             if (await _gestor.EditarPerfilUtilizador(model, user.Email))
             {
+                bool aux = await _gestor.UploadFotoUtilizador(user, Request.Form.Files.Single());
                 return RedirectToAction("Index", "Candidato");
             }
             else {

@@ -236,7 +236,6 @@ namespace ProjectoEsw.Controllers
         } 
         public IActionResult Index()
         {
-            // await _gestor.adicionarInfo();
             return View();
         }
 

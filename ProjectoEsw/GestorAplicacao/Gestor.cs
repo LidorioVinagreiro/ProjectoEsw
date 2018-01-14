@@ -12,6 +12,9 @@ using ProjectoEsw.Models.Candidatura_sprint2;
 using ProjectoEsw.Models.Candidatura_sprint2.ViewModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace ProjectoEsw.GestorAplicacao
 {
@@ -22,14 +25,21 @@ namespace ProjectoEsw.GestorAplicacao
         private UserManager<Utilizador> _userManager;
         private SignInManager<Utilizador> _signInManager;
         private GestorEmail _gestorEmail;
+        private IHostingEnvironment _hostingEnvironment;
+        private string DirectoriaUtilizadores = "\\Utilizadores";
+        private string DirectoriaDocumentos = "\\Documentos";
+        private string DirectoriaImagem = "\\Imagem";
+
         public Gestor(AplicacaoDbContexto context,
             UserManager<Utilizador> userManager,
             SignInManager<Utilizador> signInManager,
-            GestorEmail gestorEmail) {
+            GestorEmail gestorEmail,
+            IHostingEnvironment _environment) {
             _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
             _gestorEmail = gestorEmail;
+            _hostingEnvironment = _environment;
         }
         
         public async Task<string> getUtilizadorRole(string email)
@@ -68,6 +78,7 @@ namespace ProjectoEsw.GestorAplicacao
             };
             var rsult = await _context.Perfils.AddAsync(perfil);
             await _context.SaveChangesAsync();
+            this.GerarDirectoriaUtilizador(perfil);
             return perfil.ID;
         }
 
@@ -205,5 +216,51 @@ namespace ProjectoEsw.GestorAplicacao
             return true;
         }
 
+
+
+        public bool GerarDirectoriaUtilizador(Perfil user) {
+            string users = DirectoriaUtilizadores + user.Email;
+            string documentos = users+ DirectoriaDocumentos;
+            string imagem = users + DirectoriaImagem;
+            string path = _hostingEnvironment.WebRootPath + documentos;
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+                string path1 = _hostingEnvironment.WebRootPath + imagem;
+                Directory.CreateDirectory(path1);
+                return true;
+            
+             }
+            
+            return false;
+        }
+
+        public async Task<bool> UploadFotoUtilizador(Utilizador user,IFormFile imagem) {
+            if (imagem == null || imagem.Length == 0)
+                return false;
+
+            var pathImagem = DirectoriaUtilizadores + "\\" + user.Email + DirectoriaImagem;
+            var path = Path.Combine(
+                        _hostingEnvironment.WebRootPath + pathImagem, imagem.FileName);
+
+            using (var stream = new FileStream(path, FileMode.Create))
+            {
+                await imagem.CopyToAsync(stream);
+            }
+            _context.Perfils.Where(row => row.UtilizadorFK == user.Id).Single().Foto = imagem.FileName;
+            _context.SaveChanges();
+            return true;
+        }
+
+        public string getImagePath(Utilizador user) {
+            var pathImagem = DirectoriaUtilizadores + "\\" + user.Email + DirectoriaImagem;
+            Perfil perfil =_context.Perfils.Where(row => row.UtilizadorFK == user.Id).Single();
+            return Path.Combine( _hostingEnvironment.WebRootPath , pathImagem , perfil.Foto);
+        }
+
+        public Utilizador getUtilizadorByPerfilId(int id) {
+            return _context.Users.Where(row => row.PerfilFK == id).Single();
+
+        }
     }
 }

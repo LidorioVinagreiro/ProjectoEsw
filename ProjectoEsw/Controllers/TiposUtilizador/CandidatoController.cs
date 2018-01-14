@@ -318,6 +318,20 @@ namespace ProjectoEsw.Controllers
             Perfil p1 = _gestor.getPerfil(user);
             return View(p1);
         }
+
+        public IActionResult MarcarReuniao() {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult MarcarReuniao(MarcarReuniaoViewModel viewModel) {
+            Utilizador actual = _gestor.getUtilizador(this.User).Result;
+            bool marcou = _gestor.MarcarReuniao(actual, viewModel.DataReuniaoInicio, viewModel.DataReuniaoFim);
+            if (marcou)
+                return View(); // marcou reuniao
+            return View();//erro nao marcou    
+        }
+
         //METODOS DE AJAX
         [HttpGet]
         public JsonResult GetEvents(int idPerfil)

@@ -132,6 +132,22 @@ namespace ProjectoEsw.Controllers
             return View(); // modelstate invalid
 
         }
+
+        public IActionResult MarcarEntrevista() {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult MarcarEntrevista(MarcarEntrevistaViewModel model) {
+            Utilizador tecnico = _gestor.getUtilizador(this.User).Result;
+            Utilizador candidato = _gestor.getUtilizadorById(model.CandidatoID);
+            bool marcou = _gestor.MarcarEntrevista(tecnico, candidato, model.DataEntrevistaInicio, model.DataEntrevistaFim);
+            if (marcou) {
+                return View(); // entrevista marcada
+            }
+            return View();//erro na marcacao
+
+        }
+
         public IActionResult ProgramasMobilidade()
         {
             Utilizador user = _gestor.getUtilizador(this.User).Result;

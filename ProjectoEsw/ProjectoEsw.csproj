@@ -29,4 +29,8 @@
     <Folder Include="wwwroot\Utilizadores\lidmcv%40gmail.com\Imagem\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="Models\Estatisticas_sprint3\ViewModel\TipoQuantidadeEstatisticas.cs" />
+  </ItemGroup>
+
 </Project>

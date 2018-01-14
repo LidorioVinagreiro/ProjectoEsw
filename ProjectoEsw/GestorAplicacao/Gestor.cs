@@ -15,6 +15,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
 using Microsoft.AspNetCore.Http;
+using ProjectoEsw.Models.Estatisticas_sprint3.ViewModel;
 
 namespace ProjectoEsw.GestorAplicacao
 {
@@ -258,9 +259,45 @@ namespace ProjectoEsw.GestorAplicacao
             return Path.Combine( _hostingEnvironment.WebRootPath , pathImagem , perfil.Foto);
         }
 
-        public Utilizador getUtilizadorByPerfilId(int id) {
-            return _context.Users.Where(row => row.PerfilFK == id).Single();
+        public Utilizador getUtilizadorByPerfilId(int idPerfil) {
+            return _context.Users.Where(row => row.PerfilFK == idPerfil).Single();
 
+        }
+
+        public Utilizador getUtilizadorById(string id)
+        {
+            return _context.Users.Where(row => row.Id == id).Single();
+
+        }
+        public bool MarcarEntrevista(Utilizador tecnico,Utilizador candidato,DateTime inicio,DateTime fim) {
+            Candidatura candidatura = _context.Candidaturas.Where(row => row.UtilizadorFK == candidato.Id).Single();
+            if (!candidatura.Estado.Equals(Estado.APROVADA))
+                return false;
+            Perfil tec = _context.Perfils.Where(row => row.UtilizadorFK == tecnico.Id).Single();
+            Eventos evento = new Eventos { EntrevistadorFK = tec.ID ,Tipo = Tipo.Entrevista,Descricao = "Entrevista : " + candidato.UserName ,Inicio =inicio, Fim= fim,Titulo="Entrevista a Candidato"};
+            _context.SaveChanges();
+            return true;
+        }
+
+        public bool MarcarReuniao(Utilizador candidato,DateTime inicio,DateTime fim)
+        {
+            Perfil candidatop = _context.Perfils.Where(row => row.UtilizadorFK == candidato.Id).Single();
+            Eventos evento = new Eventos { PerfilFK = candidatop.ID, Inicio = inicio, Fim = fim , Titulo="REUNIAO NA ASSOCIACAO",Descricao="Duvidas na Candidatura" };
+            _context.SaveChanges();
+            string tecnico = "tecnico";
+            IdentityRole tecn = _context.Roles.Where(row => row.Name.ToUpper().Equals(tecnico.ToUpper())).Single();
+            List<IdentityUserRole<string>> users = _context.UserRoles.Where(row => row.RoleId == tecn.Id).ToList();
+            List<Utilizador> usersList = _context.Users.Where(row => users.Select(row1 => row1.UserId).Contains(row.Id)).ToList();
+            foreach (var item in usersList)
+            {
+                _gestorEmail.EnviarEmail(item, "FOI MARCADA UMA REUNIAO", inicio.ToString());
+            }
+            
+            return true;
+        }
+
+        public EstatisticasGerais GerarEstatisticas() {
+            return new EstatisticasGerais { };
         }
     }
 }

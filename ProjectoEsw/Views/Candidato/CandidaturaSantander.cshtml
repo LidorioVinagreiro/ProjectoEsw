@@ -27,7 +27,7 @@
     <span class="glyphicon glyphicon-question-sign" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaPagina("Candidato.Candidatura").Descricao"></span>
     <div class="container col-lg-offset-1 col-sm-10">
         <h2 class="text-center">Candidatura Santader Universidades</h2>
-        <form class="form-horizontal" asp-controller="Candidato" asp-action="CandidaturaSantander" method="post">
+        <form class="form-horizontal" asp-controller="Candidato" asp-action="CandidaturaSantander" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
                 <p>Dados Pessoais</p>
@@ -82,10 +82,8 @@
                 <input asp-for="NumeroEmergencia" placeholder="Telefone do contacto de emergencia" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Candidato.Candidatura","Telefone Emergencia").Descricao" />
                 <span asp-validation-for="NumeroEmergencia" class="text-danger"></span>
                 <div class=" help-block"></div>
-
                 <p> Dados para Candidatura</p>
                 <div class=" help-block"></div>
-
                 <input asp-for="Escola" placeholder="Nome da Escola" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Candidato.Candidatura","Escola").Descricao" />
                 <span asp-validation-for="Escola" class="text-danger"></span>
                 <div class=" help-block"></div>
@@ -95,13 +93,12 @@
                 <input asp-for="AnoCurricular" placeholder="Seu ano curricular" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Candidato.Candidatura","Ano Curricular").Descricao" />
                 <span asp-validation-for="AnoCurricular" class="text-danger"></span>
                 <div class=" help-block"></div>
-               <!-- for (int i = 0; i < Model.Instituicoes.Count; i++)
-                {
-                    var checkbox1 = "checkbox" + i;
-                    <input name="lista" type="checkbox" value="Model.Instituicoes[i].ID" />
-                    <label>Model.Instituicoes[i].NomeInstituicao</label>
-                    <input asp-for="Model.Instituicoes[i].ID" type="hidden" />
-                }-->
+               @for (int i = 0; i < @Model.Instituicoes.Count; i++)
+               {
+                   var checkbox1 = "checkbox" + i;
+                <input name="lista" type="checkbox" value="@Model.Instituicoes[i].ID" />
+                    <label>@Model.Instituicoes[i].NomeInstituicao</label>
+               }
                 <div class="help-block"></div>
                 <input asp-for="IBAN" placeholder="Nome da Escola" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Candidato.Candidatura","IBAN").Descricao" />
                 <span asp-validation-for="IBAN" class="text-danger"></span>

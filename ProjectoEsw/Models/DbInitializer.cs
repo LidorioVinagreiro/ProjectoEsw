@@ -232,10 +232,10 @@ namespace ProjectoEsw.Models
                 context.UserRoles.Add(new IdentityUserRole<string> { RoleId = id1, UserId = admin.Id });
                 context.SaveChanges();
 
-                Perfil aux = new Perfil { UtilizadorFK = tec1.Id };
-                Perfil aux1 = new Perfil { UtilizadorFK = tec2.Id };
-                Perfil aux2 = new Perfil { UtilizadorFK = tec3.Id };
-                Perfil aux3 = new Perfil { UtilizadorFK = admin.Id };
+                Perfil aux = new Perfil { UtilizadorFK = tec1.Id ,Email = tec1.Email};
+                Perfil aux1 = new Perfil { UtilizadorFK = tec2.Id, Email = tec2.Email };
+                Perfil aux2 = new Perfil { UtilizadorFK = tec3.Id, Email = tec3.Email };
+                Perfil aux3 = new Perfil { UtilizadorFK = admin.Id, Email = admin.Email };
 
                 context.Perfils.Add(aux);
                 context.Perfils.Add(aux1);

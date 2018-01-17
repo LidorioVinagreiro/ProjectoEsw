@@ -79,15 +79,31 @@ namespace ProjectoEsw.Controllers
             }
             return View(candidaturas);
         }
+        [HttpPost]
+        public IActionResult AnalisarCandidatura() {
+            //Candidatura candidatura = _context.Candidaturas.Where(row => row.ID == model.ID).Single();
 
-        public IActionResult AnalisarCandidatura(Candidatura model) {
-            Candidatura candidatura = _context.Candidaturas.Where(row => row.ID == model.ID).Single();
-            if (candidatura.Estado.Equals(Estado.EM_ANALISE))
+
+            List<string> x = Request.Form["lista"].ToList();
+            if (x.Count <= 0)
+                return RedirectToAction("Index", "Tecnico"); // caso não selecione nada
+            List<int> aux = new List<int>();
+            for (int i = 0; i < x.Count; i++)
             {
-                return View("AnalisarCandidatura", model);
+                int a = 0;
+                Int32.TryParse(x[i], out a);
+                if (a != 0)
+                {
+                    aux.Add(a);
+                    i = x.Count;
+                }
             }
-            //erro
-            return View();
+            Candidatura listaIns = _context.Candidaturas.Where(row => aux.Contains(row.ID)).Single();
+            Utilizador user = _context.Users.Where(row => row.Id == listaIns.UtilizadorFK).Single();
+            Perfil perfil = _context.Perfils.Where(row => row.ID == user.PerfilFK).Single();
+            listaIns.Candidato = user;
+            listaIns.Candidato.Perfil = perfil;
+            return View("AnalisarCandidatura",listaIns);
         }
 
         [HttpPost]

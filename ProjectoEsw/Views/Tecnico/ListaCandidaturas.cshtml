@@ -17,35 +17,38 @@
 @section SobreNos{
     <a asp-area="" asp-controller="Tecnico" asp-action="SobreNos">Sobre Nós</a>
 }
-<div class="jumbotron col-sm-8">
-    <h2 class=" text-center">Lista De Candidaturas</h2>
-    <div class="checkbox checkboxList col-sm-12">
-       @if (Model.Any() == false)
-       {
-           <h4>Sem Candidaturas</h4>
+<form class="form-horizontal" asp-controller="Tecnico" asp-action="AnalisarCandidatura" method="post">
+    <div class="jumbotron col-sm-8">
+        <h2 class=" text-center">Lista De Candidaturas</h2>
+        <div class="checkbox checkboxList col-sm-12">
+            @if (Model.Any() == false)
+            {
+                <h4>Sem Candidaturas</h4>
 
-       }
-       else
-       {
-           for (int i = 0; i < Model.Count; i++)
-           {
-               var checkbox1 = "checkbox" + i;
-            <div>               
-                <input name=@checkbox1 type="checkbox" />
-                <label>@Model[i].Candidato.Perfil.NomeCompleto</label>
-                <label>@Model[i].TipoCandidatura.Tipo</label>
-                <input asp-for="@Model[i].ID" type="hidden" />
-            </div>
-           }
-       }
+            }
+            else
+            {
+                for (int i = 0; i < Model.Count; i++)
+                {
+                    var checkbox1 = "checkbox" + i;
+                    <div>
+                        <input value="@Model[i].ID" name="lista" type="checkbox" />
+                        <label>@Model[i].Candidato.Perfil.NomeCompleto</label>
+                        <label>@Model[i].TipoCandidatura.Tipo</label>
+                        <input asp-for="@Model[i].ID" type="hidden" />
+                    </div>
+                }
+            }
+        </div>
+        @if (Model.Any() == true)
+        {
+            <button type="submit" class="btn btn-default">Analisar</button>
+        }
     </div>
-    @if(Model.Any() == true){
-        <a asp-area="" asp-controller="Tecnico" asp-action="AnalisarCandidatura" class="btn btn-default btn-xs center-block col-sm-12">Analisar Candidatura</a>
-    }
-</div>
-<div class="jumbotron col-sm-3 col-sm-offset-1">
-    <h5 class="text-center">Opcoes</h5>
-    <!--<a asp-area="" asp-controller="Tecnico" asp-action="Perfil" class="btn btn-link btn-xs pull-right col-sm-12">Ver Perfil</a>-->
-    <!--<a asp-area="" asp-controller="Tecnico" asp-action="Perfil" class="btn btn-link btn-xs center-block col-sm-12">Editar Perfil</a>-->
-    <a asp-area="" asp-controller="Tecnico" asp-action="ListaCandidaturas" class="btn btn-link btn-xs pull-right col-sm-12">Lista Candidaturas</a>
-</div>
+</form>>
+    <div class="jumbotron col-sm-3 col-sm-offset-1">
+        <h5 class="text-center">Opcoes</h5>
+        <!--<a asp-area="" asp-controller="Tecnico" asp-action="Perfil" class="btn btn-link btn-xs pull-right col-sm-12">Ver Perfil</a>-->
+        <!--<a asp-area="" asp-controller="Tecnico" asp-action="Perfil" class="btn btn-link btn-xs center-block col-sm-12">Editar Perfil</a>-->
+        <a asp-area="" asp-controller="Tecnico" asp-action="ListaCandidaturas" class="btn btn-link btn-xs pull-right col-sm-12">Lista Candidaturas</a>
+    </div>

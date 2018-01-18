@@ -11,6 +11,6 @@ namespace ProjectoEsw.Models.Estatisticas_sprint3.ViewModel
         public TotalBolsaEstatisticas TotalBolsaEstatisticas { get; set; }
         public List<ARCandidaturasEstatisticas> ARCandidaturaEstatisticas { get; set; }
         public List<InstituicaoEstatisticas> InstituicaoEstatistica { get; set; }
-        public DestinosPreferenciasEstatisticas GetDestinosPreferenciasEstatisticas { get; set; }
+        public DestinosPreferenciasEstatisticas DestinosPreferenciasEstatisticas { get; set; }
     }
 }

@@ -297,7 +297,40 @@ namespace ProjectoEsw.GestorAplicacao
         }
 
         public EstatisticasGerais GerarEstatisticas() {
-            return new EstatisticasGerais { };
+            EstatisticasGerais model = new EstatisticasGerais { };
+
+            List<ARCandidaturasEstatisticas> ar = new List<ARCandidaturasEstatisticas>();
+            foreach (string x in Enum.GetNames(Estado.APROVADA.GetType())) {
+                int  valor = _context.Candidaturas.Where(row => row.Estado.Equals(x)).Count();
+                ar.Add(new ARCandidaturasEstatisticas { Estado = x, intNCandidaturasEstado = valor });    
+            }
+
+            List<TipoQuantidadeEstatistica> tqe = new List<TipoQuantidadeEstatistica>();
+            foreach (TipoCandidatura tipo in _context.TipoCandidatuas) {
+                int valor = _context.Candidaturas.Where(row => row.TipoCandidaturaFK == tipo.ID).Count();
+                tqe.Add(new TipoQuantidadeEstatistica { TipoMobilidade = tipo.Tipo, nCandidatos = valor });    
+            }
+
+            TotalBolsaEstatisticas bolsas = new TotalBolsaEstatisticas { };
+            bolsas.QuantidadeBolsas = _context.Candidaturas.Where(row => row.Estado == Estado.APROVADA).Where(row => row.Bolsa == true).Count();
+
+            //mini barraca
+            var query = _context.Instituicoes_Candidatura.GroupBy(row => row.InstituicaoId);
+            DestinosPreferenciasEstatisticas dpe = new DestinosPreferenciasEstatisticas { PreferenciaMaior = query.FirstOrDefault().Single().Instituicao, PreferenciaMenor = query.LastOrDefault().Single().Instituicao };
+
+            List<InstituicaoEstatisticas> ie = new List<InstituicaoEstatisticas>();
+
+            foreach (Instituicao x in _context.Instituicoes) {
+                int valor = _context.Instituicoes_Candidatura.Where(row => row.InstituicaoId == x.ID).Count();
+                ie.Add(new InstituicaoEstatisticas { Instituicao = x, QuantidadeAlunosInscritos = valor });
+            }
+
+            model.ARCandidaturaEstatisticas = ar;
+            model.TipoQuantidadeEstatisticas = tqe;
+            model.TotalBolsaEstatisticas = bolsas;
+            model.DestinosPreferenciasEstatisticas = dpe;
+            model.InstituicaoEstatistica = ie;
+            return model;
         }
     }
 }

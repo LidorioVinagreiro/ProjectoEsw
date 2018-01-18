@@ -152,6 +152,7 @@ namespace ProjectoEsw.Controllers
         public IActionResult MarcarEntrevista() {
             return View();
         }
+
         [HttpPost]
         public IActionResult MarcarEntrevista(MarcarEntrevistaViewModel model) {
             Utilizador tecnico = _gestor.getUtilizador(this.User).Result;

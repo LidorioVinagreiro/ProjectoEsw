@@ -24,75 +24,102 @@
             <h2 class=" text-center">Candidatura Submetida</h2>
             <input id="ID" name="ID" type="hidden" value="@Model.ID">
             <div class="col-sm-12">
-                <label asp-for="Candidato.Perfil.NomeCompleto" class="col-sm-3 control-label"></label>
+                <label asp-for="Candidato.Perfil.NomeCompleto" class="col-sm-4 control-label"></label>
                 <div class="col-sm-offset-4">
-                    <h5>@Model.Candidato.Perfil.NomeCompleto</h5>
+                    <h5 class="col-sm-7">@Model.Candidato.Perfil.NomeCompleto</h5> 
+                    <div  class="col-sm-offset-11">
+                        <input type="checkbox" name="lista" value="NomeCompleto" />
+                    </div>
                 </div>
             </div>
             <div class="col-sm-12">
-                <label asp-for="Candidato.Perfil.NomeCompleto" class="col-sm-3 control-label"></label>
+                <label asp-for="Candidato.Perfil.DataNasc" class="col-sm-4 control-label"></label>
                 <div class="col-sm-offset-4">
-                    <h5>@Model.Candidato.Perfil.NomeCompleto</h5>
+                    <h5 class="col-sm-7">@Model.Candidato.Perfil.DataNasc</h5>
+                    <div class="col-sm-offset-11">
+                        <input type="checkbox" name="lista" value="DataNasc" />
+                    </div>
                 </div>
             </div>
             <div class="col-sm-12">
-                <label asp-for="Candidato.Perfil.DataNasc" class="col-sm-3 control-label"></label>
+                <label asp-for="Candidato.Perfil.Email" class="col-sm-4 control-label"></label>
                 <div class="col-sm-offset-4">
-                    <h5>@Model.Candidato.Perfil.DataNasc</h5>
+                    <h5 class="col-sm-7"> @Model.Candidato.Perfil.Email</h5>
+                    <div class="col-sm-offset-11">
+                        <input type="checkbox" name="lista" value="Email" />
+                    </div>
                 </div>
             </div>
             <div class="col-sm-12">
-                <label asp-for="Candidato.Perfil.Email" class="col-sm-3 control-label"></label>
+                <label asp-for="Candidato.Perfil.Nif" class="col-sm-4 control-label"></label>
                 <div class="col-sm-offset-4">
-                    <h5> @Model.Candidato.Perfil.Email</h5>
+                    <h5 class="col-sm-7"> @Model.Candidato.Perfil.Nif</h5>
+                    <div class="col-sm-offset-11">
+                        <input type="checkbox" name="lista" value="Nif" />
+                    </div>
                 </div>
             </div>
             <div class="col-sm-12">
-                <label asp-for="Candidato.Perfil.Nif" class="col-sm-3 control-label"></label>
+                <label asp-for="Candidato.Perfil.NumeroIdentificacao" class="col-sm-4 control-label"></label>
                 <div class="col-sm-offset-4">
-                    <h5> @Model.Candidato.Perfil.Nif</h5>
+                    <h5 class="col-sm-7"> @Model.Candidato.Perfil.NumeroIdentificacao</h5>
+                    <div class="col-sm-offset-11">
+                        <input type="checkbox" name="lista" value="NumeroIdentificacao" />
+                    </div>
                 </div>
             </div>
             <div class="col-sm-12">
-                <label asp-for="Candidato.Perfil.NumeroIdentificacao" class="col-sm-3 control-label"></label>
+                <label asp-for="Candidato.Perfil.MoradaRua" class="col-sm-4 control-label"></label>
                 <div class="col-sm-offset-4">
-                    <h5> @Model.Candidato.Perfil.NumeroIdentificacao</h5>
+                    <h5 class="col-sm-7"> @Model.Candidato.Perfil.MoradaRua</h5>
+                    <div class="col-sm-offset-11">
+                        <input type="checkbox" name="lista" value="MoradaRua" />
+                    </div>
                 </div>
             </div>
             <div class="col-sm-12">
-                <label asp-for="Candidato.Perfil.MoradaRua" class="col-sm-3 control-label"></label>
+                <label asp-for="Candidato.Perfil.MoradaCodigoPostal" class="col-sm-4 control-label"></label>
                 <div class="col-sm-offset-4">
-                    <h5> @Model.Candidato.Perfil.MoradaRua</h5>
+                    <h5 class="col-sm-7">@Model.Candidato.Perfil.MoradaCodigoPostal </h5>
+                    <div class="col-sm-offset-11">
+                        <input type="checkbox" name="lista" value="MoradaCodigoPostal" />
+                    </div>
                 </div>
             </div>
             <div class="col-sm-12">
-                <label asp-for="Candidato.Perfil.MoradaCodigoPostal" class="col-sm-3 control-label"></label>
+                <label asp-for="Candidato.Perfil.Nacionalidade" class="col-sm-4 control-label"></label>
                 <div class="col-sm-offset-4">
-                    <h5>@Model.Candidato.Perfil.MoradaCodigoPostal </h5>
+                    <h5 class="col-sm-7">@Model.Candidato.Perfil.Nacionalidade</h5>
+                    <div class="col-sm-offset-11">
+                        <input type="checkbox" name="lista" value="Nacionalidade" />
+                    </div>
                 </div>
             </div>
             <div class="col-sm-12">
-                <label asp-for="Candidato.Perfil.Nacionalidade" class="col-sm-3 control-label"></label>
+                <label asp-for="Candidato.Perfil.MoradaConcelho" class="col-sm-4 control-label"></label>
                 <div class="col-sm-offset-4">
-                    <h5> @Model.Candidato.Perfil.Nacionalidade</h5>
+                    <h5 class="col-sm-7">@Model.Candidato.Perfil.MoradaConcelho</h5>
+                    <div class="col-sm-offset-11">
+                        <input type="checkbox" name="lista" value="MoradaConcelho" />
+                    </div>
                 </div>
             </div>
             <div class="col-sm-12">
-                <label asp-for="Candidato.Perfil.MoradaConcelho" class="col-sm-3 control-label"></label>
+                <label asp-for="Candidato.Perfil.MoradaDistrito" class="col-sm-4 control-label"></label>
                 <div class="col-sm-offset-4">
-                    <h5>@Model.Candidato.Perfil.MoradaConcelho</h5>
+                    <h5 class="col-sm-7">@Model.Candidato.Perfil.MoradaDistrito</h5>
+                    <div class="col-sm-offset-11">
+                        <input type="checkbox" name="lista" value="MoradaDistrito" />
+                    </div>
                 </div>
             </div>
             <div class="col-sm-12">
-                <label asp-for="Candidato.Perfil.MoradaDistrito" class="col-sm-3 control-label"></label>
+                <label asp-for="Candidato.Perfil.Telefone" class="col-sm-4 control-label"></label>
                 <div class="col-sm-offset-4">
-                    <h5>@Model.Candidato.Perfil.MoradaDistrito</h5>
-                </div>
-            </div>
-            <div class="col-sm-12">
-                <label asp-for="Candidato.Perfil.Telefone" class="col-sm-3 control-label"></label>
-                <div class="col-sm-offset-4">
-                    <h5>@Model.Candidato.Perfil.Telefone</h5>
+                    <h5 class="col-sm-7">@Model.Candidato.Perfil.Telefone</h5>
+                    <div class="col-sm-offset-11">
+                        <input type="checkbox" name="lista" value="Telefone" />
+                    </div>
                 </div>
             </div>
         </div>
@@ -100,68 +127,107 @@
             <h4>Dados do Contacto em caso de emergencia</h4>
 
             <div class="col-sm-12">
-                <label asp-for="NomeEmergencia" class="col-sm-3 control-label"></label>
+                <label asp-for="NomeEmergencia" class="col-sm-4 control-label"></label>
                 <div class="col-sm-offset-4">
-                    <h5>@Model.NomeEmergencia</h5>
+                    <h5 class="col-sm-7">@Model.NomeEmergencia</h5>
+                    <div class="col-sm-offset-11">
+                        <input type="checkbox" name="lista" value="NomeEmergencia" />
+                    </div>
                 </div>
             </div>
             <div class="col-sm-12">
-                <label asp-for="AfiliacaoEmergencia" class="col-sm-3 control-label"></label>
+                <label asp-for="AfiliacaoEmergencia" class="col-sm-4 control-label"></label>
                 <div class="col-sm-offset-4">
-                    <h5>@Model.AfiliacaoEmergencia</h5>
+                    <h5 class="col-sm-7">@Model.AfiliacaoEmergencia</h5>
+                    <div class="col-sm-offset-11">
+                        <input type="checkbox" name="lista" value="AfiliacaoEmergencia" />
+                    </div>
                 </div>
             </div>
-            <div class="col-sm-12">
-                <label asp-for="NumeroEmergencia" class="col-sm-3 control-label"></label>
+            <div class="col-sm-12   ">
+                <label asp-for="NumeroEmergencia" class="col-sm-4 control-label"></label>
                 <div class="col-sm-offset-4">
-                    <h5>@Model.NumeroEmergencia</h5>
+                    <h5 class="col-sm-7">@Model.NumeroEmergencia</h5>
+                    <div class="col-sm-offset-11">
+                        <input type="checkbox" name="lista" value="NumeroEmergencia" />
+                    </div>
                 </div>
             </div>
         </div>
         <div class="form-group">
             <h4>Dados Candidatura</h4>
             <div class="col-sm-12">
-                <label asp-for="Escola" class="col-sm-3 control-label"></label>
+                <label asp-for="Escola" class="col-sm-4 control-label"></label>
                 <div class="col-sm-offset-4">
-                    <h5>@Model.Escola</h5>
+                    <h5 class="col-sm-7">@Model.Escola</h5>
+                    <div class="col-sm-offset-11">
+                        <input type="checkbox" name="lista" value="Escola" />
+                    </div>
                 </div>
             </div>
             <div class="col-sm-12">
-                <label asp-for="CursoFrequentado" class="col-sm-3 control-label"></label>
+                <label asp-for="CursoFrequentado" class="col-sm-4 control-label"></label>
                 <div class="col-sm-offset-4">
-                    <h5>@Model.CursoFrequentado</h5>
+                    <h5 class="col-sm-7">@Model.CursoFrequentado</h5>
+                    <div class="col-sm-offset-11">
+                        <input type="checkbox" name="lista" value="CursoFrequentado" />
+                    </div>
                 </div>
             </div>
             <div class="col-sm-12">
-                <label asp-for="AnoCurricular" class="col-sm-3 control-label"></label>
+                <label asp-for="AnoCurricular" class="col-sm-4 control-label"></label>
                 <div class="col-sm-offset-4">
-                    <h5>@Model.AnoCurricular</h5>
+                    <h5 class="col-sm-7">@Model.AnoCurricular</h5>
+                    <div class="col-sm-offset-11">
+                        <input type="checkbox" name="lista" value="AnoCurricular" />
+                    </div>
                 </div>
             </div>
             <div class="col-sm-12">
-                <label asp-for="Instituicoes" class="col-sm-3 control-label"></label>
+                <label asp-for="Instituicoes" class="col-sm-4 control-label"></label>
                 <div class="col-sm-offset-4">
-                    <h5></h5>
-                </div>
-            </div>
-            <div class="col-sm-12">
-                <label asp-for="Bolsa" class="col-sm-3 control-label"></label>
-                <div class="col-sm-offset-4">
-                    @if (Model.Bolsa == true)
-            {
-                        <h5>Sim</h5>
+                    
+                    @if (Model.Instituicoes == null)
+                    {
+
+                        <h5 class="col-sm-7">Sem instituicoes</h5>
+
                     }
                     else
                     {
-                        <h5>Não</h5>
+                        for (int i =0;i < Model.Instituicoes.Count(); i++){
+                            <h5 class="col-sm-7">@Model.Instituicoes.ToList()[i].Instituicao.NomeInstituicao</h5>
+                        }
                     }
+                    <div class="col-sm-offset-11">
+                        <input type="checkbox" name="lista" value="Instituicoes" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <label asp-for="Bolsa" class="col-sm-4 control-label"></label>
+                <div class="col-sm-offset-4">
+                    @if (Model.Bolsa == true)
+                    {
+                        <h5 class="col-sm-7">Sim</h5>
+                    }
+                    else
+                    {
+                        <h5 class="col-sm-7">Não</h5>
+                    }
+                    <div class="col-sm-offset-11">
+                        <input type="checkbox" name="lista" value="Bolsa" />
+                    </div>
                 </div>
             </div>
 
-            <div class="col-sm-8">
-                <label asp-for="CartaMotivacao" class="col-sm-3 control-label"></label>
+            <div class="col-sm-12">
+                <label asp-for="CartaMotivacao" class="col-sm-4 control-label"></label>
                 <div class="col-sm-offset-4">
-                    <p>@Model.CartaMotivacao</p>
+                    <h5 class="col-sm-7">@Model.CartaMotivacao</h5>
+                    <div class="col-sm-offset-11">
+                        <input type="checkbox" name="lista" value="CartaMotivacao" />
+                    </div>
                 </div>
             </div>
         </div>

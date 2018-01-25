@@ -154,7 +154,7 @@ namespace ProjectoEsw.GestorAplicacao
                     });
                 }
                 // remover todas as instituicoes da BD
-                _context.Instituicoes_Candidatura = _context.Instituicoes_Candidatura.Where(row => row.CandidaturaId != candidatura.ID).
+                _context.Instituicoes_Candidatura = _context.Instituicoes_Candidatura.Where(row => row.CandidaturaId != candidatura.ID);
                 _context.Instituicoes_Candidatura.AddRange(instituicoes);
                 await _context.SaveChangesAsync();
                 return true;

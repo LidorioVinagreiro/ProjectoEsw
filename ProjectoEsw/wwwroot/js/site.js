@@ -197,27 +197,6 @@
                 })
             };
 
-            function gerarEstatistica(lista) {
-                var chart = new CanvasJS.Chart("chartContainer", {
-                theme: "theme2",
-                animationEnabled: true,
-                title: {
-                    text: "Simple Column Chart in ASP.NET MVC"
-                },
-                    subtitles: [ { text: "Try Resizing the Browser" } ],
-                        data: [
-                            {
-                                type: "pie", //change type to bar, line, area, pie, etc
-                                dataPoints: [
-                                    { label: "algo", y: 71 },
-                                    { label: "sim", y: 55 },
-                                ]
-                            }
-                        ]
-                    });
-                    chart.render();
-                };
-
         }
     });
 }

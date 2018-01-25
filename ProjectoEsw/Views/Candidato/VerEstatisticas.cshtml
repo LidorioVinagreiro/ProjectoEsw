@@ -1,0 +1,57 @@
+﻿@section links {
+    <a asp-area="" asp-controller="Candidato" asp-action="Logout" class="btn btn-link btn-xs pull-right">Log Out</a>
+}
+
+@section Home{
+    <a asp-area="" asp-controller="Candidato" asp-action="Index">Home</a>
+}
+
+@section ProgramasMobilidade{
+    <a asp-area="" asp-controller="Candidato" asp-action="ProgramasMobilidade">Programas Mobilidade</a>
+}
+
+@section Bolsas{
+    <a asp-area="" asp-controller="Candidato" asp-action="Bolsas">Bolsas</a>
+}
+
+@section SobreNos{
+    <a asp-area="" asp-controller="Candidato" asp-action="SobreNos">Sobre Nós</a>
+}
+
+<!--Home-->
+<div class="jumbotron col-sm-8">
+    <h2 class="text-center">Estatisticas</h2>
+</div>
+
+<div class="jumbotron col-sm-3 col-sm-offset-1">
+    <h5 class="text-center">Opcoes</h5>
+    <a asp-area="" asp-controller="Candidato" asp-action="VisualizarCandidatura" class="btn btn-link btn-xs pull-right col-sm-12">Ver Candidatura</a>
+    <a asp-area="" asp-controller="Candidato" asp-action="Perfil" class="btn btn-link btn-xs pull-right col-sm-12">Ver Perfil</a>
+    <a asp-area="" asp-controller="Candidato" asp-action="EditarPerfil" class="btn btn-link btn-xs center-block col-sm-12">Editar Perfil</a>
+</div>
+
+<div class="col-sm-8">
+    <div id="chartContainer"></div>
+</div>
+
+<script type="text/javascript">
+        window.onload = function () {
+            var chart = new CanvasJS.Chart("chartContainer", {
+                theme: "theme2",
+                animationEnabled: true,
+                title: {
+                    text: "Simple Column Chart in ASP.NET MVC"
+                },
+                subtitles: [{ text: "Try Resizing the Browser" }],
+                data: [
+                    {
+                        type: "column", //change type to bar, line, area, pie, etc
+                        dataPoints: @Html.Raw(ViewBag.DataPoints)
+                            }
+                ]
+            });
+            chart.render();
+        };
+</script>
+
+

@@ -315,8 +315,8 @@ namespace ProjectoEsw.GestorAplicacao
             bolsas.QuantidadeBolsas = _context.Candidaturas.Where(row => row.Estado == Estado.APROVADA).Where(row => row.Bolsa == true).Count();
 
             //mini barraca
-            var query = _context.Instituicoes_Candidatura.GroupBy(row => row.InstituicaoId);
-            DestinosPreferenciasEstatisticas dpe = new DestinosPreferenciasEstatisticas { PreferenciaMaior = query.FirstOrDefault().Single().Instituicao, PreferenciaMenor = query.LastOrDefault().Single().Instituicao };
+           // var query = _context.Instituicoes_Candidatura.GroupBy(row => row.InstituicaoId);
+            //DestinosPreferenciasEstatisticas dpe = new DestinosPreferenciasEstatisticas { PreferenciaMaior = query.FirstOrDefault().Single().Instituicao, PreferenciaMenor = query.LastOrDefault().Single().Instituicao };
 
             List<InstituicaoEstatisticas> ie = new List<InstituicaoEstatisticas>();
 
@@ -328,7 +328,7 @@ namespace ProjectoEsw.GestorAplicacao
             model.ARCandidaturaEstatisticas = ar;
             model.TipoQuantidadeEstatisticas = tqe;
             model.TotalBolsaEstatisticas = bolsas;
-            model.DestinosPreferenciasEstatisticas = dpe;
+           // model.DestinosPreferenciasEstatisticas = dpe;
             model.InstituicaoEstatistica = ie;
             return model;
         }

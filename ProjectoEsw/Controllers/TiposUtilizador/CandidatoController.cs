@@ -13,6 +13,9 @@ using ProjectoEsw.Models.Candidatura_sprint2.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Primitives;
 using Microsoft.AspNetCore.Http;
+using ProjectoEsw.Models.Estatisticas_sprint3.ViewModel;
+using ProjectoEsw.Models.Estatisticas_sprint3;
+using Newtonsoft.Json;
 
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -376,6 +379,20 @@ namespace ProjectoEsw.Controllers
             }
             await _contexto.SaveChangesAsync();
             return new JsonResult(new { status = status} ); 
+        }
+
+        public IActionResult VerEstatisticas()
+        {
+            EstatisticasGerais model = _gestor.GerarEstatisticas();
+            List<InstituicaoEstatisticas> ins = model.InstituicaoEstatistica;
+            List<DataPoint> dataPoints = new List<DataPoint>();
+            for (int i = 0; i < ins.Count; i++)
+            {
+                dataPoints.Add(new DataPoint(ins[i].Instituicao.NomeInstituicao, ins[i].QuantidadeAlunosInscritos));
+            }
+            ViewBag.DataPoints = JsonConvert.SerializeObject(dataPoints);
+
+            return View();
         }
     }
 }

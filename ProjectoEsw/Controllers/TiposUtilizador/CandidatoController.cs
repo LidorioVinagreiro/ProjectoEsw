@@ -189,7 +189,8 @@ namespace ProjectoEsw.Controllers
                     AfiliacaoEmergencia = model.AfiliacaoEmergencia,
                     NumeroEmergencia = model.NumeroEmergencia,
                     NomeEmergencia = model.NomeEmergencia,
-                    CursoFrequentado = model.CursoFrequentado
+                    CursoFrequentado = model.CursoFrequentado,
+                    
                 };
 
                 bool done = await _gestor.adicionarCandidatura(user, candidatura,model);
@@ -290,13 +291,52 @@ namespace ProjectoEsw.Controllers
         public IActionResult AlterarCandidatura() {
             Utilizador user = _gestor.getUtilizador(this.User).Result;
             Perfil p1 = _gestor.getPerfil(user);
-            Candidatura candidatura = _contexto.Candidaturas.Where(x => x.Candidato.Id == user.Id).Single();
-            return View("AlterarCandidatura",candidatura);
+            Candidatura candidatura = _contexto.Candidaturas.Where(x => x.Candidato.Id == user.Id)
+                .Single();
+            TipoCandidatura tipo = _contexto.TipoCandidatuas.Where(row => row.ID == candidatura.TipoCandidaturaFK).Single();
+            p1.Utilizador = user;
+            p1.UtilizadorFK = user.Id;
+            user.Perfil = p1;
+            candidatura.Candidato = user;
+            candidatura.TipoCandidatura = tipo;
+            candidatura.Instituicoes = _contexto.Instituicoes_Candidatura.Where(row => row.CandidaturaId == candidatura.ID).ToList();
+            if (tipo.Tipo.Equals("Erasmus"))
+                return View("AlterarCandidaturaErasmus",candidatura);
+            else
+                return View("AlterarCandidaturaSantander", candidatura);
         }
 
         [HttpPost]
         public IActionResult AlterarCandidatura(CandidaturaViewModel model) {
-            return View();
+            if (ModelState.IsValid) {
+                Candidatura candidatura = _contexto.Candidaturas.Where(row => row.ID == model.ID).Single();
+                candidatura.AfiliacaoEmergencia = model.AfiliacaoEmergencia;
+                candidatura.AnoCurricular = model.AnoCurricular;
+                candidatura.Bolsa = model.Bolsa;
+                candidatura.Escola = model.Escola;
+                candidatura.Estado = Estado.EM_ANALISE;
+                candidatura.IBAN = model.IBAN;
+                candidatura.NomeEmergencia = model.NomeEmergencia;
+                candidatura.NumeroEmergencia = model.NumeroEmergencia;
+
+                List<string> x = Request.Form["lista"].ToList();
+                if (x.Count <= 0)
+                    return RedirectToAction("Index", "Candidato"); // caso não selecione nada
+                List<int> aux = new List<int>();
+                for (int i = 0; i < x.Count; i++)
+                {
+                    int a = 0;
+                    Int32.TryParse(x[i], out a);
+                    if (a != 0)
+                        aux.Add(a);
+                }
+                List<Instituicao> listaIns = _contexto.Instituicoes.Where(row => aux.Contains(row.ID)).ToList();
+
+                candidatura.Instituicoes = aux;   
+
+            }
+
+            return View();// algo errado no model state
         }
 
         public IActionResult ProgramasMobilidade() {

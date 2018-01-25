@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Hosting;
 using System.IO;
 using Microsoft.AspNetCore.Http;
 using ProjectoEsw.Models.Estatisticas_sprint3.ViewModel;
+using Microsoft.Extensions.Primitives;
 
 namespace ProjectoEsw.GestorAplicacao
 {
@@ -139,7 +140,32 @@ namespace ProjectoEsw.GestorAplicacao
             }
         }
 
+        public async Task<bool> AlterarCandidatura(Utilizador user, Candidatura candidatura, CandidaturaViewModel model) {
+            try
+            {
+                List<Instituicoes_Candidatura> instituicoes = new List<Instituicoes_Candidatura>();
+                for (int i = 0; i < model.Instituicoes.Count; i++)
+                {
+                    instituicoes.Add(new Instituicoes_Candidatura
+                    {
+                        CandidaturaId = candidatura.ID,
+                        InstituicaoId = model.Instituicoes[i].ID
 
+                    });
+                }
+                // remover todas as instituicoes da BD
+                _context.Instituicoes_Candidatura = _context.Instituicoes_Candidatura.Where(row => row.CandidaturaId != candidatura.ID).
+                _context.Instituicoes_Candidatura.AddRange(instituicoes);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception e)
+            {
+                e.ToString();
+                return false;
+            }
+
+        }
 
         public async Task<Utilizador> getUtilizador(ClaimsPrincipal principal)
         {
@@ -207,13 +233,18 @@ namespace ProjectoEsw.GestorAplicacao
             _gestorEmail.EnviarEmail(candidatura.Candidato, "Candidatura aprovada", candidatura.ToString());
             return true;
         }
-        public bool PedirAlteracaoCandidatura(Candidatura candidatura, Utilizador Tecnico)
+        public bool PedirAlteracaoCandidatura(Candidatura candidatura, Utilizador Tecnico,StringValues propriedadesParaAlterar)
         {
+            string emailBody = "";
+            for (int i = 0; i < propriedadesParaAlterar.Count; i++)
+            {
+                emailBody += propriedadesParaAlterar.ToList()[i].ToString();
+            }
             if (!candidatura.Estado.Equals(Estado.EM_ANALISE))
                 return false;
             candidatura.Estado = Estado.INCOMPLETA;
             _context.SaveChanges();
-            _gestorEmail.EnviarEmail(candidatura.Candidato, "Candidatura necessita de alteracao", candidatura.ToString());
+            _gestorEmail.EnviarEmail(candidatura.Candidato, "Candidatura necessita de alteracao", emailBody);
             return true;
         }
 

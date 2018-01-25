@@ -9,6 +9,8 @@ using ProjectoEsw.Models;
 using ProjectoEsw.GestorAplicacao;
 using ProjectoEsw.Models.Identity;
 using ProjectoEsw.Models.Candidatura_sprint2.ViewModels;
+using Microsoft.Extensions.Primitives;
+using Microsoft.EntityFrameworkCore;
 
 namespace ProjectoEsw.Controllers
 {
@@ -137,15 +139,20 @@ namespace ProjectoEsw.Controllers
         [HttpPost]
         public IActionResult PedirAlteracaoCandidatura(CandidaturaViewModel model)
         {
+            StringValues valores = Request.Form["lista"];
+            if (!valores.Any())
+                return View("Index"); // nao selecionaram valores nenhuns
             if (ModelState.IsValid)
             {
-                Candidatura candidatura = _context.Candidaturas.Where(x => x.ID == model.ID).Single();
+                Candidatura candidatura = _context.Candidaturas.Where(x => x.ID == model.ID)
+                    .Include(row => row.Candidato)
+                    .Single();
                 Task<Utilizador> tecnico = _gestor.getUtilizador(this.User);
-                if (_gestor.PedirAlteracaoCandidatura(candidatura, tecnico.Result))
-                    return View();// pedido alteracao
-                return View(); // erro a alterar
+                if (_gestor.PedirAlteracaoCandidatura(candidatura, tecnico.Result,valores))
+                    return View("Index");// pedido alteracao
+                return View("Index"); // erro a alterar
             }
-            return View(); // modelstate invalid
+            return View("Index"); // modelstate invalid
 
         }
 

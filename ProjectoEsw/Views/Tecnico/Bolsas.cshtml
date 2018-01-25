@@ -18,9 +18,38 @@
 @section SobreNos{
     <a asp-area="" asp-controller="Tecnico" asp-action="SobreNos">Sobre Nós</a>
 }
+
 <div class="jumbotron col-sm-8">
     <h3 class="text-center">Bolsas</h3>
     <p class="text-center"> Resto Informacao + links + prazos</p>
+    
+    <script type="text/javascript">
+
+    window.onload = function () {
+        var chart = new CanvasJS.Chart("chartContainer", {
+            theme: "theme2",
+            animationEnabled: true,
+            title: {
+                text: "Simple Column Chart in ASP.NET MVC"
+            },
+            subtitles: [
+                { text: "Try Resizing the Browser" }
+            ],
+            data: [
+                {
+                    type: "pie", //change type to bar, line, area, pie, etc
+                    dataPoints: [
+                        { label: "algo", y: 71 },
+                        { label: "sim", y: 55 },
+                    ]
+                }
+            ]
+        });
+        chart.render();
+    };
+    </script>
+    <div id="chartContainer"></div>
+
 </div>
 
 <div class="jumbotron col-sm-3 col-sm-offset-1">

@@ -22,13 +22,14 @@ using Newtonsoft.Json;
 
 namespace ProjectoEsw.Controllers
 {
-    [Authorize(Roles ="Candidato")]
+    [Authorize(Roles = "Candidato")]
     public class CandidatoController : Controller
     {
         private Gestor _gestor;
         private AplicacaoDbContexto _contexto;
         private GestorEmail _gestorEmail;
-        public CandidatoController(Gestor gestor,AplicacaoDbContexto contexto,GestorEmail gestorEmail) {
+        public CandidatoController(Gestor gestor, AplicacaoDbContexto contexto, GestorEmail gestorEmail)
+        {
             _gestor = gestor;
             _contexto = contexto;
             _gestorEmail = gestorEmail;
@@ -42,7 +43,7 @@ namespace ProjectoEsw.Controllers
             Perfil queryPerfil = _gestor.getPerfil(user);
             user.Perfil = queryPerfil;
             var model = user.Perfil;
-           return View(model);
+            return View(model);
         }
 
 
@@ -64,7 +65,8 @@ namespace ProjectoEsw.Controllers
             });
         }
 
-        public async Task<IActionResult> Perfil() {
+        public async Task<IActionResult> Perfil()
+        {
             Utilizador user = await _gestor.getUtilizador(this.User);
             Perfil queryPerfil = _gestor.getPerfil(user);
             user.Perfil = queryPerfil;
@@ -72,7 +74,8 @@ namespace ProjectoEsw.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> EditarPerfil(RegisterViewModel model) {
+        public async Task<IActionResult> EditarPerfil(RegisterViewModel model)
+        {
             Utilizador user = await _gestor.getUtilizador(this.User);
             Perfil queryPerfil = _gestor.getPerfil(user);
 
@@ -81,34 +84,39 @@ namespace ProjectoEsw.Controllers
                 bool aux = await _gestor.UploadFotoUtilizador(user, Request.Form.Files.Single());
                 return RedirectToAction("Index", "Candidato");
             }
-            else {
+            else
+            {
                 //falta erros?
                 return RedirectToAction("Index", "Candidato");
             }
-            
+
         }
 
         [HttpPost]
-        public async Task<IActionResult> AlterarPassword(RegisterViewModel model) {
+        public async Task<IActionResult> AlterarPassword(RegisterViewModel model)
+        {
             if (ModelState.IsValid)
             {
 
                 await _gestor.EditarPassword(model);
-                return RedirectToAction("Index","Candidato");
+                return RedirectToAction("Index", "Candidato");
             }
-            else {
+            else
+            {
                 //password nao foi alterada
                 return RedirectToAction("Index", "Candidato");
             }
         }
 
-        public async Task<IActionResult> Logout() {
+        public async Task<IActionResult> Logout()
+        {
             await _gestor.LogOut();
             return RedirectToAction("Index", "Home");
         }
 
 
-        public IActionResult CandidaturaErasmus() {
+        public IActionResult CandidaturaErasmus()
+        {
             Utilizador user = _gestor.getUtilizador(this.User).Result;
             Perfil perfil = _gestor.getPerfil(user);
             user.Perfil = perfil;
@@ -124,8 +132,8 @@ namespace ProjectoEsw.Controllers
             catch
             {
             }
-            CandidaturaViewModel model = new CandidaturaViewModel { UtilizadorFK = user.Id ,Candidato = user, Instituicoes = _contexto.Instituicoes.Where(row => row.Interno == false).ToList() };
-            return View("candidaturaErasmus",model);
+            CandidaturaViewModel model = new CandidaturaViewModel { UtilizadorFK = user.Id, Candidato = user, Instituicoes = _contexto.Instituicoes.Where(row => row.Interno == false).ToList() };
+            return View("candidaturaErasmus", model);
         }
 
         public IActionResult CandidaturaSantander()
@@ -137,7 +145,7 @@ namespace ProjectoEsw.Controllers
             try
             {
                 Candidatura aux = _contexto.Candidaturas.Where(row => row.UtilizadorFK == user.Id).Single();
-                if(aux.UtilizadorFK == user.Id)
+                if (aux.UtilizadorFK == user.Id)
                 {
                     return RedirectToAction("Index", "Candidato");
                 }
@@ -146,12 +154,14 @@ namespace ProjectoEsw.Controllers
             {
             }
             CandidaturaViewModel model = new CandidaturaViewModel { UtilizadorFK = user.Id, Candidato = user, Instituicoes = _contexto.Instituicoes.Where(row => row.Interno == true).ToList() };
-            return View("CandidaturaSantander",model);
+            return View("CandidaturaSantander", model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> CandidaturaErasmus(CandidaturaViewModel model) {           
-            if (ModelState.IsValid) {
+        public async Task<IActionResult> CandidaturaErasmus(CandidaturaViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
                 TipoCandidatura tipo = _contexto.TipoCandidatuas.Single(row => row.Tipo == "Erasmus");
                 Utilizador user = await _gestor.getUtilizador(this.User);
 
@@ -162,22 +172,23 @@ namespace ProjectoEsw.Controllers
                 for (int i = 0; i < x.Count; i++)
                 {
                     int a = 0;
-                    Int32.TryParse(x[i],out a);
+                    Int32.TryParse(x[i], out a);
                     if (a != 0)
                         aux.Add(a);
                 }
                 List<Instituicao> listaIns = _contexto.Instituicoes.Where(row => aux.Contains(row.ID)).ToList();
                 if (listaIns.Where(row => row.Interno != false).Any())
-                    return RedirectToAction("index","Candidato"); // form as been tempered isto é os forms foram mudados manualmente
+                    return RedirectToAction("index", "Candidato"); // form as been tempered isto é os forms foram mudados manualmente
 
                 model.Instituicoes = listaIns;
-                bool dataInicio = System.DateTime.Now.CompareTo(tipo.DataInicio) >=0;
+                bool dataInicio = System.DateTime.Now.CompareTo(tipo.DataInicio) >= 0;
                 bool dataFim = System.DateTime.Now.CompareTo(tipo.DataFim) < 0;
-                if (!(dataInicio && dataFim)) {
+                if (!(dataInicio && dataFim))
+                {
                     //não cumpre os prazos
                     return View();
                 }
-                
+
                 Candidatura candidatura = new Candidatura
                 {
                     UtilizadorFK = user.Id,
@@ -195,8 +206,9 @@ namespace ProjectoEsw.Controllers
                     CursoFrequentado = model.CursoFrequentado
                 };
 
-                bool done = await _gestor.adicionarCandidatura(user, candidatura,model);
-                if (done) {
+                bool done = await _gestor.adicionarCandidatura(user, candidatura, model);
+                if (done)
+                {
                     _gestorEmail.EnviarEmail(user, "Efectuou a candidatura", candidatura.ToString());
                     //sucesso
                     return RedirectToAction("Index", "Candidato");
@@ -228,7 +240,7 @@ namespace ProjectoEsw.Controllers
                         aux.Add(a);
                 }
                 List<Instituicao> listaIns = _contexto.Instituicoes.Where(row => aux.Contains(row.ID)).ToList();
-                if (listaIns.Where(row => row.Interno != true).Any())               
+                if (listaIns.Where(row => row.Interno != true).Any())
                     return View(); // form as been tempered isto é os forms foram mudados manualmente
 
                 model.Instituicoes = listaIns;
@@ -255,7 +267,7 @@ namespace ProjectoEsw.Controllers
                     NomeEmergencia = model.NomeEmergencia,
                 };
 
-                bool done = await _gestor.adicionarCandidatura(user, candidatura,model);
+                bool done = await _gestor.adicionarCandidatura(user, candidatura, model);
                 if (done)
                 {
                     _gestorEmail.EnviarEmail(user, "Efectuou a candidatura", candidatura.ToString());
@@ -270,7 +282,8 @@ namespace ProjectoEsw.Controllers
 
         }
 
-        public IActionResult VisualizarCandidatura() {
+        public IActionResult VisualizarCandidatura()
+        {
             Utilizador user = _gestor.getUtilizador(this.User).Result;
             Perfil p1 = _gestor.getPerfil(user);
             user.Perfil = p1;
@@ -290,22 +303,25 @@ namespace ProjectoEsw.Controllers
             }
             //model.Candidato = user;
         }
-        public IActionResult AlterarCandidatura() {
+        public IActionResult AlterarCandidatura()
+        {
             Utilizador user = _gestor.getUtilizador(this.User).Result;
             Perfil p1 = _gestor.getPerfil(user);
             Candidatura candidatura = _contexto.Candidaturas.Where(x => x.Candidato.Id == user.Id).Single();
-            return View("AlterarCandidatura",candidatura);
+            return View("AlterarCandidatura", candidatura);
         }
 
         [HttpPost]
-        public IActionResult AlterarCandidatura(CandidaturaViewModel model) {
+        public IActionResult AlterarCandidatura(CandidaturaViewModel model)
+        {
             return View();
         }
 
-        public IActionResult ProgramasMobilidade() {
+        public IActionResult ProgramasMobilidade()
+        {
             Utilizador user = _gestor.getUtilizador(this.User).Result;
             Perfil p1 = _gestor.getPerfil(user);
-            
+
             return View(p1);
         }
 
@@ -322,12 +338,14 @@ namespace ProjectoEsw.Controllers
             return View(p1);
         }
 
-        public IActionResult MarcarReuniao() {
+        public IActionResult MarcarReuniao()
+        {
             return View();
         }
 
         [HttpPost]
-        public IActionResult MarcarReuniao(MarcarReuniaoViewModel viewModel) {
+        public IActionResult MarcarReuniao(MarcarReuniaoViewModel viewModel)
+        {
             Utilizador actual = _gestor.getUtilizador(this.User).Result;
             bool marcou = _gestor.MarcarReuniao(actual, viewModel.DataReuniaoInicio, viewModel.DataReuniaoFim);
             if (marcou)
@@ -346,7 +364,7 @@ namespace ProjectoEsw.Controllers
         [HttpPost]
         public async Task<JsonResult> SaveEvents(Eventos evento)
         {
-            
+
             var status = false;
             if (evento.ID > 0)
             {
@@ -359,50 +377,30 @@ namespace ProjectoEsw.Controllers
                 updateEvento.PerfilFK = _gestor.getPerfil(user).ID;
 
             }
-            else {
+            else
+            {
                 _contexto.Eventos.Add(evento);
             }
-            
+
             await _contexto.SaveChangesAsync();
             status = true;
-            return  new JsonResult(new { Data = new { status = status } });
+            return new JsonResult(new { Data = new { status = status } });
         }
 
         [HttpPost]
-        public async Task<JsonResult> DeleteEvent(int id) {
+        public async Task<JsonResult> DeleteEvent(int id)
+        {
             var status = false;
             Eventos evento = _contexto.Eventos.Where(even => even.ID == id).SingleOrDefault();
 
-            if (evento!=null){
+            if (evento != null)
+            {
                 _contexto.Eventos.Remove(evento);
                 status = true;
             }
             await _contexto.SaveChangesAsync();
-            return new JsonResult(new { status = status} ); 
+            return new JsonResult(new { status = status });
         }
 
-        public IActionResult VerEstatisticas()
-        {
-            EstatisticasGerais model = _gestor.GerarEstatisticas();
-            List<InstituicaoEstatisticas> ins = model.InstituicaoEstatistica;
-            List<TipoQuantidadeEstatistica> can = model.TipoQuantidadeEstatisticas;
-            TotalBolsaEstatisticas bol = model.TotalBolsaEstatisticas;
-            List<DataPoint> dataPointsIns = new List<DataPoint>();
-            for (int i = 0; i < ins.Count; i++)
-            {
-                dataPointsIns.Add(new DataPoint(ins[i].Instituicao.NomeInstituicao, ins[i].QuantidadeAlunosInscritos));
-            }
-            ViewBag.dataPointsIns = JsonConvert.SerializeObject(dataPointsIns);
-
-            List<DataPoint> dataPointsTipo = new List<DataPoint>();
-            for (int a = 0; a < can.Count; a++)
-            {
-                dataPointsTipo.Add(new DataPoint(can[a].TipoMobilidade, can[a].nCandidatos));
-            }
-            ViewBag.dataPointsTipo = JsonConvert.SerializeObject(dataPointsTipo);
-            ViewBag.SemBolsa = bol.QuantidadeSemBolsa;
-            ViewBag.ComBolsa = bol.QuantidadeBolsas;
-            return View();
-        }
     }
 }

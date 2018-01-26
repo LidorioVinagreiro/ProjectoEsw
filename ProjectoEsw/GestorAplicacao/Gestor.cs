@@ -298,17 +298,13 @@ namespace ProjectoEsw.GestorAplicacao
 
         public EstatisticasGerais GerarEstatisticas() {
             EstatisticasGerais model = new EstatisticasGerais { };
+
             List<ARCandidaturasEstatisticas> ar = new List<ARCandidaturasEstatisticas>();
-            foreach (string x in Enum.GetNames(Estado.APROVADA.GetType())) { //tem candidatura com estao = 3 e nao retoma esse valor
-                int  valor = _context.Candidaturas.Where(row => row.Estado.Equals(x)).Count();
+            foreach (string x in Enum.GetNames(Estado.APROVADA.GetType())) {
+                Estado EstadoValue = (Estado)Enum.Parse(typeof(Estado), x);
+                int  valor = _context.Candidaturas.Where(row => row.Estado.Equals(EstadoValue)).Count();
                 ar.Add(new ARCandidaturasEstatisticas { Estado = x, intNCandidaturasEstado = valor });
             }
-            /*List<ARCandidaturasEstatisticas> ar = new List<ARCandidaturasEstatisticas>();
-            foreach (string x in Enum.GetNames(Estado.APROVADA.GetType())) {
-                int  valor = _context.Candidaturas.Where(row => row.Estado.Equals(x)).Count();
-                ar.Add(new ARCandidaturasEstatisticas { Estado = x, intNCandidaturasEstado = valor });    
-            }
-*/
 
             List<TipoQuantidadeEstatistica> tqe = new List<TipoQuantidadeEstatistica>(); // Funciona!
             foreach (TipoCandidatura tipo in _context.TipoCandidatuas) {
@@ -317,14 +313,14 @@ namespace ProjectoEsw.GestorAplicacao
             }
 
             TotalBolsaEstatisticas bolsas = new TotalBolsaEstatisticas { };
-            bolsas.QuantidadeBolsas = _context.Candidaturas.Where(row => row.Estado == Estado.APROVADA).Where(row => row.Bolsa == true).Count();
-            bolsas.QuantidadeSemBolsa = _context.Candidaturas.Where(row => row.Estado == Estado.APROVADA).Where(row => row.Bolsa == false).Count();
+            bolsas.QuantidadeBolsas = _context.Candidaturas.Where(row => row.Bolsa == true).Count();
+            bolsas.QuantidadeSemBolsa = _context.Candidaturas.Where(row => row.Bolsa == false).Count();
 
             //mini barraca
-            // var query = _context.Instituicoes_Candidatura.GroupBy(row => row.InstituicaoId);
-            //DestinosPreferenciasEstatisticas dpe = new DestinosPreferenciasEstatisticas { PreferenciaMaior = query.FirstOrDefault().Single().Instituicao, PreferenciaMenor = query.LastOrDefault().Single().Instituicao };
+            var query = _context.Instituicoes_Candidatura.Include(row => row.Instituicao).GroupBy(row => row.InstituicaoId);
+            DestinosPreferenciasEstatisticas dpe = new DestinosPreferenciasEstatisticas { PreferenciaMaior = query.FirstOrDefault().Single().Instituicao, PreferenciaMenor = query.LastOrDefault().Single().Instituicao };
 
-            List<InstituicaoEstatisticas> ie = new List<InstituicaoEstatisticas>();// funciona
+            List<InstituicaoEstatisticas> ie = new List<InstituicaoEstatisticas>();
 
             foreach (Instituicao x in _context.Instituicoes) {
                 int valor = _context.Instituicoes_Candidatura.Where(row => row.InstituicaoId == x.ID).Count();
@@ -334,7 +330,7 @@ namespace ProjectoEsw.GestorAplicacao
             model.ARCandidaturaEstatisticas = ar;
             model.TipoQuantidadeEstatisticas = tqe;
             model.TotalBolsaEstatisticas = bolsas;
-           // model.DestinosPreferenciasEstatisticas = dpe;
+            model.DestinosPreferenciasEstatisticas = dpe;
             model.InstituicaoEstatistica = ie;
             return model;
         }

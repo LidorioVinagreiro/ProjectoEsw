@@ -1,0 +1,165 @@
+﻿@section links {
+    <a asp-area="" asp-controller="Administrador" asp-action="Logout" class="btn btn-link btn-xs pull-right">Log Out</a>
+}
+
+@section Home{
+    <a asp-area="" asp-controller="Candidato" asp-action="Index">Home</a>
+}
+
+@section ProgramasMobilidade{
+    <a asp-area="" asp-controller="Candidato" asp-action="ProgramasMobilidade">Programas Mobilidade</a>
+}
+
+@section Bolsas{
+    <a asp-area="" asp-controller="Candidato" asp-action="Bolsas">Bolsas</a>
+}
+
+@section SobreNos{
+    <a asp-area="" asp-controller="Candidato" asp-action="SobreNos">Sobre Nós</a>
+}
+
+<!--Home-->
+<div class="jumbotron col-sm-8">
+    <h2 class="text-center">Estatisticas</h2>
+    <div class="help-block"></div>
+    <div class="text-center">
+        <button onclick="criarEstatistica('instituicoes')">Instituicoes</button>
+        <button onclick="criarEstatistica('destinos')">Destinos</button>
+        <button onclick="criarEstatistica('candidaturas')">Candidaturas</button>
+        <button onclick="criarEstatistica('tipoCandidatura')">Tipo Candidatura</button>
+        <button onclick="criarEstatistica('bolsas')">Bolsas</button>
+
+    </div>
+</div>
+
+<div class="jumbotron col-sm-3 col-sm-offset-1">
+    <h5 class="text-center">Opcoes</h5>
+    <a asp-area="" asp-controller="Administrador" asp-action="VerEstatistica" class="btn btn-link btn-xs pull-right col-sm-12">Ver Estatisticas</a>
+</div>
+
+<div class="col-sm-8">
+    <div id="Charts"></div>
+    <div id="tableDiv" style="display: none"></div>
+    <div>
+
+    </div>
+</div>
+<script>
+    function criarEstatistica(tipo) {
+        var aux, tipo, titulo, subtitulo;
+        var grafico = document.getElementById("Charts");
+        var divTable = document.getElementById("tableDiv");
+        var tabela;
+        if (tipo == "instituicoes") {
+
+            grafico.style.display = 'inline';
+            divTable.style.display = 'none';
+            if (divTable.hasChildNodes()) {
+                table = document.getElementById("tabela");
+                divTable.removeChild(table);
+
+            }
+            aux = @Html.Raw(ViewBag.dataPointsIns);
+            titulo = "Estatisticas das Instituicoes";
+            tipo = "pie";
+            subtitulo = "Numero de alunos por Instituicoes";
+        }
+        if (tipo == "destinos") {
+            grafico.style.display = 'none';
+            divTable.style.display = 'inline';
+
+            var table = document.createElement("table");
+            table.id = "tabela";
+            var tr1 = document.createElement("tr");
+            var thText = document.createElement("th");
+            var thValue = document.createElement("th");
+            var text = document.createTextNode("Maior Preferencia - ");
+            var value = document.createTextNode("@Html.ViewBag.maiorPreferencia");
+
+            var tr2 = document.createElement("tr");
+            var thText2 = document.createElement("th");
+            var thValue2 = document.createElement("th");
+            var text2 = document.createTextNode("Menor Preferencia - ");
+            var value2 = document.createTextNode(" @Html.ViewBag.menorPreferencia");
+
+
+            thText.appendChild(text);
+            thValue.appendChild(value);
+            tr1.appendChild(thText);
+            tr1.appendChild(thValue);
+
+            thText2.appendChild(text2);
+            thValue2.appendChild(value2);
+            tr2.appendChild(thText2);
+            tr2.appendChild(thValue2);
+
+            table.appendChild(tr1);
+            table.appendChild(tr2);
+
+            divTable.appendChild(table);
+
+        }
+        if (tipo == "candidaturas") {
+
+            grafico.style.display = 'inline';
+            divTable.style.display = 'none';
+
+            if (divTable.hasChildNodes()) {
+                table = document.getElementById("tabela");
+                divTable.removeChild(table);
+
+            }
+
+            aux = @Html.Raw(ViewBag.dataPointsArc);
+            titulo = "Estatisticas das Candidaturas";
+            tipo = "pie";
+            subtitulo = "Numero de alunos por estados das candidaturas";
+        }
+        if (tipo == "tipoCandidatura") {
+            grafico.style.display = 'inline';
+            divTable.style.display = 'none';
+
+            if (divTable.hasChildNodes()) {
+                table = document.getElementById("tabela");
+                divTable.removeChild(table);
+
+            }
+
+            aux = @Html.Raw(ViewBag.dataPointsTipo);
+            titulo = "Estatisticas dos Tipos de Candidaturas";
+            tipo = "column";
+            subtitulo = "Numero de alunos por tipos de candidaturas";
+        }
+        if (tipo == "bolsas") {
+            grafico.style.display = 'inline';
+            divTable.style.display = 'none';
+
+            if (divTable.hasChildNodes()) {
+                table = document.getElementById("tabela");
+                divTable.removeChild(table);
+
+            }
+
+            aux = @Html.Raw(ViewBag.dataPointsBolsa);
+            titulo = "Estatisticas das Bolsas";
+            tipo = "column";
+            subtitulo = "Numero de alunos com e sem bolsa atribuidas";
+        }
+
+        // Criacao Chart
+
+        if (tipo != "destinos") {
+            var chart = new CanvasJS.Chart("Charts", {
+                theme: "theme2",
+                animationEnabled: true,
+                title: { text: titulo },
+                subtitles: [{ text: subtitulo }],
+                data: [{ type: tipo, dataPoints: aux }] //change type to bar, line, area, pie, etc
+            });
+            chart.render();
+        }
+    }
+</script>
+
+
+

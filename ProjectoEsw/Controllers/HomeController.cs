@@ -147,7 +147,7 @@ namespace ProjectoEsw.Controllers
                                 case "Candidato":
                                     return RedirectToAction("Index", "Candidato");
 
-                                case "administrador":
+                                case "Administrador":
                                     return RedirectToAction("Index", "Administrador");
 
                                 case "Tecnico":

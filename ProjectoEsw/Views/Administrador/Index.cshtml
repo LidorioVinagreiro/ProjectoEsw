@@ -1,89 +1,52 @@
-﻿@model ProjectoEsw.Models.Identity.Perfil;
-
-
+﻿
 @section links {
-    <a asp-area="" asp-controller="Candidato" asp-action="Logout" class="btn btn-link btn-xs pull-right">Log Out</a>
-    <a asp-area="" asp-controller="Candidato" asp-action="Index" class="btn btn-link btn-xs pull-right"> @Html.DisplayFor(model => model.Email) </a>
+    <a asp-area="" asp-controller="Administrador" asp-action="Logout" class="btn btn-link btn-xs pull-right">Log Out</a>
+
 }
-@section Home {
-    <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+@section Home{
+    <a asp-area="" asp-controller="Candidato" asp-action="Index">Home</a>
 }
 @section ProgramasMobilidade{
     <a asp-area="" asp-controller="Candidato" asp-action="ProgramasMobilidade">Programas Mobilidade</a>
 }
-
 @section Bolsas{
     <a asp-area="" asp-controller="Candidato" asp-action="Bolsas">Bolsas</a>
 }
 @section SobreNos{
     <a asp-area="" asp-controller="Candidato" asp-action="SobreNos">Sobre Nós</a>
 }
-<div class="jumbotron col-sm-8">
-        <h2 class=" text-center">Perfil do Administrador</h2>
-        <div class="col-sm-12">
-            <label asp-for="NomeCompleto" class="col-sm-3 control-label"></label>
-            <div class="col-sm-offset-3">
-                @if (@Model.NomeCompleto == null)
-                {
-                    <h5>Sem Informação</h5>
-                }
-                else
-                {
-                    <h5>@Model.NomeCompleto</h5>
-                }
-            </div>
-        </div>
-        <div class="col-sm-12">
-            <label asp-for="DataNasc" class="col-sm-3 control-label"></label>
-            <div class="col-sm-offset-3">
-                @if (@Model.DataNasc == null)
-            {
-                    <h5>Sem Informação</h5>
-                }
-                else
-                {
-                    <h5>@Model.DataNasc</h5>
-                }
-            </div>
-        </div>
+<div id="myCarousel" class="carousel slide col-sm-8" data-ride="carousel" data-interval="9000">
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+        <li data-target="#myCarousel" data-slide-to="3"></li>
+    </ol>
+    <div class="carousel-inner" role="listbox">
+        <img src="~/images/EramusExample.svg" alt="Eramus+" class="img-responsive" />
+        <div class="item">
 
-        <div class="col-sm-12">
-            <label asp-for="Email" class="col-sm-3 control-label"></label>
-            <div class="col-sm-offset-3">
-                @if (@Model.Email == null)
-            {
-                    <h5>Sem Informação</h5>
-                }
-                else
-                {
-                    <h5>@Model.Email</h5>
-                        }
-            </div>
         </div>
+        <div class="item">
 
-        <div class="col-sm-12">
-            <label asp-for="Telefone" class="col-sm-3 control-label"></label>
-            <div class="col-sm-offset-3">
-                @if (@Model.Telefone == null)
-            {
-                    <h5>Sem Informação</h5>
-                }
-                else
-                {
-                    <h5>@Model.Telefone</h5>
-                }
-            </div>
         </div>
-        <div class="col-sm-12">
-            <label asp-for="Foto" class="col-sm-3 control-label"></label>
-            <div class="col-sm-offset-3">
-                <p>@Model.Foto</p>
-            </div>
+        <div class="item">
+
         </div>
     </div>
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+
 <div class="jumbotron col-sm-3 col-sm-offset-1">
-    <h5 class="text-center">Opcoes</h5> 
-        <a asp-area="" asp-controller="Candidato" asp-action="Index" class="btn btn-link btn-xs pull-right col-sm-12">Ver Perfil</a>
-    <a asp-area="" asp-controller="Candidato" asp-action="Perfil" class="btn btn-link btn-xs center-block col-sm-12">Editar Perfil</a>
+    <h5 class="text-center">Opcoes</h5>
+    <a asp-area="" asp-controller="Administrador" asp-action="VerEstatisticas" class="btn btn-link btn-xs center-block col-sm-12">Estatisticas</a>
+
 </div>
 

@@ -310,7 +310,7 @@ namespace ProjectoEsw.Controllers
         public IActionResult AlterarCandidatura(CandidaturaViewModel model) {
             if (ModelState.IsValid) {
                 Utilizador user = _gestor.getUtilizador(this.User).Result;
-                Candidatura candidatura = _contexto.Candidaturas.Where(row => row.ID == model.ID).Single();
+                Candidatura candidatura = _contexto.Candidaturas.Where(row => row.UtilizadorFK == user.Id).Single();
                 candidatura.AfiliacaoEmergencia = model.AfiliacaoEmergencia;
                 candidatura.AnoCurricular = model.AnoCurricular;
                 candidatura.Bolsa = model.Bolsa;
@@ -337,7 +337,7 @@ namespace ProjectoEsw.Controllers
                 model.Instituicoes = listaIns;
 
                 if (_gestor.AlterarCandidatura(user, candidatura, model).Result)
-                    return View(); // correu tudo bem
+                    return View("Index","Candidato"); // correu tudo bem
                 return View(); //Erro
             }
 

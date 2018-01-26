@@ -185,7 +185,7 @@
                     type: "POST",
                     url: "/" + tipoutilizador + "/SaveEvents",
                     //dataType: 'json',
-                    //contentType: dataType,
+                    //contentType: dataType,    
                     data: evento,
                     success: function (status) {
                         alert("Evento guardado");

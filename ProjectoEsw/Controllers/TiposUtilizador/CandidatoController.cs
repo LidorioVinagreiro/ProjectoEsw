@@ -385,13 +385,23 @@ namespace ProjectoEsw.Controllers
         {
             EstatisticasGerais model = _gestor.GerarEstatisticas();
             List<InstituicaoEstatisticas> ins = model.InstituicaoEstatistica;
-            List<DataPoint> dataPoints = new List<DataPoint>();
+            List<TipoQuantidadeEstatistica> can = model.TipoQuantidadeEstatisticas;
+            TotalBolsaEstatisticas bol = model.TotalBolsaEstatisticas;
+            List<DataPoint> dataPointsIns = new List<DataPoint>();
             for (int i = 0; i < ins.Count; i++)
             {
-                dataPoints.Add(new DataPoint(ins[i].Instituicao.NomeInstituicao, ins[i].QuantidadeAlunosInscritos));
+                dataPointsIns.Add(new DataPoint(ins[i].Instituicao.NomeInstituicao, ins[i].QuantidadeAlunosInscritos));
             }
-            ViewBag.DataPoints = JsonConvert.SerializeObject(dataPoints);
+            ViewBag.dataPointsIns = JsonConvert.SerializeObject(dataPointsIns);
 
+            List<DataPoint> dataPointsTipo = new List<DataPoint>();
+            for (int a = 0; a < can.Count; a++)
+            {
+                dataPointsTipo.Add(new DataPoint(can[a].TipoMobilidade, can[a].nCandidatos));
+            }
+            ViewBag.dataPointsTipo = JsonConvert.SerializeObject(dataPointsTipo);
+            ViewBag.SemBolsa = bol.QuantidadeSemBolsa;
+            ViewBag.ComBolsa = bol.QuantidadeBolsas;
             return View();
         }
     }

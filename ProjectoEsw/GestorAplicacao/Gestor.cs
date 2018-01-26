@@ -298,14 +298,19 @@ namespace ProjectoEsw.GestorAplicacao
 
         public EstatisticasGerais GerarEstatisticas() {
             EstatisticasGerais model = new EstatisticasGerais { };
-
             List<ARCandidaturasEstatisticas> ar = new List<ARCandidaturasEstatisticas>();
+            foreach (string x in Enum.GetNames(Estado.APROVADA.GetType())) { //tem candidatura com estao = 3 e nao retoma esse valor
+                int  valor = _context.Candidaturas.Where(row => row.Estado.Equals(x)).Count();
+                ar.Add(new ARCandidaturasEstatisticas { Estado = x, intNCandidaturasEstado = valor });
+            }
+            /*List<ARCandidaturasEstatisticas> ar = new List<ARCandidaturasEstatisticas>();
             foreach (string x in Enum.GetNames(Estado.APROVADA.GetType())) {
                 int  valor = _context.Candidaturas.Where(row => row.Estado.Equals(x)).Count();
                 ar.Add(new ARCandidaturasEstatisticas { Estado = x, intNCandidaturasEstado = valor });    
             }
+*/
 
-            List<TipoQuantidadeEstatistica> tqe = new List<TipoQuantidadeEstatistica>();
+            List<TipoQuantidadeEstatistica> tqe = new List<TipoQuantidadeEstatistica>(); // Funciona!
             foreach (TipoCandidatura tipo in _context.TipoCandidatuas) {
                 int valor = _context.Candidaturas.Where(row => row.TipoCandidaturaFK == tipo.ID).Count();
                 tqe.Add(new TipoQuantidadeEstatistica { TipoMobilidade = tipo.Tipo, nCandidatos = valor });    
@@ -313,12 +318,13 @@ namespace ProjectoEsw.GestorAplicacao
 
             TotalBolsaEstatisticas bolsas = new TotalBolsaEstatisticas { };
             bolsas.QuantidadeBolsas = _context.Candidaturas.Where(row => row.Estado == Estado.APROVADA).Where(row => row.Bolsa == true).Count();
+            bolsas.QuantidadeSemBolsa = _context.Candidaturas.Where(row => row.Estado == Estado.APROVADA).Where(row => row.Bolsa == false).Count();
 
             //mini barraca
-           // var query = _context.Instituicoes_Candidatura.GroupBy(row => row.InstituicaoId);
+            // var query = _context.Instituicoes_Candidatura.GroupBy(row => row.InstituicaoId);
             //DestinosPreferenciasEstatisticas dpe = new DestinosPreferenciasEstatisticas { PreferenciaMaior = query.FirstOrDefault().Single().Instituicao, PreferenciaMenor = query.LastOrDefault().Single().Instituicao };
 
-            List<InstituicaoEstatisticas> ie = new List<InstituicaoEstatisticas>();
+            List<InstituicaoEstatisticas> ie = new List<InstituicaoEstatisticas>();// funciona
 
             foreach (Instituicao x in _context.Instituicoes) {
                 int valor = _context.Instituicoes_Candidatura.Where(row => row.InstituicaoId == x.ID).Count();

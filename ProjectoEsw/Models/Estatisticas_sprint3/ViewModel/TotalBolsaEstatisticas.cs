@@ -8,5 +8,6 @@ namespace ProjectoEsw.Models.Estatisticas_sprint3.ViewModel
     public class TotalBolsaEstatisticas
     {
         public int QuantidadeBolsas { get; set; }
+        public int QuantidadeSemBolsa { get; set; }
     }
 }

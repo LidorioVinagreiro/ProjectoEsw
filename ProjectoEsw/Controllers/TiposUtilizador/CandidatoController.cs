@@ -333,9 +333,7 @@ namespace ProjectoEsw.Controllers
                         aux.Add(a);
                 }
                 List<Instituicao> listaIns = _contexto.Instituicoes.Where(row => aux.Contains(row.ID)).ToList();
-                if (listaIns.Where(row => row.Interno != true).Any())
-                    return View(); // form as been tempered isto é os forms foram mudados manualmente
-
+                
                 model.Instituicoes = listaIns;
 
                 if (_gestor.AlterarCandidatura(user, candidatura, model).Result)
@@ -349,7 +347,6 @@ namespace ProjectoEsw.Controllers
         public IActionResult ProgramasMobilidade() {
             Utilizador user = _gestor.getUtilizador(this.User).Result;
             Perfil p1 = _gestor.getPerfil(user);
-            
             return View(p1);
         }
 

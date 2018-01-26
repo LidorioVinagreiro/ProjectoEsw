@@ -1,7 +1,132 @@
-﻿
-@{
-    ViewData["Title"] = "AlterarCandidaturaSantander";
+﻿@using ProjectoEsw.Models.Identity
+@using System.Linq
+@inject ProjectoEsw.GestorAplicacao.GestorAjudas gestorAjudas
+@inject ProjectoEsw.Models.AplicacaoDbContexto context
+@inject ProjectoEsw.GestorAplicacao.Gestor gestor
+@model ProjectoEsw.Models.Candidatura_sprint2.Candidatura
+
+@section links {
+    <a asp-area="" asp-controller="Candidato" asp-action="Logout" class="btn btn-link btn-xs pull-right">Log Out</a>
+    <a asp-area="" asp-controller="Candidato" asp-action="Perfil" class="btn btn-link btn-xs pull-right"> @Html.DisplayFor(Model => Model.Candidato.Perfil.Email) </a>
+
+}
+@section Home{
+    <a asp-area="" asp-controller="Candidato" asp-action="Index">Home</a>
+
+}
+@section ProgramasMobilidade{
+    <a asp-area="" asp-controller="Candidato" asp-action="ProgramasMobilidade">Programas Mobilidade</a>
+}
+@section Bolsas{
+    <a asp-area="" asp-controller="Candidato" asp-action="Bolsas">Bolsas</a>
+}
+@section SobreNos{
+    <a asp-area="" asp-controller="Candidato" asp-action="SobreNos">Sobre Nós</a>
 }
 
-<h2>AlterarCandidaturaSantander</h2>
+<div class="jumbotron col-sm-7 col-sm-offset-1">
+    <span class="glyphicon glyphicon-question-sign" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaPagina("Home.EditarPerfil").Descricao"></span>
+    <div class="container col-lg-offset-1 col-sm-10">
+        <h2 class="text-center">Alterar Candidatura  @Model.TipoCandidatura.Tipo </h2><!--Model.TipoCandidaturaFK TipoCandidatura virtual?-->
+        <form class="form-horizontal" asp-controller="Candidato" asp-action="AlterarCandidatura" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <p>Dados Pessoais</p>
+                <input asp-for="Candidato.Perfil.NomeCompleto" placeholder="Nome Completo" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Candidato.Candidatura","Nome Completo").Descricao" />
+                <span asp-validation-for="Candidato.Perfil.NomeCompleto" class="text-danger"></span>
+                <div class=" help-block"></div>
+                <input asp-for="Candidato.Perfil.DataNasc" placeholder="Data de Nascimento" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Candidato.Candidatura","Data Nascimento").Descricao" />
+                <span asp-validation-for="Candidato.Perfil.DataNasc" class="text-danger"></span>
+                <div class=" help-block"></div>
+                <input asp-for="Candidato.Perfil.Email" placeholder="Email" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Candidato.Candidatura","Email").Descricao" />
+                <span asp-validation-for="Candidato.Perfil.Email" class="text-danger"></span>
+                <div class=" help-block"></div>
+                <input asp-for="Candidato.Perfil.Nif" placeholder="Numero de Identificação Fiscal" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Candidato.Candidatura","NIF").Descricao" />
+                <span asp-validation-for="Candidato.Perfil.Nif" class="text-danger"></span>
+                <div class=" help-block"></div>
+                <input asp-for="Candidato.Perfil.NumeroIdentificacao" placeholder="Numero de Identificação" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Candidato.Candidatura","Numero Identificação").Descricao" />
+                <span asp-validation-for="Candidato.Perfil.NumeroIdentificacao" class="text-danger"></span>
+                <div class=" help-block"></div>
+                <input asp-for="Candidato.Perfil.MoradaRua" placeholder="Rua da Morada" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Candidato.candidatura","Morada Rua").Descricao" />
+                <span asp-validation-for="Candidato.Perfil.MoradaRua" class="text-danger"></span>
+                <div class=" help-block"></div>
+                <input asp-for="Candidato.Perfil.MoradaCodigoPostal" placeholder="Codigo Postal da Morada" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Candidato.Candidatura","Morada Codigo Postal").Descricao" />
+                <span asp-validation-for="Candidato.Perfil.MoradaCodigoPostal" class="text-danger"></span>
+                <div class=" help-block"></div>
+                <select asp-for="Candidato.Perfil.Nacionalidade" asp-items="Html.GetEnumSelectList<Nacionalidade>()" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Candidato.Candidatura","Nacionalidade").Descricao">
+                    <option value="0">Escolha a Nacionalidade</option>
+                </select><span asp-validation-for="Candidato.Perfil.Nacionalidade" class="text-danger"></span>
+                <div class=" help-block"></div>
+                <select asp-for="Candidato.Perfil.MoradaConcelho" asp-items="Html.GetEnumSelectList<Concelho>()" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Candidato.Candidatura","Morada Concelho").Descricao">
+                    <option value="0">Escolha o Concelho</option>
+                </select>
+                <span asp-validation-for="Candidato.Perfil.MoradaConcelho" class="text-danger"></span>
+                <div class=" help-block"></div>
+                <select asp-for="Candidato.Perfil.MoradaDistrito" asp-items="Html.GetEnumSelectList<Distrito>()" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Candidato.Candidatura","Morada Distrito").Descricao">
+                    <option value="0">Escolha o Distrito</option>
+                </select>
+                <span asp-validation-for="Candidato.Perfil.MoradaDistrito" class="text-danger"></span>
+                <div class=" help-block"></div>
+                <input asp-for="Candidato.Perfil.Telefone" placeholder="O seu Telefone" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Candidato.Candidatura","Telefone").Descricao" />
+                <span asp-validation-for="Candidato.Perfil.Telefone" class="text-danger"></span>
+                <div class=" help-block"></div>
 
+                <p> Dados para casos de emergencia</p>
+                <div class=" help-block"></div>
+
+                <input asp-for="NomeEmergencia" placeholder="Nome da pessoa a contactar" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Candidato.Candidatura","Nome Emergencia").Descricao" />
+                <span asp-validation-for="NomeEmergencia" class="text-danger"></span>
+                <div class=" help-block"></div>
+                <input asp-for="AfiliacaoEmergencia" placeholder="Afiliação" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Candidato.Candidatura","Afiliacao Emergencia").Descricao" />
+                <span asp-validation-for="AfiliacaoEmergencia" class="text-danger"></span>
+                <div class=" help-block"></div>
+                <input asp-for="NumeroEmergencia" placeholder="Telefone do contacto de emergencia" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Candidato.Candidatura","Telefone Emergencia").Descricao" />
+                <span asp-validation-for="NumeroEmergencia" class="text-danger"></span>
+                <div class=" help-block"></div>
+
+                <p> Dados para Candidatura</p>
+                <div class=" help-block"></div>
+
+                <input asp-for="Escola" placeholder="Nome da Escola" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Candidato.Candidatura","Escola").Descricao" />
+                <span asp-validation-for="Escola" class="text-danger"></span>
+                <div class=" help-block"></div>
+                <input asp-for="CursoFrequentado" placeholder="Curso" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Candidato.Candidatura","Curso Frequentado").Descricao" />
+                <span asp-validation-for="CursoFrequentado" class="text-danger"></span>
+                <div class=" help-block"></div>
+                <input asp-for="AnoCurricular" placeholder="Seu ano curricular" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Candidato.Candidatura","Ano Curricular").Descricao" />
+                <span asp-validation-for="AnoCurricular" class="text-danger"></span>
+                <div class=" help-block"></div>
+                @for (int i = 0; i < gestor.InstituicoesInternas().Count; i++)
+                {
+                    bool check =  @Model.Instituicoes.Where(row => row.Instituicao.ID == @gestor.InstituicoesInternas().ToList()[i].ID).Any();
+                    <input name="lista" type="checkbox" value="@gestor.InstituicoesInternas().ToList()[i].ID" checked="@check" />
+                    <label>@gestor.InstituicoesInternas().ToList()[i].NomeInstituicao</label>
+                }
+                <div class=" form-inline">
+                    <h5>Deseja Candidatar-se a bolsa? </h5>
+                    <label asp-for="Bolsa" class="control-label"></label>
+                    <input asp-for="Bolsa" placeholder="Seu ano curricular" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Candidato.Candidatura","Bolsa").Descricao" />
+                    <div class=" help-block"></div>
+                </div>
+                <input asp-for="IBAN" placeholder="Inserir IBAN" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Candidato.Candidatura","IBAN").Descricao" />
+                <span asp-validation-for="IBAN" class="text-danger"></span>
+
+                <div class="form-inline">
+                    <h5 class="pull-left">Carta Motivação</h5>
+                    <input type="file" name="files" class="pull-right" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="text-center">
+                    <button type="submit" class="btn btn-default">Cancelar</button>
+                    <button type="submit" class="btn btn-default">Alterar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="jumbotron col-sm-3 col-sm-offset-1">
+    <h5 class="text-center">Opcoes</h5>
+    <a asp-area="" asp-controller="Candidato" asp-action="VisualizarCandidatura" class="btn btn-link btn-xs pull-right col-sm-12">Ver Candidatura</a>
+    <a asp-area="" asp-controller="Candidato" asp-action="Perfil" class="btn btn-link btn-xs pull-right col-sm-12">Ver Perfil</a>
+    <a asp-area="" asp-controller="Candidato" asp-action="EditarPerfil" class="btn btn-link btn-xs center-block col-sm-12">Editar Perfil</a>

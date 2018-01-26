@@ -2,6 +2,7 @@
 @using System.Linq
 @inject ProjectoEsw.GestorAplicacao.GestorAjudas gestorAjudas
 @inject ProjectoEsw.Models.AplicacaoDbContexto context
+@inject ProjectoEsw.GestorAplicacao.Gestor gestor
 @model ProjectoEsw.Models.Candidatura_sprint2.Candidatura
 
 @section links {
@@ -95,12 +96,12 @@
                 <input asp-for="AnoCurricular" placeholder="Seu ano curricular" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Candidato.Candidatura","Ano Curricular").Descricao" />
                 <span asp-validation-for="AnoCurricular" class="text-danger"></span>
                 <div class=" help-block"></div>
-                <select asp-items="context.Instituicoes.Where(row => row.Interno == true).Select(x=> new SelectListItem { Text = x.NomeInstituicao , Value = x.NomeInstituicao})" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Candidato.Candidatura","Instituicoes").Descricao">
-                    <option value="0">Escolha a Instituicao</option>
-                </select>
-                <div class="help-block"></div>
-                <input asp-for="Instituicoes" placeholder="Seu ano curricular" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Candidato.Candidatura","Instituicoes").Descricao" />
-                <span asp-validation-for="Instituicoes" class="text-danger"></span>
+                @for (int i = 0; i < gestor.InstituicoesExternas().Count; i++)
+                {
+                    bool check =  @Model.Instituicoes.Where(row => row.Instituicao.ID == @gestor.InstituicoesExternas().ToList()[i].ID).Any();
+                    <input name ="lista" type="checkbox" value="@gestor.InstituicoesExternas().ToList()[i].ID" checked="@check"/>
+                    <label>@gestor.InstituicoesExternas().ToList()[i].NomeInstituicao</label>
+                }
                 <div class=" form-inline">
                     <h5>Deseja Candidatar-se a bolsa? </h5>
                     <label asp-for="Bolsa" class="control-label"></label>

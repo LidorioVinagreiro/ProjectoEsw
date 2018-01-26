@@ -347,7 +347,10 @@ namespace ProjectoEsw.GestorAplicacao
             bolsas.QuantidadeBolsas = _context.Candidaturas.Where(row => row.Estado == Estado.APROVADA).Where(row => row.Bolsa == true).Count();
 
             //mini barraca
-            var query = _context.Instituicoes_Candidatura.GroupBy(row => row.InstituicaoId);
+            var query = _context.Instituicoes_Candidatura
+                .Include(row=>row.Instituicao)
+                .Include(row=>row.Candidatura)
+                .GroupBy(row => row.InstituicaoId);
             DestinosPreferenciasEstatisticas dpe = new DestinosPreferenciasEstatisticas { PreferenciaMaior = query.FirstOrDefault().Single().Instituicao, PreferenciaMenor = query.LastOrDefault().Single().Instituicao };
 
             List<InstituicaoEstatisticas> ie = new List<InstituicaoEstatisticas>();

@@ -13,7 +13,7 @@ namespace ProjectoEsw.Models
     {
         public static void Initialize(AplicacaoDbContexto context)
         {
-
+        
             if (!context.Instituicoes.Any()) {
                 context.Instituicoes.Add(new Instituicao
                 {

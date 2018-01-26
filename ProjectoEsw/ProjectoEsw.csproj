@@ -28,4 +28,6 @@
     <Folder Include="wwwroot\Utilizadores\lidmcv%40gmail.com\Imagem\" />
   </ItemGroup>
 
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JSONSchema="" /></VisualStudio></ProjectExtensions>
+
 </Project>

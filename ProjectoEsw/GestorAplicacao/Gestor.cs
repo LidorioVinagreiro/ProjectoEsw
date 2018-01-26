@@ -141,6 +141,9 @@ namespace ProjectoEsw.GestorAplicacao
         }
 
         public async Task<bool> AlterarCandidatura(Utilizador user, Candidatura candidatura, CandidaturaViewModel model) {
+            List<Instituicoes_Candidatura> lista = _context.Instituicoes_Candidatura.Where(row => row.CandidaturaId == candidatura.ID).ToList();
+            _context.Instituicoes_Candidatura.RemoveRange(lista);
+            await _context.SaveChangesAsync();
             try
             {
                 List<Instituicoes_Candidatura> instituicoes = new List<Instituicoes_Candidatura>();
@@ -153,9 +156,7 @@ namespace ProjectoEsw.GestorAplicacao
 
                     });
                 }
-                // remover todas as instituicoes da BD
-                _context.Instituicoes_Candidatura = _context.Instituicoes_Candidatura.Where(row => row.CandidaturaId != candidatura.ID);
-                _context.Instituicoes_Candidatura.AddRange(instituicoes);
+               
                 await _context.SaveChangesAsync();
                 return true;
             }

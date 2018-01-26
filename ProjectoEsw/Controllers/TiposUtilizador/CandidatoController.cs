@@ -309,6 +309,7 @@ namespace ProjectoEsw.Controllers
         [HttpPost]
         public IActionResult AlterarCandidatura(CandidaturaViewModel model) {
             if (ModelState.IsValid) {
+                Utilizador user = _gestor.getUtilizador(this.User).Result;
                 Candidatura candidatura = _contexto.Candidaturas.Where(row => row.ID == model.ID).Single();
                 candidatura.AfiliacaoEmergencia = model.AfiliacaoEmergencia;
                 candidatura.AnoCurricular = model.AnoCurricular;
@@ -318,7 +319,8 @@ namespace ProjectoEsw.Controllers
                 candidatura.IBAN = model.IBAN;
                 candidatura.NomeEmergencia = model.NomeEmergencia;
                 candidatura.NumeroEmergencia = model.NumeroEmergencia;
-
+                candidatura.CursoFrequentado = model.CursoFrequentado;
+                _contexto.SaveChanges();
                 List<string> x = Request.Form["lista"].ToList();
                 if (x.Count <= 0)
                     return RedirectToAction("Index", "Candidato"); // caso não selecione nada
@@ -331,9 +333,14 @@ namespace ProjectoEsw.Controllers
                         aux.Add(a);
                 }
                 List<Instituicao> listaIns = _contexto.Instituicoes.Where(row => aux.Contains(row.ID)).ToList();
+                if (listaIns.Where(row => row.Interno != true).Any())
+                    return View(); // form as been tempered isto é os forms foram mudados manualmente
 
-                candidatura.Instituicoes = aux;   
+                model.Instituicoes = listaIns;
 
+                if (_gestor.AlterarCandidatura(user, candidatura, model).Result)
+                    return View(); // correu tudo bem
+                return View(); //Erro
             }
 
             return View();// algo errado no model state

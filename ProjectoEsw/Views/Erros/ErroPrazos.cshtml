@@ -1,5 +1,4 @@
-﻿
-@model ProjectoEsw.Models.Identity.Perfil;
+﻿@model ProjectoEsw.Models.Identity.Perfil;
 
 @section links {
     <a asp-area="" asp-controller="Candidato" asp-action="Logout" class="btn btn-link btn-xs pull-right">Log Out</a>
@@ -19,12 +18,13 @@
 @section SobreNos{
     <a asp-area="" asp-controller="Candidato" asp-action="SobreNos">Sobre Nós</a>
 }
-<!--Home-->
+
 <div class="jumbotron col-sm-8">
-    <h2 class=" text-center"><strong>Erro na Candidatura</strong></h2>
-    <p><strong></strong></p>
+    <h2 class=" text-center"><strong>Erro de Prazos</strong></h2>
+    <p><strong>O tempo para fazer as candidaturas infelizmente terminaram. Para efectuar uma candidatura so poderá fazer no proximo semestre</strong></p>
     <a asp-area="" asp-controller="Candidato" asp-action="Index" class="btn btn-link btn-xs text-center center-block">Voltar Pagina Inicial</a>
 </div>
+
 
 <div class="jumbotron col-sm-3 col-sm-offset-1">
     <h5 class="text-center">Opcoes</h5>

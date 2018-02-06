@@ -1,6 +1,4 @@
-﻿
-@model ProjectoEsw.Models.Identity.Perfil;
-
+﻿@model ProjectoEsw.Models.Identity.Perfil
 @section links {
     <a asp-area="" asp-controller="Candidato" asp-action="Logout" class="btn btn-link btn-xs pull-right">Log Out</a>
     <a asp-area="" asp-controller="Candidato" asp-action="Perfil" class="btn btn-link btn-xs pull-right"> @Html.DisplayFor(Model => Model.Email) </a>
@@ -8,7 +6,6 @@
 }
 @section Home{
     <a asp-area="" asp-controller="Candidato" asp-action="Index">Home</a>
-
 }
 @section ProgramasMobilidade{
     <a asp-area="" asp-controller="Candidato" asp-action="ProgramasMobilidade">Programas Mobilidade</a>
@@ -19,10 +16,17 @@
 @section SobreNos{
     <a asp-area="" asp-controller="Candidato" asp-action="SobreNos">Sobre Nós</a>
 }
-<!--Home-->
+
+<div class="jumbotron">
+    <h2 class=" text-center"><strong class="text-center center-block"> Erro Editar Perfil</strong></h2>
+    <p><strong>Erro ao editar o perfil, volte a tentar</strong></p>
+    <a asp-area="" asp-controller="Candidato" asp-action="Index" class="btn btn-link btn-xs text-center center-block">Voltar Pagina Inicial</a>
+</div>
+
+
 <div class="jumbotron col-sm-8">
-    <h2 class=" text-center"><strong>Erro na Candidatura</strong></h2>
-    <p><strong></strong></p>
+    <h2 class=" text-center"><strong class="text-center center-block"> Erro Editar Perfil</strong></h2>
+    <p><strong>Erro ao editar o perfil, volte a tentar</strong></p>
     <a asp-area="" asp-controller="Candidato" asp-action="Index" class="btn btn-link btn-xs text-center center-block">Voltar Pagina Inicial</a>
 </div>
 

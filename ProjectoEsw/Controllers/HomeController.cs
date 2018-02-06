@@ -98,25 +98,25 @@ namespace ProjectoEsw.Controllers
     }
 
         public async Task<IActionResult> ConfirmarEmail(string userId, string token) {
+            ViewData["Title"] = "Erro Email Confirmado";
             if (userId == null || token == null)
             {
                 //userid ou token null
-                return View("Error");
+                return View("Erros/ErroConfirmarEmail");
             }
             var user = await _userManager.FindByIdAsync(userId);
             if (user == null) {
                 //nao encontra utilizador
-                return View("Error");
+                return View("Erros/ErroConfirmarEmail");
             }
             var result = await _userManager.ConfirmEmailAsync(user, token);
             if (result.Succeeded)
             {
-                //adicionar que a confirmacao do emai foi efectuada
-                return RedirectToAction("Login", "Home");
+                return View("EmailConfirmado");
             }
             else {
                 //nao houve confirmacao do token
-                return View("Error");
+                return View("Erros/ErroConfirmarEmail");
             }
 
         }
@@ -130,7 +130,6 @@ namespace ProjectoEsw.Controllers
         public async Task<IActionResult> Login(LoginViewModel model) {
             if (ModelState.IsValid)
             {
-                ////1 false = persistent, 2 false = lockdownonfailure
                 Utilizador user = await _userManager.FindByNameAsync(model.Email);
                 if (user != null)
                 {
@@ -166,18 +165,18 @@ namespace ProjectoEsw.Controllers
                     }
                     else
                     {
-                        ModelState.AddModelError(string.Empty, "Falta Confirmar Email");
+                        ModelState.AddModelError(string.Empty, "Falta confirmar Email");
                         return View();
                     }
                 }
                 else {
-                    ModelState.AddModelError(string.Empty, "Utilizador Nao Existe");
+                    ModelState.AddModelError(string.Empty, "Utilizador não existe");
                     return View();
                 }
             }
             else
             {
-                ModelState.AddModelError(string.Empty, "model errado");
+                ModelState.AddModelError(string.Empty, "Model errado");
                 return View();
             }
         }
@@ -191,7 +190,7 @@ namespace ProjectoEsw.Controllers
         {
             Utilizador user = await _userManager.FindByNameAsync(Email);
             if(user == null || !(await _userManager.IsEmailConfirmedAsync(user))){
-                //nao ha utilizador ou falta confirmar email.. nao defenir erro
+                ModelState.AddModelError(string.Empty, "Email do utilizador não existe");
                 return View();
             }
 
@@ -225,13 +224,12 @@ namespace ProjectoEsw.Controllers
             var result = await _userManager.ResetPasswordAsync(user, model.Code, model.Password);
             
             if (result.Succeeded) {
-                ModelState.AddModelError(string.Empty, "Password Alterada Faça Login");
-                return View("Login");
+                return View("PasswordAlterada");
             }
             else
             {
-                ModelState.AddModelError(string.Empty, "Password Alterada Faça Login");
-                return View("Error");
+                ModelState.AddModelError(string.Empty, "Password não foi alterada Faça Login");
+                return View();
             }
         } 
         public IActionResult Index()

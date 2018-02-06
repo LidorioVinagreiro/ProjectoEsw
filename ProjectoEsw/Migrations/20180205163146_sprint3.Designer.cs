@@ -14,8 +14,8 @@ using System;
 namespace ProjectoEsw.Migrations
 {
     [DbContext(typeof(AplicacaoDbContexto))]
-    [Migration("20180113005617_initial")]
-    partial class initial
+    [Migration("20180205163146_sprint3")]
+    partial class sprint3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

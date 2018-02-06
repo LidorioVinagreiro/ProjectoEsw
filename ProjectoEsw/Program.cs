@@ -25,9 +25,7 @@ namespace ProjectoEsw
                 var services = scope.ServiceProvider;
                 try
                 {
-                    var context = services.GetRequiredService<AplicacaoDbContexto>();
-                    
-                    DbInitializer.Initialize(context);
+                    DbInitializer.Initialize(services);
                 }
                 catch (Exception ex)
                 {
@@ -35,7 +33,7 @@ namespace ProjectoEsw
                     logger.LogError(ex, "Ocurreu um erro a popular a BD");
                 }
             }
-            BuildWebHost(args).Run();
+            host.Run();
         }
 
         public static IWebHost BuildWebHost(string[] args) =>

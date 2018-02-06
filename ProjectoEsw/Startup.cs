@@ -38,8 +38,14 @@ namespace ProjectoEsw
                 options.SupportedCultures = new [] { new CultureInfo("pt-PT") };
                 options.DefaultRequestCulture = new RequestCulture("pt-PT");             
             });
+
             
-            services.AddDbContext<AplicacaoDbContexto>(options => options.UseSqlServer(connect1));
+            services.AddEntityFrameworkSqlServer()
+            .AddDbContext<AplicacaoDbContexto>(options =>
+            {
+                options.UseSqlServer(connect1);
+            });
+
             services.AddIdentity<Utilizador, IdentityRole>(options =>
                 {
                     options.Password.RequireDigit = false;
@@ -51,6 +57,9 @@ namespace ProjectoEsw
                 }
             ).AddEntityFrameworkStores<AplicacaoDbContexto>()
             .AddDefaultTokenProviders();
+
+            
+
 
             services.ConfigureApplicationCookie(options => 
             {
@@ -86,6 +95,8 @@ namespace ProjectoEsw
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            
             app.UseAuthentication();
             
             app.UseRequestLocalization();
@@ -113,6 +124,7 @@ namespace ProjectoEsw
 
 
             });
+            
         }
     }
 }

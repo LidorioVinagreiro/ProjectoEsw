@@ -6,255 +6,268 @@ using Microsoft.AspNetCore.Identity;
 using ProjectoEsw.Models.Identity;
 using ProjectoEsw.Models.Ajudas;
 using ProjectoEsw.Models.Candidatura_sprint2;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace ProjectoEsw.Models
 {
     public static class DbInitializer
     {
-        public static void Initialize(AplicacaoDbContexto context)
+        public static void Initialize(IServiceProvider app)
         {
-        
-            if (!context.Instituicoes.Any()) {
-                context.Instituicoes.Add(new Instituicao
-                {
-                    Interno = true,
-                    LatitudeInstituicao = "n/a",
-                    LongitudeInstituicao = "n/a",
-                    NomeInstituicao = "IPS Setubal",
-                    PaisInstituicao = "Portugal",
-                    SiteInstituicao = "wwww.google.pt",
-                });
-                context.Instituicoes.Add(new Instituicao
-                {
-                    Interno = true,
-                    LatitudeInstituicao = "n/a",
-                    LongitudeInstituicao = "n/a",
-                    NomeInstituicao = "IPS Barreiro",
-                    PaisInstituicao = "Portugal",
-                    SiteInstituicao = "wwww.google.pt",
-                });
-
-                context.Instituicoes.Add(new Instituicao
-                {
-                    Interno = false,
-                    LatitudeInstituicao = "n/a",
-                    LongitudeInstituicao = "n/a",
-                    NomeInstituicao = "IPS Espanha",
-                    PaisInstituicao = "Espanha",
-                    SiteInstituicao = "wwww.espanha.com",
-                });
-
-                context.Instituicoes.Add(new Instituicao
-                {
-                    Interno = false,
-                    LatitudeInstituicao = "n/a",
-                    LongitudeInstituicao = "n/a",
-                    NomeInstituicao = "Franca IPS",
-                    PaisInstituicao = "Franca",
-                    SiteInstituicao = "wwww.Franca.com",
-                });
-
-                context.Instituicoes.Add(new Instituicao
-                {
-                    Interno = false,
-                    LatitudeInstituicao = "n/a",
-                    LongitudeInstituicao = "n/a",
-                    NomeInstituicao = "IPS Inglaterra",
-                    PaisInstituicao = "Inglaterra",
-                    SiteInstituicao = "wwww.inglaterra.com",
-                });
-                context.SaveChanges();
-            }
-
-            if (!context.TipoCandidatuas.Any()) {
-                context.TipoCandidatuas.Add(new TipoCandidatura
-                {
-                    Tipo = "Erasmus",
-                    DataInicio = System.DateTime.Now,
-                    DataFim = System.DateTime.Now.AddMonths(4)
-                });
-
-                context.TipoCandidatuas.Add(new TipoCandidatura
-                {
-                    Tipo = "Santander",
-                    DataInicio = System.DateTime.Now,
-                    DataFim = System.DateTime.Now.AddMonths(4)
-                });
-                context.SaveChanges();
-            }
-            if (!context.Roles.Any())
+            using (var context = app.GetRequiredService<AplicacaoDbContexto>())
             {
-                context.Roles.Add(new IdentityRole { Name = "Candidato", NormalizedName = "CANDIDATO" });
-                context.Roles.Add(new IdentityRole { Name = "Tecnico", NormalizedName = "TECNICO" });
-                context.Roles.Add(new IdentityRole { Name="Administrador", NormalizedName="ADMINISTRADOR"});
-                context.SaveChanges();
+                if (!context.Instituicoes.Any())
+                {
+
+                    context.Instituicoes.Add(new Instituicao
+                    {
+                        Interno = true,
+                        LatitudeInstituicao = "n/a",
+                        LongitudeInstituicao = "n/a",
+                        NomeInstituicao = "IPS Setubal",
+                        PaisInstituicao = "Portugal",
+                        SiteInstituicao = "wwww.google.pt",
+                    });
+                    context.Instituicoes.Add(new Instituicao
+                    {
+                        Interno = true,
+                        LatitudeInstituicao = "n/a",
+                        LongitudeInstituicao = "n/a",
+                        NomeInstituicao = "IPS Barreiro",
+                        PaisInstituicao = "Portugal",
+                        SiteInstituicao = "wwww.google.pt",
+                    });
+
+                    context.Instituicoes.Add(new Instituicao
+                    {
+                        Interno = false,
+                        LatitudeInstituicao = "n/a",
+                        LongitudeInstituicao = "n/a",
+                        NomeInstituicao = "IPS Espanha",
+                        PaisInstituicao = "Espanha",
+                        SiteInstituicao = "wwww.espanha.com",
+                    });
+
+                    context.Instituicoes.Add(new Instituicao
+                    {
+                        Interno = false,
+                        LatitudeInstituicao = "n/a",
+                        LongitudeInstituicao = "n/a",
+                        NomeInstituicao = "Franca IPS",
+                        PaisInstituicao = "Franca",
+                        SiteInstituicao = "wwww.Franca.com",
+                    });
+
+                    context.Instituicoes.Add(new Instituicao
+                    {
+                        Interno = false,
+                        LatitudeInstituicao = "n/a",
+                        LongitudeInstituicao = "n/a",
+                        NomeInstituicao = "IPS Inglaterra",
+                        PaisInstituicao = "Inglaterra",
+                        SiteInstituicao = "wwww.inglaterra.com",
+                    });
+                    context.SaveChanges();
+                }
+
+                if (!context.TipoCandidatuas.Any())
+                {
+                    context.TipoCandidatuas.Add(new TipoCandidatura
+                    {
+                        Tipo = "Erasmus",
+                        DataInicio = System.DateTime.Now,
+                        DataFim = System.DateTime.Now.AddMonths(4)
+                    });
+
+                    context.TipoCandidatuas.Add(new TipoCandidatura
+                    {
+                        Tipo = "Santander",
+                        DataInicio = System.DateTime.Now,
+                        DataFim = System.DateTime.Now.AddMonths(4)
+                    });
+                    context.SaveChangesAsync();
+                }
+                if (!context.Roles.Any())
+                {
+                    context.Roles.Add(new IdentityRole { Name = "Candidato", NormalizedName = "CANDIDATO" });
+                    context.Roles.Add(new IdentityRole { Name = "Tecnico", NormalizedName = "TECNICO" });
+                    context.Roles.Add(new IdentityRole { Name = "Administrador", NormalizedName = "ADMINISTRADOR" });
+                    context.SaveChanges();
+                }
+
+
+                if (!context.AjudaPaginas.Any())
+                {
+                    context.AjudaPaginas.Add(new AjudaPagina
+                    {
+                        Pagina = "Home.Login",
+                        Descricao = "Nesta página o utilizador terá de prencher os campos email e password " +
+                                 "com os campos respetivos que definiu ao fazer o registo.De seguida premirá o botão sign in para que o " +
+                                 "login seja efetuado"
+                    });
+
+                    context.AjudaPaginas.Add(new AjudaPagina
+                    {
+                        Pagina = "Home.Register",
+                        Descricao = "Nesta página o utilizador irá efetuar o seu registo inserindo os dados relativos ao Nome Completo, " +
+                                 "Data Nascimento, Numero identificação Fiscal, Numero Identificaçao, Numero Telefone, " +
+                                 "Email e Password, para que fique registado na página"
+                    });
+
+                    context.AjudaPaginas.Add(new AjudaPagina
+                    {
+                        Pagina = "Home.RecuperarPassword",
+                        Descricao = "Esta página tem como função fazer a recuperação da password caso o utilizador ja nao se lembre qual é. " +
+                                 "O utilizador terá de inserir o seu email que preencheu no registo e carregar no botao recuperar e " +
+                                 "receberáuma mensagem com a sua password"
+                    });
+
+                    context.AjudaPaginas.Add(new AjudaPagina
+                    {
+                        Pagina = "Home.EditarPerfil",
+                        Descricao = "Esta página tem como função a alteração dos campos no perfil do utilizador. " +
+                                "Poderá escolher alterar o perfil ou as password, para tal terá de inserir os campos necessarios á sua conclusão" +
+                                " que estao especificados na pagina"
+                    });
+                    context.AjudaPaginas.Add(new AjudaPagina
+                    {
+                        Pagina = "Candidato.CandidaturaEramus",
+                        Descricao = "Esta página tem como função a submição da Candidatura Erasmus+. " +
+                                "Tera de preencher os campos necessarios a candidatura, que serão os seus dados pessoais, os dados da pessoa que será o seu contacto de emergencia" +
+                                " e os dados referentes ao seu estatuto escolar"
+                    });
+                    context.AjudaPaginas.Add(new AjudaPagina
+                    {
+                        Pagina = "Candidato.CandidaturaSantander",
+                        Descricao = "Esta página tem como função a submição da Candidatura Santander. " +
+                                "Tera de preencher os campos necessarios a candidatura, que serão os seus dados pessoais, os dados da pessoa que será o seu contacto de emergencia" +
+                                " e os dados referentes ao seu estatuto escolar"
+                    });
+                    context.AjudaPaginas.Add(new AjudaPagina
+                    {
+                        Pagina = "Candidato.Perfil",
+                        Descricao = "Esta página é para demonstrar ao utilizador os dados que ele inseriu relativamente ao seu perfil. "
+                    });
+                    context.AjudaPaginas.Add(new AjudaPagina
+                    {
+                        Pagina = "Candidato.Candidatura",
+                        Descricao = "Esta página tem como função a submição da Candidatura. " +
+                               "Tera de preencher os campos necessarios a candidatura, que serão os seus dados pessoais, os dados da pessoa que será o seu contacto de emergencia" +
+                               " e os dados referentes ao seu estatuto escolar"
+                    });
+                    context.SaveChanges();
+
+                }
+
+                if (!context.AjudaCampos.Any())
+                {
+                    context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 1, Campo = "Email", Descricao = "Deverá inserir o seu email pessoal do tipo(ex: jbvc@hotmail.com)" });
+                    context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 1, Campo = "Password", Descricao = "Neste campo deverá inserir a sua password com letras maiusculas, letras minusculas e digitos" });
+
+                    context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "Nome Completo", Descricao = "Neste campo deverá inserir um nome completo com apenas letras" });
+                    context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "Data Nascimento", Descricao = "Neste campo deverá inserir a data nascimento no formato dia/mês/ano" });
+                    context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "Numero Telefone", Descricao = "Neste campo deverá inserir o seu numero telefone com 9 digitos numericos" });
+                    context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "Email", Descricao = "Neste campo deverá inserir o seu email do tipo(ex: jbvc@hotmail.com)" });
+                    context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "Password", Descricao = "Neste campo deverá definir a sua password com letras maiusculas, letras minusculas e digitos" });
+                    context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "Confirmar Password", Descricao = "Neste campo deverá inserir novamente a password definida anteriormente" });
+                    context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "Morada Rua", Descricao = "Neste campo deverá inserir a rua da sua morada (Ex. Rua aberto delgado)" });
+                    context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "Morada Concelho", Descricao = "Neste campo deverá inserir o concelho da sua morada " });
+                    context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "Morada Distrito", Descricao = "Neste campo deverá inserir o codigo de postal da sua morada " });
+                    context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "Morada Codigo Postal", Descricao = "Neste campo deverá inserir o seu codigo postal (Ex. 0000-000)" });
+                    context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "Genero", Descricao = "Neste campo deverá inserir a nova morada para o seu perfil" });
+                    context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "Nacionalidade", Descricao = "Neste campo deverá inserir a sua nacionalidade" });
+                    context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "Numero Identificação", Descricao = "Neste campo deverá inserir o seu numero de identificação da escola com apenas digitos" });
+                    context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "NIF", Descricao = "Neste campo deverá inserir o seu numero de identificação fiscal que deverá conter 9 digitos numéricos" });
+
+                    context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 3, Campo = "Email", Descricao = "Neste campo deverá inserir o seu email do tipo(ex: jbvc@hotmail.com)" });
+
+                    context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 4, Campo = "Novo Numero Identificação", Descricao = "Neste campo deverá inserir o seu novo numero de identificação da escola com apenas digitos" });
+                    context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 4, Campo = "Novo NIF", Descricao = "Neste campo deverá inserir o seu novo numero de identificação fiscal que deverá conter 9 digitos numéricos" });
+                    context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 4, Campo = "Nova Morada Rua", Descricao = "Neste campo deverá inserir a sua nova rua da sua morada (Ex. Rua aberto delgado) " });
+                    context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 4, Campo = "Nova Morada Concelho", Descricao = "Neste campo deverá inserir o novo concelho da sua morada" });
+                    context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 4, Campo = "Nova Morada Distrito", Descricao = "Neste campo deverá inserir a novo distrito da sua morada" });
+                    context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 4, Campo = "Nova Morada Codigo Postal", Descricao = "Neste campo deverá inserir o novo codigo postal da sua morada" });
+                    context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 4, Campo = "Novo Telefone", Descricao = "Neste campo deverá inserir o seu novo numero de telefone" });
+                    context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 4, Campo = "Nova Password", Descricao = "Neste campo deverá definir a sua nova password com letras maiusculas, letras minusculas e digitos" });
+                    context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 4, Campo = "Confirmar Nova Password", Descricao = "Neste campo deverá inserir novamente a sua nova password definida anteriormente" });
+
+                    context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Nome Completo", Descricao = "Neste campo deverá inserir um nome completo com apenas letras" });
+                    context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Data Nascimento", Descricao = "Neste campo deverá inserir a data nascimento no formato dia/mês/ano" });
+                    context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Telefone", Descricao = "Neste campo deverá inserir o seu telefone com 9 digitos" });
+                    context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Email", Descricao = "Neste campo deverá inserir o seu email do tipo(ex: jbvc@hotmail.com)" });
+                    context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "NIF", Descricao = "Neste campo deverá inserir o seu numero de identificação fiscal que deverá conter 9 digitos numéricos" });
+                    context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Numero Identificação", Descricao = "Neste campo deverá inserir o seu numero de identificação da escola com apenas digitos" });
+                    context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Numero Telefone", Descricao = "Neste campo deverá inserir o seu numero telefone com 9 digitos numericos" });
+                    context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Morada Rua", Descricao = "Neste campo deverá inserir a rua da sua morada (Ex. Rua aberto delgado)" });
+                    context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Morada Concelho", Descricao = "Neste campo deverá inserir o concelho da sua morada " });
+                    context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Morada Distrito", Descricao = "Neste campo deverá inserir o distrito da sua morada " });
+                    context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Morada Codigo Postal", Descricao = "Neste campo deverá inserir o seu codigo postal (Ex. 0000-000)" });
+                    context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Nacionalidade", Descricao = "Neste campo deverá inserir a sua nacionalidade" });
+                    context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Nome Emergencia", Descricao = "Neste campo deverá inserir o nome da pessoa que será o seu contacto de emergência" });
+                    context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Afiliacao Emergencia", Descricao = "Neste campo deverá inserir a afiliação da pessoa em questão " });
+                    context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Telefone Emergencia", Descricao = "Neste campo deverá inserir o numero de telefone do seu contacto de emergência" });
+                    context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Escola", Descricao = "Neste campo deverá inserir a sua Escola" });
+                    context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Curso Frequentado", Descricao = "Neste campo deverá inserir o nome do seu curso" });
+                    context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Ano Curricular", Descricao = "Neste campo deverá inserir o seu ano curricular actual" });
+                    context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Instituicoes", Descricao = "Neste campo deverá selecior as instituições que irá se candidatar" });
+                    context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Bolsa", Descricao = "Neste campo deverá selecionar se pretender bolsa" });
+                    context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "IBAN", Descricao = "Neste campo deverá inserir o seu IBAN para a bolsa" });
+
+                    context.SaveChanges();
+                }
+
+                if (!context.UserRoles.Any())
+                {
+                    PasswordHasher<Utilizador> hash = new PasswordHasher<Utilizador>();
+                    Utilizador tec1 = new Utilizador { SecurityStamp = Guid.NewGuid().ToString(), UserName = "tecnico1@est.pt", EmailConfirmed = true, NormalizedUserName = "TECNICO1@EST.PT", Email = "tecnico1@est.pt" };
+                    tec1.PasswordHash = hash.HashPassword(tec1, "tecnico1");
+                    Utilizador tec2 = new Utilizador { SecurityStamp = Guid.NewGuid().ToString(), UserName = "tecnico2@est.pt", EmailConfirmed = true, NormalizedUserName = "TECNICO2@EST.PT", Email = "tecnico2@est.pt" };
+                    tec2.PasswordHash = hash.HashPassword(tec2, "tecnico2");
+                    Utilizador tec3 = new Utilizador { SecurityStamp = Guid.NewGuid().ToString(), UserName = "tecnico3@est.pt", EmailConfirmed = true, NormalizedUserName = "TECNICO3@EST.PT", Email = "tecnico3@est.pt" };
+                    tec3.PasswordHash = hash.HashPassword(tec3, "tecnico3");
+                    Utilizador admin = new Utilizador { SecurityStamp = Guid.NewGuid().ToString(), UserName = "admin@est.pt", EmailConfirmed = true, NormalizedUserName = "ADMIN@EST.PT", Email = "admin@est.pt" };
+                    admin.PasswordHash = hash.HashPassword(admin, "admin");
+
+                    context.Users.Add(tec1);
+                    context.Users.Add(tec2);
+                    context.Users.Add(tec3);
+                    context.Users.Add(admin);
+                    context.SaveChanges();
+
+
+                    var id = context.Roles.Where(row => row.Name.Equals("Tecnico")).Single().Id;
+                    var id1 = context.Roles.Where(row => row.Name.Equals("Administrador")).Single().Id;
+
+                    context.UserRoles.Add(new IdentityUserRole<string> { RoleId = id, UserId = tec1.Id });
+                    context.UserRoles.Add(new IdentityUserRole<string> { RoleId = id, UserId = tec2.Id });
+                    context.UserRoles.Add(new IdentityUserRole<string> { RoleId = id, UserId = tec3.Id });
+                    context.UserRoles.Add(new IdentityUserRole<string> { RoleId = id1, UserId = admin.Id });
+                    context.SaveChanges();
+
+                    Perfil aux = new Perfil { UtilizadorFK = tec1.Id, Email = tec1.Email };
+                    Perfil aux1 = new Perfil { UtilizadorFK = tec2.Id, Email = tec2.Email };
+                    Perfil aux2 = new Perfil { UtilizadorFK = tec3.Id, Email = tec3.Email };
+                    Perfil aux3 = new Perfil { UtilizadorFK = admin.Id, Email = admin.Email };
+
+                    context.Perfils.Add(aux);
+                    context.Perfils.Add(aux1);
+                    context.Perfils.Add(aux2);
+                    context.Perfils.Add(aux3);
+                    context.SaveChanges();
+
+                    tec1.PerfilFK = aux.ID;
+                    tec2.PerfilFK = aux1.ID;
+                    tec3.PerfilFK = aux2.ID;
+                    admin.PerfilFK = aux3.ID;
+                    context.SaveChanges();
+                }
+
             }
-
-        
-            if (!context.AjudaPaginas.Any())
-            {
-                context.AjudaPaginas.Add(new AjudaPagina
-               {Pagina="Home.Login",
-                Descricao = "Nesta página o utilizador terá de prencher os campos email e password " +
-                             "com os campos respetivos que definiu ao fazer o registo.De seguida premirá o botão sign in para que o " +
-                             "login seja efetuado" });
-
-                context.AjudaPaginas.Add(new AjudaPagina
-                {Pagina = "Home.Register",
-                 Descricao = "Nesta página o utilizador irá efetuar o seu registo inserindo os dados relativos ao Nome Completo, " +
-                             "Data Nascimento, Numero identificação Fiscal, Numero Identificaçao, Numero Telefone, " +
-                             "Email e Password, para que fique registado na página" });
-
-                context.AjudaPaginas.Add(new AjudaPagina
-                {Pagina = "Home.RecuperarPassword",
-                 Descricao = "Esta página tem como função fazer a recuperação da password caso o utilizador ja nao se lembre qual é. " +
-                             "O utilizador terá de inserir o seu email que preencheu no registo e carregar no botao recuperar e " +
-                             "receberáuma mensagem com a sua password"});
-
-                context.AjudaPaginas.Add(new AjudaPagina
-                {
-                    Pagina = "Home.EditarPerfil",
-                    Descricao = "Esta página tem como função a alteração dos campos no perfil do utilizador. " +
-                            "Poderá escolher alterar o perfil ou as password, para tal terá de inserir os campos necessarios á sua conclusão" +
-                            " que estao especificados na pagina"
-                });
-                context.AjudaPaginas.Add(new AjudaPagina
-                {
-                    Pagina = "Candidato.CandidaturaEramus",
-                    Descricao = "Esta página tem como função a submição da Candidatura Erasmus+. " +
-                            "Tera de preencher os campos necessarios a candidatura, que serão os seus dados pessoais, os dados da pessoa que será o seu contacto de emergencia" +
-                            " e os dados referentes ao seu estatuto escolar"
-                });
-                context.AjudaPaginas.Add(new AjudaPagina
-                {
-                    Pagina = "Candidato.CandidaturaSantander",
-                    Descricao = "Esta página tem como função a submição da Candidatura Santander. " +
-                            "Tera de preencher os campos necessarios a candidatura, que serão os seus dados pessoais, os dados da pessoa que será o seu contacto de emergencia" +
-                            " e os dados referentes ao seu estatuto escolar"
-                });
-                context.AjudaPaginas.Add(new AjudaPagina
-                {
-                    Pagina = "Candidato.Perfil",
-                    Descricao = "Esta página é para demonstrar ao utilizador os dados que ele inseriu relativamente ao seu perfil. "
-                });
-                context.AjudaPaginas.Add(new AjudaPagina
-                {
-                    Pagina = "Candidato.Candidatura",
-                    Descricao = "Esta página tem como função a submição da Candidatura. " +
-                           "Tera de preencher os campos necessarios a candidatura, que serão os seus dados pessoais, os dados da pessoa que será o seu contacto de emergencia" +
-                           " e os dados referentes ao seu estatuto escolar"
-                });
-                context.SaveChanges();
-
-            }
-
-            if (!context.AjudaCampos.Any())
-            {
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 1, Campo = "Email", Descricao = "Deverá inserir o seu email pessoal do tipo(ex: jbvc@hotmail.com)"});
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 1, Campo = "Password", Descricao = "Neste campo deverá inserir a sua password com letras maiusculas, letras minusculas e digitos" });
-
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "Nome Completo", Descricao = "Neste campo deverá inserir um nome completo com apenas letras" });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "Data Nascimento", Descricao = "Neste campo deverá inserir a data nascimento no formato dia/mês/ano" });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "Numero Telefone", Descricao = "Neste campo deverá inserir o seu numero telefone com 9 digitos numericos" });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "Email", Descricao = "Neste campo deverá inserir o seu email do tipo(ex: jbvc@hotmail.com)" });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "Password", Descricao = "Neste campo deverá definir a sua password com letras maiusculas, letras minusculas e digitos" });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "Confirmar Password", Descricao = "Neste campo deverá inserir novamente a password definida anteriormente" });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "Morada Rua", Descricao = "Neste campo deverá inserir a rua da sua morada (Ex. Rua aberto delgado)" });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "Morada Concelho", Descricao = "Neste campo deverá inserir o concelho da sua morada " });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "Morada Distrito", Descricao = "Neste campo deverá inserir o codigo de postal da sua morada " });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "Morada Codigo Postal", Descricao = "Neste campo deverá inserir o seu codigo postal (Ex. 0000-000)" });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "Genero", Descricao = "Neste campo deverá inserir a nova morada para o seu perfil" });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "Nacionalidade", Descricao = "Neste campo deverá inserir a sua nacionalidade" });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "Numero Identificação", Descricao = "Neste campo deverá inserir o seu numero de identificação da escola com apenas digitos" });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 2, Campo = "NIF", Descricao = "Neste campo deverá inserir o seu numero de identificação fiscal que deverá conter 9 digitos numéricos" });
-
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 3, Campo = "Email", Descricao = "Neste campo deverá inserir o seu email do tipo(ex: jbvc@hotmail.com)" });
-
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 4, Campo = "Novo Numero Identificação", Descricao = "Neste campo deverá inserir o seu novo numero de identificação da escola com apenas digitos" });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 4, Campo = "Novo NIF", Descricao = "Neste campo deverá inserir o seu novo numero de identificação fiscal que deverá conter 9 digitos numéricos" });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 4, Campo = "Nova Morada Rua", Descricao = "Neste campo deverá inserir a sua nova rua da sua morada (Ex. Rua aberto delgado) " });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 4, Campo = "Nova Morada Concelho", Descricao = "Neste campo deverá inserir o novo concelho da sua morada" });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 4, Campo = "Nova Morada Distrito", Descricao = "Neste campo deverá inserir a novo distrito da sua morada" });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 4, Campo = "Nova Morada Codigo Postal", Descricao = "Neste campo deverá inserir o novo codigo postal da sua morada" });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 4, Campo = "Novo Telefone", Descricao = "Neste campo deverá inserir o seu novo numero de telefone" });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 4, Campo = "Nova Password", Descricao = "Neste campo deverá definir a sua nova password com letras maiusculas, letras minusculas e digitos" });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 4, Campo = "Confirmar Nova Password", Descricao = "Neste campo deverá inserir novamente a sua nova password definida anteriormente" });
-
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Nome Completo", Descricao = "Neste campo deverá inserir um nome completo com apenas letras" });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Data Nascimento", Descricao = "Neste campo deverá inserir a data nascimento no formato dia/mês/ano" });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Telefone", Descricao = "Neste campo deverá inserir o seu telefone com 9 digitos" });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Email", Descricao = "Neste campo deverá inserir o seu email do tipo(ex: jbvc@hotmail.com)" });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "NIF", Descricao = "Neste campo deverá inserir o seu numero de identificação fiscal que deverá conter 9 digitos numéricos" });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Numero Identificação", Descricao = "Neste campo deverá inserir o seu numero de identificação da escola com apenas digitos" });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Numero Telefone", Descricao = "Neste campo deverá inserir o seu numero telefone com 9 digitos numericos" });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Morada Rua", Descricao = "Neste campo deverá inserir a rua da sua morada (Ex. Rua aberto delgado)" });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Morada Concelho", Descricao = "Neste campo deverá inserir o concelho da sua morada " });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Morada Distrito", Descricao = "Neste campo deverá inserir o distrito da sua morada " });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Morada Codigo Postal", Descricao = "Neste campo deverá inserir o seu codigo postal (Ex. 0000-000)" });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Nacionalidade", Descricao = "Neste campo deverá inserir a sua nacionalidade" });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Nome Emergencia", Descricao = "Neste campo deverá inserir o nome da pessoa que será o seu contacto de emergência" });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Afiliacao Emergencia", Descricao = "Neste campo deverá inserir a afiliação da pessoa em questão " });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Telefone Emergencia", Descricao = "Neste campo deverá inserir o numero de telefone do seu contacto de emergência" });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Escola", Descricao = "Neste campo deverá inserir a sua Escola" });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Curso Frequentado", Descricao = "Neste campo deverá inserir o nome do seu curso" });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Ano Curricular", Descricao = "Neste campo deverá inserir o seu ano curricular actual" });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Instituicoes", Descricao = "Neste campo deverá selecior as instituições que irá se candidatar" });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Bolsa", Descricao = "Neste campo deverá selecionar se pretender bolsa" });
-                context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "IBAN", Descricao = "Neste campo deverá inserir o seu IBAN para a bolsa" });
-
-                context.SaveChanges();
-            }
-            if (!context.UserRoles.Any())
-            {
-                PasswordHasher<Utilizador> hash = new PasswordHasher<Utilizador>();
-                Utilizador tec1 = new Utilizador {SecurityStamp = Guid.NewGuid().ToString(), UserName = "tecnico1@est.pt", EmailConfirmed = true ,NormalizedUserName="TECNICO1@EST.PT", Email = "tecnico1@est.pt"};
-                tec1.PasswordHash = hash.HashPassword(tec1, "tecnico1");
-                Utilizador tec2 = new Utilizador { SecurityStamp = Guid.NewGuid().ToString(),UserName = "tecnico2@est.pt", EmailConfirmed = true, NormalizedUserName = "TECNICO2@EST.PT", Email = "tecnico2@est.pt" };
-                tec2.PasswordHash = hash.HashPassword(tec2, "tecnico2");
-                Utilizador tec3 = new Utilizador { SecurityStamp = Guid.NewGuid().ToString(), UserName = "tecnico3@est.pt", EmailConfirmed = true, NormalizedUserName = "TECNICO3@EST.PT", Email = "tecnico3@est.pt" };
-                tec3.PasswordHash = hash.HashPassword(tec3, "tecnico3");
-                Utilizador admin = new Utilizador { SecurityStamp = Guid.NewGuid().ToString(), UserName = "admin@est.pt", EmailConfirmed = true, NormalizedUserName = "ADMIN@EST.PT", Email = "admin@est.pt" };
-                admin.PasswordHash = hash.HashPassword(admin, "admin");
-
-                context.Users.Add(tec1);
-                context.Users.Add(tec2);
-                context.Users.Add(tec3);
-                context.Users.Add(admin);
-                context.SaveChanges();
-                
-
-                var id = context.Roles.Where(row => row.Name.Equals("Tecnico")).Single().Id;
-                var id1 = context.Roles.Where(row => row.Name.Equals("Administrador")).Single().Id;
-     
-                context.UserRoles.Add(new IdentityUserRole<string> { RoleId = id, UserId = tec1.Id });
-                context.UserRoles.Add(new IdentityUserRole<string> { RoleId = id, UserId = tec2.Id });
-                context.UserRoles.Add(new IdentityUserRole<string> { RoleId = id, UserId = tec3.Id });
-                context.UserRoles.Add(new IdentityUserRole<string> { RoleId = id1, UserId = admin.Id });
-                context.SaveChanges();
-
-                Perfil aux = new Perfil { UtilizadorFK = tec1.Id ,Email = tec1.Email};
-                Perfil aux1 = new Perfil { UtilizadorFK = tec2.Id, Email = tec2.Email };
-                Perfil aux2 = new Perfil { UtilizadorFK = tec3.Id, Email = tec3.Email };
-                Perfil aux3 = new Perfil { UtilizadorFK = admin.Id, Email = admin.Email };
-
-                context.Perfils.Add(aux);
-                context.Perfils.Add(aux1);
-                context.Perfils.Add(aux2);
-                context.Perfils.Add(aux3);
-                context.SaveChanges();
-
-                tec1.PerfilFK = aux.ID;
-                tec2.PerfilFK = aux1.ID;
-                tec3.PerfilFK = aux2.ID;
-                admin.PerfilFK = aux3.ID;
-                context.SaveChanges();
-            }
-
-
         }
 
 
-    }
+        }
     }
 
 

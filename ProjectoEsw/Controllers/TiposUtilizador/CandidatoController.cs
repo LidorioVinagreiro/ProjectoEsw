@@ -46,7 +46,7 @@ namespace ProjectoEsw.Controllers
             return View(model);
         }
 
-
+        [HttpGet]
         public async Task<IActionResult> EditarPerfil()
         {
             Utilizador user = await _gestor.getUtilizador(this.User);
@@ -82,12 +82,12 @@ namespace ProjectoEsw.Controllers
             if (await _gestor.EditarPerfilUtilizador(model, user.Email))
             {
                 bool aux = await _gestor.UploadFotoUtilizador(user, Request.Form.Files.Single());
-                return RedirectToAction("Index", "Candidato");
+                return RedirectToAction("Index", "Candidato"); // mudar para o perfil secalhar
             }
             else
             {
                 //falta erros?
-                return RedirectToAction("Index", "Candidato");
+                return View("Erros/ErroEditarPerfil", queryPerfil);
             }
 
         }
@@ -95,6 +95,9 @@ namespace ProjectoEsw.Controllers
         [HttpPost]
         public async Task<IActionResult> AlterarPassword(RegisterViewModel model)
         {
+            Utilizador user = await _gestor.getUtilizador(this.User);
+            Perfil queryPerfil = _gestor.getPerfil(user);
+
             if (ModelState.IsValid)
             {
 
@@ -104,17 +107,16 @@ namespace ProjectoEsw.Controllers
             else
             {
                 //password nao foi alterada
-                return RedirectToAction("Index", "Candidato");
+                return View("ErroAlterarPassword", queryPerfil);
             }
         }
-
         public async Task<IActionResult> Logout()
         {
             await _gestor.LogOut();
             return RedirectToAction("Index", "Home");
         }
 
-
+        [HttpGet]
         public IActionResult CandidaturaErasmus()
         {
             Utilizador user = _gestor.getUtilizador(this.User).Result;
@@ -126,7 +128,7 @@ namespace ProjectoEsw.Controllers
                 Candidatura aux = _contexto.Candidaturas.Where(row => row.UtilizadorFK == user.Id).Single();
                 if (aux.UtilizadorFK == user.Id)
                 {
-                    return RedirectToAction("Index", "Candidato");
+                    return View("ErroCandidaturaRepetir",perfil);//se tiver uma rejeitada ou uma feita o ano passado
                 }
             }
             catch
@@ -135,7 +137,7 @@ namespace ProjectoEsw.Controllers
             CandidaturaViewModel model = new CandidaturaViewModel { UtilizadorFK = user.Id, Candidato = user, Instituicoes = _contexto.Instituicoes.Where(row => row.Interno == false).ToList() };
             return View("candidaturaErasmus", model);
         }
-
+        [HttpGet]
         public IActionResult CandidaturaSantander()
         {
             Utilizador user = _gestor.getUtilizador(this.User).Result;
@@ -147,7 +149,7 @@ namespace ProjectoEsw.Controllers
                 Candidatura aux = _contexto.Candidaturas.Where(row => row.UtilizadorFK == user.Id).Single();
                 if (aux.UtilizadorFK == user.Id)
                 {
-                    return RedirectToAction("Index", "Candidato");
+                    return View("ErroCandidaturaRepetir", perfil);//se tiver uma rejeitada ou uma feita o ano passado
                 }
             }
             catch
@@ -164,10 +166,10 @@ namespace ProjectoEsw.Controllers
             {
                 TipoCandidatura tipo = _contexto.TipoCandidatuas.Single(row => row.Tipo == "Erasmus");
                 Utilizador user = await _gestor.getUtilizador(this.User);
-
+                Perfil perfil = _contexto.Perfils.Single(row => row.ID == user.PerfilFK);
                 List<string> x = Request.Form["lista"].ToList();
                 if (x.Count <= 0)
-                    return RedirectToAction("Index", "Candidato"); // caso não selecione nada
+                    return View("ErroSelecionarInstituicoes", perfil); // caso não selecione nada
                 List<int> aux = new List<int>();
                 for (int i = 0; i < x.Count; i++)
                 {
@@ -178,15 +180,15 @@ namespace ProjectoEsw.Controllers
                 }
                 List<Instituicao> listaIns = _contexto.Instituicoes.Where(row => aux.Contains(row.ID)).ToList();
                 if (listaIns.Where(row => row.Interno != false).Any())
-                    return RedirectToAction("index", "Candidato"); // form as been tempered isto é os forms foram mudados manualmente
-
+                    return View("ErroCandidatura", perfil);
+                    
                 model.Instituicoes = listaIns;
                 bool dataInicio = System.DateTime.Now.CompareTo(tipo.DataInicio) >= 0;
                 bool dataFim = System.DateTime.Now.CompareTo(tipo.DataFim) < 0;
                 if (!(dataInicio && dataFim))
                 {
                     //não cumpre os prazos
-                    return View();
+                    return View("ErroPrazos", perfil);
                 }
 
                 Candidatura candidatura = new Candidatura
@@ -212,13 +214,13 @@ namespace ProjectoEsw.Controllers
                 {
                     _gestorEmail.EnviarEmail(user, "Efectuou a candidatura", candidatura.ToString());
                     //sucesso
-                    return RedirectToAction("Index", "Candidato");
+                    return View("CandidaturaSucesso", perfil);
                 }
                 //erro adicionar candidatura
-                return RedirectToAction("Index", "Candidato");
+                return View("ErroCandidatura", perfil);
             }
             //Erro model
-            return View();
+            return View("Erro");
         }
 
         [HttpPost]
@@ -228,10 +230,10 @@ namespace ProjectoEsw.Controllers
             {
                 TipoCandidatura tipo = _contexto.TipoCandidatuas.Single(row => row.Tipo == "Santander");
                 Utilizador user = await _gestor.getUtilizador(this.User);
-
+                Perfil perfil = _contexto.Perfils.Single(row => row.ID == user.PerfilFK);
                 List<string> x = Request.Form["lista"].ToList();
                 if (x.Count <= 0)
-                    return RedirectToAction("Index", "Candidato"); // caso não selecione nada
+                    return View("ErroSelecionarInstituicoes", perfil); // caso não selecione nada
                 List<int> aux = new List<int>();
                 for (int i = 0; i < x.Count; i++)
                 {
@@ -242,7 +244,7 @@ namespace ProjectoEsw.Controllers
                 }
                 List<Instituicao> listaIns = _contexto.Instituicoes.Where(row => aux.Contains(row.ID)).ToList();
                 if (listaIns.Where(row => row.Interno != true).Any())
-                    return View(); // form as been tempered isto é os forms foram mudados manualmente
+                    return View("ErroCandidatura", perfil); // form as been tempered isto é os forms foram mudados manualmente
 
                 model.Instituicoes = listaIns;
                 bool dataInicio = System.DateTime.Now.CompareTo(tipo.DataInicio) >= 0;
@@ -250,7 +252,7 @@ namespace ProjectoEsw.Controllers
                 if (!(dataInicio && dataFim))
                 {
                     //não cumpre os prazos
-                    return View();
+                    return View("ErroPrazos", perfil);
                 }
                 Candidatura candidatura = new Candidatura
                 {
@@ -273,13 +275,13 @@ namespace ProjectoEsw.Controllers
                 {
                     _gestorEmail.EnviarEmail(user, "Efectuou a candidatura", candidatura.ToString());
                     //sucesso
-                    return RedirectToAction("Index", "Candidato");
+                    return View("CandidaturaSucesso", perfil);
                 }
                 //erro
-                return RedirectToAction("Index", "Candidato");
+                return View("ErroCandidatura", perfil);
             }
             //Erro
-            return View();
+            return View("Erro");
 
         }
 
@@ -390,10 +392,11 @@ namespace ProjectoEsw.Controllers
         public IActionResult MarcarReuniao(MarcarReuniaoViewModel viewModel)
         {
             Utilizador actual = _gestor.getUtilizador(this.User).Result;
+            Perfil perfil = _gestor.getPerfil(actual);
             bool marcou = _gestor.MarcarReuniao(actual, viewModel.DataReuniaoInicio, viewModel.DataReuniaoFim);
             if (marcou)
-                return View(); // marcou reuniao
-            return View();//erro nao marcou    
+                return View("MarcarReuniaoSucesso", perfil); // marcou reuniao
+            return View("ErroMarcarReuniao", perfil);//erro nao marcou    
         }
 
         //METODOS DE AJAX

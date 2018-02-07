@@ -9,5 +9,6 @@ namespace ProjectoEsw.Models.Candidatura_sprint2.ViewModels
     {
         public DateTime DataReuniaoInicio { get; set; }
         public DateTime DataReuniaoFim { get; set; }
+
     }
 }

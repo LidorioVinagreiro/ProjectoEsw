@@ -1,8 +1,7 @@
-﻿@model ProjectoEsw.Models.Identity.Perfil;
+﻿
 
 @section links {
     <a asp-area="" asp-controller="Tecnico" asp-action="Logout" class="btn btn-link btn-xs pull-right">Log Out</a>
-    <a asp-area="" asp-controller="Tecnico" asp-action="Perfil" class="btn btn-link btn-xs pull-right"> @Html.DisplayFor(Model => Model.Email) </a>
 
 }
 @section Home{
@@ -19,11 +18,21 @@
     <a asp-area="" asp-controller="Tecnico" asp-action="SobreNos">Sobre Nós</a>
 }
 <!--Candidato-->
-<div class="jumbotron col-sm-5">
-    <h3>Erasmus+</h3>
-    <p> Resto Informacao + links + prazos</p>
+
+<div class="jumbotron col-sm-8 ">
+    <div class="jumbotron col-sm-6">
+        <h3>Erasmus+</h3>
+        <p> Resto Informacao + links + prazos</p>
+    </div>
+    <div class="jumbotron col-sm-6">
+        <h3>Programa Santander</h3>
+        <p> Resto Informacao + links + prazos</p>
+    </div>
 </div>
-<div class="jumbotron col-sm-5 col-sm-offset-1">
-    <h3>Programa Santander</h3>
-    <p> Resto Informacao + links + prazos</p>
-</div>
+    <div class="jumbotron col-sm-3 col-sm-offset-1">
+        <h5 class="text-center">Opcoes</h5>
+        <!--<a asp-area="" asp-controller="Tecnico" asp-action="Perfil" class="btn btn-link btn-xs pull-right col-sm-12">Ver Perfil</a>
+        <a asp-area="" asp-controller="Tecnico" asp-action="Perfil" class="btn btn-link btn-xs center-block col-sm-12">Editar Perfil</a>-->
+        <a asp-area="" asp-controller="Tecnico" asp-action="ListaCandidaturas" class="btn btn-link btn-xs pull-right col-sm-12">Lista Candidaturas</a>
+        <a asp-area="" asp-controller="Tecnico" asp-action="MarcarEntrevista" class="btn btn-link btn-xs pull-right col-sm-12">Marcar Entrevistas</a>
+    </div>

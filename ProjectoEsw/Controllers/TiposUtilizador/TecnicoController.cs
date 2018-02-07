@@ -157,7 +157,17 @@ namespace ProjectoEsw.Controllers
         }
 
         public IActionResult MarcarEntrevista() {
-            return View();
+            List<Candidatura> candidaturas = _context.Candidaturas.Where(row => row.Estado == Estado.APROVADA).ToList();
+            List<Utilizador> utilizadores  = new List<Utilizador>();
+            for (int i = 0; i < candidaturas.Count(); i++)
+            {
+            utilizadores.Add(_context.Users.Where(row => row.Id == candidaturas[i].UtilizadorFK).Single());
+            utilizadores[i].Perfil = _context.Perfils.Where(row => row.ID == utilizadores[i].PerfilFK).Single();
+            }
+            MarcarEntrevistaViewModel entrevistas = new MarcarEntrevistaViewModel();
+            entrevistas.Candidatos = utilizadores;
+
+            return View(entrevistas);
         }
 
         [HttpPost]
@@ -166,9 +176,9 @@ namespace ProjectoEsw.Controllers
             Utilizador candidato = _gestor.getUtilizadorById(model.CandidatoID);
             bool marcou = _gestor.MarcarEntrevista(tecnico, candidato, model.DataEntrevistaInicio, model.DataEntrevistaFim);
             if (marcou) {
-                return View(); // entrevista marcada
+                return View("MarcarEntrevistaSucesso"); // entrevista marcada
             }
-            return View();//erro na marcacao
+            return View("Erros/ErroMarcarEntrevista");//erro na marcacao
 
         }
 

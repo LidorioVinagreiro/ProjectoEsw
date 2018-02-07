@@ -1,0 +1,62 @@
+﻿@model ProjectoEsw.Models.Candidatura_sprint2.ViewModels.MarcarEntrevistaViewModel;
+
+@section links {
+    <a asp-area="" asp-controller="Tecnico" asp-action="Logout" class="btn btn-link btn-xs pull-right">Log Out</a>
+
+}
+@section Home{
+    <a asp-area="" asp-controller="Tecnico" asp-action="Index">Home</a>
+
+}
+@section ProgramasMobilidade{
+    <a asp-area="" asp-controller="Tecnico" asp-action="ProgramasMobilidade">Programas Mobilidade</a>
+}
+@section Bolsas{
+    <a asp-area="" asp-controller="Tecnico" asp-action="Bolsas">Bolsas</a>
+}
+@section SobreNos{
+    <a asp-area="" asp-controller="Tecnico" asp-action="SobreNos">Sobre Nós</a>
+}
+
+
+<form class="form-horizontal" asp-controller="Tecnico" asp-action="MarcarEntrevista" method="post">
+    <div class="jumbotron col-sm-8">
+        <h2 class=" text-center">Lista De Candidaturas</h2>
+        @if (Model.Candidatos.Any() == false)
+        {
+            <h4 class="center-block text-center">Sem Candidatos Aprovados</h4>
+            <a asp-area="" asp-controller="Tecnico" asp-action="ListaCandidaturas" class="btn btn-link btn center-block text-center">Pagina inicial</a>
+        }
+        else
+        {<div class="checkbox checkboxList col-sm-12">
+            
+                @for (int i = 0; i < Model.Candidatos.Count; i++)
+                {
+                    var checkbox1 = "checkbox" + i;
+                    <div>
+                        <input value="@Model.Candidatos[i].Id" name="lista" type="checkbox" />
+                        <label>@Model.Candidatos[i].Perfil.NomeCompleto</label>
+                        <label>@Model.Candidatos[i].Perfil.NumeroIdentificacao</label>
+                        <input asp-for="@Model.Candidatos[i].Id" type="hidden" />
+                    </div>
+                }
+            
+        </div>
+        <div class="col-sm-6">
+            <input asp-for="DataEntrevistaInicio" placeholder="Data de Inicio da entrevista" class="form-control center-block" />
+            <span asp-validation-for="DataEntrevistaInicio" class="text-danger"></span>
+        </div>
+        <div class="col-sm-6">
+            <input asp-for="DataEntrevistaInicio" placeholder="Data de Inicio da entrevista" class="form-control center-block" />
+            <span asp-validation-for="DataEntrevistaInicio" class="text-danger"></span>
+        </div>
+      <button type="submit" class="btn btn-default center-block">Marcar Entrevista</button>
+       }
+   </div>
+</form>
+
+<div class="jumbotron col-sm-3 col-sm-offset-1">
+    <h5 class="text-center">Opcoes</h5>
+    <a asp-area="" asp-controller="Tecnico" asp-action="ListaCandidaturas" class="btn btn-link btn-xs pull-right col-sm-12">Lista Candidaturas</a>
+    <a asp-area="" asp-controller="Tecnico" asp-action="MarcarEntrevista" class="btn btn-link btn-xs pull-right col-sm-12">Marcar Entrevistas</a>
+</div>

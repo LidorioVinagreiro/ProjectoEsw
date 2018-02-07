@@ -10,6 +10,7 @@ namespace ProjectoEsw.Models.Candidatura_sprint2.ViewModels
     {
         public string CandidatoID { get; set; }
         public Utilizador Candidato { get; set; }
+        public List<Utilizador> Candidatos { get; set; }
         public DateTime DataEntrevistaInicio { get; set; }
         public DateTime DataEntrevistaFim { get; set; }
     }

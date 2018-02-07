@@ -252,7 +252,7 @@ namespace ProjectoEsw.GestorAplicacao
 
 
         public bool GerarDirectoriaUtilizador(Perfil user) {
-            string users = DirectoriaUtilizadores + user.Email;
+            string users = DirectoriaUtilizadores + "\\" + user.Email;
             string documentos = users+ DirectoriaDocumentos;
             string imagem = users + DirectoriaImagem;
             string path = _hostingEnvironment.WebRootPath + documentos;

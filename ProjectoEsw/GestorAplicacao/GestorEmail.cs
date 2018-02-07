@@ -8,15 +8,29 @@ using System.Threading.Tasks;
 
 namespace ProjectoEsw.GestorAplicacao
 {
+    /// <summary>
+    /// Esta classe tem como objectivo a agragação de todos os metodos necessarios para envio de Email
+    /// </summary>
     public class GestorEmail
     {
+        /// <summary>
+        /// Atributos privados da classe GestorEmail
+        /// Estes atributos são as credenciais para a autenticação do servidor no servidor de SMTP
+        /// </summary>
         private string ServerEmail = "cimobgrupo2@gmail.com";
         private string EmailPassword = "gruposw2017";
-
+        /// <summary>
+        /// Construtor do GestorEmail
+        /// </summary>
         public GestorEmail() {
 
         }
-
+        /// <summary>
+        /// Esta função tem como objectivo envio de um email para um determinado utilizador.
+        /// </summary>
+        /// <param name="user">Parametro do tipo Utilizador</param>
+        /// <param name="titulo" type="string">Assunto do Email</param>
+        /// <param name="body" type="string">Corpo do Email</param>
         public void EnviarEmail(Utilizador user,string titulo,string body) {
             var message = new MimeMessage();
             message.From.Add(new MailboxAddress("Server side", ServerEmail));

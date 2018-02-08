@@ -116,7 +116,7 @@ namespace ProjectoEsw.Controllers
             }
             else {
                 //nao houve confirmacao do token
-                return View("Erros/ErroConfirmarEmail");
+                return View("../Erros/ErroConfirmarEmail");
             }
 
         }

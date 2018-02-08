@@ -1,0 +1,28 @@
+﻿
+@section links {
+    <a asp-area="" asp-controller="Tecnico" asp-action="Logout" class="btn btn-link btn-xs pull-right">Log Out</a>
+}
+@section Home{
+    <a asp-area="" asp-controller="Tecnico" asp-action="Index">Home</a>
+
+}
+@section ProgramasMobilidade{
+    <a asp-area="" asp-controller="Tecnico" asp-action="ProgramasMobilidade">Programas Mobilidade</a>
+}
+@section Bolsas{
+    <a asp-area="" asp-controller="Tecnico" asp-action="Bolsas">Bolsas</a>
+}
+@section SobreNos{
+    <a asp-area="" asp-controller="Tecnico" asp-action="SobreNos">Sobre Nós</a>
+}
+<!--Home-->
+<div class="jumbotron col-sm-8">
+    <h2 class=" text-center"><strong>Erro na validação da candidatura</strong></h2>
+    <p><strong>Não foi possivel validar a candidatura que estava em analise, por favor tente novamente</strong></p>
+    <a asp-area="" asp-controller="Tecnico" asp-action="Index" class="btn btn-link btn-xs text-center center-block">Voltar Pagina Inicial</a>
+</div>
+
+<div class="jumbotron col-sm-3 col-sm-offset-1">
+    <h5 class="text-center">Opcoes</h5>
+    <a asp-area="" asp-controller="Tecnico" asp-action="ListaCandidaturas" class="btn btn-link btn-xs pull-right col-sm-12">Lista Candidaturas</a>
+</div>

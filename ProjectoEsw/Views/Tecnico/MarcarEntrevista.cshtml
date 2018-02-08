@@ -28,8 +28,10 @@
             <a asp-area="" asp-controller="Tecnico" asp-action="ListaCandidaturas" class="btn btn-link btn center-block text-center">Pagina inicial</a>
         }
         else
-        {<div class="checkbox checkboxList col-sm-12">
-            
+        {
+
+            <h3 class="text-center center-block"style="padding-bottom:5px;">Candidaturas</h3>
+            <div class="checkbox checkboxList col-sm-12">            
                 @for (int i = 0; i < Model.Candidatos.Count; i++)
                 {
                     var checkbox1 = "checkbox" + i;
@@ -39,9 +41,10 @@
                         <label>@Model.Candidatos[i].Perfil.NumeroIdentificacao</label>
                         <input asp-for="@Model.Candidatos[i].Id" type="hidden" />
                     </div>
-                }
-            
+                }           
         </div>
+        <h4 class="text-center center-block" style="padding-bottom:10px;padding-top:10px">Data iniciio - Data fim</h4>
+        <div class="help-block"></div>
         <div class="col-sm-6">
             <input asp-for="DataEntrevistaInicio" placeholder="Data de Inicio da entrevista" class="form-control center-block" />
             <span asp-validation-for="DataEntrevistaInicio" class="text-danger"></span>
@@ -50,8 +53,10 @@
             <input asp-for="DataEntrevistaInicio" placeholder="Data de Inicio da entrevista" class="form-control center-block" />
             <span asp-validation-for="DataEntrevistaInicio" class="text-danger"></span>
         </div>
-      <button type="submit" class="btn btn-default center-block">Marcar Entrevista</button>
-       }
+        <div>
+            <button type="submit" class="btn btn-default center-block" style="padding-top:10px">Marcar Entrevista</button>
+        </div>
+        }
    </div>
 </form>
 

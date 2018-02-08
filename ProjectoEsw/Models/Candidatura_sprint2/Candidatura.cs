@@ -21,7 +21,7 @@ namespace ProjectoEsw.Models.Candidatura_sprint2
         [DisplayName("Curso")]
         public string CursoFrequentado { get; set; }
         public string Escola { get; set; }
-        public int IBAN { get; set; }
+        public string IBAN { get; set; }
         [DisplayName("Ano Curricular")]
         public int AnoCurricular { get; set; }
         public bool Bolsa { get; set; }

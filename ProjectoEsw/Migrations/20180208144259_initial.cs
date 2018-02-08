@@ -181,7 +181,7 @@ namespace ProjectoEsw.Migrations
                     CursoFrequentado = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Escola = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Estado = table.Column<int>(type: "int", nullable: false),
-                    IBAN = table.Column<int>(type: "int", nullable: false),
+                    IBAN = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NomeEmergencia = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NumeroEmergencia = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TipoCandidaturaFK = table.Column<int>(type: "int", nullable: false),

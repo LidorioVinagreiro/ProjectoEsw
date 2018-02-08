@@ -115,10 +115,10 @@ namespace ProjectoEsw.Controllers
                 Candidatura candidatura = _context.Candidaturas.Where(x => x.ID == model.ID).Single();
                 Task<Utilizador> tecnico = _gestor.getUtilizador(this.User);
                 if (_gestor.RejeitarCandidatura(candidatura, tecnico.Result))
-                    return View();// rejeitada
-                return View(); // erro a rejeitar
+                    return View("CandidaturaRejeitada");// rejeitada
+                return View("../Erros/ErroValidarCandidatura"); // erro a rejeitar
             }
-            return View(); // modelstate invalid
+            return View("Erro"); // modelstate invalid
         }
 
         [HttpPost]
@@ -129,10 +129,10 @@ namespace ProjectoEsw.Controllers
                 Candidatura candidatura = _context.Candidaturas.Where(x => x.ID == model.ID).Single();
                 Task<Utilizador> tecnico = _gestor.getUtilizador(this.User);
                 if (_gestor.AprovarCandidatura(candidatura, tecnico.Result))
-                    return View();// aprovado
-                return View(); // erro a aprovar
+                    return View("CandidaturaAprovada");// aprovado
+                return View("../Erros/ErroValidarCandidatura"); // erro a aprovar
             }
-            return View(); // modelstate invalid
+            return View("Erro"); // modelstate invalid
 
         }
 
@@ -141,7 +141,7 @@ namespace ProjectoEsw.Controllers
         {
             StringValues valores = Request.Form["lista"];
             if (!valores.Any())
-                return View("Index"); // nao selecionaram valores nenhuns
+                return View("../Erros/ErroNenhumValorSelecionado"); // nao selecionaram valores nenhuns
             if (ModelState.IsValid)
             {
                 Candidatura candidatura = _context.Candidaturas.Where(x => x.ID == model.ID)
@@ -149,10 +149,10 @@ namespace ProjectoEsw.Controllers
                     .Single();
                 Task<Utilizador> tecnico = _gestor.getUtilizador(this.User);
                 if (_gestor.PedirAlteracaoCandidatura(candidatura, tecnico.Result,valores))
-                    return View("Index");// pedido alteracao
-                return View("Index"); // erro a alterar
+                    return View("CandidaturaIncompleta");// pedido alteracao
+                return View("../Erros/ErroValidarCandidatura"); // erro a alterar
             }
-            return View("Index"); // modelstate invalid
+            return View("Erro"); // modelstate invalid
 
         }
 
@@ -178,7 +178,7 @@ namespace ProjectoEsw.Controllers
             if (marcou) {
                 return View("MarcarEntrevistaSucesso"); // entrevista marcada
             }
-            return View("Erros/ErroMarcarEntrevista");//erro na marcacao
+            return View("../Erros/ErroMarcarEntrevista");//erro na marcacao
 
         }
 

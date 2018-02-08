@@ -33,142 +33,130 @@
 else
 {
 <div class="jumbotron col-sm-8">
-    <h2 class=" text-center">Candidatura</h2>
-    <div class="col-sm-12">
-        <label asp-for="Candidato.Perfil.NomeCompleto" class="col-sm-3 control-label"></label>
-        <div class="col-sm-offset-4">
-            <h5>@Model.Candidato.Perfil.NomeCompleto</h5>
-        </div>
+    
+    <div class="help-block"></div>
+    <h2 class=" text-center" style="padding-bottom:5px;">Candidatura</h2>
+    <div class="help-block"></div>
+
+    <div>
+        <label asp-for="Candidato.Perfil.NomeCompleto" class="col-sm-6 control-label text-right"></label>
+        <h5 class="col-sm-offset-6 control-label">@Model.Candidato.Perfil.NomeCompleto</h5>
     </div>
-    <div class="col-sm-12">
-        <label asp-for="Candidato.Perfil.DataNasc" class="col-sm-3 control-label"></label>
-        <div class="col-sm-offset-4">
-            <h5>@Model.Candidato.Perfil.DataNasc</h5>
-        </div>
+    <div>
+        <label asp-for="Candidato.Perfil.DataNasc" class="col-sm-6 control-label text-right"></label>
+        <h5 class="col-sm-offset-6">@Model.Candidato.Perfil.DataNasc.Date.ToShortDateString()</h5>
+
     </div>
-    <div class="col-sm-12">
-        <label asp-for="Candidato.Perfil.Email" class="col-sm-3 control-label"></label>
-        <div class="col-sm-offset-4">
-            <h5> @Model.Candidato.Perfil.Email</h5>
-        </div>
+    <div>
+        <label asp-for="Candidato.Perfil.Genero" class="col-sm-6 control-label text-right"></label>
+        <h5 class="col-sm-offset-6"> @Model.Candidato.Perfil.Genero</h5>
     </div>
-    <div class="col-sm-12">
-        <label asp-for="Candidato.Perfil.Nif" class="col-sm-3 control-label"></label>
-        <div class="col-sm-offset-4">
-            <h5> @Model.Candidato.Perfil.Nif</h5>
-        </div>
+    <div>
+        <label asp-for="Candidato.Perfil.Nacionalidade" class="col-sm-6 control-label text-right"></label>
+        <h5 class="col-sm-offset-6">@Model.Candidato.Perfil.Nacionalidade</h5>
     </div>
-    <div class="col-sm-12">
-        <label asp-for="Candidato.Perfil.NumeroIdentificacao" class="col-sm-3 control-label"></label>
-        <div class="col-sm-offset-4">
-            <h5> @Model.Candidato.Perfil.NumeroIdentificacao</h5>
-        </div>
+    <div>
+        <label asp-for="Candidato.Perfil.MoradaRua" class="col-sm-6 control-label text-right"></label>
+        <h5 class="col-sm-offset-6">@Model.Candidato.Perfil.MoradaRua</h5>
     </div>
-    <div class="col-sm-12">
-        <label asp-for="Candidato.Perfil.MoradaRua" class="col-sm-3 control-label"></label>
-        <div class="col-sm-offset-4">
-            <h5> @Model.Candidato.Perfil.MoradaRua</h5>
-        </div>
+    <div>
+        <label asp-for="Candidato.Perfil.MoradaCodigoPostal" class="col-sm-6 control-label text-right"></label>
+        <h5 class="col-sm-offset-6"> @Model.Candidato.Perfil.MoradaCodigoPostal</h5>
     </div>
-    <div class="col-sm-12">
-        <label asp-for="Candidato.Perfil.MoradaCodigoPostal" class="col-sm-3 control-label"></label>
-        <div class="col-sm-offset-4">
-            <h5>@Model.Candidato.Perfil.MoradaCodigoPostal </h5>
-        </div>
+    <div>
+        <label asp-for="Candidato.Perfil.MoradaConcelho" class="col-sm-6 control-label text-right"></label>
+        <h5 class="col-sm-offset-6">@Model.Candidato.Perfil.MoradaConcelho </h5>
     </div>
-    <div class="col-sm-12">
-        <label asp-for="Candidato.Perfil.Nacionalidade" class="col-sm-3 control-label"></label>
-        <div class="col-sm-offset-4">
-            <h5> @Model.Candidato.Perfil.Nacionalidade</h5>
-        </div>
+    <div>
+        <label asp-for="Candidato.Perfil.MoradaDistrito" class="col-sm-6 control-label text-right"></label>
+        <h5 class="col-sm-offset-6">@Model.Candidato.Perfil.MoradaDistrito</h5>
     </div>
-    <div class="col-sm-12">
-        <label asp-for="Candidato.Perfil.MoradaConcelho" class="col-sm-3 control-label"></label>
-        <div class="col-sm-offset-4">
-            <h5>@Model.Candidato.Perfil.MoradaConcelho</h5>
-        </div>
+    <div>
+        <label asp-for="Candidato.Perfil.Email" class="col-sm-6 control-label text-right"></label>
+        <h5 class="col-sm-offset-6">@Model.Candidato.Perfil.Email</h5>
     </div>
-    <div class="col-sm-12">
-        <label asp-for="Candidato.Perfil.MoradaDistrito" class="col-sm-3 control-label"></label>
-        <div class="col-sm-offset-4">
-            <h5>@Model.Candidato.Perfil.MoradaDistrito</h5>
-        </div>
+    <div>
+        <label asp-for="Candidato.Perfil.Nif" class="col-sm-6 control-label text-right"></label>
+        <h5 class="col-sm-offset-6">@Model.Candidato.Perfil.Nif</h5>
     </div>
-    <div class="col-sm-12">
-        <label asp-for="Candidato.Perfil.Telefone" class="col-sm-3 control-label"></label>
-        <div class="col-sm-offset-4">
-            <h5>@Model.Candidato.Perfil.Telefone</h5>
-        </div>
+    <div>
+        <label asp-for="Candidato.Perfil.NumeroIdentificacao" class="col-sm-6 control-label text-right"></label>
+        <h5 class="col-sm-offset-6">@Model.Candidato.Perfil.NumeroIdentificacao</h5>
+    </div>
+    <div>
+        <label asp-for="Candidato.Perfil.Telefone" class="col-sm-6 control-label text-right"></label>
+        <h5 class="col-sm-offset-6">@Model.Candidato.Perfil.Telefone</h5>
     </div>
 
-    <h4>Dados do Contacto em caso de emergencia</h4>
+    <div class="help-block"></div>
+    <h3 class="text-center center-block" style="padding-bottom:10px; padding-top:10px;">Dados do Contacto em caso de emergencia</h3>
+    <div class="help-block"></div>
+    
+    <div>
+        <label asp-for="NomeEmergencia" class="col-sm-6 control-label text-right"></label>
+        <h5 class="col-sm-offset-6">@Model.NomeEmergencia</h5>
+    </div>
+    <div>
+        <label asp-for="AfiliacaoEmergencia" class="col-sm-6 control-label text-right"></label>
+        <h5 class="col-sm-offset-6">@Model.AfiliacaoEmergencia</h5>
+    </div>
+    <div>
+        <label asp-for="NumeroEmergencia" class="col-sm-6 control-label text-right"></label>
+        <h5 class="col-sm-offset-6">@Model.NumeroEmergencia</h5>
+    </div>
+    
+    <div class="help-block"></div>
+    <h3 class="text-center center-block" style="padding-bottom:10px; padding-top:10px;">Dados Candidatura</h3>
+    <div class="help-block"></div>
 
-    <div class="col-sm-12">
-        <label asp-for="NomeEmergencia" class="col-sm-3 control-label"></label>
-        <div class="col-sm-offset-4">
-            <h5>@Model.NomeEmergencia</h5>
-        </div>
+    <div>
+        <label asp-for="Escola" class="col-sm-6 control-label text-right"></label>
+        <h5 class="col-sm-offset-6">@Model.Escola</h5>
     </div>
-    <div class="col-sm-12">
-        <label asp-for="AfiliacaoEmergencia" class="col-sm-3 control-label"></label>
-        <div class="col-sm-offset-4">
-            <h5>@Model.AfiliacaoEmergencia</h5>
-        </div>
+    <div>
+        <label asp-for="CursoFrequentado" class="col-sm-6 control-label text-right"></label>
+        <h5 class="col-sm-offset-6">@Model.CursoFrequentado</h5>
     </div>
-    <div class="col-sm-12">
-        <label asp-for="NumeroEmergencia" class="col-sm-3 control-label"></label>
-        <div class="col-sm-offset-4">
-            <h5>@Model.NumeroEmergencia</h5>
-        </div>
+    <div>
+        <label asp-for="AnoCurricular" class="col-sm-6 control-label text-right"></label>
+        <h5 class="col-sm-offset-6">@Model.AnoCurricular</h5>
     </div>
-    <h4>Dados Candidatura</h4>
-    <div class="col-sm-12">
-        <label asp-for="Escola" class="col-sm-3 control-label"></label>
-        <div class="col-sm-offset-4">
-            <h5>@Model.Escola</h5>
-        </div>
-    </div>
-    <div class="col-sm-12">
-        <label asp-for="CursoFrequentado" class="col-sm-3 control-label"></label>
-        <div class="col-sm-offset-4">
-            <h5>@Model.CursoFrequentado</h5>
-        </div>
-    </div>
-    <div class="col-sm-12">
-        <label asp-for="AnoCurricular" class="col-sm-3 control-label"></label>
-        <div class="col-sm-offset-4">
-            <h5>@Model.AnoCurricular</h5>
-        </div>
-    </div>
-    <div class="col-sm-12">
+    <div>
+        <label asp-for="Instituicoes" class="col-sm-6 control-label text-right"></label>
         @foreach (var item in Model.Instituicoes)
         {
-        <span>@item.Instituicao.NomeInstituicao</span>
-            <div class="col-sm-offset-4">
-                <h5></h5>
-            </div>
+            <h5 class="col-sm-offset-6">@item.Instituicao.NomeInstituicao</h5>
+         
         }
     </div>
-    <div class="col-sm-12">
-        <label asp-for="Bolsa" class="col-sm-3 control-label"></label>
-        <div class="col-sm-offset-4">
-            @if (Model.Bolsa == true)
-            {
-                <h5>Sim</h5>
-            }
-            else
-            {
-                <h5>Não</h5>
-            }
-        </div>
+    <div>
+        <label asp-for="Bolsa" class="col-sm-6 control-label text-right"></label>
+        @if (Model.Bolsa == true)
+        {
+            <h5 class="col-sm-offset-6">Sim</h5>
+        }
+        else
+        {
+            <h5 class="col-sm-offset-6">Não</h5>
+        }
+    </div>
+    <div>
+        <label asp-for="Estado" class="col-sm-6 control-label text-right"></label>
+        <h5 class="col-sm-offset-6">@Model.Estado</h5>
+    </div>
+    <div>
+        <label asp-for="CartaMotivacao" class="col-sm-6 control-label text-right"></label>
+        <h5 class="col-sm-offset-6">@Model.CartaMotivacao</h5>
+        @if (Model.CartaMotivacao == null)
+        {
+            <h5 class="col-sm-offset-6">Sem carta</h5>
+        }
+        else
+        {
+            <h5 class="col-sm-offset-6">@Model.CartaMotivacao</h5>
+        }
     </div>
 
-    <div class="col-sm-12">
-        <label asp-for="CartaMotivacao" class="col-sm-3 control-label"></label>
-        <div class="col-sm-offset-4">
-            <h5>@Model.CartaMotivacao</h5>
-        </div>
-    </div>
     @if (@Model.Estado.ToString().Equals("INCOMPLETA"))
     {
         <a asp-area="" asp-controller="Candidato" asp-action="AlterarCandidatura" class="btn btn-default btn-xs center-block col-sm-12">Alterar Candidatura</a>

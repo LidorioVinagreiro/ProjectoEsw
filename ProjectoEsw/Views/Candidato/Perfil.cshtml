@@ -18,91 +18,69 @@
     <a asp-area="" asp-controller="Candidato" asp-action="SobreNos">Sobre Nós</a>
 }
 <div class="jumbotron col-sm-8">
-    <h2 class=" text-center">Perfil do Candidato</h2>
-    <div class="col-sm-12">
-        <label asp-for="NomeCompleto" class="col-sm-5 control-label"></label>
-        <div class="col-sm-offset-5">
-            <h5>@Model.NomeCompleto</h5>
-        </div>
+    <h2 class=" text-center" style="padding-bottom:5px;">Perfil do Candidato</h2>
+    <div>
+        <label asp-for="NomeCompleto" class="col-sm-6 control-label text-right"></label>
+        <h5 class="col-sm-offset-6 control-label">@Model.NomeCompleto</h5>      
     </div>
-    <div class="col-sm-12">
-        <label asp-for="DataNasc" class="col-sm-5 control-label"></label>
-        <div class="col-sm-offset-5">
-            <h5>@Model.DataNasc.Date.ToShortDateString()</h5>
-        </div>
+    <div>
+        <label asp-for="DataNasc" class="col-sm-6 control-label text-right"></label>
+        <h5 class="col-sm-offset-6">@Model.DataNasc.Date.ToShortDateString()</h5>
+        
     </div>
-    <div class="col-sm-12">
-        <label asp-for="Genero" class="col-sm-5 control-label"></label>
-        <div class="col-sm-offset-5">
-            <h5> @Model.Genero</h5>
-        </div>
+    <div>
+        <label asp-for="Genero" class="col-sm-6 control-label text-right" ></label>
+        <h5 class="col-sm-offset-6"> @Model.Genero</h5>  
     </div>
-    <div class="col-sm-12">
-        <label asp-for="Nacionalidade" class="col-sm-5 control-label"></label>
-        <div class="col-sm-offset-5">
-            <h5>@Model.Nacionalidade</h5>
-        </div>
+    <div>
+        <label asp-for="Nacionalidade" class="col-sm-6 control-label text-right"></label>
+        <h5 class="col-sm-offset-6">@Model.Nacionalidade</h5>
     </div>
-    <div class="col-sm-12">
-        <label asp-for="MoradaRua" class="col-sm-5 control-label"></label>
-        <div class="col-sm-offset-5">
-            <h5>@Model.MoradaRua</h5>
-        </div>
+    <div>
+        <label asp-for="MoradaRua" class="col-sm-6 control-label text-right"></label>
+        <h5 class="col-sm-offset-6">@Model.MoradaRua</h5>
     </div>
-    <div class="col-sm-12">
-        <label asp-for="MoradaCodigoPostal" class="col-sm-5 control-label"></label>
-        <div class="col-sm-offset-5">
-            <h5>@Model.MoradaCodigoPostal</h5>
-        </div>
+    <div>
+        <label asp-for="MoradaCodigoPostal" class="col-sm-6 control-label text-right"></label>
+        <h5 class="col-sm-offset-6"> @Model.MoradaCodigoPostal</h5>
     </div>
-    <div class="col-sm-12">
-        <label asp-for="MoradaConcelho" class="col-sm-5 control-label"></label>
-        <div class="col-sm-offset-5">
-            <h5>@Model.MoradaConcelho </h5>
-        </div>
+    <div>
+        <label asp-for="MoradaConcelho" class="col-sm-6 control-label text-right"></label>
+        <h5 class="col-sm-offset-6">@Model.MoradaConcelho </h5>
     </div>
-    <div class="col-sm-12">
-        <label asp-for="MoradaDistrito" class="col-sm-5 control-label"></label>
-        <div class="col-sm-offset-5">
-            <h5>@Model.MoradaDistrito</h5>
-        </div>
+    <div>
+        <label asp-for="MoradaDistrito" class="col-sm-6 control-label text-right"></label>
+        <h5 class="col-sm-offset-6">@Model.MoradaDistrito</h5>
     </div>
-    <div class="col-sm-12">
-        <label asp-for="Email" class="col-sm-5 control-label"></label>
-        <div class="col-sm-offset-5">
-            <h5>@Model.Email</h5>
-        </div>
+    <div>
+        <label asp-for="Email" class="col-sm-6 control-label text-right"></label>
+        <h5 class="col-sm-offset-6">@Model.Email</h5>
     </div>
-    <div class="col-sm-12">
-        <label asp-for="Nif" class="col-sm-5 control-label"></label>
-        <div class="col-sm-offset-5">
-            <h5>@Model.Nif</h5>
-        </div>
+    <div>
+        <label asp-for="Nif" class="col-sm-6 control-label text-right"></label>
+        <h5 class="col-sm-offset-6">@Model.Nif</h5>
     </div>
-    <div class="col-sm-12">
-        <label asp-for="NumeroIdentificacao" class="col-sm-5 control-label"></label>
-        <div class="col-sm-offset-5">
-            <h5>@Model.NumeroIdentificacao</h5>
-        </div>
+    <div>
+        <label asp-for="NumeroIdentificacao" class="col-sm-6 control-label text-right"></label> 
+        <h5 class="col-sm-offset-6">@Model.NumeroIdentificacao</h5>
     </div>
-    <div class="col-sm-12">
-        <label asp-for="Telefone" class="col-sm-4 control-label"></label>
-        <div class="col-sm-offset-5">
-            <h5>@Model.Telefone</h5>
-        </div>
+    <div>
+        <label asp-for="Telefone" class="col-sm-6 control-label text-right"></label>
+            <h5 class="col-sm-offset-6">@Model.Telefone</h5>
     </div>
-    <div class="col-sm-12">
-        <label asp-for="Foto" class="col-sm-5 control-label"></label>
-        <div class="col-sm-offset-5">
+    <div>
+        <label asp-for="Foto" class="col-sm-6 control-label text-right"></label>
+        <div class="col-sm-offset-6">
             @{
-                if (gestor.getImagePath(gestor.getUtilizadorByPerfilId(Model.ID)).Length >= 1) 
-                {
+                try
+                {     
                     <img src="@Url.Content(gestor.getImagePath(gestor.getUtilizadorByPerfilId(Model.ID)))" alt="logo" width="200" height="200" />
                 }
-                else
-                {
+                catch
+                {    
                     <img src="~/images/default_profile.jpg" />
                 }
+               
             }
      </div>
     </div>

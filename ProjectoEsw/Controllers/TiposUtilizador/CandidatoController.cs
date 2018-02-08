@@ -82,12 +82,12 @@ namespace ProjectoEsw.Controllers
             if (await _gestor.EditarPerfilUtilizador(model, user.Email))
             {
                 bool aux = await _gestor.UploadFotoUtilizador(user, Request.Form.Files.Single());
-                return RedirectToAction("Index", "Candidato"); // mudar para o perfil secalhar
+                return View("EditarPerfilSucesso",queryPerfil); // mudar para o perfil secalhar
             }
             else
             {
                 //falta erros?
-                return View("Erros/ErroEditarPerfil", queryPerfil);
+                return View("../Erros/ErroEditarPerfil", queryPerfil);
             }
 
         }
@@ -107,7 +107,7 @@ namespace ProjectoEsw.Controllers
             else
             {
                 //password nao foi alterada
-                return View("ErroAlterarPassword", queryPerfil);
+                return View("../Erros/ErroAlterarPassword", queryPerfil);
             }
         }
         public async Task<IActionResult> Logout()
@@ -128,7 +128,7 @@ namespace ProjectoEsw.Controllers
                 Candidatura aux = _contexto.Candidaturas.Where(row => row.UtilizadorFK == user.Id).Single();
                 if (aux.UtilizadorFK == user.Id)
                 {
-                    return View("ErroCandidaturaRepetir",perfil);//se tiver uma rejeitada ou uma feita o ano passado
+                    return View("../Erros/ErroCandidaturaRepetir",perfil);//se tiver uma rejeitada ou uma feita o ano passado
                 }
             }
             catch
@@ -149,7 +149,7 @@ namespace ProjectoEsw.Controllers
                 Candidatura aux = _contexto.Candidaturas.Where(row => row.UtilizadorFK == user.Id).Single();
                 if (aux.UtilizadorFK == user.Id)
                 {
-                    return View("ErroCandidaturaRepetir", perfil);//se tiver uma rejeitada ou uma feita o ano passado
+                    return View("../Erros/ErroCandidaturaRepetir", perfil);//se tiver uma rejeitada ou uma feita o ano passado
                 }
             }
             catch
@@ -169,7 +169,7 @@ namespace ProjectoEsw.Controllers
                 Perfil perfil = _contexto.Perfils.Single(row => row.ID == user.PerfilFK);
                 List<string> x = Request.Form["lista"].ToList();
                 if (x.Count <= 0)
-                    return View("ErroSelecionarInstituicoes", perfil); // caso não selecione nada
+                    return View("../Erros/ErroSelecionarInstituicoes", perfil); // caso não selecione nada
                 List<int> aux = new List<int>();
                 for (int i = 0; i < x.Count; i++)
                 {
@@ -180,7 +180,7 @@ namespace ProjectoEsw.Controllers
                 }
                 List<Instituicao> listaIns = _contexto.Instituicoes.Where(row => aux.Contains(row.ID)).ToList();
                 if (listaIns.Where(row => row.Interno != false).Any())
-                    return View("ErroCandidatura", perfil);
+                    return View("../Erros/ErroCandidatura", perfil);
                     
                 model.Instituicoes = listaIns;
                 bool dataInicio = System.DateTime.Now.CompareTo(tipo.DataInicio) >= 0;
@@ -217,7 +217,7 @@ namespace ProjectoEsw.Controllers
                     return View("CandidaturaSucesso", perfil);
                 }
                 //erro adicionar candidatura
-                return View("ErroCandidatura", perfil);
+                return View("../Erros/ErroCandidatura", perfil);
             }
             //Erro model
             return View("Erro");
@@ -233,7 +233,7 @@ namespace ProjectoEsw.Controllers
                 Perfil perfil = _contexto.Perfils.Single(row => row.ID == user.PerfilFK);
                 List<string> x = Request.Form["lista"].ToList();
                 if (x.Count <= 0)
-                    return View("ErroSelecionarInstituicoes", perfil); // caso não selecione nada
+                    return View("../Erros/ErroSelecionarInstituicoes", perfil); // caso não selecione nada
                 List<int> aux = new List<int>();
                 for (int i = 0; i < x.Count; i++)
                 {
@@ -252,7 +252,7 @@ namespace ProjectoEsw.Controllers
                 if (!(dataInicio && dataFim))
                 {
                     //não cumpre os prazos
-                    return View("ErroPrazos", perfil);
+                    return View("../Erros/ErroPrazos", perfil);
                 }
                 Candidatura candidatura = new Candidatura
                 {
@@ -278,7 +278,7 @@ namespace ProjectoEsw.Controllers
                     return View("CandidaturaSucesso", perfil);
                 }
                 //erro
-                return View("ErroCandidatura", perfil);
+                return View("../Erros/ErroCandidatura", perfil);
             }
             //Erro
             return View("Erro");
@@ -342,7 +342,7 @@ namespace ProjectoEsw.Controllers
                 _contexto.SaveChanges();
                 List<string> x = Request.Form["lista"].ToList();
                 if (x.Count <= 0)
-                    return RedirectToAction("Index", "Candidato"); // caso não selecione nada
+                    return View("../Erros/ErroSelecionarInstituicoes"); // caso não selecione nada
                 List<int> aux = new List<int>();
                 for (int i = 0; i < x.Count; i++)
                 {
@@ -356,8 +356,8 @@ namespace ProjectoEsw.Controllers
                 model.Instituicoes = listaIns;
 
                 if (_gestor.AlterarCandidatura(user, candidatura, model).Result)
-                    return View("Index","Candidato"); // correu tudo bem
-                return View(); //Erro
+                    return View("AlterarCandidaturaSucesso"); // correu tudo bem
+                return View("Erro"); //Erro
             }
 
             return View();// algo errado no model state
@@ -396,7 +396,7 @@ namespace ProjectoEsw.Controllers
             bool marcou = _gestor.MarcarReuniao(actual, viewModel.DataReuniaoInicio, viewModel.DataReuniaoFim);
             if (marcou)
                 return View("MarcarReuniaoSucesso", perfil); // marcou reuniao
-            return View("ErroMarcarReuniao", perfil);//erro nao marcou    
+            return View("../Erros/ErroMarcarReuniao", perfil);//erro nao marcou    
         }
 
         //METODOS DE AJAX

@@ -14,7 +14,7 @@ using System;
 namespace ProjectoEsw.Migrations
 {
     [DbContext(typeof(AplicacaoDbContexto))]
-    [Migration("20180207164505_initial")]
+    [Migration("20180208144259_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -219,7 +219,7 @@ namespace ProjectoEsw.Migrations
 
                     b.Property<int>("Estado");
 
-                    b.Property<int>("IBAN");
+                    b.Property<string>("IBAN");
 
                     b.Property<string>("NomeEmergencia");
 

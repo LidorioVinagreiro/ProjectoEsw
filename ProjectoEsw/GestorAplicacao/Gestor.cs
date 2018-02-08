@@ -229,6 +229,7 @@ namespace ProjectoEsw.GestorAplicacao
         {
             if (!candidatura.Estado.Equals(Estado.EM_ANALISE))
                 return false;
+            candidatura.Candidato = _context.Users.Where(row => row.Id == candidatura.UtilizadorFK).Single();
             candidatura.Estado = Estado.APROVADA;
             _context.SaveChanges();
             _gestorEmail.EnviarEmail(candidatura.Candidato, "Candidatura aprovada", candidatura.ToString());

@@ -218,7 +218,7 @@ namespace ProjectoEsw.Migrations
 
                     b.Property<int>("Estado");
 
-                    b.Property<int>("IBAN");
+                    b.Property<string>("IBAN");
 
                     b.Property<string>("NomeEmergencia");
 

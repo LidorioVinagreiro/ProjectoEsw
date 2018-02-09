@@ -11,25 +11,43 @@ using Newtonsoft.Json;
 
 namespace ProjectoEsw.Controllers
 {
+    /// <summary>
+    /// Este constrolador é somente utilizado por utilizadores com o role Administrador
+    /// </summary>
     [Authorize(Roles="Administrador")]
     public class AdministradorController : Controller
     {
+        /// <summary>
+        /// Atributos privado do controlador
+        /// </summary>
         private Gestor _gestor;
         public AdministradorController(Gestor gestor) {
             _gestor = gestor;
         }
+        /// <summary>
+        /// Este metodo de ação é primeira ação que o administrador vê quando faz o login
+        /// </summary>
+        /// <returns>View Index</returns>
         public IActionResult Index()
         {
             return View();
         }
 
+        /// <summary>
+        /// Este metodo de ação é responsavel pelo log out do administardor e 
+        /// redireciona para a pagina index do controlador Home
+        /// </summary>
+        /// <returns> View Index, Controller Home</returns>
         public async Task<IActionResult> Logout()
         {
             await _gestor.LogOut();
             return RedirectToAction("Index", "Home");
         }
 
-
+        /// <summary>
+        /// Este metodo de ação é responsavel pela demonstração das estatisticas
+        /// </summary>
+        /// <returns>View VerEstatisticas</returns>
         public IActionResult VerEstatisticas()
         {
             EstatisticasGerais model = _gestor.GerarEstatisticas();

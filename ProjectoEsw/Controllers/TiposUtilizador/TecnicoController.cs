@@ -14,23 +14,40 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ProjectoEsw.Controllers
 {
+    /// <summary>
+    /// Este controlador é somente acedido por utilizadores com o role Tecnico
+    /// </summary>
     [Authorize(Roles = "Tecnico")]
     public class TecnicoController : Controller
     {
+        /// <summary>
+        /// Atributos privados do controlador
+        /// </summary>
         private AplicacaoDbContexto _context;
         private Gestor _gestor;
-
+        /// <summary>
+        /// Construtor do controlador Tecnico, os parametros deste controlador são recebidos por DI(ddependency injection)
+        /// </summary>
+        /// <param name="context" type="AplicacaoDbContexto">Contexto da aplicacaçao</param>
+        /// <param name="gestor" type="Gestor">Gestor de informação</param>
         public TecnicoController(AplicacaoDbContexto context,Gestor gestor) {
             _context = context;
             _gestor = gestor;
         }
-       
+        /// <summary>
+        /// Este metodo de ação tem como objectivo de fazer o log out do Tecnico e redireciona para
+        /// pagina Index do Controlador Home
+        /// </summary>
+        /// <returns>View Index,Controlador Home</returns>
         public async Task<IActionResult> Logout()
         {
             await _gestor.LogOut();
             return RedirectToAction("Index", "Home");
         }
-
+        /// <summary>
+        /// Este metodo de ação tem como objectivo mostrar o perfil do tecnico
+        /// </summary>
+        /// <returns>View Perfil, Controller Tecnico</returns>
         public async Task<IActionResult> Perfil()
         {
             Utilizador user = await _gestor.getUtilizador(this.User);
@@ -38,7 +55,10 @@ namespace ProjectoEsw.Controllers
             user.Perfil = queryPerfil;
             return View(user.Perfil);
         }
-
+        /// <summary>
+        /// Este metodo de ação mostra ao tecnico a pagina de editar perfil
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> EditarPerfil()
         {
             Utilizador user = await _gestor.getUtilizador(this.User);
@@ -56,6 +76,11 @@ namespace ProjectoEsw.Controllers
                 NumeroIdentificacao = user.Perfil.NumeroIdentificacao
             });
         }
+        /// <summary>
+        /// Este metodo de ação ocorre quando existe um post atraves do formulario da pagina EditarPefil
+        /// </summary>
+        /// <param name="model" type="RegisterViewModel">Parametro com informção sobre o perfil</param>
+        /// <returns>Redireciona para uma ação</returns>
         [HttpPost]
         public async Task<IActionResult> EditarPerfil(RegisterViewModel model)
         {
@@ -71,7 +96,13 @@ namespace ProjectoEsw.Controllers
                 return RedirectToAction("Index", "Tecnico");
             }
         }
-            public IActionResult ListaCandidaturas() {
+
+        /// <summary>
+        /// Este metodo de ação tem como objectivo mostrar ao tecnico uma lista de candidaturas que existem na BD
+        /// ,a lista de candidaturas somente contem candidaturas com Estado igual a Estado.EM_ANALISE
+        /// </summary>
+        /// <returns>View ListaCandidaturas,Controller Tecnico</returns>
+        public IActionResult ListaCandidaturas() {
                 List<Candidatura> candidaturas = _context.Candidaturas.Where(row => row.Estado == Estado.EM_ANALISE).ToList();
             for(int i = 0; i < candidaturas.Count(); i++)
             {
@@ -81,11 +112,15 @@ namespace ProjectoEsw.Controllers
             }
             return View(candidaturas);
         }
+
+        /// <summary>
+        /// Este metodo de ação ocorre quando é efectuado um post atraves do formulario da ListaCandidaturas
+        /// e tem como objectivo mostrar uma candidatura para ser feita uma analise
+        /// </summary>
+        /// <returns>View AnalisarCandidatura,Controller Tecnico</returns>
         [HttpPost]
         public IActionResult AnalisarCandidatura() {
-            //Candidatura candidatura = _context.Candidaturas.Where(row => row.ID == model.ID).Single();
-
-
+           
             List<string> x = Request.Form["lista"].ToList();
             if (x.Count <= 0)
                 return RedirectToAction("Index", "Tecnico"); // caso não selecione nada
@@ -108,6 +143,12 @@ namespace ProjectoEsw.Controllers
             return View("AnalisarCandidatura",listaIns);
         }
 
+        /// <summary>
+        ///Este metodo de ação ocorre quando é enviada informação(post) atraves do formulario AnalisarCandidatura
+        ///e tem como objectivo mudar o estado de uma candidatura para Rejeitada
+        /// </summary>
+        /// <param name="model" type="CandidaturaViewModel">modelo de view de uma candidatura</param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult RejeitarCandidatura(CandidaturaViewModel model) {
             if (ModelState.IsValid)
@@ -121,6 +162,12 @@ namespace ProjectoEsw.Controllers
             return View("Erro"); // modelstate invalid
         }
 
+        /// <summary>
+        ///Este metodo de ação ocorre quando é enviada informação(post) atraves do formulario AnalisarCandidatura
+        ///e tem como objectivo mudar o estado de uma candidatura para Aprovada
+        /// </summary>
+        /// <param name="model" type="CandidaturaViewModel">model de view de uma candidatura</param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult AprovarCandidatura(CandidaturaViewModel model)
         {
@@ -135,7 +182,12 @@ namespace ProjectoEsw.Controllers
             return View("Erro"); // modelstate invalid
 
         }
-
+        /// <summary>
+        ///Este metodo de ação ocorre quando é enviada informação(post) atraves do formulario AnalisarCandidatura
+        ///e tem como objectivo mudar o estado de uma candidatura para Incompleta
+        /// </summary>
+        /// <param name="model" type ="CandidaturaViewModel">modelo da view de uma candidatura</param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult PedirAlteracaoCandidatura(CandidaturaViewModel model)
         {
@@ -155,7 +207,11 @@ namespace ProjectoEsw.Controllers
             return View("Erro"); // modelstate invalid
 
         }
-
+        /// <summary>
+        /// Este metodo de ação  tem como objectivo mostrar uma vista com os candidatos aprovados e a possibilidade
+        /// de marcar uma entrevista com os mesmos
+        /// </summary>
+        /// <returns></returns>
         public IActionResult MarcarEntrevista() {
             List<Candidatura> candidaturas = _context.Candidaturas.Where(row => row.Estado == Estado.APROVADA).ToList();
             List<Utilizador> utilizadores  = new List<Utilizador>();
@@ -170,6 +226,12 @@ namespace ProjectoEsw.Controllers
             return View(entrevistas);
         }
 
+        /// <summary>
+        /// Este metodo de ação ocorre quando é enviada informação(post) através do formulario
+        /// que está na view MarcarEntrevista
+        /// </summary>
+        /// <param name="model" type="MarcarEntrevistaViewModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult MarcarEntrevista(MarcarEntrevistaViewModel model) {
             Utilizador tecnico = _gestor.getUtilizador(this.User).Result;
@@ -181,26 +243,40 @@ namespace ProjectoEsw.Controllers
             return View("../Erros/ErroMarcarEntrevista");//erro na marcacao
 
         }
-
+        /// <summary>
+        /// Este metodo de ação mostra uma view com informação sobre os programas de mobilidade
+        /// </summary>
+        /// <returns></returns>
         public IActionResult ProgramasMobilidade()
         {
             Utilizador user = _gestor.getUtilizador(this.User).Result;
             Perfil p1 = _gestor.getPerfil(user);
             return View(p1);
         }
-
+        /// <summary>
+        /// Este metodo de ação mostra uma view com informação sobre as bolsas 
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Bolsas()
         {
             Utilizador user = _gestor.getUtilizador(this.User).Result;
             Perfil p1 = _gestor.getPerfil(user);
             return View(p1);
         }
+        /// <summary>
+        /// Este metodo de ação retorna uma view com informação sobre o grupo 2
+        /// </summary>
+        /// <returns></returns>
         public IActionResult SobreNos()
         {
             Utilizador user = _gestor.getUtilizador(this.User).Result;
             Perfil p1 = _gestor.getPerfil(user);
             return View(p1);
         }
+        /// <summary>
+        /// Este metodo de ação é a ação que ocorre quando o Tecnico efectua o log in
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Index()
         {
             Utilizador user = _gestor.getUtilizador(this.User).Result;

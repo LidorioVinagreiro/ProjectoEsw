@@ -13,14 +13,28 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ProjectoEsw.Controllers
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [AllowAnonymous]
     public class HomeController : Controller
     {
+        /// <summary>
+        /// 
+        /// </summary>
         private Gestor _gestor;
-         private SignInManager<Utilizador> _signInManager;
+        private SignInManager<Utilizador> _signInManager;
         private UserManager<Utilizador> _userManager;
         private AplicacaoDbContexto _context;
         private GestorEmail _gestorEmail;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="signInManager"></param>
+        /// <param name="userManager"></param>
+        /// <param name="contexto"></param>
+        /// <param name="gestor"></param>
+        /// <param name="gestorEmail"></param>
         public HomeController(
             SignInManager<Utilizador> signInManager,
             UserManager<Utilizador> userManager,
@@ -34,7 +48,10 @@ namespace ProjectoEsw.Controllers
             _gestor = gestor;
             _gestorEmail = gestorEmail;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Register()
         {
@@ -95,7 +112,12 @@ namespace ProjectoEsw.Controllers
         }
                 
     }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="token"></param>
+        /// <returns></returns>
         public async Task<IActionResult> ConfirmarEmail(string userId, string token) {
             ViewData["Title"] = "Erro Email Confirmado";
             if (userId == null || token == null)
@@ -115,16 +137,23 @@ namespace ProjectoEsw.Controllers
             }
             else {
                 //nao houve confirmacao do token
-                return View("../Erros/ErroConfirmarEmail");
+                return View("Erros/ErroConfirmarEmail");
             }
 
         }
-       
+       /// <summary>
+       /// 
+       /// </summary>
+       /// <returns></returns>
         public IActionResult Login() {
             return View();
         }
 
-        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model) {
             if (ModelState.IsValid)
@@ -183,7 +212,11 @@ namespace ProjectoEsw.Controllers
         public IActionResult RecuperarPassword() {
             return View();
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Email"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> RecuperarPassword([Bind] string Email)
         {
@@ -205,11 +238,21 @@ namespace ProjectoEsw.Controllers
             return View("ConfirmarPassword");
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="code"></param>
+        /// <returns></returns>
         public IActionResult ResetPassword(string code) {
             ViewBag.code = code;
             return code == null ? View("Error") : View() ;
         }
-            
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> ResetPassword(RecuperarPassViewModel model)
         {
@@ -231,19 +274,35 @@ namespace ProjectoEsw.Controllers
                 return View();
             }
         } 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Index()
         {
             return View();
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public IActionResult ProgramasMobilidade()
         {
             return View();
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public IActionResult SobreNos()
         {
             return View();
         }
+    
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Bolsas()
         {
             return View();

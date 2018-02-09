@@ -22,12 +22,24 @@ using Newtonsoft.Json;
 
 namespace ProjectoEsw.Controllers
 {
+    /// <summary>
+    /// Este controlador é só acedido por utilizadores com o Role Candidato 
+    /// </summary>
     [Authorize(Roles = "Candidato")]
     public class CandidatoController : Controller
     {
+        /// <summary>
+        /// Atributos privados do controlador Candidato
+        /// </summary>
         private Gestor _gestor;
         private AplicacaoDbContexto _contexto;
         private GestorEmail _gestorEmail;
+        /// <summary>
+        /// Metodo construtor do controlador Candidato
+        /// </summary>
+        /// <param name="gestor" type="gestor">Classe Gestora de </param>
+        /// <param name="contexto" type="AplicacaoDbContexto"></param>
+        /// <param name="gestorEmail" type="GestorEmail"></param>
         public CandidatoController(Gestor gestor, AplicacaoDbContexto contexto, GestorEmail gestorEmail)
         {
             _gestor = gestor;
@@ -35,7 +47,10 @@ namespace ProjectoEsw.Controllers
             _gestorEmail = gestorEmail;
         }
 
-        // GET: /<controller>/
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -45,13 +60,17 @@ namespace ProjectoEsw.Controllers
             var model = user.Perfil;
             return View(model);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> EditarPerfil()
         {
             Utilizador user = await _gestor.getUtilizador(this.User);
             Perfil queryPerfil = _gestor.getPerfil(user);
             user.Perfil = queryPerfil;
+
             return View(new RegisterViewModel
             {
                 Email = user.Perfil.Email,
@@ -64,7 +83,10 @@ namespace ProjectoEsw.Controllers
                 NumeroIdentificacao = user.Perfil.NumeroIdentificacao
             });
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> Perfil()
         {
             Utilizador user = await _gestor.getUtilizador(this.User);
@@ -72,14 +94,18 @@ namespace ProjectoEsw.Controllers
             user.Perfil = queryPerfil;
             return View(user.Perfil);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> EditarPerfil(RegisterViewModel model)
         {
             Utilizador user = await _gestor.getUtilizador(this.User);
             Perfil queryPerfil = _gestor.getPerfil(user);
 
-            if (await _gestor.EditarPerfilUtilizador(model, user.Email))
+            if (_gestor.EditarPerfilUtilizador(model, user.Email).Result)
             {
                 bool aux = await _gestor.UploadFotoUtilizador(user, Request.Form.Files.Single());
                 return View("EditarPerfilSucesso",queryPerfil); // mudar para o perfil secalhar
@@ -92,6 +118,11 @@ namespace ProjectoEsw.Controllers
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> AlterarPassword(RegisterViewModel model)
         {
@@ -110,12 +141,19 @@ namespace ProjectoEsw.Controllers
                 return View("../Erros/ErroAlterarPassword", queryPerfil);
             }
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> Logout()
         {
             await _gestor.LogOut();
             return RedirectToAction("Index", "Home");
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult CandidaturaErasmus()
         {
@@ -137,6 +175,10 @@ namespace ProjectoEsw.Controllers
             CandidaturaViewModel model = new CandidaturaViewModel { UtilizadorFK = user.Id, Candidato = user, Instituicoes = _contexto.Instituicoes.Where(row => row.Interno == false).ToList() };
             return View("candidaturaErasmus", model);
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult CandidaturaSantander()
         {
@@ -159,6 +201,11 @@ namespace ProjectoEsw.Controllers
             return View("CandidaturaSantander", model);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> CandidaturaErasmus(CandidaturaViewModel model)
         {
@@ -222,7 +269,11 @@ namespace ProjectoEsw.Controllers
             //Erro model
             return View("Erro");
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> CandidaturaSantander(CandidaturaViewModel model)
         {
@@ -284,7 +335,10 @@ namespace ProjectoEsw.Controllers
             return View("Erro");
 
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public IActionResult VisualizarCandidatura()
         {
             Utilizador user = _gestor.getUtilizador(this.User).Result;
@@ -306,6 +360,10 @@ namespace ProjectoEsw.Controllers
             }
             //model.Candidato = user;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public IActionResult AlterarCandidatura()
         {
             Utilizador user = _gestor.getUtilizador(this.User).Result;
@@ -324,7 +382,11 @@ namespace ProjectoEsw.Controllers
             else
                 return View("AlterarCandidaturaSantander", candidatura);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult AlterarCandidatura(CandidaturaViewModel model) {
             if (ModelState.IsValid) {
@@ -362,32 +424,49 @@ namespace ProjectoEsw.Controllers
 
             return View("Erro");// algo errado no model state
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public IActionResult ProgramasMobilidade()
         {
             Utilizador user = _gestor.getUtilizador(this.User).Result;
             Perfil p1 = _gestor.getPerfil(user);
             return View(p1);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Bolsas()
         {
             Utilizador user = _gestor.getUtilizador(this.User).Result;
             Perfil p1 = _gestor.getPerfil(user);
             return View(p1);
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public IActionResult SobreNos()
         {
             Utilizador user = _gestor.getUtilizador(this.User).Result;
             Perfil p1 = _gestor.getPerfil(user);
             return View(p1);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public IActionResult MarcarReuniao()
         {
             return View();
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="viewModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult MarcarReuniao(MarcarReuniaoViewModel viewModel)
         {
@@ -399,14 +478,22 @@ namespace ProjectoEsw.Controllers
             return View("../Erros/ErroMarcarReuniao", perfil);//erro nao marcou    
         }
 
-        //METODOS DE AJAX
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="idPerfil"></param>
+        /// <returns></returns>
         [HttpGet]
         public JsonResult GetEvents(int idPerfil)
         {
             var events = _contexto.Eventos.Where(Eventos => Eventos.PerfilFK == idPerfil).ToList();
             return Json(events);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="evento"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<JsonResult> SaveEvents(Eventos evento)
         {
@@ -432,7 +519,11 @@ namespace ProjectoEsw.Controllers
             status = true;
             return new JsonResult(new { Data = new { status = status } });
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<JsonResult> DeleteEvent(int id)
         {

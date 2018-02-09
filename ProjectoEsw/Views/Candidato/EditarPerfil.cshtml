@@ -24,8 +24,7 @@
 <div class="jumbotron col-sm-8">
     <div style="display:inline" class="col-sm-12">
         <span class="glyphicon glyphicon-question-sign pull-right" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaPagina("Home.EditarPerfil").Descricao"></span>
-            <a class="btn btn-link btn-sm center-block" onclick="mudarDiv('2')">Editar perfil</a>
-            <a class="btn btn-link btn-sm center-block" onclick="mudarDiv('1')">Alterar password</a>
+
     </div>
     <div id ="1" class="container col-sm-offset-2 col-sm-8">
         <h2 class="text-center" style="padding-top:5px;">Editar Perfil</h2>
@@ -96,7 +95,9 @@
     <h5 class="text-center">Opcoes</h5>
     <a asp-area="" asp-controller="Candidato" asp-action="VisualizarCandidatura" class="btn btn-link btn-xs pull-right col-sm-12">Ver Candidatura</a>
     <a asp-area="" asp-controller="Candidato" asp-action="Perfil" class="btn btn-link btn-xs pull-right col-sm-12">Ver Perfil</a>
-    <a asp-area="" asp-controller="Candidato" asp-action="EditarPerfil" class="btn btn-link btn-xs center-block col-sm-12">Editar Perfil</a>
+
+    <a class="btn btn-link btn-xs center-block col-sm-12" onclick="mudarDiv('2')">Editar perfil</a>
+    <a class="btn btn-link btn-xs center-block col-sm-12" onclick="mudarDiv('1')">Alterar password</a>
 </div>
 <script>
     function mudarDiv(tipo) {

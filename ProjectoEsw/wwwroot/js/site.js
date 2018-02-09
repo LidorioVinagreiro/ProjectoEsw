@@ -1,4 +1,5 @@
-﻿function CriarCalendario(tipoutilizador,perfil) {
+﻿
+function CriarCalendario(tipoutilizador, perfil) {
     $(document).ready(function () {
         var eventsAux = [];
         var selectedEvent = null;

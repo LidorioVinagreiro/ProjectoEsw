@@ -17,8 +17,7 @@ namespace ProjectoEsw.Controllers
     public class HomeController : Controller
     {
         private Gestor _gestor;
-        //o dependidy injection vai tratar destas variaveis, não é necessario criar estes objectos
-        private SignInManager<Utilizador> _signInManager;
+         private SignInManager<Utilizador> _signInManager;
         private UserManager<Utilizador> _userManager;
         private AplicacaoDbContexto _context;
         private GestorEmail _gestorEmail;

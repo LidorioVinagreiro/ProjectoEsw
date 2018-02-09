@@ -360,7 +360,7 @@ namespace ProjectoEsw.Controllers
                 return View("Erro"); //Erro
             }
 
-            return View();// algo errado no model state
+            return View("Erro");// algo errado no model state
         }
 
         public IActionResult ProgramasMobilidade()

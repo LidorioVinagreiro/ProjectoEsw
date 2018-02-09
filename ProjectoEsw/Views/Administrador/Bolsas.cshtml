@@ -1,0 +1,46 @@
+﻿
+@model ProjectoEsw.Models.Identity.Perfil;
+
+@section links {
+    <a asp-area="" asp-controller="Candidato" asp-action="Logout" class="btn btn-link btn-xs pull-right">Log Out</a>
+    <a asp-area="" asp-controller="Candidato" asp-action="Perfil" class="btn btn-link btn-xs pull-right"> @Html.DisplayFor(Model => Model.Email) </a>
+
+}
+@section Home{
+    <a asp-area="" asp-controller="Candidato" asp-action="Index">Home</a>
+
+}
+@section ProgramasMobilidade{
+    <a asp-area="" asp-controller="Candidato" asp-action="ProgramasMobilidade">Programas Mobilidade</a>
+}
+@section Bolsas{
+    <a asp-area="" asp-controller="Candidato" asp-action="Bolsas">Bolsas</a>
+}
+@section SobreNos{
+    <a asp-area="" asp-controller="Candidato" asp-action="SobreNos">Sobre Nós</a>
+}
+<!--Home-->
+<div class="jumbotron col-sm-8">
+    <h2 class="text-center">Bolsas</h2>
+    <div class="help-block"></div>
+    <p><font size="2">As bolsas de mobilidade Erasmus são atribuídas anualmente pela Agência Nacional ERASMUS+ Educação e Formação (ANE+) .</font></p>
+    <p><font size="2">Os alunos interessados podem candidatar-se à obtenção de uma bolsa de mobilidade. Existe, contudo, a possibilidade do estudante ir em mobilidade sem bolsa caso tenhamos mais candidatos do que bolsas atribuídas.</font></p>
+    <p><font size="2">As bolsas de mobilidade Erasmus destinam-se a auxiliar nas despesas de viagem e de subsistência (alojamento e alimentação), sendo apenas uma ajuda para fazer face à diferença do custo de nível de vida entre o país de origem e de destino. A atribuição da bolsa de mobilidades segue os mesmos critérios que a seleção dos candidatos.</font></p>    
+    <p><font size="2">Estudantes que pretendam prolongar o seu período de estudos terão a atribuição de bolsa complementar condicionada à verba existente.</font></p>
+    <p><font size="2">Ainda não recebemos a tabela de bolsas para 2018/2019 por parte da ANE+ em virtude de ainda estar a decorrer o processo de candidatura.</font></p>
+    <p><font size="2">O pagamento das bolsas é feito da seguinte forma:</font></p>
+    <ul>
+        <li><font size="2">90% até 30 dias após a assinatura do contrato por ambos os outorgantes - antes da partida do estudante;</font></li>
+        <li><font size="2">10% até 30 dias após a entrega da Carta de Confirmação, submissão do Relatório Final na plataforma eletrónica da Agência Nacional ERASMUS+ Educação e Formação, bem como a regularização de documentos que estejam em falta - aquando do regresso do estudante.</font></li>
+    </ul>
+
+    <p><font size="2">Para mais informacoes consultar clique <a href="https://www.ips.pt/ips_si/web_base.gera_pagina?P_pagina=34462" class="btn-sm btn-link">aqui</a></font></p>
+</div>
+
+
+<div class="jumbotron col-sm-3 col-sm-offset-1">
+    <h5 class="text-center">Opcoes</h5>
+    <a asp-area="" asp-controller="Candidato" asp-action="VisualizarCandidatura" class="btn btn-link btn-xs pull-right col-sm-12">Ver Candidatura</a>
+    <a asp-area="" asp-controller="Candidato" asp-action="Perfil" class="btn btn-link btn-xs pull-right col-sm-12">Ver Perfil</a>
+    <a asp-area="" asp-controller="Candidato" asp-action="EditarPerfil" class="btn btn-link btn-xs center-block col-sm-12">Editar Perfil</a>
+</div>

@@ -1,0 +1,45 @@
+﻿@model ProjectoEsw.Models.Candidatura_sprint2.ViewModels.MarcarReuniaoViewModel;
+
+@section links {
+    <a asp-area="" asp-controller="Candidato" asp-action="Logout" class="btn btn-link btn-xs pull-right">Log Out</a>
+}
+@section Home{
+    <a asp-area="" asp-controller="Candidato" asp-action="Index">Home</a>
+
+}
+@section ProgramasMobilidade{
+    <a asp-area="" asp-controller="Candidato" asp-action="ProgramasMobilidade">Programas Mobilidade</a>
+}
+@section Bolsas{
+    <a asp-area="" asp-controller="Candidato" asp-action="Bolsas">Bolsas</a>
+}
+@section SobreNos{
+    <a asp-area="" asp-controller="Candidato" asp-action="SobreNos">Sobre Nós</a>
+}
+
+<form class="form-horizontal" asp-controller="Candidato" asp-action="MarcarReuniao" method="post">
+    <div class="jumbotron col-sm-8">
+        <h2 class=" text-center">Marcar Reuniao</h2>
+            <h4 class="text-center center-block" style="padding-bottom:10px;padding-top:10px">Data iniciio - Data fim</h4>
+            <div class="help-block"></div>
+            <div class="col-sm-6">
+                <input asp-for="DataReuniaoInicio" placeholder="Data de Inicio da entrevista" class="form-control center-block" />
+                <span asp-validation-for="DataReuniaoFim" class="text-danger"></span>
+            </div>
+            <div class="col-sm-6">
+                <input asp-for="DataReuniaoFim" placeholder="Data de Inicio da entrevista" class="form-control center-block" />
+                <span asp-validation-for="DataReuniaoFim" class="text-danger"></span>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-default center-block" style="padding-top:10px">Marcar Entrevista</button>
+            </div>
+        }
+    </div>
+</form>
+
+<div class="jumbotron col-sm-3 col-sm-offset-1">
+    <h5 class="text-center">Opcoes</h5>
+    <a asp-area="" asp-controller="Candidato" asp-action="VisualizarCandidatura" class="btn btn-link btn-xs pull-right col-sm-12">Ver Candidatura</a>
+    <a asp-area="" asp-controller="Candidato" asp-action="Perfil" class="btn btn-link btn-xs pull-right col-sm-12">Ver Perfil</a>
+    <a asp-area="" asp-controller="Candidato" asp-action="EditarPerfil" class="btn btn-link btn-xs center-block col-sm-12">Editar Perfil</a>
+</div>

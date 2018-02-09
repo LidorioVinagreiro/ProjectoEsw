@@ -123,12 +123,12 @@ namespace ProjectoEsw.Controllers
             if (userId == null || token == null)
             {
                 //userid ou token null
-                return View("Erros/ErroConfirmarEmail");
+                return View("../Erros/ErroConfirmarEmail");
             }
             var user = await _userManager.FindByIdAsync(userId);
             if (user == null) {
                 //nao encontra utilizador
-                return View("Erros/ErroConfirmarEmail");
+                return View("../Erros/ErroConfirmarEmail");
             }
             var result = await _userManager.ConfirmEmailAsync(user, token);
             if (result.Succeeded)

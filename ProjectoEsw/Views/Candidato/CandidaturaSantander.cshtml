@@ -100,7 +100,7 @@
                     <label>@Model.Instituicoes[i].NomeInstituicao</label>
                }
                 <div class="help-block"></div>
-                <input asp-for="IBAN" placeholder="Nome da Escola" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Candidato.Candidatura","IBAN").Descricao" />
+                <input asp-for="IBAN" placeholder="Iban" class="form-control" data-toggle="popover" data-trigger="hover" data-content="@gestorAjudas.BuscarAjudaCampo("Candidato.Candidatura","IBAN").Descricao" />
                 <span asp-validation-for="IBAN" class="text-danger"></span>
                 <div class="help-block"></div>
                 <div class=" form-inline">

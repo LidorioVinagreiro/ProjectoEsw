@@ -212,7 +212,7 @@ namespace ProjectoEsw.Models
                     context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Ano Curricular", Descricao = "Neste campo deverá inserir o seu ano curricular actual" });
                     context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Instituicoes", Descricao = "Neste campo deverá selecior as instituições que irá se candidatar" });
                     context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Bolsa", Descricao = "Neste campo deverá selecionar se pretender bolsa" });
-                    context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "IBAN", Descricao = "Neste campo deverá inserir o seu IBAN para a bolsa" });
+                    context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "IBAN", Descricao = "Neste campo deverá inserir o seu IBAN para a bolsa, deverá conter 23 digitos" });
 
                     context.SaveChanges();
                 }

@@ -270,7 +270,7 @@ namespace ProjectoEsw.Controllers
             }
             else
             {
-                ModelState.AddModelError(string.Empty, "Password não coincide");
+                ModelState.AddModelError(string.Empty, "Password não coincide ou email está incorrecto");
                 return View();
             }
         } 

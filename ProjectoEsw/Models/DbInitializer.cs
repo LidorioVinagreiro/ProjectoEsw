@@ -207,7 +207,7 @@ namespace ProjectoEsw.Models
                     context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Nome Emergencia", Descricao = "Neste campo deverá inserir o nome da pessoa que será o seu contacto de emergência" });
                     context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Afiliacao Emergencia", Descricao = "Neste campo deverá inserir a afiliação da pessoa em questão " });
                     context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Telefone Emergencia", Descricao = "Neste campo deverá inserir o numero de telefone do seu contacto de emergência" });
-                    context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Escola", Descricao = "Neste campo deverá inserir a sua Escola" });
+                    context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Escola", Descricao = "Neste campo deverá inserir a sua escola actual" });
                     context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Curso Frequentado", Descricao = "Neste campo deverá inserir o nome do seu curso" });
                     context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Ano Curricular", Descricao = "Neste campo deverá inserir o seu ano curricular actual" });
                     context.AjudaCampos.Add(new AjudaCampo { PaginaFK = 8, Campo = "Instituicoes", Descricao = "Neste campo deverá selecior as instituições que irá se candidatar" });

@@ -270,7 +270,7 @@ namespace ProjectoEsw.Controllers
             }
             else
             {
-                ModelState.AddModelError(string.Empty, "Password não foi alterada Faça Login");
+                ModelState.AddModelError(string.Empty, "Password não coincide");
                 return View();
             }
         } 

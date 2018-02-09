@@ -31,7 +31,7 @@
         {
 
             <h3 class="text-center center-block"style="padding-bottom:5px;">Candidaturas</h3>
-            <div class="checkbox checkboxList col-sm-12">            
+            <div class="checkbox checkboxList col-sm-12 center-block text-center" style="padding-bottom:10px">            
                 @for (int i = 0; i < Model.Candidatos.Count; i++)
                 {
                     var checkbox1 = "checkbox" + i;
@@ -42,22 +42,34 @@
                         <input asp-for="@Model.Candidatos[i].Id" type="hidden" />
                     </div>
                 }           
-        </div>
-        <h4 class="text-center center-block" style="padding-bottom:10px;padding-top:10px">Data iniciio - Data fim</h4>
+            </div>
         <div class="help-block"></div>
-        <div class="col-sm-6">
-            <input asp-for="DataEntrevistaInicio" placeholder="Data de Inicio da entrevista" class="form-control center-block" />
-            <span asp-validation-for="DataEntrevistaInicio" class="text-danger"></span>
-        </div>
-        <div class="col-sm-6">
-            <input asp-for="DataEntrevistaInicio" placeholder="Data de Inicio da entrevista" class="form-control center-block" />
-            <span asp-validation-for="DataEntrevistaInicio" class="text-danger"></span>
-        </div>
-        <div>
+        <div class="center-block text-center" style="padding-top:10px">
+            <div class=" form-inline center-block">
+                <div style="padding-top:10px">
+                    <label class="control-label">Data Inicio: </label>
+                </div>
+                <div>
+                    <input asp-for="DataEntrevistaInicio" placeholder="Data inicio da entrevista" class="form-control" style="padding-top:10px" />
+                    <span asp-validation-for="DataEntrevistaInicio" class="text-danger"></span>
+                </div>
+            </div>
+            <div class=" form-inline center-block">
+                <div style="padding-top:10px">
+                    <label class="control-label">Data Fim: </label>
+                </div>
+                <div>
+                    <input asp-for="DataEntrevistaFim" placeholder="Data inicio da entrevista" class="form-control" />
+                    <span asp-validation-for="DataEntrevistaFim" class="text-danger"></span>
+                </div>
+                <div class=" help-block"></div>
+            </div>
+            <div class="help-block"></div>
             <button type="submit" class="btn btn-default center-block" style="padding-top:10px">Marcar Entrevista</button>
+            </div>
+            }
+            
         </div>
-        }
-   </div>
 </form>
 
 <div class="jumbotron col-sm-3 col-sm-offset-1">

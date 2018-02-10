@@ -166,7 +166,7 @@ namespace ProjectoEsw.Controllers
                 Candidatura aux = _contexto.Candidaturas.Where(row => row.UtilizadorFK == user.Id).Single();
                 if (aux.UtilizadorFK == user.Id)
                 {
-                    return View("../Erros/ErroCandidaturaRepetir",perfil);//se tiver uma rejeitada ou uma feita o ano passado
+                    return View("ErroCandidaturaRepetir",perfil);
                 }
             }
             catch
@@ -191,7 +191,7 @@ namespace ProjectoEsw.Controllers
                 Candidatura aux = _contexto.Candidaturas.Where(row => row.UtilizadorFK == user.Id).Single();
                 if (aux.UtilizadorFK == user.Id)
                 {
-                    return View("../Erros/ErroCandidaturaRepetir", perfil);//se tiver uma rejeitada ou uma feita o ano passado
+                    return View("ErroCandidaturaRepetir", perfil);//se tiver uma rejeitada ou uma feita o ano passado
                 }
             }
             catch

@@ -437,6 +437,7 @@ namespace ProjectoEsw.GestorAplicacao
                 return false;
             Perfil tec = _context.Perfils.Where(row => row.UtilizadorFK == tecnico.Id).Single();
             Eventos evento = new Eventos { EntrevistadorFK = tec.ID ,Tipo = Tipo.Entrevista,Descricao = "Entrevista : " + candidato.UserName ,Inicio =inicio, Fim= fim,Titulo="Entrevista a Candidato"};
+            Eventos eventoCandidato = new Eventos { EntrevistadorFK = candidato.PerfilFK, Tipo = Tipo.Entrevista, Descricao = "Entrevista : " + tecnico.UserName, Inicio = inicio, Fim = fim, Titulo = "Entrevista" };
             _context.SaveChanges();
             return true;
         }
@@ -460,6 +461,8 @@ namespace ProjectoEsw.GestorAplicacao
             List<Utilizador> usersList = _context.Users.Where(row => users.Select(row1 => row1.UserId).Contains(row.Id)).ToList();
             foreach (var item in usersList)
             {
+                Eventos eventoTecnico = new Eventos { PerfilFK = item.PerfilFK, Inicio = inicio, Fim = fim, Titulo = "ALUNOS DESEJA UMA REUNIÃO", Descricao = "ALuno: " + candidatop.NomeCompleto };
+                _context.SaveChanges();
                 _gestorEmail.EnviarEmail(item, "FOI MARCADA UMA REUNIAO", inicio.ToString());
             }
             

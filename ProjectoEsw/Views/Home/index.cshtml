@@ -38,3 +38,12 @@
         <span class="sr-only">Next</span>
     </a>
 </div>
+
+@Html.Partial("TempoRestante")
+
+@section HorasFalta{
+    <script>
+        horas("@System.DateTime.UtcNow");
+    </script>
+
+}

@@ -130,6 +130,7 @@ namespace ProjectoEsw.GestorAplicacao
                 perfil.MoradaConcelho = model.MoradaConcelho;
                 perfil.MoradaDistrito = model.MoradaDistrito;
                 perfil.NumeroIdentificacao = model.NumeroIdentificacao;
+                perfil.MoradaRua = model.MoradaRua;
                 perfil.Nif = model.Nif;
                 await _context.SaveChangesAsync();
                 return true;
@@ -495,7 +496,7 @@ namespace ProjectoEsw.GestorAplicacao
 
             //mini barraca
             var query = _context.Instituicoes_Candidatura.Include(row => row.Instituicao).GroupBy(row => row.InstituicaoId);
-            DestinosPreferenciasEstatisticas dpe = new DestinosPreferenciasEstatisticas { PreferenciaMaior = query.FirstOrDefault().Single().Instituicao, PreferenciaMenor = query.LastOrDefault().Single().Instituicao };
+            DestinosPreferenciasEstatisticas dpe = new DestinosPreferenciasEstatisticas { PreferenciaMaior = query.First().Single().Instituicao, PreferenciaMenor = query.Last().Single().Instituicao };
 
             List<InstituicaoEstatisticas> ie = new List<InstituicaoEstatisticas>();
 

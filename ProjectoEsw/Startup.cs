@@ -29,7 +29,7 @@ namespace ProjectoEsw
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var conect = "Server=(localdb)\\mssqllocaldb;Database=RegistoTeste;";
+          //  var conect = "Server=(localdb)\\mssqllocaldb;Database=RegistoTeste;";
             var connect1 = Configuration.GetConnectionString("ProjectoEsw_grupo2");
 
             services.Configure<RequestLocalizationOptions>(options =>

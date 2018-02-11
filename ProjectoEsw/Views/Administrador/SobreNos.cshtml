@@ -1,31 +1,40 @@
 ﻿@model ProjectoEsw.Models.Identity.Perfil;
 
 @section links {
-    <a asp-area="" asp-controller="Candidato" asp-action="Logout" class="btn btn-link btn-xs pull-right">Log Out</a>
-    <a asp-area="" asp-controller="Candidato" asp-action="Perfil" class="btn btn-link btn-xs pull-right"> @Html.DisplayFor(Model => Model.Email) </a>
+    <a asp-area="" asp-controller="Administrador" asp-action="Logout" class="btn btn-link btn-xs pull-right">Log Out</a>
+    <a asp-area="" asp-controller="Administrador" asp-action="Perfil" class="btn btn-link btn-xs pull-right"> @Html.DisplayFor(Model => Model.Email) </a>
 
 }
 @section Home{
-    <a asp-area="" asp-controller="Candidato" asp-action="Index">Home</a>
+    <a asp-area="" asp-controller="Administrador" asp-action="Index">Home</a>
 
 }
 @section ProgramasMobilidade{
-    <a asp-area="" asp-controller="Candidato" asp-action="ProgramasMobilidade">Programas Mobilidade</a>
+    <a asp-area="" asp-controller="Administrador" asp-action="ProgramasMobilidade">Programas Mobilidade</a>
 }
 @section Bolsas{
-    <a asp-area="" asp-controller="Candidato" asp-action="Bolsas">Bolsas</a>
+    <a asp-area="" asp-controller="Administrador" asp-action="Bolsas">Bolsas</a>
 }
 @section SobreNos{
-    <a asp-area="" asp-controller="Candidato" asp-action="SobreNos">Sobre Nós</a>
+    <a asp-area="" asp-controller="Administrador" asp-action="SobreNos">Sobre Nós</a>
 }
 <!--Home-->
-<div class="jumbotron col-sm-8">
-    <h2>Sobre Nos</h2>
-    <p> Resto Informacao + links + prazos</p>
-</div>
+    <div class="jumbotron col-sm-8">
+        <div class="col-sm-12" id="divErasmus">
+            <h3 class="text-center">Sobre Nós</h3>
+            <div class="help-block"></div>
+            <p><font size="2">  Esta  <strong>WebApp</strong> foi criada para o <strong>CIMOB</strong>, como projecto escolar e para promover e ajudar no processo de candidatura para os programas mobilidade que o <strong>Instituito Politecnico de Setubal</strong> tem para oferecer</font></p>
+            <p><font size="2">  Foi desenvolvida por um grupo de quatro elementro que procedeu a implementação da mesma.</font></p>
+            <p><font size="2">  Estes elementos sao todos alunos de Engenheiria Informatica no IPS/EST, que estao a frequentar as cadeiras de Engenheiria de Software e Programação Visual para o qual este projecto foi desenvolvido</font></p>
+            <p><font size="2">  Os grupo é consistido portanto: </font></p>
+            <p><font size="2">  - <strong>Ricardo Monteiro</strong> - Project Manager</font></p>
+            <p><font size="2">  - <strong>Lidorio Vinagreiro</strong> - Developer </font></p>
+            <p><font size="2">  - <strong>Fernando Azevedo</strong> - Developer </font></p>
+            <p><font size="2">  - <strong>Diogo Marques</strong> - Developer </font></p>
+        </div>
+    </div>
 <div class="jumbotron col-sm-3 col-sm-offset-1">
     <h5 class="text-center">Opcoes</h5>
-    <a asp-area="" asp-controller="Candidato" asp-action="VisualizarCandidatura" class="btn btn-link btn-xs pull-right col-sm-12">Ver Candidatura</a>
-    <a asp-area="" asp-controller="Candidato" asp-action="Perfil" class="btn btn-link btn-xs pull-right col-sm-12">Ver Perfil</a>
-    <a asp-area="" asp-controller="Candidato" asp-action="EditarPerfil" class="btn btn-link btn-xs center-block col-sm-12">Editar Perfil</a>
+    <a asp-area="" asp-controller="Administrador" asp-action="VerEstatisticas" class="btn btn-link btn-xs center-block col-sm-12">Estatisticas</a>
+
 </div>

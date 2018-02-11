@@ -84,6 +84,9 @@
     <Compile Include="My Project\AssemblyInfo.vb" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Login.loadtest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="RegistoLogin.loadtest">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

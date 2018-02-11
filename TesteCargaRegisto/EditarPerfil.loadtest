@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<LoadTest Name="LoadTest3" Description="" Owner="" storage="c:\users\ferna\desktop\projectoesw\testecargaregisto\loadtest3.loadtest" Priority="2147483647" Enabled="true" CssProjectStructure="" CssIteration="" DeploymentItemsEditable="" WorkItemIds="" TraceLevel="None" CurrentRunConfig="Configurações de Execução1" Id="fd8e1791-4e55-4566-ab81-1e5a0ec8d9f6" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+<LoadTest Name="EditarPerfil" Description="" Owner="" storage="c:\users\ferna\desktop\projectoesw\testecargaregisto\editarperfil.loadtest" Priority="2147483647" Enabled="true" CssProjectStructure="" CssIteration="" DeploymentItemsEditable="" WorkItemIds="" TraceLevel="None" CurrentRunConfig="Configurações de Execução1" Id="fd8e1791-4e55-4566-ab81-1e5a0ec8d9f6" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
   <Scenarios>
     <Scenario Name="Cenário1" DelayBetweenIterations="0" PercentNewUsers="0" IPSwitching="false" TestMixType="PercentageOfTestsStarted" ApplyDistributionToPacingDelay="true" MaxTestIterations="0" DisableDuringWarmup="false" DelayStartTime="0" AllowedAgents="">
       <ThinkProfile Value="0.2" Pattern="NormalDistribution" />

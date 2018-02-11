@@ -1,13 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<LoadTest Name="LoadTest1" Description="" Owner="" storage="c:\users\ferna\desktop\projectoesw\testecargaregisto\loadtest1.loadtest" Priority="2147483647" Enabled="true" CssProjectStructure="" CssIteration="" DeploymentItemsEditable="" WorkItemIds="" TraceLevel="None" CurrentRunConfig="Configurações de Execução1" Id="49ca0714-7d97-4831-8da8-3eb578dfd6ff" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+<LoadTest Name="RegistoLogin" Description="" Owner="" storage="c:\users\ferna\desktop\projectoesw\testecargaregisto\registologin.loadtest" Priority="2147483647" Enabled="true" CssProjectStructure="" CssIteration="" DeploymentItemsEditable="" WorkItemIds="" TraceLevel="None" CurrentRunConfig="Configurações de Execução1" Id="49ca0714-7d97-4831-8da8-3eb578dfd6ff" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
   <Scenarios>
     <Scenario Name="LoginRegistoCandidatura" DelayBetweenIterations="0" PercentNewUsers="0" IPSwitching="false" TestMixType="PercentageOfTestsStarted" ApplyDistributionToPacingDelay="true" MaxTestIterations="0" DisableDuringWarmup="false" DelayStartTime="0" AllowedAgents="">
       <ThinkProfile Value="0.2" Pattern="NormalDistribution" />
       <LoadProfile Pattern="Step" InitialUsers="10" MaxUsers="20" StepUsers="10" StepDuration="10" StepRampTime="0" />
       <TestMix>
-        <TestProfile Name="TesteCargaRegisto" Path="testecargaregisto.webtest" Id="b0c68bff-3471-4896-8db1-b4775e825dcd" Percentage="35" Type="Microsoft.VisualStudio.TestTools.WebStress.DeclarativeWebTestElement, Microsoft.VisualStudio.QualityTools.LoadTest, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-        <TestProfile Name="TesteCargaLogin" Path="testecargalogin.webtest" Id="80c9178d-b094-44fa-b98b-7c47b6582d61" Percentage="60" Type="Microsoft.VisualStudio.TestTools.WebStress.DeclarativeWebTestElement, Microsoft.VisualStudio.QualityTools.LoadTest, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-        <TestProfile Name="TesteCargaCandidatura" Path="testecargacandidatura.webtest" Id="fd71e8fa-8829-4446-bd89-185e0f9cd40e" Percentage="5" Type="Microsoft.VisualStudio.TestTools.WebStress.DeclarativeWebTestElement, Microsoft.VisualStudio.QualityTools.LoadTest, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+        <TestProfile Name="TesteCargaRegisto" Path="testecargaregisto.webtest" Id="b0c68bff-3471-4896-8db1-b4775e825dcd" Percentage="30" Type="Microsoft.VisualStudio.TestTools.WebStress.DeclarativeWebTestElement, Microsoft.VisualStudio.QualityTools.LoadTest, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+        <TestProfile Name="TesteCargaLogin" Path="testecargalogin.webtest" Id="80c9178d-b094-44fa-b98b-7c47b6582d61" Percentage="70" Type="Microsoft.VisualStudio.TestTools.WebStress.DeclarativeWebTestElement, Microsoft.VisualStudio.QualityTools.LoadTest, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
       </TestMix>
       <BrowserMix>
         <BrowserProfile Percentage="100">

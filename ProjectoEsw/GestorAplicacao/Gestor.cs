@@ -437,8 +437,10 @@ namespace ProjectoEsw.GestorAplicacao
             if (!candidatura.Estado.Equals(Estado.APROVADA))
                 return false;
             Perfil tec = _context.Perfils.Where(row => row.UtilizadorFK == tecnico.Id).Single();
-            Eventos evento = new Eventos { EntrevistadorFK = tec.ID ,Tipo = Tipo.Entrevista,Descricao = "Entrevista : " + candidato.UserName ,Inicio =inicio, Fim= fim,Titulo="Entrevista a Candidato"};
-            Eventos eventoCandidato = new Eventos { EntrevistadorFK = candidato.PerfilFK, Tipo = Tipo.Entrevista, Descricao = "Entrevista : " + tecnico.UserName, Inicio = inicio, Fim = fim, Titulo = "Entrevista" };
+            Eventos evento = new Eventos { PerfilFK = tec.ID ,Tipo = Tipo.Entrevista,Descricao = "Entrevista : " + candidato.UserName ,Inicio =inicio, Fim= fim,Titulo="Entrevista a Candidato"};
+            Eventos eventoCandidato = new Eventos { PerfilFK = candidato.PerfilFK, Tipo = Tipo.Entrevista, Descricao = "Entrevista : " + tecnico.UserName, Inicio = inicio, Fim = fim, Titulo = "Entrevista" };
+            _context.Eventos.Add(evento);
+            _context.Eventos.Add(eventoCandidato);
             _context.SaveChanges();
             return true;
         }
@@ -455,6 +457,7 @@ namespace ProjectoEsw.GestorAplicacao
         {
             Perfil candidatop = _context.Perfils.Where(row => row.UtilizadorFK == candidato.Id).Single();
             Eventos evento = new Eventos { PerfilFK = candidatop.ID, Inicio = inicio, Fim = fim , Titulo="REUNIAO NA ASSOCIACAO",Descricao="Duvidas na Candidatura" };
+            _context.Eventos.Add(evento);
             _context.SaveChanges();
             string tecnico = "tecnico";
             IdentityRole tecn = _context.Roles.Where(row => row.Name.ToUpper().Equals(tecnico.ToUpper())).Single();
@@ -463,10 +466,11 @@ namespace ProjectoEsw.GestorAplicacao
             foreach (var item in usersList)
             {
                 Eventos eventoTecnico = new Eventos { PerfilFK = item.PerfilFK, Inicio = inicio, Fim = fim, Titulo = "ALUNOS DESEJA UMA REUNIÃO", Descricao = "ALuno: " + candidatop.NomeCompleto };
+                _context.Eventos.Add(eventoTecnico);
                 _context.SaveChanges();
                 _gestorEmail.EnviarEmail(item, "FOI MARCADA UMA REUNIAO", inicio.ToString());
             }
-            
+
             return true;
         }
         /// <summary>

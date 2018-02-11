@@ -18,7 +18,6 @@ using ProjectoEsw.Models.Estatisticas_sprint3;
 using Newtonsoft.Json;
 
 
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace ProjectoEsw.Controllers
 {
@@ -48,7 +47,7 @@ namespace ProjectoEsw.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Esta pagina é apresentada quando o utilizador do tipo Candidato efectua o login 
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -61,7 +60,7 @@ namespace ProjectoEsw.Controllers
             return View(model);
         }
         /// <summary>
-        /// 
+        /// Esta ação possibilita a alteração do perfil do utilizador
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -84,7 +83,7 @@ namespace ProjectoEsw.Controllers
             });
         }
         /// <summary>
-        /// 
+        /// Esta ação possibilita a visualização do utilizador
         /// </summary>
         /// <returns></returns>
         public async Task<IActionResult> Perfil()
@@ -95,9 +94,10 @@ namespace ProjectoEsw.Controllers
             return View(user.Perfil);
         }
         /// <summary>
-        /// 
+        /// Esta ação ocorre após ser submetida informação atraves de um formulario.
+        /// O formulario encontra-se na view EditarPerfil
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="model">Modelo que contem dados a serem alterados</param>
         /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> EditarPerfil(RegisterViewModel model)
@@ -119,9 +119,9 @@ namespace ProjectoEsw.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Esta ação ocorre apos a submissão de dados atraves do formulario da view EditarPerfil
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="model"> Modelo com dados inseridos pelo utilizador</param>
         /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> AlterarPassword(RegisterViewModel model)
@@ -142,16 +142,17 @@ namespace ProjectoEsw.Controllers
             }
         }
         /// <summary>
-        /// 
+        /// Esta ação efectua o log out do utilizador actual
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Redireciona para a pagina inicial (Home/Index)</returns>
         public async Task<IActionResult> Logout()
         {
             await _gestor.LogOut();
             return RedirectToAction("Index", "Home");
         }
         /// <summary>
-        /// 
+        /// Esta ação é responsavel pela construção da view candidaturaErasmus.
+        /// E possibilita ao utilizador efectuar uma candidatura do tipo Erasmus
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -176,7 +177,8 @@ namespace ProjectoEsw.Controllers
             return View("candidaturaErasmus", model);
         }
         /// <summary>
-        /// 
+        /// Esta ação é responsavel pela construção da view candidaturaSantander.
+        /// E possibilita ao utilizador efectuar uma candidatura do tipo Santander       
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -202,9 +204,10 @@ namespace ProjectoEsw.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Esta ação ocorre quando o utilizador preenche e envia o formulario existente na view candidaturaErasmus
+        /// Esta ação pretende verificação dos dados submetidos e guardar esta mesma informação
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="model">modelo de dados de uma candidatura</param>
         /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> CandidaturaErasmus(CandidaturaViewModel model)
@@ -270,9 +273,10 @@ namespace ProjectoEsw.Controllers
             return View("Erro");
         }
         /// <summary>
-        /// 
+        /// Esta ação ocorre quando o utilizador preenche e envia o formulario existente na view candidaturaSantander
+        /// Esta ação pretende verificação dos dados submetidos e guardar esta mesma informação
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="model">modelo de dados de uma candidatura</param>
         /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> CandidaturaSantander(CandidaturaViewModel model)
@@ -336,7 +340,7 @@ namespace ProjectoEsw.Controllers
 
         }
         /// <summary>
-        /// 
+        /// O objectivo desta ação é visualizar a candidatura que foi previamente submetida
         /// </summary>
         /// <returns></returns>
         public IActionResult VisualizarCandidatura()
@@ -358,10 +362,12 @@ namespace ProjectoEsw.Controllers
             {
                 return View("VisualizarCandidatura");
             }
-            //model.Candidato = user;
+            
         }
         /// <summary>
-        /// 
+        /// O objectivo desta ação é alterar uma candidatura previamente submetida.
+        /// Esta ação só esta disponivel para o candidato caso o tecnico tenha verificado a candidatura e esta
+        /// se encontre incompleta em algum campo da mesma
         /// </summary>
         /// <returns></returns>
         public IActionResult AlterarCandidatura()
@@ -382,10 +388,10 @@ namespace ProjectoEsw.Controllers
             else
                 return View("AlterarCandidaturaSantander", candidatura);
         }
-        /// <summary>
-        /// 
+        /// <summary> 
+        /// Esta ação ocorre após serem submetidos dados atraves do formulário AlterarCandidaturaErasmus ou AlterarCandidaturaErasmus
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="model">Modelo com dados alterados da candidatura</param>
         /// <returns></returns>
         [HttpPost]
         public IActionResult AlterarCandidatura(CandidaturaViewModel model) {
@@ -424,7 +430,7 @@ namespace ProjectoEsw.Controllers
             return View("Erro");// algo errado no model state
         }
         /// <summary>
-        /// 
+        /// O objectivo desta ação é mostrar uma view com informação dos programas de mobilidade
         /// </summary>
         /// <returns></returns>
         public IActionResult ProgramasMobilidade()
@@ -434,7 +440,7 @@ namespace ProjectoEsw.Controllers
             return View(p1);
         }
         /// <summary>
-        /// 
+        /// O objectivo desta ação é mostrar uma view com informação das bolsas disponiveis
         /// </summary>
         /// <returns></returns>
         public IActionResult Bolsas()
@@ -444,7 +450,7 @@ namespace ProjectoEsw.Controllers
             return View(p1);
         }
         /// <summary>
-        /// 
+        /// O objectivo desta ação é mostrar uma view com informação dos membros do grupo
         /// </summary>
         /// <returns></returns>
         public IActionResult SobreNos()
@@ -454,7 +460,7 @@ namespace ProjectoEsw.Controllers
             return View(p1);
         }
         /// <summary>
-        /// 
+        /// O objectivo desta ação é dar ao utilizador a possibilidade de marcar uma reuniao com qualquer tecnico
         /// </summary>
         /// <returns></returns>
         public IActionResult MarcarReuniao()
@@ -462,9 +468,9 @@ namespace ProjectoEsw.Controllers
             return View();
         }
         /// <summary>
-        /// 
+        /// Esta ação ocorre apos serem submetidos dados atraves do formulario da view MarcarReuniao
         /// </summary>
-        /// <param name="viewModel"></param>
+        /// <param name="viewModel">Modelo de dados de uma Reuniao</param>
         /// <returns></returns>
         [HttpPost]
         public IActionResult MarcarReuniao(MarcarReuniaoViewModel viewModel)
@@ -478,10 +484,10 @@ namespace ProjectoEsw.Controllers
         }
 
         /// <summary>
-        /// 
+        /// O objectivo desta ação é ler e retornar todos os eventos associados a um id de Perfil
         /// </summary>
-        /// <param name="idPerfil"></param>
-        /// <returns></returns>
+        /// <param name="idPerfil">identificador de perfil</param>
+        /// <returns>Json de lista de eventos</returns>
         [HttpGet]
         public JsonResult GetEvents(int idPerfil)
         {
@@ -489,10 +495,10 @@ namespace ProjectoEsw.Controllers
             return Json(events);
         }
         /// <summary>
-        /// 
+        /// Esta ação tem como objetivo guardar um Evento 
         /// </summary>
-        /// <param name="evento"></param>
-        /// <returns></returns>
+        /// <param name="evento">Modelo de dados um evento</param>
+        /// <returns>Json de sucesso</returns>
         [HttpPost]
         public async Task<JsonResult> SaveEvents(Eventos evento)
         {
@@ -519,10 +525,10 @@ namespace ProjectoEsw.Controllers
             return new JsonResult(new { Data = new { status = status } });
         }
         /// <summary>
-        /// 
+        /// Esta ação tem como objectivo apagar um eventos com um determinado identificador
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id">identificador do evento</param>
+        /// <returns>Json com estado da operação</returns>
         [HttpPost]
         public async Task<JsonResult> DeleteEvent(int id)
         {

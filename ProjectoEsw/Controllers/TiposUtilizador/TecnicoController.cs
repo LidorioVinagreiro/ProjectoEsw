@@ -11,6 +11,7 @@ using ProjectoEsw.Models.Identity;
 using ProjectoEsw.Models.Candidatura_sprint2.ViewModels;
 using Microsoft.Extensions.Primitives;
 using Microsoft.EntityFrameworkCore;
+using ProjectoEsw.Models.Calendario;
 
 namespace ProjectoEsw.Controllers
 {
@@ -287,5 +288,67 @@ namespace ProjectoEsw.Controllers
             Perfil p1 = _gestor.getPerfil(user);
             return View(p1);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="idPerfil"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public JsonResult GetEvents(int idPerfil)
+        {
+            var events = _context.Eventos.Where(Eventos => Eventos.PerfilFK == idPerfil).ToList();
+            return Json(events);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="evento"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<JsonResult> SaveEvents(Eventos evento)
+        {
+
+            var status = false;
+            if (evento.ID > 0)
+            {
+                Utilizador user = await _gestor.getUtilizador(this.User);
+                var updateEvento = _context.Eventos.Where(even => even.ID == evento.ID).SingleOrDefault();
+                updateEvento.Inicio = evento.Inicio;
+                updateEvento.Titulo = evento.Titulo;
+                updateEvento.Fim = evento.Fim;
+                updateEvento.Descricao = evento.Descricao;
+                updateEvento.PerfilFK = _gestor.getPerfil(user).ID;
+
+            }
+            else
+            {
+                _context.Eventos.Add(evento);
+            }
+
+            await _context.SaveChangesAsync();
+            status = true;
+            return new JsonResult(new { Data = new { status = status } });
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<JsonResult> DeleteEvent(int id)
+        {
+            var status = false;
+            Eventos evento = _context.Eventos.Where(even => even.ID == id).SingleOrDefault();
+
+            if (evento != null)
+            {
+                _context.Eventos.Remove(evento);
+                status = true;
+            }
+            await _context.SaveChangesAsync();
+            return new JsonResult(new { status = status });
+        }
+
     }
 }

@@ -12,7 +12,6 @@ namespace ProjectoEsw.Models.Identity
     {
         [ForeignKey("Perfil")]
         public int? PerfilFK { get; set; }
-        //identityUser já contem informacao de utilizadores!
         public virtual Perfil Perfil { get; set; }
 
     }

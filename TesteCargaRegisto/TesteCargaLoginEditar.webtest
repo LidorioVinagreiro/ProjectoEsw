@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<WebTest Name="TesteCargaLoginEditar" Id="5b5fe974-35b3-41f0-a310-eaf23d5a79c2" Owner="" Priority="2147483647" Enabled="True" CssProjectStructure="" CssIteration="" Timeout="0" WorkItemIds="" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" Description="" CredentialUserName="" CredentialPassword="" PreAuthenticate="True" Proxy="default" StopOnError="False" RecordedResultFile="WebTest1.2e50e951-5fac-4aa0-a2de-71560698361b.rec.webtestresult" ResultsLocale="">
+  <Items>
+    <Request Method="GET" Guid="f84fe6ef-f30d-48c2-951e-401bdc59409f" Version="1.1" Url="http://localhost:57220/" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False" />
+    <Request Method="GET" Guid="2c4a65bc-c568-49ff-b56f-26faeaa049d9" Version="1.1" Url="http://localhost:57220/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.eot" ThinkTime="7" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
+      <Headers>
+        <Header Name="Referer" Value="http://localhost:57220/" />
+      </Headers>
+      <QueryStringParameters>
+        <QueryStringParameter Name="" Value="" RecordedValue="" CorrelationBinding="" UrlEncode="False" UseToGroupResults="False" />
+      </QueryStringParameters>
+    </Request>
+    <Request Method="GET" Guid="9df50f84-6d0a-4e71-a496-6d63c3830c5b" Version="1.1" Url="http://localhost:57220/Home/Login" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
+      <Headers>
+        <Header Name="Referer" Value="http://localhost:57220/" />
+      </Headers>
+      <ExtractionRules>
+        <ExtractionRule Classname="Microsoft.VisualStudio.TestTools.WebTesting.Rules.ExtractHiddenFields, Microsoft.VisualStudio.QualityTools.WebTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" VariableName="1" DisplayName="Extrair campos ocultos" Description="Extrair todos os campos ocultos da resposta e colocá-los no contexto do teste.">
+          <RuleParameters>
+            <RuleParameter Name="Required" Value="True" />
+            <RuleParameter Name="HtmlDecode" Value="True" />
+          </RuleParameters>
+        </ExtractionRule>
+      </ExtractionRules>
+    </Request>
+    <Request Method="GET" Guid="914696bd-2e0d-43b5-a8eb-03317b896af3" Version="1.1" Url="http://localhost:57220/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.eot" ThinkTime="18" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
+      <Headers>
+        <Header Name="Referer" Value="http://localhost:57220/Home/Login" />
+      </Headers>
+      <QueryStringParameters>
+        <QueryStringParameter Name="" Value="" RecordedValue="" CorrelationBinding="" UrlEncode="False" UseToGroupResults="False" />
+      </QueryStringParameters>
+    </Request>
+    <Request Method="POST" Guid="4477adf3-8da4-4f3c-8c5c-1e43a089d9cb" Version="1.1" Url="http://localhost:57220/Home/Login" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="http://localhost:57220/Candidato" ReportingName="" IgnoreHttpStatusCode="False">
+      <Headers>
+        <Header Name="Referer" Value="http://localhost:57220/Home/Login" />
+      </Headers>
+      <FormPostHttpBody>
+        <FormPostParameter Name="Email" Value="fernando_azevedo_30@hotmail.com" RecordedValue="fernando_azevedo_30@hotmail.com" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Password" Value="irule512" RecordedValue="irule512" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="__RequestVerificationToken" Value="{{$HIDDEN1.__RequestVerificationToken}}" RecordedValue="CfDJ8IZ9GjaFmaVGne66JMWjAxJNO2ttqxsxaY5kD9z0SzNJk8bk5FCztP6OOMMKptD-fdBpRyVhEALcv0ULOQFUGENQLXMgw7CyVaV_htgTBvB-slW-Nm4U2ZYJ2OkhxkwQmkSwiWy3x_6ZUCoJrlAfOW0" CorrelationBinding="" UrlEncode="True" />
+      </FormPostHttpBody>
+    </Request>
+    <Request Method="GET" Guid="5296e4a3-078b-4f13-83b5-7b171faaed79" Version="1.1" Url="http://localhost:57220/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.eot" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
+      <Headers>
+        <Header Name="Referer" Value="http://localhost:57220/Candidato" />
+      </Headers>
+      <QueryStringParameters>
+        <QueryStringParameter Name="" Value="" RecordedValue="" CorrelationBinding="" UrlEncode="False" UseToGroupResults="False" />
+      </QueryStringParameters>
+    </Request>
+    <Request Method="GET" Guid="7ce3dead-7169-4716-af7a-6ad4e33fe738" Version="1.1" Url="http://localhost:57220/Candidato/GetEvents" ThinkTime="3" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
+      <Headers>
+        <Header Name="Content-Type" Value="application/json" />
+        <Header Name="Accept" Value="application/json, text/javascript, */*; q=0.01" />
+        <Header Name="X-Requested-With" Value="XMLHttpRequest" />
+        <Header Name="Referer" Value="http://localhost:57220/Candidato" />
+      </Headers>
+      <QueryStringParameters>
+        <QueryStringParameter Name="idPerfil" Value="5" RecordedValue="5" CorrelationBinding="" UrlEncode="False" UseToGroupResults="False" />
+      </QueryStringParameters>
+    </Request>
+    <Request Method="GET" Guid="da1be533-b4ed-4055-bcea-197ad03a212d" Version="1.1" Url="http://localhost:57220/Candidato/EditarPerfil" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
+      <Headers>
+        <Header Name="Referer" Value="http://localhost:57220/Candidato" />
+      </Headers>
+      <ExtractionRules>
+        <ExtractionRule Classname="Microsoft.VisualStudio.TestTools.WebTesting.Rules.ExtractHiddenFields, Microsoft.VisualStudio.QualityTools.WebTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" VariableName="1" DisplayName="Extrair campos ocultos" Description="Extrair todos os campos ocultos da resposta e colocá-los no contexto do teste.">
+          <RuleParameters>
+            <RuleParameter Name="Required" Value="True" />
+            <RuleParameter Name="HtmlDecode" Value="True" />
+          </RuleParameters>
+        </ExtractionRule>
+      </ExtractionRules>
+      <CorrelationExtractionRules>
+        <ExtractionRule Classname="Microsoft.VisualStudio.TestTools.WebTesting.Rules.ExtractFormField, Microsoft.VisualStudio.QualityTools.WebTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" VariableName="FormPostParam1.Nif" DisplayName="" Description="">
+          <RuleParameters>
+            <RuleParameter Name="Name" Value="Nif" />
+            <RuleParameter Name="HtmlDecode" Value="True" />
+            <RuleParameter Name="Required" Value="False" />
+            <RuleParameter Name="Index" Value="0" />
+          </RuleParameters>
+        </ExtractionRule>
+        <ExtractionRule Classname="Microsoft.VisualStudio.TestTools.WebTesting.Rules.ExtractFormField, Microsoft.VisualStudio.QualityTools.WebTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" VariableName="FormPostParam2.NumeroIdentificacao" DisplayName="" Description="">
+          <RuleParameters>
+            <RuleParameter Name="Name" Value="NumeroIdentificacao" />
+            <RuleParameter Name="HtmlDecode" Value="True" />
+            <RuleParameter Name="Required" Value="False" />
+            <RuleParameter Name="Index" Value="0" />
+          </RuleParameters>
+        </ExtractionRule>
+        <ExtractionRule Classname="Microsoft.VisualStudio.TestTools.WebTesting.Rules.ExtractFormField, Microsoft.VisualStudio.QualityTools.WebTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" VariableName="FormPostParam3.MoradaRua" DisplayName="" Description="">
+          <RuleParameters>
+            <RuleParameter Name="Name" Value="MoradaRua" />
+            <RuleParameter Name="HtmlDecode" Value="True" />
+            <RuleParameter Name="Required" Value="False" />
+            <RuleParameter Name="Index" Value="0" />
+          </RuleParameters>
+        </ExtractionRule>
+        <ExtractionRule Classname="Microsoft.VisualStudio.TestTools.WebTesting.Rules.ExtractFormField, Microsoft.VisualStudio.QualityTools.WebTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" VariableName="FormPostParam4.MoradaCodigoPostal" DisplayName="" Description="">
+          <RuleParameters>
+            <RuleParameter Name="Name" Value="MoradaCodigoPostal" />
+            <RuleParameter Name="HtmlDecode" Value="True" />
+            <RuleParameter Name="Required" Value="False" />
+            <RuleParameter Name="Index" Value="0" />
+          </RuleParameters>
+        </ExtractionRule>
+        <ExtractionRule Classname="Microsoft.VisualStudio.TestTools.WebTesting.Rules.ExtractFormField, Microsoft.VisualStudio.QualityTools.WebTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" VariableName="FormPostParam5.Telefone" DisplayName="" Description="">
+          <RuleParameters>
+            <RuleParameter Name="Name" Value="Telefone" />
+            <RuleParameter Name="HtmlDecode" Value="True" />
+            <RuleParameter Name="Required" Value="False" />
+            <RuleParameter Name="Index" Value="0" />
+          </RuleParameters>
+        </ExtractionRule>
+        <ExtractionRule Classname="Microsoft.VisualStudio.TestTools.WebTesting.Rules.ExtractText, Microsoft.VisualStudio.QualityTools.WebTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" VariableName="FormPostParam6.MoradaConcelho" DisplayName="" Description="">
+          <RuleParameters>
+            <RuleParameter Name="StartsWith" Value="lue=&quot;" />
+            <RuleParameter Name="EndsWith" Value="&quot;&gt;Esc" />
+            <RuleParameter Name="Index" Value="4" />
+            <RuleParameter Name="IgnoreCase" Value="False" />
+            <RuleParameter Name="UseRegularExpression" Value="False" />
+            <RuleParameter Name="HtmlDecode" Value="True" />
+            <RuleParameter Name="Required" Value="False" />
+          </RuleParameters>
+        </ExtractionRule>
+        <ExtractionRule Classname="Microsoft.VisualStudio.TestTools.WebTesting.Rules.ExtractText, Microsoft.VisualStudio.QualityTools.WebTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" VariableName="FormPostParam7.MoradaDistrito" DisplayName="" Description="">
+          <RuleParameters>
+            <RuleParameter Name="StartsWith" Value="lue=&quot;" />
+            <RuleParameter Name="EndsWith" Value="&quot;&gt;Mon" />
+            <RuleParameter Name="Index" Value="11" />
+            <RuleParameter Name="IgnoreCase" Value="False" />
+            <RuleParameter Name="UseRegularExpression" Value="False" />
+            <RuleParameter Name="HtmlDecode" Value="True" />
+            <RuleParameter Name="Required" Value="False" />
+          </RuleParameters>
+        </ExtractionRule>
+      </CorrelationExtractionRules>
+    </Request>
+    <Request Method="GET" Guid="0dd1d38f-fd8f-4521-b97d-60ef790be57c" Version="1.1" Url="http://localhost:57220/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.eot" ThinkTime="7" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
+      <Headers>
+        <Header Name="Referer" Value="http://localhost:57220/Candidato/EditarPerfil" />
+      </Headers>
+      <QueryStringParameters>
+        <QueryStringParameter Name="" Value="" RecordedValue="" CorrelationBinding="" UrlEncode="False" UseToGroupResults="False" />
+      </QueryStringParameters>
+    </Request>
+    <Request Method="POST" Guid="dabaf422-9251-47b1-8717-729f582cd4b8" Version="1.1" Url="http://localhost:57220/Candidato/EditarPerfil" ThinkTime="3" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
+      <Headers>
+        <Header Name="Referer" Value="http://localhost:57220/Candidato/EditarPerfil" />
+      </Headers>
+      <FormPostHttpBody>
+        <FormPostParameter Name="Nif" Value="123123123" RecordedValue="123123123" CorrelationBinding="{{FormPostParam1.Nif}}" UrlEncode="True" />
+        <FormPostParameter Name="NumeroIdentificacao" Value="123123123" RecordedValue="123123123" CorrelationBinding="{{FormPostParam2.NumeroIdentificacao}}" UrlEncode="True" />
+        <FormPostParameter Name="MoradaRua" Value="rua fernando Azevedfo" RecordedValue="rua fernando Azevedfo" CorrelationBinding="{{FormPostParam3.MoradaRua}}" UrlEncode="True" />
+        <FormPostParameter Name="MoradaCodigoPostal" Value="1234-123" RecordedValue="1234-123" CorrelationBinding="{{FormPostParam4.MoradaCodigoPostal}}" UrlEncode="True" />
+        <FormPostParameter Name="MoradaConcelho" Value="0" RecordedValue="0" CorrelationBinding="{{FormPostParam6.MoradaConcelho}}" UrlEncode="True" />
+        <FormPostParameter Name="MoradaDistrito" Value="6" RecordedValue="6" CorrelationBinding="{{FormPostParam7.MoradaDistrito}}" UrlEncode="True" />
+        <FormPostParameter Name="Telefone" Value="912123123" RecordedValue="912123123" CorrelationBinding="{{FormPostParam5.Telefone}}" UrlEncode="True" />
+        <FormPostParameter Name="__RequestVerificationToken" Value="{{$HIDDEN1.__RequestVerificationToken}}" RecordedValue="CfDJ8IZ9GjaFmaVGne66JMWjAxJz26RynwkRFLZE-9il-B9rMRTVT0dsSmTGj-X9lRd7pVLi6I9RfqNYR26nWrJVQp_9SB-tRlw0dtvzJlBhBYLvKdKMaiALa0Sd3CLZBNO0cTACaxG52FteT5d421HAWe9SjZEV1waTCGLqmAEc1qyKGVo2FUMtmR8G7V3_7NPmVg" CorrelationBinding="" UrlEncode="True" />
+        <FileUploadParameter Name="files" FileName="" ContentType="application/octet-stream" GenerateUniqueName="True" UseGuids="False" FileUploadName="" HtmlEncodeFileName="True" />
+      </FormPostHttpBody>
+    </Request>
+    <Request Method="GET" Guid="0653751c-f25a-40d4-aae8-8705a3a0feac" Version="1.1" Url="http://localhost:57220/Candidato" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
+      <Headers>
+        <Header Name="Referer" Value="http://localhost:57220/Candidato/EditarPerfil" />
+      </Headers>
+    </Request>
+  </Items>
+  <ValidationRules>
+    <ValidationRule Classname="Microsoft.VisualStudio.TestTools.WebTesting.Rules.ValidateResponseUrl, Microsoft.VisualStudio.QualityTools.WebTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" DisplayName="URL de resposta" Description="Valida que a URL de resposta após redirecionamentos é a mesma que a URL de resposta após os parâmetros QueryString serem ignorados." Level="Low" ExectuionOrder="BeforeDependents" />
+    <ValidationRule Classname="Microsoft.VisualStudio.TestTools.WebTesting.Rules.ValidationRuleResponseTimeGoal, Microsoft.VisualStudio.QualityTools.WebTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" DisplayName="Meta de tempo de resposta" Description="Valida que o tempo de resposta para a solicitação é menor que ou igual ao tempo de resposta especificado na solicitação. Metas de tempo de resposta nulas serão ignoradas." Level="Low" ExectuionOrder="AfterDependents">
+      <RuleParameters>
+        <RuleParameter Name="Tolerance" Value="0" />
+      </RuleParameters>
+    </ValidationRule>
+  </ValidationRules>
+</WebTest>

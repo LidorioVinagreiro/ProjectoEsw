@@ -1,0 +1,58 @@
+﻿<div>
+    <label><span id="data1"></span></label>
+    <label><span id="data1Fim"></span></label>
+    <label><span id="data2"></span></label>
+    <label><span id="data2Fim"></span></label>
+</div>
+
+<script type="text/javascript">
+    function horas(DataActual) {
+        $(document).ready(function () {
+            var dataActual = moment(DataActual, "DD/MM/YYYY HH:mm");
+            $.ajax({
+                type: 'GET',
+                url: '/Home/HorasCandidaturas',
+                contentType: 'application/json',
+                success: function (data) {
+                    var aux = [];
+                    $.each(data, function (i, v) {
+                        var diffInicioActual = dataActual.diff(moment(new Date(v.dataInicio), "DD/MM/YYYY HH:mm"),"hours");
+                        var diffFimActual = dataActual.diff(moment(new Date(v.dataFim), "DD/MM/YYYY HH:mm"),"hours");
+                        aux.push({
+                            tipo: v.tipo,
+                            data1: diffInicioActual,
+                            data2: diffFimActual
+                        });
+                    });
+                    if (aux[0].data1 > 0) {
+                        $('#data1').text("Estamos em candidaturas tipo:" + aux[0].tipo);
+                    } else { 
+                        $('#data1').text("falta: "+aux[0].data1.toString()+" horas para iniciar a candidaura");
+                    }
+
+                    if (aux[0].data2 > 0) {
+                        $('#data1Fim').text("Terminou candidaturas");
+                    } else {
+                        $('#data1Fim').text("falta: " + aux[0].data2.toString() * -1 + " horas para acabar a candidaura");
+                    }
+
+                    if (aux[1].data1 > 0) {
+                        $('#data2').text("Estamos em candidaturas tipo:" + aux[1].tipo);
+                    } else {
+                        $('#data2').text("falta: " + aux[1].data1.toString() + " horas para iniciar a candidaura");
+                    }
+
+                    if (aux[1].data2 > 0) {
+                        $('#data2Fim').text("Terminou candidaturas");
+                    } else {
+                        $('#data2Fim').text("falta: " + aux[1].data2.toString()* -1 + " horas para acabar a candidaura");
+                    }
+                    
+                },
+                error: function (err) {
+                    alert("ALGO FALHOU");
+                }
+            });
+        });
+    }
+</script>

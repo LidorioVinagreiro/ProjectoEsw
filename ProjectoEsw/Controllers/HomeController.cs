@@ -307,6 +307,10 @@ namespace ProjectoEsw.Controllers
         {
             return View();
         }
+
+        public IActionResult HorasCandidaturas() {
+            return new JsonResult(_context.TipoCandidatuas.ToList());
+        }
     }
 }
 

@@ -234,8 +234,12 @@ namespace ProjectoEsw.Controllers
         /// <returns></returns>
         [HttpPost]
         public IActionResult MarcarEntrevista(MarcarEntrevistaViewModel model) {
+            List<string> idCandidato = Request.Form["lista"].ToList();
             Utilizador tecnico = _gestor.getUtilizador(this.User).Result;
-            Utilizador candidato = _gestor.getUtilizadorById(model.CandidatoID);
+            if(idCandidato.Count>1 || idCandidato.Count == 0)
+                return View("../Erros/ErroMarcarEntrevista");
+
+            Utilizador candidato = _gestor.getUtilizadorById(idCandidato[0]);
             bool marcou = _gestor.MarcarEntrevista(tecnico, candidato, model.DataEntrevistaInicio, model.DataEntrevistaFim);
             if (marcou) {
                 return View("MarcarEntrevistaSucesso"); // entrevista marcada

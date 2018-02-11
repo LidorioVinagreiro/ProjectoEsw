@@ -40,13 +40,13 @@ namespace ProjectoEsw
             });
 
 
-            services.AddEntityFrameworkSqlServer()
-            .AddDbContext<AplicacaoDbContexto>(options =>
-            {
-                options.UseSqlServer(connect1);
-            });
+            //services.AddEntityFrameworkSqlServer()
+            //.AddDbContext<AplicacaoDbContexto>(options =>
+            //{
+            //    options.UseSqlServer(connect1);
+            //});
 
-            //services.AddDbContext<AplicacaoDbContexto>(options => options.UseSqlServer(conect));
+            services.AddDbContext<AplicacaoDbContexto>(options => options.UseSqlServer(conect));
 
             services.AddIdentity<Utilizador, IdentityRole>(options =>
                 {

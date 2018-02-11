@@ -55,12 +55,14 @@
 </div>
 
 
-@Html.Partial("Calendario",new ProjectoEsw.Models.Calendario.Eventos { });
+@Html.Partial("Calendario",new ProjectoEsw.Models.Calendario.Eventos { })
 
 @section calendario{
 <script> 
         CriarCalendario("Candidato", @Model.ID);
     </script>
 }
+
+
 
 

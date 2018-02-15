@@ -136,7 +136,7 @@ namespace ProjectoEsw.Controllers
                     i = x.Count;
                 }
             }
-            Candidatura listaIns = _context.Candidaturas.Where(row => aux.Contains(row.ID)).Single();
+            Candidatura listaIns = _context.Candidaturas.Where(row => row.ID == aux[0]).Single();
             Utilizador user = _context.Users.Where(row => row.Id == listaIns.UtilizadorFK).Single();
             Perfil perfil = _context.Perfils.Where(row => row.ID == user.PerfilFK).Single();
             listaIns.Candidato = user;
@@ -151,12 +151,12 @@ namespace ProjectoEsw.Controllers
         /// <param name="model" type="CandidaturaViewModel">modelo de view de uma candidatura</param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult RejeitarCandidatura(CandidaturaViewModel model) {
+        public IActionResult RejeitarCandidatura(Candidatura model) {
             if (ModelState.IsValid)
             {
                 Candidatura candidatura = _context.Candidaturas.Where(x => x.ID == model.ID).Single();
                 Task<Utilizador> tecnico = _gestor.getUtilizador(this.User);
-                if (_gestor.RejeitarCandidatura(candidatura, tecnico.Result))
+                if (_gestor.RejeitarCandidatura(model, tecnico.Result))
                     return View("CandidaturaRejeitada");// rejeitada
                 return View("../Erros/ErroValidarCandidatura"); // erro a rejeitar
             }
@@ -170,13 +170,13 @@ namespace ProjectoEsw.Controllers
         /// <param name="model" type="CandidaturaViewModel">model de view de uma candidatura</param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult AprovarCandidatura(CandidaturaViewModel model)
+        public IActionResult AprovarCandidatura(Candidatura model)
         {
             if (ModelState.IsValid)
             {
                 Candidatura candidatura = _context.Candidaturas.Where(x => x.ID == model.ID).Single();
                 Task<Utilizador> tecnico = _gestor.getUtilizador(this.User);
-                if (_gestor.AprovarCandidatura(candidatura, tecnico.Result))
+                if (_gestor.AprovarCandidatura(model, tecnico.Result))
                     return View("CandidaturaAprovada");// aprovado
                 return View("../Erros/ErroValidarCandidatura"); // erro a aprovar
             }
@@ -190,7 +190,7 @@ namespace ProjectoEsw.Controllers
         /// <param name="model" type ="CandidaturaViewModel">modelo da view de uma candidatura</param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult PedirAlteracaoCandidatura(CandidaturaViewModel model)
+        public IActionResult PedirAlteracaoCandidatura(Candidatura model)
         {
             StringValues valores = Request.Form["lista"];
             if (!valores.Any())
@@ -201,7 +201,7 @@ namespace ProjectoEsw.Controllers
                     .Include(row => row.Candidato)
                     .Single();
                 Task<Utilizador> tecnico = _gestor.getUtilizador(this.User);
-                if (_gestor.PedirAlteracaoCandidatura(candidatura, tecnico.Result,valores))
+                if (_gestor.PedirAlteracaoCandidatura(model, tecnico.Result,valores))
                     return View("CandidaturaIncompleta");// pedido alteracao
                 return View("../Erros/ErroValidarCandidatura"); // erro a alterar
             }

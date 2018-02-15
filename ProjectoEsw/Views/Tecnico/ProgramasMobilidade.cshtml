@@ -18,21 +18,72 @@
     <a asp-area="" asp-controller="Tecnico" asp-action="SobreNos">Sobre Nós</a>
 }
 <!--Candidato-->
+<div class="col-sm-8 jumbotron ">
 
-<div class="jumbotron col-sm-8 ">
-    <div class="jumbotron col-sm-6">
-        <h3>Erasmus+</h3>
-        <p> Resto Informacao + links + prazos</p>
+    <div class="col-sm-12" id="divErasmus" style="display:none">
+        <h3 class="text-center">Programa Erasmus+</h3>
+        <div class="help-block"></div>
+        <div style="display:inline-block; padding-bottom:5px" class="fc-button-group col-sm-12 text-center">
+            <button class="btn btn-default text-center" onclick="mudarDiv('divErasmus')">Programa Erasmus+</button>
+            <button class="btn btn-default text-center" onclick="mudarDiv('divSantander')">Programa Santander</button>
+        </div>
+        <div class="help-block"></div>
+        <p><font size="2">  O <strong>programa Erasmus + </strong>é um programa da UE para apoiar educação, formação, juventude e desporto na Europa. O seu orçamento de € 14,7 bilhões proporcionará oportunidades para mais de 4 milhões de europeus para estudar, treinar, ganhar experiência e se voluntariar no exterior.</font></p>
+        <p><font size="2">  Definir para durar até 2020, a Erasmus + não só tem oportunidades para estudantes. Combinando sete programas anteriores, tem oportunidades para uma grande variedade de indivíduos e organizações.</font></p>
+        <p><font size="2">Para mais informacoes pode consultar </font></p>
+        <p><font size="2">- O site do <a href="https://www.ips.pt/ips_si/web_base.gera_pagina?P_pagina=30435">Instituto Politecnico de Setubal</a></font></p>
+        <p><font size="2">- O site da <a href="https://ec.europa.eu/programmes/erasmus-plus/about_en">Comissão Europeia</a></font></p>
+        <p><font size="2"><strong> Prazos</strong>: </font></p>
+        <p><font size="2"> Candidaturas para o 1º Semestre - abertas até 30 de Novembro de 2017</font></p>
+        <p><font size="2"> Candidaturas para o 2º Semestre - abertas até 30 de Abril de 2017</font></p>
     </div>
-    <div class="jumbotron col-sm-6">
-        <h3>Programa Santander</h3>
-        <p> Resto Informacao + links + prazos</p>
+    <div class="col-sm-12" id="divSantander" style="display:none">
+        <h3 class="text-center">Programa Santander Universidades</h3>
+        <div class="help-block"></div>
+        <div style="display:inline-block; padding-bottom:5px" class="fc-button-group col-sm-12 text-center">
+            <button class="btn btn-default text-center" onclick="mudarDiv('divErasmus')">Programa Erasmus+</button>
+            <button class="btn btn-default text-center" onclick="mudarDiv('divSantander')">Programa Santander</button>
+        </div>
+        <div class="help-block"></div>
+        <p><font size="2"> O <strong>Santander Universidades</strong> é um programa de mobilidade de intercâmbio de estudantes que consiste na realização de um período de estudos noutro continente.</font></p>
+        <p><font size="2"> O intercâmbio tem obrigatoriamente de estar abrangido por um Protocolo de Cooperação com uma instituição que integre a rede deste Programa.</font></p>
+        <p><font size="2"> A matrícula/inscrição e o pagamento das propinas efetuados no IPS são válidos para os estudos na universidade brasileira de destino, não havendo necessidade de qualquer matrícula adicional.</font></p>
+        <p><font size="2"> Para mais informacoes pode consultar </font></p>
+        <p><font size="2">- O site do <a href="https://www.ips.pt/ips_si/web_base.gera_pagina?P_pagina=30435">Instituto Politecnico de Setubal</a></font></p>
+        <p><font size="2"><strong> Prazos</strong>: </font></p>
+        <p><font size="2"> Candidaturas para o 1º Semestre - abertas até 30 de Novembro de 2017</font></p>
+        <p><font size="2"> Candidaturas para o 2º Semestre - abertas até 30 de Abril de 2017</font></p>
+
     </div>
+    <div class="col-sm-12" id="divInicio">
+        <h3 class="text-center">Programas Mobilidade</h3>
+        <div class="help-block"></div>
+        <div style="display:inline-block; padding-bottom:5px" class="fc-button-group col-sm-12 text-center">
+            <button class="btn btn-default text-center" onclick="mudarDiv('divErasmus')">Programa Erasmus+</button>
+            <button class="btn btn-default text-center" onclick="mudarDiv('divSantander')">Programa Santander</button>
+        </div>
+        <div class="help-block"></div>
+        <p><font size="2"> Esta pagina fornece a informação relativa aos tipos de<strong> programas de mobilidade</strong>, sendo possivel efectuar a canditura a uma programa de mobilidade aos utilizadores registados.</font></p>
+    </div>
+
 </div>
-    <div class="jumbotron col-sm-3 col-sm-offset-1">
-        <h5 class="text-center">Opcoes</h5>
-        <!--<a asp-area="" asp-controller="Tecnico" asp-action="Perfil" class="btn btn-link btn-xs pull-right col-sm-12">Ver Perfil</a>
-        <a asp-area="" asp-controller="Tecnico" asp-action="Perfil" class="btn btn-link btn-xs center-block col-sm-12">Editar Perfil</a>-->
-        <a asp-area="" asp-controller="Tecnico" asp-action="ListaCandidaturas" class="btn btn-link btn-xs pull-right col-sm-12">Lista Candidaturas</a>
-        <a asp-area="" asp-controller="Tecnico" asp-action="MarcarEntrevista" class="btn btn-link btn-xs pull-right col-sm-12">Marcar Entrevistas</a>
-    </div>
+<script>
+    function mudarDiv(tipo) {
+        var div1 = document.getElementById("divErasmus");
+        var div2 = document.getElementById("divSantander");
+        var div3 = document.getElementById("divInicio");
+        if (tipo == "divSantander") {
+            div1.style.display = "none"
+            div2.style.display = "block"
+            div3.style.display = "none"
+        }
+
+        if (tipo == "divErasmus") {
+
+            div1.style.display = "block"
+            div2.style.display = "none"
+            div3.style.display = "none"
+        }
+    }
+
+</script>

@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<WebTest Name="WebTest2" Id="573336fc-b06c-498d-a7f1-9441fede2405" Owner="" Priority="2147483647" Enabled="True" CssProjectStructure="" CssIteration="" Timeout="0" WorkItemIds="" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" Description="" CredentialUserName="" CredentialPassword="" PreAuthenticate="True" Proxy="default" StopOnError="False" RecordedResultFile="WebTest2.f2d26449-98d2-4cf2-bf9b-2d6b3507a69c.rec.webtestresult" ResultsLocale="">
+<WebTest Name="TesteCargaCandidatura" Id="573336fc-b06c-498d-a7f1-9441fede2405" Owner="" Priority="2147483647" Enabled="True" CssProjectStructure="" CssIteration="" Timeout="0" WorkItemIds="" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010" Description="" CredentialUserName="" CredentialPassword="" PreAuthenticate="True" Proxy="default" StopOnError="False" RecordedResultFile="TesteCargaCandidatura.f26517f9-5cb9-4504-ae51-eb8301b30141.rec.webtestresult" ResultsLocale="">
   <Items>
-    <Request Method="GET" Guid="f1bf27eb-15ec-4d8b-8ecf-a30b27e6c96a" Version="1.1" Url="http://localhost:57220/" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False" />
-    <Request Method="GET" Guid="7d828ac5-8468-4c94-ac42-ca219da6d12f" Version="1.1" Url="http://localhost:57220/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.eot" ThinkTime="3" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
+    <Request Method="GET" Guid="d23c85f9-561c-42c1-a182-95918847f55c" Version="1.1" Url="http://localhost:57220/" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False" />
+    <Request Method="GET" Guid="501e1621-75f9-4ed6-bb27-5959c8418b70" Version="1.1" Url="http://localhost:57220/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.eot" ThinkTime="5" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
       <Headers>
         <Header Name="Referer" Value="http://localhost:57220/" />
       </Headers>
@@ -10,7 +10,7 @@
         <QueryStringParameter Name="" Value="" RecordedValue="" CorrelationBinding="" UrlEncode="False" UseToGroupResults="False" />
       </QueryStringParameters>
     </Request>
-    <Request Method="GET" Guid="7eff44a0-8604-4d06-8c7c-9b630dff96f2" Version="1.1" Url="http://localhost:57220/Home/Login" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
+    <Request Method="GET" Guid="0e727d42-c67a-4b80-958d-ed3ea9c89a49" Version="1.1" Url="http://localhost:57220/Home/Login" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
       <Headers>
         <Header Name="Referer" Value="http://localhost:57220/" />
       </Headers>
@@ -23,7 +23,7 @@
         </ExtractionRule>
       </ExtractionRules>
     </Request>
-    <Request Method="GET" Guid="c0e73150-7451-4e25-b7f0-492ca4cb8c07" Version="1.1" Url="http://localhost:57220/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.eot" ThinkTime="4" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
+    <Request Method="GET" Guid="4ec031ca-ba1c-4af4-8dab-29dc26408b3b" Version="1.1" Url="http://localhost:57220/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.eot" ThinkTime="6" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
       <Headers>
         <Header Name="Referer" Value="http://localhost:57220/Home/Login" />
       </Headers>
@@ -31,17 +31,17 @@
         <QueryStringParameter Name="" Value="" RecordedValue="" CorrelationBinding="" UrlEncode="False" UseToGroupResults="False" />
       </QueryStringParameters>
     </Request>
-    <Request Method="POST" Guid="3a0ea559-57de-4a8b-a0e3-04c84eb88829" Version="1.1" Url="http://localhost:57220/Home/Login" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="http://localhost:57220/Candidato" ReportingName="" IgnoreHttpStatusCode="False">
+    <Request Method="POST" Guid="c8dd1009-5a12-4225-9e7e-5f3f3ac380dd" Version="1.1" Url="http://localhost:57220/Home/Login" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="http://localhost:57220/Candidato" ReportingName="" IgnoreHttpStatusCode="False">
       <Headers>
         <Header Name="Referer" Value="http://localhost:57220/Home/Login" />
       </Headers>
       <FormPostHttpBody>
-        <FormPostParameter Name="Email" Value="fernando.rula@gmail.com" RecordedValue="fernando.rula@gmail.com" CorrelationBinding="" UrlEncode="True" />
-        <FormPostParameter Name="Password" Value="fernando1" RecordedValue="fernando1" CorrelationBinding="" UrlEncode="True" />
-        <FormPostParameter Name="__RequestVerificationToken" Value="{{$HIDDEN1.__RequestVerificationToken}}" RecordedValue="CfDJ8IZ9GjaFmaVGne66JMWjAxLbkRfUaeZ5YeSKx7QQ6d3zbM-5cdQ8RTFatYQ0MV1zj8A3lS7G7tWWumUOH1WaHBIthnzGoeIDOpZUcLbuiWdoQh2Dv5r_E79jF3AlPITHixT5Hgfgjpbw-bs6Otz0vOE" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Email" Value="fernando_azevedo_30@hotmail.com" RecordedValue="fernando_azevedo_30@hotmail.com" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Password" Value="irule512" RecordedValue="irule512" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="__RequestVerificationToken" Value="{{$HIDDEN1.__RequestVerificationToken}}" RecordedValue="CfDJ8IZ9GjaFmaVGne66JMWjAxIhO4YhvRUpOsaYmCwka-ebx4YyKeJzYukWtIBmhAUp8OPKDOjR2TOVRFL4SCn820B7jT7zYcj0_rIbDRSg2mL36EJ0iKApEX0Nj4_ZxllQVa-8C7ZTLcCf9sit__jIe0w" CorrelationBinding="" UrlEncode="True" />
       </FormPostHttpBody>
     </Request>
-    <Request Method="GET" Guid="83b6d817-6ade-4a26-91b7-839e5e4a623c" Version="1.1" Url="http://localhost:57220/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.eot" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
+    <Request Method="GET" Guid="b28f5b07-8bb6-4387-b8f3-45d872e3b52e" Version="1.1" Url="http://localhost:57220/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.eot" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
       <Headers>
         <Header Name="Referer" Value="http://localhost:57220/Candidato" />
       </Headers>
@@ -49,7 +49,7 @@
         <QueryStringParameter Name="" Value="" RecordedValue="" CorrelationBinding="" UrlEncode="False" UseToGroupResults="False" />
       </QueryStringParameters>
     </Request>
-    <Request Method="GET" Guid="c1352ebf-4fda-4b16-83bd-e482fa195717" Version="1.1" Url="http://localhost:57220/Candidato/GetEvents" ThinkTime="1" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
+    <Request Method="GET" Guid="c91e18a6-3e35-4dad-9240-d55d857040a1" Version="1.1" Url="http://localhost:57220/Candidato/GetEvents" ThinkTime="6" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
       <Headers>
         <Header Name="Content-Type" Value="application/json" />
         <Header Name="Accept" Value="application/json, text/javascript, */*; q=0.01" />
@@ -57,15 +57,15 @@
         <Header Name="Referer" Value="http://localhost:57220/Candidato" />
       </Headers>
       <QueryStringParameters>
-        <QueryStringParameter Name="idPerfil" Value="7" RecordedValue="7" CorrelationBinding="" UrlEncode="False" UseToGroupResults="False" />
+        <QueryStringParameter Name="idPerfil" Value="6" RecordedValue="6" CorrelationBinding="" UrlEncode="False" UseToGroupResults="False" />
       </QueryStringParameters>
     </Request>
-    <Request Method="GET" Guid="5522ca40-36cd-4470-901c-0613be551129" Version="1.1" Url="http://localhost:57220/Candidato/ProgramasMobilidade" ThinkTime="4" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
+    <Request Method="GET" Guid="25f25919-6d71-428e-adb0-605c3c3e91c7" Version="1.1" Url="http://localhost:57220/Candidato/ProgramasMobilidade" ThinkTime="3" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
       <Headers>
         <Header Name="Referer" Value="http://localhost:57220/Candidato" />
       </Headers>
     </Request>
-    <Request Method="GET" Guid="6f1e7aa5-de02-4683-8f9f-bb9fd8cd1fd7" Version="1.1" Url="http://localhost:57220/Candidato/CandidaturaErasmus" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
+    <Request Method="GET" Guid="99869bc5-bbab-41a5-83dc-24b71296a2a1" Version="1.1" Url="http://localhost:57220/Candidato/CandidaturaErasmus" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
       <Headers>
         <Header Name="Referer" Value="http://localhost:57220/Candidato/ProgramasMobilidade" />
       </Headers>
@@ -183,8 +183,8 @@
         <ExtractionRule Classname="Microsoft.VisualStudio.TestTools.WebTesting.Rules.ExtractText, Microsoft.VisualStudio.QualityTools.WebTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" VariableName="FormPostParam13.Candidato.Perfil.MoradaDistrito" DisplayName="" Description="">
           <RuleParameters>
             <RuleParameter Name="StartsWith" Value="lue=&quot;" />
-            <RuleParameter Name="EndsWith" Value="&quot; sel" />
-            <RuleParameter Name="Index" Value="7" />
+            <RuleParameter Name="EndsWith" Value="&quot;&gt;Mon" />
+            <RuleParameter Name="Index" Value="18" />
             <RuleParameter Name="IgnoreCase" Value="False" />
             <RuleParameter Name="UseRegularExpression" Value="False" />
             <RuleParameter Name="HtmlDecode" Value="True" />
@@ -215,7 +215,7 @@
         </ExtractionRule>
       </CorrelationExtractionRules>
     </Request>
-    <Request Method="GET" Guid="c7b01a23-7c28-4d47-954a-367e9dfb2989" Version="1.1" Url="http://localhost:57220/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.eot" ThinkTime="23" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
+    <Request Method="GET" Guid="6f690ec1-091e-4b39-84b6-fd344ef80bf5" Version="1.1" Url="http://localhost:57220/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.eot" ThinkTime="20" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
       <Headers>
         <Header Name="Referer" Value="http://localhost:57220/Candidato/CandidaturaErasmus" />
       </Headers>
@@ -223,85 +223,40 @@
         <QueryStringParameter Name="" Value="" RecordedValue="" CorrelationBinding="" UrlEncode="False" UseToGroupResults="False" />
       </QueryStringParameters>
     </Request>
-    <Request Method="POST" Guid="409b455f-1814-4adf-9f10-f23579313732" Version="1.1" Url="http://localhost:57220/Candidato/CandidaturaErasmus" ThinkTime="5" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
+    <Request Method="POST" Guid="0584b391-33f8-4ba7-9590-24fc706e687b" Version="1.1" Url="http://localhost:57220/Candidato/CandidaturaErasmus" ThinkTime="3" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
       <Headers>
         <Header Name="Referer" Value="http://localhost:57220/Candidato/CandidaturaErasmus" />
       </Headers>
       <FormPostHttpBody>
-        <FormPostParameter Name="Candidato.Perfil.NomeCompleto" Value="Fernando Azevedo" RecordedValue="Fernando Azevedo" CorrelationBinding="{{FormPostParam1.Candidato.Perfil.NomeCompleto}}" UrlEncode="True" />
-        <FormPostParameter Name="Candidato.Perfil.DataNasc" Value="1990-12-12" RecordedValue="1990-12-12" CorrelationBinding="{{FormPostParam2.Candidato.Perfil.DataNasc}}" UrlEncode="True" />
-        <FormPostParameter Name="Candidato.Perfil.Email" Value="fernando.rula@gmail.com" RecordedValue="fernando.rula@gmail.com" CorrelationBinding="{{FormPostParam3.Candidato.Perfil.Email}}" UrlEncode="True" />
+        <FormPostParameter Name="Candidato.Perfil.NomeCompleto" Value="Fernando" RecordedValue="Fernando" CorrelationBinding="{{FormPostParam1.Candidato.Perfil.NomeCompleto}}" UrlEncode="True" />
+        <FormPostParameter Name="Candidato.Perfil.DataNasc" Value="1980-12-12" RecordedValue="1980-12-12" CorrelationBinding="{{FormPostParam2.Candidato.Perfil.DataNasc}}" UrlEncode="True" />
+        <FormPostParameter Name="Candidato.Perfil.Email" Value="fernando_azevedo_30@hotmail.com" RecordedValue="fernando_azevedo_30@hotmail.com" CorrelationBinding="{{FormPostParam3.Candidato.Perfil.Email}}" UrlEncode="True" />
         <FormPostParameter Name="Candidato.Perfil.Nif" Value="123123123" RecordedValue="123123123" CorrelationBinding="{{FormPostParam4.Candidato.Perfil.Nif}}" UrlEncode="True" />
         <FormPostParameter Name="Candidato.Perfil.NumeroIdentificacao" Value="123123123" RecordedValue="123123123" CorrelationBinding="{{FormPostParam5.Candidato.Perfil.NumeroIdentificacao}}" UrlEncode="True" />
-        <FormPostParameter Name="Candidato.Perfil.MoradaRua" Value="rua fernando Azevedfo" RecordedValue="rua fernando Azevedfo" CorrelationBinding="{{FormPostParam6.Candidato.Perfil.MoradaRua}}" UrlEncode="True" />
-        <FormPostParameter Name="Candidato.Perfil.MoradaCodigoPostal" Value="1233-123" RecordedValue="1233-123" CorrelationBinding="{{FormPostParam7.Candidato.Perfil.MoradaCodigoPostal}}" UrlEncode="True" />
+        <FormPostParameter Name="Candidato.Perfil.MoradaRua" Value="rua fernando namora" RecordedValue="rua fernando namora" CorrelationBinding="{{FormPostParam6.Candidato.Perfil.MoradaRua}}" UrlEncode="True" />
+        <FormPostParameter Name="Candidato.Perfil.MoradaCodigoPostal" Value="1234-123" RecordedValue="1234-123" CorrelationBinding="{{FormPostParam7.Candidato.Perfil.MoradaCodigoPostal}}" UrlEncode="True" />
         <FormPostParameter Name="Candidato.Perfil.Nacionalidade" Value="0" RecordedValue="0" CorrelationBinding="{{FormPostParam11.Candidato.Perfil.Nacionalidade}}" UrlEncode="True" />
         <FormPostParameter Name="Candidato.Perfil.MoradaConcelho" Value="0" RecordedValue="0" CorrelationBinding="{{FormPostParam12.Candidato.Perfil.MoradaConcelho}}" UrlEncode="True" />
-        <FormPostParameter Name="Candidato.Perfil.MoradaDistrito" Value="0" RecordedValue="0" CorrelationBinding="{{FormPostParam13.Candidato.Perfil.MoradaDistrito}}" UrlEncode="True" />
+        <FormPostParameter Name="Candidato.Perfil.MoradaDistrito" Value="6" RecordedValue="6" CorrelationBinding="{{FormPostParam13.Candidato.Perfil.MoradaDistrito}}" UrlEncode="True" />
         <FormPostParameter Name="Candidato.Perfil.Telefone" Value="912123123" RecordedValue="912123123" CorrelationBinding="{{FormPostParam8.Candidato.Perfil.Telefone}}" UrlEncode="True" />
         <FormPostParameter Name="NomeEmergencia" Value="lidorio" RecordedValue="lidorio" CorrelationBinding="" UrlEncode="True" />
         <FormPostParameter Name="AfiliacaoEmergencia" Value="filho" RecordedValue="filho" CorrelationBinding="" UrlEncode="True" />
         <FormPostParameter Name="NumeroEmergencia" Value="912123123" RecordedValue="912123123" CorrelationBinding="{{FormPostParam14.NumeroEmergencia}}" UrlEncode="True" />
-        <FormPostParameter Name="Escola" Value="est" RecordedValue="est" CorrelationBinding="" UrlEncode="True" />
-        <FormPostParameter Name="CursoFrequentado" Value="ei" RecordedValue="ei" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="Escola" Value="EST" RecordedValue="EST" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="CursoFrequentado" Value="EI" RecordedValue="EI" CorrelationBinding="" UrlEncode="True" />
         <FormPostParameter Name="AnoCurricular" Value="1" RecordedValue="1" CorrelationBinding="{{FormPostParam15.AnoCurricular}}" UrlEncode="True" />
         <FormPostParameter Name="lista" Value="3" RecordedValue="3" CorrelationBinding="{{FormPostParam9.lista}}" UrlEncode="True" />
         <FormPostParameter Name="IBAN" Value="12345678901234567890123" RecordedValue="12345678901234567890123" CorrelationBinding="" UrlEncode="True" />
         <FormPostParameter Name="Bolsa" Value="true" RecordedValue="true" CorrelationBinding="{{FormPostParam10.Bolsa}}" UrlEncode="True" />
         <FormPostParameter Name="files" Value="" RecordedValue="" CorrelationBinding="" UrlEncode="True" />
-        <FormPostParameter Name="__RequestVerificationToken" Value="{{$HIDDEN1.__RequestVerificationToken}}" RecordedValue="CfDJ8IZ9GjaFmaVGne66JMWjAxJxMdt_RA4tDwhp4kOqp5MdrGhoYsC8yjWkXXzgWSb2pJkRhA6q6a-QX6yeAkJKnDOdUqLiU1kubrNLeZgxrsalV-C7cl7eWYY2a7CbGCoziUqmXG21vRA68Ey_FbN2MR_1z5Uf2Mk6MPv8axtFW4mgDSe8xhtBmDbkI2kGvWMRzw" CorrelationBinding="" UrlEncode="True" />
+        <FormPostParameter Name="__RequestVerificationToken" Value="{{$HIDDEN1.__RequestVerificationToken}}" RecordedValue="CfDJ8IZ9GjaFmaVGne66JMWjAxIPNFf5rAYZ_sdQhRSEY6ayrv843ksgFT3dwLflaicfI8Yd5iXOrrdcTp6A0SS8BsQCYFZ86-qc6k2k_NyjJNtj9Ynh7h-DLDMhNqwg_IrqBvs3Rls_0LBj0MbXY8cdbFHwhgf-eKSPXuvxEx1TmJSdtE4yC9QiFyuW4XaFfs8n3A" CorrelationBinding="" UrlEncode="True" />
         <FormPostParameter Name="Bolsa" Value="{{$HIDDEN1.Bolsa}}" RecordedValue="false" CorrelationBinding="" UrlEncode="True" />
       </FormPostHttpBody>
     </Request>
-    <Request Method="GET" Guid="e7b526a3-6fc3-409b-8e30-805bc8892d83" Version="1.1" Url="http://localhost:57220/Candidato" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
+    <Request Method="GET" Guid="8e508092-bbf1-494d-ac07-b2f2ef9a8bed" Version="1.1" Url="http://localhost:57220/Candidato" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
       <Headers>
         <Header Name="Referer" Value="http://localhost:57220/Candidato/CandidaturaErasmus" />
       </Headers>
-    </Request>
-    <Request Method="GET" Guid="d7b289a7-a801-4335-b2d9-cf3800d6a4df" Version="1.1" Url="http://localhost:57220/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.eot" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
-      <Headers>
-        <Header Name="Referer" Value="http://localhost:57220/Candidato" />
-      </Headers>
-      <QueryStringParameters>
-        <QueryStringParameter Name="" Value="" RecordedValue="" CorrelationBinding="" UrlEncode="False" UseToGroupResults="False" />
-      </QueryStringParameters>
-    </Request>
-    <Request Method="GET" Guid="656a95b8-4ef5-4e31-8f27-c95efb01fab9" Version="1.1" Url="http://localhost:57220/Candidato/GetEvents" ThinkTime="3" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
-      <Headers>
-        <Header Name="Content-Type" Value="application/json" />
-        <Header Name="Accept" Value="application/json, text/javascript, */*; q=0.01" />
-        <Header Name="X-Requested-With" Value="XMLHttpRequest" />
-        <Header Name="Referer" Value="http://localhost:57220/Candidato" />
-      </Headers>
-      <QueryStringParameters>
-        <QueryStringParameter Name="idPerfil" Value="7" RecordedValue="7" CorrelationBinding="" UrlEncode="False" UseToGroupResults="False" />
-      </QueryStringParameters>
-    </Request>
-    <Request Method="GET" Guid="7b5787fa-0744-494a-ae5c-850604f41baf" Version="1.1" Url="http://localhost:57220/Candidato/Logout" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="http://localhost:57220/" ReportingName="" IgnoreHttpStatusCode="False">
-      <Headers>
-        <Header Name="Referer" Value="http://localhost:57220/Candidato" />
-      </Headers>
-    </Request>
-    <Request Method="GET" Guid="c895692a-f9c9-4391-bffa-5434d47d89a7" Version="1.1" Url="http://localhost:57220/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.eot" ThinkTime="1" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
-      <Headers>
-        <Header Name="Referer" Value="http://localhost:57220/" />
-      </Headers>
-      <QueryStringParameters>
-        <QueryStringParameter Name="" Value="" RecordedValue="" CorrelationBinding="" UrlEncode="False" UseToGroupResults="False" />
-      </QueryStringParameters>
-    </Request>
-    <Request Method="GET" Guid="528814ad-d440-412b-af8c-bcba786d337c" Version="1.1" Url="http://localhost:57220/" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
-      <Headers>
-        <Header Name="Referer" Value="http://localhost:57220/" />
-      </Headers>
-    </Request>
-    <Request Method="GET" Guid="f1da6548-55e6-49ed-8c57-a0560dd2ce5a" Version="1.1" Url="http://localhost:57220/lib/bootstrap/dist/fonts/glyphicons-halflings-regular.eot" ThinkTime="0" Timeout="300" ParseDependentRequests="True" FollowRedirects="True" RecordResult="True" Cache="False" ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="0" ExpectedResponseUrl="" ReportingName="" IgnoreHttpStatusCode="False">
-      <Headers>
-        <Header Name="Referer" Value="http://localhost:57220/" />
-      </Headers>
-      <QueryStringParameters>
-        <QueryStringParameter Name="" Value="" RecordedValue="" CorrelationBinding="" UrlEncode="False" UseToGroupResults="False" />
-      </QueryStringParameters>
     </Request>
   </Items>
   <ValidationRules>

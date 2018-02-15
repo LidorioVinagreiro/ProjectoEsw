@@ -154,9 +154,12 @@ namespace ProjectoEsw.Controllers
         public IActionResult RejeitarCandidatura(Candidatura model) {
             if (ModelState.IsValid)
             {
-                Candidatura candidatura = _context.Candidaturas.Where(x => x.ID == model.ID).Single();
+                Candidatura candidatura = _context.Candidaturas.Where(x => x.ID == model.ID)
+                    .Include(row=> row.Instituicoes)
+                    .Include(row=> row.Candidato)
+                    .Single();
                 Task<Utilizador> tecnico = _gestor.getUtilizador(this.User);
-                if (_gestor.RejeitarCandidatura(model, tecnico.Result))
+                if (_gestor.RejeitarCandidatura(candidatura, tecnico.Result))
                     return View("CandidaturaRejeitada");// rejeitada
                 return View("../Erros/ErroValidarCandidatura"); // erro a rejeitar
             }
@@ -174,9 +177,12 @@ namespace ProjectoEsw.Controllers
         {
             if (ModelState.IsValid)
             {
-                Candidatura candidatura = _context.Candidaturas.Where(x => x.ID == model.ID).Single();
+                Candidatura candidatura = _context.Candidaturas.Where(x => x.ID == model.ID)
+                    .Include(row => row.Candidato)
+                    .Include(row => row.Instituicoes)
+                    .Single();
                 Task<Utilizador> tecnico = _gestor.getUtilizador(this.User);
-                if (_gestor.AprovarCandidatura(model, tecnico.Result))
+                if (_gestor.AprovarCandidatura(candidatura, tecnico.Result))
                     return View("CandidaturaAprovada");// aprovado
                 return View("../Erros/ErroValidarCandidatura"); // erro a aprovar
             }
@@ -199,9 +205,10 @@ namespace ProjectoEsw.Controllers
             {
                 Candidatura candidatura = _context.Candidaturas.Where(x => x.ID == model.ID)
                     .Include(row => row.Candidato)
+                    .Include(row => row.Instituicoes)
                     .Single();
                 Task<Utilizador> tecnico = _gestor.getUtilizador(this.User);
-                if (_gestor.PedirAlteracaoCandidatura(model, tecnico.Result,valores))
+                if (_gestor.PedirAlteracaoCandidatura(candidatura, tecnico.Result,valores))
                     return View("CandidaturaIncompleta");// pedido alteracao
                 return View("../Erros/ErroValidarCandidatura"); // erro a alterar
             }

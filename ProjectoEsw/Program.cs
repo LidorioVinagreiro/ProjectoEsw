@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using ProjectoEsw.Models;
 using Microsoft.AspNetCore.Identity;
 using ProjectoEsw.Models.Identity;
+//rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrwddddddddddddddddd
+using System.static;
 
 namespace ProjectoEsw
 {
